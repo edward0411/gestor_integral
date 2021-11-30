@@ -84,15 +84,10 @@
         <main class="py-4">
             @yield('content')        
         </main>
-    </div><br><br><br><br>
-    <footer class="main-footer" style="position: absolute;bottom:0;width:100%; margin-left: 0px!important;background-color:#ffc107;color:rgba(230,230,230,1);border-top:0px solid gray;">
-        <div class="text-center">
-          <p> Desarrollado por <a href=""></a></a> para Gestion Integral | Copyright &copy; 2021 Gestion Integral.</p>
-        </div>
-        <div class="float-right d-none d-sm-inline-block"style="margin-top:-10px;">
-          <b>Versión</b> {{config('app.version')}}
-        </div>
-      </footer> 
+    </div>
+    <br><br><br><br>
+    <br><br><br><br>
+    
         
           <!-- Control Sidebar -->
           <aside class="control-sidebar control-sidebar-dark">
@@ -104,6 +99,7 @@
             <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
             <!-- AdminLTE App -->
             <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-
+            <!-- styles Gestor-->
+            <script type="text/javascript" language="javascript" src="{{ asset("dist/js/styles_gestor.js") }}"></script>
 </body>
 </html>

@@ -71,12 +71,14 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0
+  <footer class="main-footer" style="position: absolute;bottom:0;width:100%; margin-left: 0px!important;background-color:#ffc107;color:rgba(230,230,230,1);border-top:0px solid gray;">
+    <div class="text-center">
+      <p> Desarrollado por <a href=""></a></a> para Gestion Integral | Copyright &copy; 2021 Gestion Integral.</p>
     </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+    <div class="float-right d-none d-sm-inline-block"style="margin-top:-10px;">
+      <b>Versión</b> {{config('app.version')}}
+    </div>
+</footer> 
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -138,6 +140,7 @@
 <script type="text/javascript" language="javascript" src="{{ asset("plugins/datatables-buttons/js/buttons.print.min.js") }}"></script>
 
 <script src="{{ asset("/dist/js/jquery.form.min.js") }}"></script>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
