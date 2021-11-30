@@ -34,12 +34,32 @@ Route::get('/', function () {return redirect()->route('home');});
 Route::group(['prefix' => 'panel/administrativo', 'middleware' => 'auth'], function () {
 
 
-    Route::get('', 'HomeController@home')->name('home');
-    Route::get('/iniciar-sesion', 'HomeController@login')->name('admin.login');
+Route::get('', 'HomeController@home')->name('home');
+Route::get('/iniciar-sesion', 'HomeController@login')->name('admin.login');
 
+
+////////// Rutas usuarios /////////
 Route::get('/view/users','UsersController@index')->name('users.index');//->middleware('permission:Administrador_usuarios_ver');
 Route::get('/create/users','UsersController@create')->name('users.create');
 Route::get('/edit/users','UsersController@edit')->name('users.edit');
+
+///////// Rutas parametricas  //////////
+
+Route::get('/view/parametrics','ParametricsController@index')->name('parametrics.index');
+Route::get('/create/parametrics','ParametricsController@create')->name('parametrics.create');
+Route::get('/edit/parametrics','ParametricsController@edit')->name('parametrics.edit');
+
+///////// Rutas paises  ////////////
+
+Route::get('/view/countries','CountriesController@index')->name('countries.index');
+Route::get('/create/countries','CountriesController@create')->name('countries.create');
+Route::get('/edit/countries','CountriesController@edit')->name('countries.edit');
+
+///////// Rutas clientes  ////////////
+
+Route::get('/view/customers','CustomersController@index')->name('customers.index');
+Route::get('/create/customers','CustomersController@create')->name('customers.create');
+Route::get('/edit/customers','CustomersController@edit')->name('customers.edit');
 
 
 

@@ -44,11 +44,29 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('users.index')}}" class="nav-link">
+                <a href="{{route('customers.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Usuarios</p>
+                  <p>Clientes</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('users.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tutores</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('users.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Comerciales</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('users.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Monitores</p>
+                </a>
+              </li>          
               <li class="nav-item">
                 <a href="../../index2.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -56,9 +74,21 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index3.html" class="nav-link">
+                <a href="{{route('countries.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Personas</p>
+                  <p>Países</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('parametrics.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Paramétricas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('users.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Usuarios</p>
                 </a>
               </li>
             </ul>

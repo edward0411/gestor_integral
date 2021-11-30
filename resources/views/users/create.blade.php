@@ -57,7 +57,7 @@
               
   
                 <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
-                <a href="{{route('users.index')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
+                <a href="{{route('parametrics.index')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
   
               </div>
               </form>
