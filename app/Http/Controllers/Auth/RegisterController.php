@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Traits\RegistersUsersClients;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,6 +24,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use RegistersUsersClients;
 
     /**
      * Where to redirect users after registration.
