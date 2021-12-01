@@ -44,6 +44,13 @@ Route::get('/view/users','UsersController@index')->name('users.index');//->middl
 Route::get('/create/users','UsersController@create')->name('users.create');
 Route::get('/edit/users','UsersController@edit')->name('users.edit');
 
+///////// Rutas roles  ////////////
+
+Route::get('/view/roles','RolesController@index')->name('roles.index');
+Route::get('/create/roles','RolesController@create')->name('roles.create');
+Route::get('/edit/roles','RolesController@edit')->name('roles.edit');
+Route::get('/permision/roles','RolesController@permission')->name('roles.permission');
+
 ///////// Rutas parametricas  //////////
 
 Route::get('/view/parametrics','ParametricsController@index')->name('parametrics.index');
@@ -61,6 +68,12 @@ Route::get('/edit/countries','CountriesController@edit')->name('countries.edit')
 Route::get('/view/customers','CustomersController@index')->name('customers.index');
 Route::get('/create/customers','CustomersController@create')->name('customers.create');
 Route::get('/edit/customers','CustomersController@edit')->name('customers.edit');
+
+///////// Rutas tutores  ////////////
+
+Route::get('/view/tutors','TutorsController@index')->name('tutors.index');
+Route::get('/create/tutors','TutorsController@create')->name('tutors.create');
+Route::get('/edit/tutors','TutorsController@edit')->name('tutors.edit');
 
 
 

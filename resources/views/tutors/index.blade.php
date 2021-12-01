@@ -2,18 +2,18 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center align-items-center">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('customers.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear cliente') !!}</a>
+                    <a href="{{route('tutors.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear tutor') !!}</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
                             <tr class="bg-warning text-center">
-                                <th>{!! trans('Número de celular') !!} </th>
+                                <th>{!! trans('Número de celular') !!}</th>
                                 <th>{!! trans('Nickname') !!} </th>
                                 <th>{!! trans('Correo') !!} </th>
                                 <th>{!! trans('País') !!}</th>
@@ -37,15 +37,17 @@
                                 <td>prueba@gmail.con</td>
                                 <td>Brasil</td>
                                 <td>
-                                    <a href="{{route('customers.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    <a href="{{route('tutors.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
                                     <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <!-- /.card-body -->
             </div>
         </div>
     </div>
 </div>
 @endsection
+
