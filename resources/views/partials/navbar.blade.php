@@ -34,7 +34,7 @@
        <!-- salir login -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <b>{{ Auth::user()->name }}</b>
+          <b>{{ Auth::user()->u_name }}</b>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">

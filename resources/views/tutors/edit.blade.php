@@ -6,7 +6,7 @@
         <div class="col-9">
             <div class="card card-warning">
                 <div class="card-header">
-                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Editar cliente') !!}</h5>
+                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Editar tutor') !!}</h5>
                 </div>
                 <!-- /.card-header -->
                 <form method="POST" action="">
@@ -28,7 +28,6 @@
                             <div class="form-group col-md-6">
                                 <label for="email">{!! trans('Correo') !!}</label>
                                 <input type="email" class="form-control form-control-sm" id="email" name="email" value="" required>
-
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="u_id_country">{!! trans('País') !!}</label>
@@ -59,7 +58,7 @@
                             </div>
                         </div>
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
-                        <a href="{{route('customers.index')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
+                        <a href="{{route('tutors.index')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
                     </div>
                 </form>
                 <!-- /.card-body -->
