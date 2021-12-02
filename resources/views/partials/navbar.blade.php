@@ -10,7 +10,7 @@
     <ul class="navbar-nav ml-auto">
       
       <!-- Navbar Search -->
-      <li class="nav-item">
+     <!-- <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
         </a>
@@ -29,12 +29,12 @@
             </div>
           </form>
         </div>
-      </li>
+      </li>-->
 
        <!-- salir login -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <b>{{ Auth::user()->u_name }}</b>
+          <b>{{ Auth::user()->u_nickname }}</b>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">
@@ -59,7 +59,7 @@
       </li>
      
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
+     <!-- <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
           <span class="badge badge-warning navbar-badge">15</span>
@@ -89,6 +89,6 @@
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
-      </li>
+      </li>-->
     </ul>
   </nav>

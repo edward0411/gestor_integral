@@ -7,8 +7,8 @@ $vars=[ 'breadcrum' => ['Administración','Roles'],
 <div class="container">
     <div class="row justify-content-center align-items-center">
         <div class="col-12">
-            <div class="card card-warning">
-                <div class="card-header" style="font-weight: bold;">
+            <div class="card">
+                <div class="card-header color-header" style="font-weight: bold;">
                     <h5 class="card-title">Crear rol</h5>
                 </div>
                 <form role="form" method="POST" action="">
@@ -30,8 +30,8 @@ $vars=[ 'breadcrum' => ['Administración','Roles'],
                     </div>
                 </form>
             </div>
-            <div class="card card-warning">
-                <div class="card-header">
+            <div class="card">
+                <div class="card-header color-header">
                     <h5 class="card-title">Lista de roles</h5>
                 </div>
                 <div class="card-body">
