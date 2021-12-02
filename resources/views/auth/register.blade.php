@@ -8,14 +8,14 @@
                 <div class="card card-outline card-warning">
                   <div class="card-header text-center">
                     <div class="tab">
-                      <button class="tablinks btn btn-sm btn-primar" onclick="openRegister(event, 'Client')" id="defaultOpen">Cliente</button>
-                      <button class="tablinks btn btn-sm btn-sucess" onclick="openRegister(event, 'Tutor')">Tutor</button>
+                      <button class="tablinks" onclick="openRegister(event, 'Client')" id="defaultOpen">Cliente</button>
+                      <button class="tablinks" onclick="openRegister(event, 'Tutor')">Tutor</button>
                     </div>
                     <a href="" class="h1"><b>Gestor</b>Integral</a>
                   </div>
                   <div class="card-body">
                     <div id="Client" class="tabcontent">
-                      <form action="{{ route('register') }}" method="post">
+                      <form action="{{ route('register_clients') }}" method="post">
                         @csrf
                         <p class="login-box-msg">Registar nuevo cliente</p>
                         <div class="input-group mb-3">
@@ -33,9 +33,9 @@
                           </div>
                         </div>
                         <div class="input-group mb-3">
-                          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Nick-Name">
+                          <input id="nick_name" type="text" class="form-control @error('name') is-invalid @enderror" name="nick_name" value="{{ old('name') }}" required autocomplete="name" placeholder="Nick-Name">
                     
-                                                 @error('name')
+                                                 @error('nick_name')
                                                      <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
                                                      </span>
@@ -49,7 +49,7 @@
                         <div class="input-group mb-3">
                           <input id="key_number" type="number" class="form-control @error('key_number') is-invalid @enderror" name="key_number" value="{{ old('key_number') }}" required autocomplete="key_number" placeholder="Número Celular">
                     
-                                                  @error('email')
+                                                  @error('key_number')
                                                       <span class="invalid-feedback" role="alert">
                                                           <strong>{{ $message }}</strong>
                                                       </span>
@@ -103,8 +103,8 @@
                               <label for="agreeTerms">
                                Acepto los <a href="#">terminos</a>
                               </label>
-                            </div>
-                          </div> -->
+                            </div>-->
+                          </div> 
                           <div class="col-8">
                             <button type="submit" class="btn btn-warning btn-block">Registro</button>
                           </div>
