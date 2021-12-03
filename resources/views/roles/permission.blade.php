@@ -7,8 +7,8 @@ $vars=[ 'breadcrum' => ['Administración','Roles', 'Permisos'],
 <div class="container">
     <div class="row justify-content-center align-items-center">
         <div class="col-9">
-            <div class="card card-warning">
-                <div class="card-header">
+            <div class="card">
+                <div class="card-header color-header">
                     <h3 class="card-title">Permisos para el rol <strong> </strong></h3>
                 </div>
                 <!-- /.card-header -->

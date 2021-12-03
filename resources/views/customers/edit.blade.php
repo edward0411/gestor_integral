@@ -5,7 +5,7 @@
     <div class="row justify-content-center align-items-center">
         <div class="col-9">
             <div class="card card-warning">
-                <div class="card-header">
+                <div class="card-header color-header">
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Editar cliente') !!}</h5>
                 </div>
                 <!-- /.card-header -->

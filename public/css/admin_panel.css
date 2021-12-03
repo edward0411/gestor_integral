@@ -5,6 +5,7 @@
 
 .navbar-white {
     background-color: #1A7C94 !important;
+    color: #fff !important;
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active,
@@ -20,6 +21,15 @@
 }
 
 .bg-warning {
+    background: #1A7C94 !important;
+    color: #fff !important
+}
+
+.sidebar-dark-blue {
+    background: #455279 !important;
+}
+
+.color-header {
     background: #1A7C94 !important;
     color: #fff !important
 }
