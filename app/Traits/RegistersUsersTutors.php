@@ -5,14 +5,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-trait RegistersUsersClients
+trait RegistersUsersTutors
 {
 
-    public function register_clients(Request $request)
+    public function register_tutors(Request $request)
     {   
-        $this->validator_client($request->all())->validate();
+        $this->validator_tutor($request->all())->validate();
 
-        event(new Registered($user = $this->create_client($request->all())));
+        event(new Registered($user = $this->create_tutor($request->all())));
 
         $this->guard()->login($user);
 
@@ -20,7 +20,7 @@ trait RegistersUsersClients
             return $response;
         }
 
-        $user->assignRole('Cliente');
+        $user->assignRole('Tutor');
 
         return $request->wantsJson()
                     ? new JsonResponse([], 201)
