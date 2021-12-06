@@ -55,11 +55,35 @@
             </section>
             <!-- Main content -->
             <!-- /.card -->
+            @if(Session::has('error'))
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              {{Session::get('error')}}
+            </div>
+        @endif
+        @if(Session::has('success'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              {{Session::get('success')}}
+            </div>
+        @endif
+        
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $message)
+                    <li>{{ $message }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
             <section class="content">
                 @yield("content")
             </section>
             <!-- /.content -->
         </div>
+
+      
         <!-- /.content-wrapper -->
         <footer class="main-footer" style="width:100%; margin-left: 0px!important;background-color:#1A7C94 ;color:rgba(230,230,230,1);border-top:0px solid gray;">
             <div class="text-center">

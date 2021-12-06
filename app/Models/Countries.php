@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Countries extends Model
 {
     use SoftDeletes;
+
+    protected $table = 'countries';
+    protected $fillable=['c_name',];
 }

@@ -9,27 +9,28 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Editar paramétrica') !!}</h5>
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" action="">
+                <form method="POST" action="{{route('parametrics.update')}}">
                     <div class="card-body">
                         @csrf
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="p_category">{!! trans('Categoria') !!}</label>
-                                <input type="text" class="form-control form-control-sm" id="p_category" name="p_category" value="">
+                                <input type="text" class="form-control form-control-sm" id="p_category" name="p_category" value="{{$parametrics->p_category}}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="p_value">{!! trans('Valor') !!}</label>
-                                <input type="text" class="form-control form-control-sm" id="p_value" name="p_value" value="">
+                                <input type="text" class="form-control form-control-sm" id="p_value" name="p_value" value="{{$parametrics->p_value}}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="p_text">{!! trans('Texto') !!}</label>
-                                <input type="text" class="form-control form-control-sm" id="p_text" name="p_text">
+                                <input type="text" class="form-control form-control-sm" id="p_text" name="p_text" value="{{$parametrics->p_text}}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="p_order">{!! trans('Orden') !!}</label>
-                                <input type="number" class="form-control form-control-sm" id="p_order" name="p_order">
+                                <input type="number" class="form-control form-control-sm" id="p_order" name="p_order" value="{{$parametrics->p_order}}">
                             </div>
                         </div>
+                        <input type="hidden" name="id" value="{{ $parametrics->id}}">
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
                         <a href="{{route('parametrics.index')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
                     </div>

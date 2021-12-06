@@ -47,7 +47,7 @@ Route::get('/edit/users','UsersController@edit')->name('users.edit');
 ///////// Rutas roles  ////////////
 
 Route::get('/view/roles','RolesController@index')->name('roles.index');
-Route::get('/create/roles','RolesController@create')->name('roles.create');
+Route::post('/create/roles','RolesController@store')->name('roles.store');
 Route::get('/edit/roles','RolesController@edit')->name('roles.edit');
 Route::get('/permision/roles','RolesController@permission')->name('roles.permission');
 
@@ -55,13 +55,19 @@ Route::get('/permision/roles','RolesController@permission')->name('roles.permiss
 
 Route::get('/view/parametrics','ParametricsController@index')->name('parametrics.index');
 Route::get('/create/parametrics','ParametricsController@create')->name('parametrics.create');
-Route::get('/edit/parametrics','ParametricsController@edit')->name('parametrics.edit');
+Route::get('/edit/parametrics/{id}','ParametricsController@edit')->name('parametrics.edit');
+Route::post('/store/parametrics','ParametricsController@store')->name('parametrics.store');
+Route::post('/update/parametrics','ParametricsController@update')->name('parametrics.update');
+Route::get('/delete/parametrics/{id}','ParametricsController@delete')->name('parametrics.delete');
 
 ///////// Rutas paises  ////////////
 
 Route::get('/view/countries','CountriesController@index')->name('countries.index');
 Route::get('/create/countries','CountriesController@create')->name('countries.create');
-Route::get('/edit/countries','CountriesController@edit')->name('countries.edit');
+Route::get('/edit/countries/{id}','CountriesController@edit')->name('countries.edit');
+Route::post('/store/countries','CountriesController@store')->name('countries.store');
+Route::post('/update/countries','CountriesController@update')->name('countries.update');
+Route::get('/delete/countries/{id}', 'CountriesController@delete')->name('countries.delete');
 
 ///////// Rutas clientes  ////////////
 

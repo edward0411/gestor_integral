@@ -21,26 +21,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($parametrics as $parametric)
                             <tr>
-                                <td>id_param_tipo_documento</td>
-                                <td>1</td>
-                                <td>Cédula de ciudadanía</td>
-                                <td>100</td>
+                                <td>{{$parametric->p_category}}</td>
+                                <td>{{$parametric->p_value}}</td>
+                                <td>{{$parametric->p_text}}</td>
+                                <td>{{$parametric->p_order}}</td>
                                 <td>
-                                    <a href="{{route('parametrics.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                    <a href="{{route('parametrics.edit',$parametric->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    <a href="{{route('parametrics.delete',$parametric->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>id_param_tipo_documento</td>
-                                <td>2</td>
-                                <td>Cédula extranjería</td>
-                                <td>200</td>
-                                <td>
-                                    <a href="{{route('parametrics.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
-                                </td>
-                            </tr>
+                            </tr>       
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -11,7 +11,7 @@ $vars=[ 'breadcrum' => ['Administración','Roles'],
                 <div class="card-header color-header" style="font-weight: bold;">
                     <h5 class="card-title">Crear rol</h5>
                 </div>
-                <form role="form" method="POST" action="">
+                <form role="form" method="POST" action="{{route('roles.store')}}">
                     @csrf
                     <div class="card-body">
                         <div class="form-row">
@@ -19,7 +19,7 @@ $vars=[ 'breadcrum' => ['Administración','Roles'],
                                 <div class="form-group">
                                     <label>Nombre del rol</label>
                                     <input type="text" name="name" id="name" class="form-control form-control-sm" placeholder="" value="">
-                                    <input type="hidden" name="id_rol" id="id_rol" value="">
+                                    <input type="hidden" name="id_rol" id="id_rol" value="{{old('id_rol') ?? '0' }}">
                                 </div>
                             </div>
                         </div>
@@ -43,14 +43,15 @@ $vars=[ 'breadcrum' => ['Administración','Roles'],
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($roles as $rol)
                             <tr>
-                                <td></td>
+                                <td>{{$rol->name}}</td>
                                 <td>
                                     <div class="row">
                                         <div class="col">
-                                            <input type="button" value="Editar" class="btn btn-warning btn-xs" onclick="">
-                                            <input type="hidden" id="" value="">
-                                            <input type="hidden" id="" value="">
+                                            <input type="button" value="Editar" class="btn btn-warning btn-xs" onclick="editar({{$rol['id']}})">
+                                            <input type="hidden" id="ed_id_rol_{{$rol['id']}}" value="{{$rol['id']}}">
+                                            <input type="hidden" id="ed_name_{{$rol['id']}}" value="{{$rol['name']}}">
                                         </div>
                                         <div class="col">
                                             <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
@@ -61,6 +62,7 @@ $vars=[ 'breadcrum' => ['Administración','Roles'],
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -74,17 +76,16 @@ $vars=[ 'breadcrum' => ['Administración','Roles'],
 
 @section('script')
 <script>
-    function editar(id) {
+function editar(id)
+{
+    //alert("Hola Editar "+id);
+    v_name= $('#ed_name_'+id).val();
+    v_id_rol= $('#ed_id_rol_'+id).val();
 
-        //alert("Hola Editar "+id);
-        v_name = $('#ed_name_' + id).val();
-        v_id_rol = $('#ed_id_rol_' + id).val();
-
-        $('#name').val(v_name);
-        $('#id_rol').val(v_id_rol);
-
-    }
-
+    $('#name').val(v_name);
+    $('#id_rol').val(v_id_rol);
+  
+}
 </script>
 @endsection
 

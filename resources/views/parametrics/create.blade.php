@@ -9,7 +9,7 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear paramétrica') !!}</h5>
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" action="">
+                <form method="POST" action="{{route('parametrics.store')}}">
                     <div class="card-body">
                         @csrf
                         <div class="row">
