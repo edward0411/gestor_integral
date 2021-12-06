@@ -17,6 +17,8 @@ class UsersSeeder extends Seeder
             'u_name' => 'carlos leyva',
             'u_nickname' => 'carlos_11_leyva',
             'u_id_country' => 1,
+            'u_id_means' => 1,
+            'u_id_money' => 1,
             'email' => 'cjleyva0505@gmail.com',
             'password' => bcrypt('123456789'),
           ]);
