@@ -6,13 +6,27 @@
         <div class="col-md-12">
             <div class="login-box">
                 <!-- /.login-logo -->
-                <div class="card card-outline card-warning">
+                <div class="card card-outline" style="color:#1A7C94">
                   <div class="card-header text-center">
+                    <div class="tab">
+                      <button class="tablinks" onclick="openRegister(event, 'Client')" id="defaultOpen">Cliente</button>
+                      <button class="tablinks" onclick="openRegister(event, 'Tutor')">Tutor</button>
+                    </div>
                     <a href="" class="h1"><b>Gestor</b>Integral</a>
                   </div>
                   <div class="card-body">
                     <p class="login-box-msg">Regístrese para iniciar su sesión</p>
-              
+                    <div id="Client" class="tabcontent">
+
+                     
+                    </div>
+                    <div id="Tutor" class="tabcontent">
+
+                     
+                    </div>
+                    
+                  
+                   
                     <form action="{{ route('login') }}" method="post">
                       @csrf
                       <div class="input-group mb-3">
@@ -43,28 +57,21 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-8">
-                          <div class="icheck-warning">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">
-                              {{ __('Recuerdame') }}
-                            </label>
-                          </div>
-                        </div>
+                
                         <!-- /.col -->
-                        <div class="col-4">
-                          <button type="submit" class="btn btn-warning btn-sm">{{ __('Iniciar Sesión') }}</button>
+                        <div class="col-8">
+                          <button type="submit" style="color:#1A7C94" class="btn btn-sm">{{ __('Iniciar Sesión') }}</button>
                         </div>
                         <!-- /.col -->
                       </div>
                     </form>
               
                     <p class="mb-1">
-                      <a href="{{ route('password.request') }}" style="color:#ffc107">Olvidé mi contraseña</a>
+                      <a href="{{ route('password.request') }}" style="color:#1A7C94">Olvidé mi contraseña</a>
                     </p>
 
                     <p class="mb-0">
-                      <a href="{{ route('register') }}" class="text-center" style="color:#ffc107">Registrar nuevo usuario</a>
+                      <a href="{{ route('register') }}" class="text-center" style="color:#1A7C94 ">Registrar nuevo usuario</a>
                     </p>
                   </div>
                   <!-- /.card-body -->

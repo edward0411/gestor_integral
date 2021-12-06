@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="register-box">
-                <div class="card card-outline card-warning">
+                <div class="card card-outline " style="color:#1A7C94">
                   <div class="card-header text-center">
                     <div class="tab">
                       <button class="tablinks" onclick="openRegister(event, 'Client')" id="defaultOpen">Cliente</button>
@@ -320,10 +320,7 @@
                         </div>
                       </form>
                     </div>
-                    
-                    
-              
-                    <a href="{{ route('login') }}" class="text-center" style="color:#ffc107">Ya tengo una cuenta</a>
+                    <a href="{{ route('login') }}" class="text-center" style="color:#1A7C94">Ya tengo una cuenta</a>
                   </div>
                   <!-- /.form-box -->
                 </div><!-- /.card -->
