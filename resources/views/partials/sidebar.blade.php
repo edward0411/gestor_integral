@@ -79,12 +79,15 @@
                   <p>Países</p>
                 </a>
               </li>
+              
               <li class="nav-item">
                 <a href="{{route('parametrics.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Paramétricas</p>
                 </a>
               </li>
+              
+             
               <li class="nav-item">
                 <a href="{{route('users.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

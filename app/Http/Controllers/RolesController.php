@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Roles as roles;
 use \Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class RolesController extends Controller
 {
@@ -13,7 +15,7 @@ class RolesController extends Controller
         $roles = roles::all();
         
         $rol_delete = roles::onlyTrashed()->get();
-        dd($rol_delete);
+       // dd($rol_delete);
 
         return view('roles.index',compact('roles'));
     }
@@ -46,13 +48,70 @@ class RolesController extends Controller
 
     }
 
-    public function edit(){
 
-        return view('roles.edit');
+    public function permissionindex($role){
+
+        $role = roles::find($role);
+
+        $permissions_role = $role->Permissions->pluck('name')->toArray();
+
+        $permissions = Permission::all();
+
+        return view('roles.permission',compact('role','permissions_role','permissions'));
     }
 
-    public function permission(){
+    public function permissionstore(Request $request){
+        set_time_limit(0);
 
-        return view('roles.permission');
+        $role = roles::find($request->roleid);
+
+        $previous_permissions_role = $role->permissions->all();
+
+        Log::channel('database')->info( 
+            'Se han revocado los pernisos',
+            [
+                'user_id' => Auth::user()->id,
+                'user_email' => Auth::user()->mail,
+                'controller' => app('request')->route()->getAction()["controller"],
+                'rol afectado' => $role->name,
+                'permisos retirados' =>  $previous_permissions_role 
+                
+            ]                    
+        );
+
+        $permissions_no_rol =  Permission::all();
+        foreach ($permissions_no_rol  as $permission_no_rol){          
+            $role->revokePermissionTo($permission_no_rol);
+        }
+       // dd($request);
+        if(isset($request->permision )){
+            foreach ($request->permision as $permision){
+                $role->givePermissionTo($permision);
+              }
+        }
+        
+
+        //dd($rol);
+
+        $role_permissions = $role->permissions->all();
+
+        $informacionlog = 'Se han otorgado los pernisos';
+        $objetolog = [
+                'user_id' => Auth::user()->id,
+                'user_email' => Auth::user()->mail,
+                'controller' => app('request')->route()->getAction()["controller"],
+                'rol afectado' => $role->name,
+                'permisos asignados' => $role_permissions            
+                ];                
+
+
+        Log::channel('database')->info( 
+            $informacionlog ,
+            $objetolog
+        );
+
+        return back()->with('success', 'Se han asignado los permisos');
+
     }
+
 }

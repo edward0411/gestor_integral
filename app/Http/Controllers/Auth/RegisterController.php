@@ -97,6 +97,8 @@ class RegisterController extends Controller
 
     protected function create_client(array $data)
     {
+
+        
         return User::create([
             'u_key_number' => $data['u_key_number'],
             'u_name' => $data['u_name'],

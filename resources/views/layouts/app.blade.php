@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+
+    <link rel="stylesheet" href=" {{ asset('css/admin_panel.css') }}">
 </head>
 <body class="hold-transition login-page">
     <div id="app" >
