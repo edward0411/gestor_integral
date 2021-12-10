@@ -12,7 +12,17 @@
                   </div>
                   <div class="card-body">
                     <p class="login-box-msg">Regístrese para iniciar su sesión</p>
-              
+                    <div id="Client" class="tabcontent">
+
+                     
+                    </div>
+                    <div id="Tutor" class="tabcontent">
+
+                     
+                    </div>
+                    
+                  
+                   
                     <form action="{{ route('login') }}" method="post">
                       @csrf
 
