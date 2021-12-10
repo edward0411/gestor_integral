@@ -57,7 +57,7 @@ $vars=[ 'breadcrum' => ['Administración','Roles'],
                                             <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                                         </div>
                                         <div class="col">
-                                            <a href="{{ route('roles.permission')}}" type="button" class="btn btn-info btn-xs" name="permisos" vuale="permisos"><i class="fas fa-key"></i> Permisos</a>
+                                            <a href="{{ route('roles.permission',$rol)}}" type="button" class="btn btn-info btn-xs" name="permisos" vuale="permisos"><i class="fas fa-key"></i> Permisos</a>
                                         </div>
                                     </div>
                                 </td>

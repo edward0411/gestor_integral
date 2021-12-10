@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ Route::get('/iniciar-sesion', 'HomeController@login')->name('admin.login');
 
 
 ////////// Rutas usuarios /////////
-Route::get('/view/users','UsersController@index')->name('users.index');//->middleware('permission:Administrador_usuarios_ver');
+Route::get('/view/users','UsersController@index')->name('users.index')->middleware('permission:Administrador_usuarios_ver');
 Route::get('/create/users','UsersController@create')->name('users.create');
 Route::get('/edit/users','UsersController@edit')->name('users.edit');
 
@@ -50,13 +51,14 @@ Route::get('/edit/users','UsersController@edit')->name('users.edit');
 Route::get('/view/roles','RolesController@index')->name('roles.index');
 Route::post('/create/roles','RolesController@store')->name('roles.store');
 Route::get('/edit/roles','RolesController@edit')->name('roles.edit');
-Route::get('/permision/roles','RolesController@permission')->name('roles.permission');
+Route::get('/permision/roles/{id_rol}','RolesController@permissionindex')->name('roles.permission');
+Route::post('/permision_store/roles','RolesController@permissionstore')->name('roles.permission.store');
 
 ///////// Rutas parametricas  //////////
 
-Route::get('/view/parametrics','ParametricsController@index')->name('parametrics.index');
-Route::get('/create/parametrics','ParametricsController@create')->name('parametrics.create');
-Route::get('/edit/parametrics/{id}','ParametricsController@edit')->name('parametrics.edit');
+Route::get('/view/parametrics','ParametricsController@index')->name('parametrics.index');//->middleware('can:Administrador_parametricas_ver');
+Route::get('/create/parametrics','ParametricsController@create')->name('parametrics.create');//->middleware('can:Administrador_parametricas_crear');
+Route::get('/edit/parametrics/{id}','ParametricsController@edit')->name('parametrics.edit');//->middleware('can:Administrador_parametricas_editar');
 Route::post('/store/parametrics','ParametricsController@store')->name('parametrics.store');
 Route::post('/update/parametrics','ParametricsController@update')->name('parametrics.update');
 Route::get('/delete/parametrics/{id}','ParametricsController@delete')->name('parametrics.delete');
@@ -81,6 +83,15 @@ Route::get('/edit/customers','CustomersController@edit')->name('customers.edit')
 Route::get('/view/tutors','TutorsController@index')->name('tutors.index');
 Route::get('/create/tutors','TutorsController@create')->name('tutors.create');
 Route::get('/edit/tutors','TutorsController@edit')->name('tutors.edit');
+
+Route::get('/createpermission',function(){
+
+    Permission::create(['name' => 'Administrador_parametricas_ver']);
+    Permission::create(['name' => 'Administrador_parametricas_crear']);
+    Permission::create(['name' => 'Administrador_parametricas_editar']);
+
+    return '<h1>se han creado los permisos</h1>';
+});
 
 
 

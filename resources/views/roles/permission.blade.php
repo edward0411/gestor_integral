@@ -9,20 +9,30 @@ $vars=[ 'breadcrum' => ['Administración','Roles', 'Permisos'],
         <div class="col-9">
             <div class="card">
                 <div class="card-header color-header">
-                    <h3 class="card-title">Permisos para el rol <strong> </strong></h3>
+                    <h3 class="card-title">Permisos para el rol <strong>{{ $role['name'] }}</strong></h3>
                 </div>
                 <!-- /.card-header -->
-                <form role="form" method="POST" action="">
+                <form role="form" method="POST" action="{{route('roles.permission.store')}}">
                     @csrf
                     <div class="card-body">
                         <div class="form-row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="hidden" name="roleid" value="">
+                                    <input type="hidden" name="roleid" value="{{$role['id']}}">
+                                    @foreach ($permissions as $permission)
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name='permision[]' value=''>
-                                        <label class="form-check-label">menu.administrador</label>
+                                        <input 
+                                        class="form-check-input" 
+                                        type="checkbox" 
+                                        name = 'permisions[]'
+                                        value = '{{$permission['name']}}'
+                                        @foreach($permissions_role as $permission_rol)
+                                            {{ ($permission_rol==$permission['name'])?'checked':'' }}
+                                        @endforeach 
+                                        >
+                                        <label class="form-check-label">{{$permission['name']}}</label>
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="col-sm-6">
