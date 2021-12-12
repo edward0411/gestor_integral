@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-blue elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
       <img src="{{ asset('image/logo.jpg') }}" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -89,9 +89,9 @@
               
              
               <li class="nav-item">
-                <a href="{{route('users.index')}}" class="nav-link">
+                <a href="{{route('coins.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Usuarios</p>
+                  <p>Monedas</p>
                 </a>
               </li>
             </ul>
