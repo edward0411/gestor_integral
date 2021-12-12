@@ -28,6 +28,11 @@
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
     <link rel="stylesheet" href=" {{ asset('css/admin_panel.css') }}">
+    <style type = "text/css">
+        .red{
+          color: red;
+        }
+    </style>
 </head>
 <body class="hold-transition login-page">
     <div id="app" >

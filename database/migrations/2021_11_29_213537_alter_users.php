@@ -39,7 +39,7 @@ class AlterUsers extends Migration
             });
 
             Schema::table('users', function (Blueprint $table) {
-                $table->integer('u_num_doc')->nullable()->after('u_type_doc');
+                $table->string('u_num_doc')->nullable()->after('u_type_doc');
             });
 
             Schema::table('users', function (Blueprint $table) {
