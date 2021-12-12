@@ -90,6 +90,16 @@ Route::get('/view/tutors','TutorsController@index')->name('tutors.index');
 Route::get('/create/tutors','TutorsController@create')->name('tutors.create');
 Route::get('/edit/tutors','TutorsController@edit')->name('tutors.edit');
 
+////////// Rutas monedas //////////
+Route::get('/view/coins','CoinsController@index')->name('coins.index');
+Route::get('/create/coins','CoinsController@create')->name('coins.create');
+Route::get('/edit/coins/{id}','CoinsController@edit')->name('coins.edit');
+Route::post('/store/coins','CoinsController@store')->name('coins.store');
+Route::post('/update/coins','CoinsController@update')->name('coins.update');
+Route::get('/inactive/coins/{id}', 'CoinsController@inactive')->name('coins.inactive');
+Route::get('/active/coins/{id}', 'CoinsController@active')->name('coins.active');
+
+
 Route::get('/createpermission',function(){
 
     Permission::create(['name' => 'Administrador_parametricas_ver']);
