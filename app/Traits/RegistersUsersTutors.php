@@ -4,13 +4,17 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Coins as coins;
+use App\Models\Countries as countries;
+use Illuminate\Support\Facades\DB;
 
 trait RegistersUsersTutors
 {
 
     public function showRegistrationTutorsForm()
-    {
-        return view('auth.registerTutors');
+    {  
+        $countries = DB::table('countries')->whereNull('deleted_at')->select('id','c_name')->get();
+        return view('auth.registerTutors',compact('countries'));
     }
 
     public function register_tutors(Request $request)

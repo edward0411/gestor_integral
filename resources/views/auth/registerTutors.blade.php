@@ -33,7 +33,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="u_nick_name"  class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Nick Name: <small>(No usar ni puntos ni espacios.)</small></label>
+                                        <label for="u_nick_name"  class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Nick Name: <small>(No usar espacios.)</small></label>
                                         <div class="input-group mb-3">
                                             
                                             <input id="u_nick_name" onchange="spc();" type="text" class="form-control form-control-sm @error('name') is-invalid @enderror" name="u_nick_name" value="{{ old('u_nick_name') }}" required autocomplete="u_nick_name">
@@ -105,7 +105,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="u_key_number" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Indicativo:</label>
+                                        <label for="u_indicativo" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Indicativo:</label>
                                         <div class="input-group mb-3">
                                             <input id="u_indicativo" type="text" class="form-control form-control-sm" name="u_indicativo" value="+57" readonly>
                                             <div class="input-group-append">
@@ -120,10 +120,9 @@
                                         <div class="input-group mb-3">
                                             <select name="id_contry" id="id_contry" class="form-control form-control-sm" required>
                                                 <option value="">Seleccione...</option>
-                                                <option value="1">Colombia</option>
-                                                <option value="2">Peru</option>
-                                                <option value="3">España</option>
-                                                <option value="4">USA</option>
+                                                @foreach ($countries as $country)
+                                                <option value="{{$country->id}}">{{$country->c_name}}</option>
+                                                @endforeach
                                             </select>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
@@ -138,7 +137,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="id_contry" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Medio de contacto:</label>
+                                        <label for="id_means" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Medio de contacto:</label>
                                         <div class="input-group mb-3">
                                             <select name="id_means" id="id_means" class="form-control form-control-sm" required>
                                                 <option value="">Seleccione...</option>
