@@ -21,7 +21,12 @@ class ParametricsController extends Controller
 
     public function create(){
 
-        return view('parametrics.create');
+        $parametrics = parametrics::whereNotNull('p_category')
+        ->select('p_category')
+        ->distinct()
+        ->get();
+
+        return view('parametrics.create',compact('parametrics'));
     }
 
     public function edit($id){
@@ -35,14 +40,12 @@ class ParametricsController extends Controller
 
         $request->validate([
             'p_category' => 'required',
-            'p_value' => 'required',
             'p_text' => 'required',
             'p_order' => 'numeric',
            ] );
 
            $parametrics = new parametrics();
            $parametrics->p_category = $request->p_category;
-           $parametrics->p_value = $request->p_value;
            $parametrics->p_text = $request->p_text;
            $parametrics->p_order = $request->p_order;
            $parametrics->created_by = Auth::user()->id;
@@ -55,14 +58,12 @@ class ParametricsController extends Controller
         
         $request->validate([
             'p_category' => 'required',
-            'p_value' => 'required',
             'p_text' => 'required',
             'p_order' => 'numeric',
            ] );
 
         $parametrics = parametrics::where('id', '=', $request->id)->first();
         $parametrics->p_category = $request->p_category;
-        $parametrics->p_value = $request->p_value;
         $parametrics->p_text = $request->p_text;
         $parametrics->p_order = $request->p_order;
         $parametrics->updated_by = Auth::user()->id;

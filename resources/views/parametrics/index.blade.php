@@ -14,7 +14,6 @@
                         <thead>
                             <tr class="bg-warning text-center">
                                 <th>{!! trans('Categoria') !!} </th>
-                                <th>{!! trans('Valor') !!}</th>
                                 <th>{!! trans('Texto') !!}</th>
                                 <th>{!! trans('Orden') !!}</th>
                                 <th>{!! trans('Acciones') !!}</th>
@@ -24,7 +23,6 @@
                             @foreach($parametrics as $parametric)
                             <tr>
                                 <td>{{$parametric->p_category}}</td>
-                                <td>{{$parametric->p_value}}</td>
                                 <td>{{$parametric->p_text}}</td>
                                 <td>{{$parametric->p_order}}</td>
                                 <td>

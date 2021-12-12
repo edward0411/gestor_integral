@@ -13,19 +13,16 @@
                     <div class="card-body">
                         @csrf
                         <div class="row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="p_category">{!! trans('Categoria') !!}</label>
-                                <input type="text" class="form-control form-control-sm" id="p_category" name="p_category" value="{{$parametrics->p_category}}">
+                                <input type="text" class="form-control form-control-sm" id="p_category" name="p_category" value="{{$parametrics->p_category}}" disabled>
+                                <input type="hidden" name="p_category" id="id_categoty"  class="form-control" value="{{$parametrics->p_category}}">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="p_value">{!! trans('Valor') !!}</label>
-                                <input type="text" class="form-control form-control-sm" id="p_value" name="p_value" value="{{$parametrics->p_value}}">
-                            </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="p_text">{!! trans('Texto') !!}</label>
                                 <input type="text" class="form-control form-control-sm" id="p_text" name="p_text" value="{{$parametrics->p_text}}">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="p_order">{!! trans('Orden') !!}</label>
                                 <input type="number" class="form-control form-control-sm" id="p_order" name="p_order" value="{{$parametrics->p_order}}">
                             </div>
