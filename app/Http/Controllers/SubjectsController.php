@@ -9,12 +9,23 @@ use App\Models\Subjects as subject;
 
 class SubjectsController extends Controller
 {
-    public function index(){
+    public function index($id){
+
+        $subjects = DB::table('subjects')
+        ->leftJoin('areas','areas.id','=','subjects.id_area')
+        ->where('subjects.id_area', $id)
+        ->select('subjects.*')
+        ->get();
 
         return view('areas.subjects.index');
     }
 
-    public function create(){
+    public function create( $id){
+
+        $subjects = DB::table('subjects')
+        ->where('subjects.id_area', $id)
+        ->select('subjects.*')
+        ->get();
 
         return view('areas.subjects.create');
     }

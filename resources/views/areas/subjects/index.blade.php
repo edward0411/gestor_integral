@@ -26,7 +26,7 @@
                                 <td>Activo</td>
                                 <td>
                                     <a href="{{route('areas.subjects.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="" class="btn btn-primary btn-xs"><i class=" 	fas fa-clipboard-list"></i> {!! trans('Temas') !!}</a>
+                                    <a href="{{route('areas.subjects.topics.index')}}" class="btn btn-primary btn-xs"><i class=" 	fas fa-clipboard-list"></i> {!! trans('Temas') !!}</a>
                                     
                                     <a href="" onclick="return confirm('{!! trans('Desea inactivar la moneda') !!}?');" class="btn btn-danger btn-xs"><i class="fas fa-ban"></i> {!! trans('Inactivar') !!}</a>
                             
