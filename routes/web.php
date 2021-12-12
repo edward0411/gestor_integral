@@ -23,12 +23,18 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::get('register.tutors', 'Auth\RegisterController@showRegistrationTutorsForm')->name('registerTutors');
+Route::get('register.clients', 'Auth\RegisterController@showRegistrationClientsForm')->name('registerClients');
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('register.clients', 'Auth\RegisterController@register_clients')->name('register_clients');
 Route::post('register.tutors', 'Auth\RegisterController@register_tutors')->name('register_tutors');
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('login.tutors', 'Auth\LoginController@showLoginTutorsForm')->name('login_tutors');
+Route::get('login.clients', 'Auth\LoginController@showLoginClientsForm')->name('login_clients');
+Route::get('login.employee', 'Auth\LoginController@showLoginEmployeeForm')->name('login_employee');
 Route::post('login', 'Auth\LoginController@login');
+Route::post('loginClients', 'Auth\LoginController@loginClients')->name('loginClients');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 

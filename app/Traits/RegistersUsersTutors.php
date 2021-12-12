@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 trait RegistersUsersTutors
 {
 
+    public function showRegistrationTutorsForm()
+    {
+        return view('auth.registerTutors');
+    }
+
     public function register_tutors(Request $request)
     {   
         $this->validator_tutor($request->all())->validate();

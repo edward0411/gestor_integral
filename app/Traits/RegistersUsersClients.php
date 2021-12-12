@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Auth;
 
 trait RegistersUsersClients
 {
+    public function showRegistrationClientsForm()
+    {
+        return view('auth.registerClients');
+    }
 
     public function register_clients(Request $request)
     {   
