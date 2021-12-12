@@ -52,7 +52,7 @@ class CoinsController extends Controller
         $coins->updated_by = Auth::user()->id;
         $coins->save();
 
-        return redirect()->route('coins.index')->with('success','Registro creado con éxito');
+        return redirect()->route('coins.index')->with('success','Registro actualizado con éxito');
     }
 
     public function active($id)
@@ -61,7 +61,7 @@ class CoinsController extends Controller
         $coins ->c_state = 1;
         $coins ->update();
 
-        return redirect()->route  ('coins.index')->with('success', trans('La momeda fue activada con éxito'));
+        return redirect()->route  ('coins.index')->with('success', trans('Registro activado con éxito'));
     }
 
     public function inactive($id)
@@ -70,7 +70,7 @@ class CoinsController extends Controller
         $coins ->c_state = 0;
         $coins ->update();
 
-        return redirect()->route  ('coins.index')->with('success', trans('La moneda fue inactivada con éxito'));
+        return redirect()->route  ('coins.index')->with('success', trans('Registro inactivado con éxito'));
 
     }
 }

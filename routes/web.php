@@ -85,6 +85,7 @@ Route::get('/create/tutors','TutorsController@create')->name('tutors.create');
 Route::get('/edit/tutors','TutorsController@edit')->name('tutors.edit');
 
 ////////// Rutas monedas //////////
+
 Route::get('/view/coins','CoinsController@index')->name('coins.index');
 Route::get('/create/coins','CoinsController@create')->name('coins.create');
 Route::get('/edit/coins/{id}','CoinsController@edit')->name('coins.edit');
@@ -92,6 +93,25 @@ Route::post('/store/coins','CoinsController@store')->name('coins.store');
 Route::post('/update/coins','CoinsController@update')->name('coins.update');
 Route::get('/inactive/coins/{id}', 'CoinsController@inactive')->name('coins.inactive');
 Route::get('/active/coins/{id}', 'CoinsController@active')->name('coins.active');
+
+////////// Rutas areas //////////
+
+Route::get('/view/areas','AreasController@index')->name('areas.index');
+Route::get('/create/areas','AreasController@create')->name('areas.create');
+Route::get('/edit/areas/{id}','AreasController@edit')->name('areas.edit');
+Route::post('/store/areas','AreasController@store')->name('areas.store');
+Route::post('/update/areas','AreasController@update')->name('areas.update');
+Route::get('/inactive/areas/{id}', 'AreasController@inactive')->name('areas.inactive');
+Route::get('/active/areas/{id}', 'AreasController@active')->name('areas.active');
+
+
+////////// Rutas materias //////////
+
+Route::get('/view/subjects','SubjectsController@index')->name('areas.subjects.index');
+Route::get('/create/subjects','SubjectsController@create')->name('areas.subjects.create');
+Route::get('/edit/subjects','SubjectsController@edit')->name('areas.subjects.edit');
+
+
 
 
 Route::get('/createpermission',function(){
