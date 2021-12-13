@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('areas.subjects.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear materia') !!}</a>
+                    <a href="{{route('areas.subjects.create',$id)}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear materia') !!}</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -20,12 +20,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($subjects as $subject)
                             <tr>
-                                <td>1</td>
-                                <td>Antropología</td>
-                                <td>Activo</td>
+                                <td>{{$subject->s_order}}</td>
+                                <td>{{$subject->s_name}}</td>
                                 <td>
-                                    <a href="{{route('areas.subjects.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    @if($subject->s_state == 1)
+                                    {!! trans('Activo') !!}
+                                    @else
+                                    {!! trans('Inactivo') !!}
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{route('areas.subjects.edit',$subject->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
                                     <a href="{{route('areas.subjects.topics.index')}}" class="btn btn-primary btn-xs"><i class=" 	fas fa-clipboard-list"></i> {!! trans('Temas') !!}</a>
                                     
                                     <a href="" onclick="return confirm('{!! trans('Desea inactivar la moneda') !!}?');" class="btn btn-danger btn-xs"><i class="fas fa-ban"></i> {!! trans('Inactivar') !!}</a>
@@ -34,6 +41,8 @@
                                 
                                 </td>
                             </tr>
+                            @endforeach
+                         
                             
                         </tbody>
                     </table>
