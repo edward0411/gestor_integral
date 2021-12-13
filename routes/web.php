@@ -115,8 +115,11 @@ Route::get('/active/areas/{id}', 'AreasController@active')->name('areas.active')
 ////////// Rutas materias //////////
 
 Route::get('/view/areas/subjects/{id}','SubjectsController@index')->name('areas.subjects.index');
-Route::get('/create/areas/subjects','SubjectsController@create')->name('areas.subjects.create');
-Route::get('/edit/areas/subjects','SubjectsController@edit')->name('areas.subjects.edit');
+Route::get('/create/areas/subjects/{id}','SubjectsController@create')->name('areas.subjects.create');
+Route::get('/edit/areas/subjects/{id}','SubjectsController@edit')->name('areas.subjects.edit');
+Route::post('/store/areas/subjects','SubjectsController@store')->name('areas.subjects.store');
+Route::post('/update/areas/subjects','SubjectsController@update')->name('areas.subjects.update');
+
 
 ////////// Rutas temas //////////
 

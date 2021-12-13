@@ -10,6 +10,12 @@ use App\Models\Subjects as subject;
 class SubjectsController extends Controller
 {
     public function index($id){
+        
+
+        $area = DB::table('areas')
+        ->where('id',$id)
+        ->select('id','a_name')
+        ->first();
 
         $subjects = DB::table('subjects')
         ->leftJoin('areas','areas.id','=','subjects.id_area')
@@ -17,21 +23,133 @@ class SubjectsController extends Controller
         ->select('subjects.*')
         ->get();
 
-        return view('areas.subjects.index');
+        return view('areas.subjects.index',compact('id','area','subjects'));
     }
 
-    public function create( $id){
+    public function create($id){
+
+        $area = DB::table('areas')
+        ->where('id',$id)
+        ->select('id','a_name')
+        ->first();
 
         $subjects = DB::table('subjects')
         ->where('subjects.id_area', $id)
-        ->select('subjects.*')
-        ->get();
+        ->max('s_order');
+        $max =  $subjects + 100;
 
-        return view('areas.subjects.create');
+        return view('areas.subjects.create',compact('max','area'));
     }
 
-    public function edit(){
+    public function edit($id){
 
-        return view('areas.subjects.edit');
+        $subjects = DB::table('subjects')
+        ->leftJoin('areas','areas.id','=','subjects.id_area')
+        ->where('subjects.id',$id)
+        ->select('subjects.s_name','subjects.s_order','areas.id','subjects.id_area')
+        ->first();
+
+        $value = DB::table('subjects')->max('s_order');
+        $max  = $value + 1;
+
+        return view('areas.subjects.edit',compact('subjects','max','id'));
+    }
+
+    public function store(Request $request){
+
+        //dd($request);
+
+        $order = $request->s_order * 100;
+
+        $subject = DB::table('subjects')
+        ->where('id_area',$request->id_area)
+        ->where('s_order',$order)
+        ->first();
+
+        if(!empty($subject)){
+
+            $value = DB::table('subjects')
+            ->where('id_area',$request->id_area)
+            ->max('s_order');
+            $number = $value / 100;
+   
+             for ($i=$number; $i >= $request->s_order; $i--)
+              {
+                $value = $i * 100;
+   
+                $subjects = subject::where('s_order', $value)
+                ->where('id_area',$request->id_area)
+                ->firstOrFail();
+                $subjects->s_order = $value + 100;
+                $subjects->update();
+   
+              }
+   
+           }
+
+           $subjects = new subject;
+           $subjects->id_area = $request->id_area;
+           $subjects->s_name = $request->s_name;
+           $subjects->s_order = $request->s_order;
+           $subjects->s_state = 1;
+           $subjects->created_by = Auth::user()->id;
+           $subjects->save();
+
+        return redirect()->route('areas.subjects.index',$request->id_area)->with('success','Registro creado con éxito');
+    }
+
+    public function update(Request $request){
+
+        //dd($request);
+
+        $order_requested = $request->s_order;
+
+        $order = DB::table('subjects')
+        ->where('id',$request->id_area)
+        ->select('s_order')
+        ->first();
+        dd($order);
+
+        $value = $order->s_order/100;
+
+        if($order_requested < $value){
+
+            $number = ($value - 1);
+
+            for ($i= $number; $i >= $order_requested ; $i--) {
+
+                $order = $i * 100;
+
+                $subjects = subject::where('s_order', $order)->where('id_area',$request->id_area)->firstOrFail();
+                $subjects->s_order = $order + 100;
+                $subjects->update();
+
+            }
+
+        }else{
+
+
+            for ($i= $order_requested; $i > $value ; $i--) {
+
+                $order = $i * 100;
+
+                $subjects = subject::where('s_order', $order)->where('id_area',$request->id_area)->firstOrFail();
+                $subjects->s_order = $order - 100;
+                $subjects->update();
+
+            }
+        }
+
+        $id_area = $request->id_area;
+
+        $subject = subject::where('id', $id_area)->firstOrFail();
+        $subject->s_name = $request->s_name;
+        $subject->s_order = $order;
+        $subject->updated_by  = Auth::user()->id;
+        $subject->update();
+
+        dd($subject);
+
+        return redirect()->route('areas.subjects.index',$request->id_area)->with('success','Registro actualizado con éxito');
     }
 }
