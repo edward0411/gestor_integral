@@ -81,6 +81,7 @@ Route::get('/delete/countries/{id}', 'CountriesController@delete')->name('countr
 ///////// Rutas clientes  ////////////
 
 Route::get('/view/customers','CustomersController@index')->name('customers.index');
+Route::get('/view/customers_inactives','CustomersController@inactive')->name('customers.inactives');
 Route::get('/create/customers','CustomersController@create')->name('customers.create');
 Route::get('/edit/customers','CustomersController@edit')->name('customers.edit');
 

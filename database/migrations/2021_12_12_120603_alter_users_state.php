@@ -19,7 +19,7 @@ class AlterUsersState extends Migration
             if(!Schema::hasColumn('users','u_indicativo'))
             {
                 Schema::table('users', function (Blueprint $table) {
-                    $table->string('u_indicativo')->after('u_key_number');
+                    $table->string('u_indicativo')->nullable()->after('u_key_number');
                 });   
             }   
         }

@@ -1,4 +1,5 @@
 @extends('layouts.master_panel')
+@section('title', 'Clientes Activos')
 
 @section('content')
 <div class="container">
@@ -13,34 +14,26 @@
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
                             <tr class="bg-warning text-center">
-                                <th>{!! trans('Número de celular') !!} </th>
+                               
                                 <th>{!! trans('Nickname') !!} </th>
+                                <th>{!! trans('Número de celular') !!} </th>
                                 <th>{!! trans('Correo') !!} </th>
                                 <th>{!! trans('País') !!}</th>
+                                <th>{!! trans('Moneda') !!}</th>
                                 <th>{!! trans('Acciones') !!}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>3165349304</td>
-                                <td>Pepito</td>
-                                <td>soporte@gmail.com.co</td>
-                                <td>Colombia</td>
-                                <td>
-                                    <a href="{{route('customers.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3116548977</td>
-                                <td>Juanito</td>
-                                <td>prueba@gmail.con</td>
-                                <td>Brasil</td>
-                                <td>
-                                    <a href="{{route('customers.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
-                                </td>
-                            </tr>
+                            @foreach ($data as $user)
+                                <tr>
+                                    <td>{{$user->u_nickname}}</td>
+                                    <td>{{$user->u_indicativo}} {{$user->u_key_number}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->c_name}}</td>
+                                    <td>{{$user->c_type_currency}} - {{$user->c_currency}}</td>
+                                    <td></td> 
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

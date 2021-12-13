@@ -19,7 +19,7 @@
                                     <div class="form-group col-md-4">
                                         <label for="u_name" class="col-md-12 control-label">Nombre Completo:</label>
                                         <div class="input-group mb-3">
-                                            <input id="u_name" type="text" class="form-control form-control-sm @error('u_name') is-invalid @enderror" name="u_name" value="{{ old('u_name') }}" required autocomplete="u_name" autofocus>
+                                            <input id="u_name" type="text" class="form-control form-control-sm @error('u_name') is-invalid @enderror" name="u_name" value="{{ old('u_name') }}" autocomplete="u_name" autofocus>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-user"></span>
@@ -55,10 +55,9 @@
                                         <div class="input-group mb-3">
                                             <select name="u_type_doc" id="u_type_doc" class="form-control form-control-sm" required>
                                                 <option value="">Seleccione..</option>
-                                                <option value="1">C.C.</option>
-                                                <option value="2">Pasaporte</option>
-                                                <option value="3">C.E.</option>
-                                                <option value="4">NIT</option>
+                                                @foreach ($type_docs as $type)
+                                                <option value="{{$type->id}}">{{$type->p_text}}</option>
+                                                @endforeach
                                             </select>
                                             <div class="input-group-append">
                                               <div class="input-group-text">
@@ -141,10 +140,9 @@
                                         <div class="input-group mb-3">
                                             <select name="id_means" id="id_means" class="form-control form-control-sm" required>
                                                 <option value="">Seleccione...</option>
-                                                <option value="1">Publicidad web</option>
-                                                <option value="2">Llamada call center</option>
-                                                <option value="3">Referido</option>
-                                                <option value="4">Publiciad mediatica</option>
+                                                @foreach ($means as $mean)
+                                                <option value="{{$mean->id}}">{{$mean->p_text}}</option>
+                                                @endforeach
                                             </select>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
@@ -157,6 +155,22 @@
                                             </span>
                                             @enderror
 
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="u_line_first" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Primera linea:</label>
+                                        <div class="input-group mb-3">
+                                            <select name="u_line_first" id="u_line_first" class="form-control form-control-sm" required>
+                                                <option value="">Seleccione...</option>
+                                                <option value="1">Si</option>
+                                                <option value="0">No</option>
+                                                
+                                            </select>
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-exclamation"></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
@@ -208,7 +222,7 @@
                                     <div class="icheck-warning">
                                         <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                         <label for="agreeTerms">
-                                        Acepto los <a href="#">terminos</a>
+                                        Acepto los <a href="#">terminos y condiciones</a>
                                         </label>
                                     </div>
                                 </div>

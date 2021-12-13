@@ -9,9 +9,9 @@
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
+      <!--<div class="image">
           <img src="{{ asset('dist/img/avatar.png') }}" class="img-circle elevation-2" alt="User Image">
-        </div>
+        </div>-->
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->u_nickname }}</a>
         </div>
@@ -44,10 +44,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('customers.index')}}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Clientes</p>
+                  <i class="right fas fa-angle-left"></i>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('customers.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Clientes Activos</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Clientes Inactivos</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="{{route('tutors.index')}}" class="nav-link">

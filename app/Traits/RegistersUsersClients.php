@@ -5,6 +5,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Coins as coins;
+use App\Models\Parametrics;
 use App\Models\Countries as countries;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,8 @@ trait RegistersUsersClients
     {
         $countries = DB::table('countries')->whereNull('deleted_at')->select('id','c_name')->get();
         $coins = coins::all();
-        return view('auth.registerClients',compact('countries','coins'));
+        $means = Parametrics::where('p_category','=','means_type')->get();
+        return view('auth.registerClients',compact('countries','coins','means'));
     }
 
     public function register_clients(Request $request)

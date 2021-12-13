@@ -64,7 +64,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'u_nick_name' => ['required', 'string', 'max:50'],
-            'u_u_key_number' => ['required', 'string','min:8', 'max:15'],
+            'u_key_number' => ['required', 'string','min:8', 'max:15'],
             'id_contry' => ['required', 'numeric'],
             'id_means' => ['required', 'numeric'],
             'id_money' => ['required', 'numeric'],
@@ -75,7 +75,7 @@ class RegisterController extends Controller
     protected function validator_tutor(array $data)
     {
         return Validator::make($data, [
-            'u_name' => ['required', 'string', 'max:50','unique:users'],
+            'u_name' => ['max:50'],
             'u_nick_name' => ['required', 'string', 'max:50'],
             'u_type_doc' => ['required', 'string'],
             'u_num_doc' => ['required', 'string'],
@@ -98,10 +98,9 @@ class RegisterController extends Controller
 
     protected function create_client(array $data)
     {
-
-        
         return User::create([
             'u_key_number' => $data['u_key_number'],
+            'u_indicativo' => $data['u_indicativo'],
             'u_name' => $data['u_name'],
             'u_nickname' => $data['u_nick_name'],
             'u_id_country' => $data['id_contry'],
@@ -115,7 +114,6 @@ class RegisterController extends Controller
 
     protected function create_tutor(array $data)
     {
-       
         return User::create([
             'u_key_number' => $data['u_key_number'],
             'u_name' => $data['u_name'],
@@ -126,6 +124,7 @@ class RegisterController extends Controller
             'u_id_country' => $data['id_contry'],
             'u_id_means' => $data['id_means'],
             'u_state' => 0,
+            'u_line_first' => $data['u_line_first'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

@@ -66,6 +66,17 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
+                                        <label for="u_indicativo" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Indicativo:</label>
+                                        <div class="input-group mb-3">
+                                            <input id="u_indicativo" type="text" class="form-control form-control-sm" name="u_indicativo" value="+57" readonly>
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-map-marker-alt"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
                                         <label for="id_contry" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Pais de origen:</label>
                                         <div class="input-group mb-3">
                                             <select name="id_contry" id="id_contry" class="form-control form-control-sm" required>
@@ -92,10 +103,9 @@
                                         <div class="input-group mb-3">
                                             <select name="id_means" id="id_means" class="form-control form-control-sm" required>
                                                 <option value="">Seleccione...</option>
-                                                <option value="1">Publicidad web</option>
-                                                <option value="2">Llamada call center</option>
-                                                <option value="3">Referido</option>
-                                                <option value="4">Publiciad mediatica</option>
+                                                @foreach ($means as $mean)
+                                                <option value="{{$mean->id}}">{{$mean->p_text}}</option>
+                                                @endforeach
                                             </select>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
@@ -181,7 +191,7 @@
                                 <div class="icheck-warning">
                               <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                               <label for="agreeTerms">
-                               Acepto los <a href="#">terminos</a>
+                               Acepto los <a href="#">terminos y condiciones</a>
                               </label>
                             </div>
                                     </div>

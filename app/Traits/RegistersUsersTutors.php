@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Coins as coins;
 use App\Models\Countries as countries;
 use Illuminate\Support\Facades\DB;
+use App\Models\Parametrics;
 
 trait RegistersUsersTutors
 {
@@ -14,7 +15,9 @@ trait RegistersUsersTutors
     public function showRegistrationTutorsForm()
     {  
         $countries = DB::table('countries')->whereNull('deleted_at')->select('id','c_name')->get();
-        return view('auth.registerTutors',compact('countries'));
+        $means = Parametrics::where('p_category','=','means_type')->orderby('p_order')->get();
+        $type_docs = Parametrics::where('p_category','=','type_documents')->orderby('p_order')->get();
+        return view('auth.registerTutors',compact('countries','means','type_docs'));
     }
 
     public function register_tutors(Request $request)
