@@ -24,7 +24,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="s_order">{!! trans('Orden') !!}</label>
-                                <input type="number" class="form-control form-control-sm" id="s_order" name="s_order" value="" max="{{$max}}" title="Por favor ingresa un numero del 1 al {{$max}}" min="1" placeholder="Asignar el valor {{$max}} como ultimo registro" required>
+                                <input type="number" class="form-control form-control-sm" id="s_order" name="s_order" value="" max="{{$max}}" title="Por favor ingresa un numero del 100 al {{$max}}" min="1" placeholder="Asignar el valor {{$max}} como ultimo registro" required>
                             </div>
                         </div>
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>

@@ -20,6 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if(count($subjects) > 0 )
                             @foreach($subjects as $subject)
                             <tr>
                                 <td>{{$subject->s_order}}</td>
@@ -33,17 +34,16 @@
                                 </td>
                                 <td>
                                     <a href="{{route('areas.subjects.edit',$subject->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="{{route('areas.subjects.topics.index')}}" class="btn btn-primary btn-xs"><i class=" 	fas fa-clipboard-list"></i> {!! trans('Temas') !!}</a>
-                                    
-                                    <a href="" onclick="return confirm('{!! trans('Desea inactivar la moneda') !!}?');" class="btn btn-danger btn-xs"><i class="fas fa-ban"></i> {!! trans('Inactivar') !!}</a>
-                            
-                                   <a href="" class="btn btn-warning btn-xs" onclick="return confirm('{!! trans('Desea activar la moneda') !!}?');"><i class="fas fa-check"></i> {!! trans('Activar') !!}</a>
-                                
+                                    <a href="{{route('areas.subjects.topics.index',$subject->id)}}" class="btn btn-primary btn-xs"><i class=" 	fas fa-clipboard-list"></i> {!! trans('Temas') !!}</a>
+                                    @if($subject->s_state == 1)
+                                    <a href="{{route('areas.subjects.inactive',array($subject->id,$id))}}" onclick="return confirm('{!! trans('Desea inactivar la materia') !!}?');" class="btn btn-danger btn-xs"><i class="fas fa-ban"></i> {!! trans('Inactivar') !!}</a>
+                                    @else
+                                   <a href="{{route('areas.subjects.active',array($subject->id,$id))}}" class="btn btn-warning btn-xs" onclick="return confirm('{!! trans('Desea activar la materia') !!}?');"><i class="fas fa-check"></i> {!! trans('Activar') !!}</a>
+                                   @endif
                                 </td>
                             </tr>
                             @endforeach
-                         
-                            
+                            @endif 
                         </tbody>
                     </table>
                 </div>
