@@ -108,11 +108,10 @@ class SubjectsController extends Controller
         ->where('id',$request->id_area)
         ->select('s_order')
         ->first();
-        dd($order);
 
         $value = $order->s_order/100;
 
-        if($order_requested < $value){
+        /*if($order_requested < $value){
 
             $number = ($value - 1);
 
@@ -126,7 +125,7 @@ class SubjectsController extends Controller
 
             }
 
-        }else{
+        }else{ 
 
 
             for ($i= $order_requested; $i > $value ; $i--) {
@@ -138,17 +137,15 @@ class SubjectsController extends Controller
                 $subjects->update();
 
             }
-        }
+        }*/
 
         $id_area = $request->id_area;
 
         $subject = subject::where('id', $id_area)->firstOrFail();
         $subject->s_name = $request->s_name;
-        $subject->s_order = $order;
+        $subject->s_order = $request->s_order;
         $subject->updated_by  = Auth::user()->id;
         $subject->update();
-
-        dd($subject);
 
         return redirect()->route('areas.subjects.index',$request->id_area)->with('success','Registro actualizado con éxito');
     }
