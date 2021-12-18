@@ -48,7 +48,7 @@ Route::get('/iniciar-sesion', 'HomeController@login')->name('admin.login');
 
 
 ////////// Rutas usuarios /////////
-Route::get('/view/users','UsersController@index')->name('users.index')->middleware('permission:Administrador_usuarios_ver');
+Route::get('/view/users','UsersController@index')->name('users.index');//->middleware('permission:Administrador_usuarios_ver');
 Route::get('/create/users','UsersController@create')->name('users.create');
 Route::get('/edit/users','UsersController@edit')->name('users.edit');
 
@@ -119,13 +119,30 @@ Route::get('/create/areas/subjects/{id}','SubjectsController@create')->name('are
 Route::get('/edit/areas/subjects/{id}','SubjectsController@edit')->name('areas.subjects.edit');
 Route::post('/store/areas/subjects','SubjectsController@store')->name('areas.subjects.store');
 Route::post('/update/areas/subjects','SubjectsController@update')->name('areas.subjects.update');
+Route::get('/inactive/areas/subjects/{id}/{id_area}', 'SubjectsController@inactive')->name('areas.subjects.inactive');
+Route::get('/active/areas/subjects/{id}/{id_area}', 'SubjectsController@active')->name('areas.subjects.active');
 
 
 ////////// Rutas temas //////////
 
-Route::get('/view/areas/subjects/topics','TopicsController@index')->name('areas.subjects.topics.index');
-Route::get('/create/subjects/topics','TopicsController@create')->name('areas.subjects.topics.create');
-Route::get('/edit/subjects/topics','TopicsController@edit')->name('areas.subjects.topics.edit');
+Route::get('/view/areas/subjects/topics/{id}','TopicsController@index')->name('areas.subjects.topics.index');
+Route::get('/create/subjects/topics/{id}','TopicsController@create')->name('areas.subjects.topics.create');
+Route::get('/edit/subjects/topics/{id}','TopicsController@edit')->name('areas.subjects.topics.edit');
+Route::post('/store/areas/subjects/topics','TopicsController@store')->name('areas.subjects.topics.store');
+Route::post('/update/areas/subjects/topics','TopicsController@update')->name('areas.subjects.topics.update');
+Route::get('/inactive/areas/subjects/topics/{id}/{id_subject}', 'TopicsController@inactive')->name('areas.subjects.topics.inactive');
+Route::get('/active/areas/subjects/topics/{id}/{id_subject}', 'TopicsController@active')->name('areas.subjects.topics.active');
+
+//////////// Rutas empleados //////////
+
+Route::get('/view/employees','EmployeesController@index')->name('employees.index');
+Route::get('/create/employees','EmployeesController@create')->name('employees.create');
+Route::get('/edit/employees/{id}','EmployeesController@edit')->name('employees.edit');
+Route::post('/store/employees','EmployeesController@store')->name('employees.store');
+Route::post('/update/employees','EmployeesController@update')->name('employees.update');
+Route::get('/delete/employees/{id}', 'EmployeesController@delete')->name('employees.delete');
+
+
 
 
 

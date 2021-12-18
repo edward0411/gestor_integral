@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('areas.subjects.topics.index')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear tema') !!}</a>
+                    <a href="{{route('areas.subjects.topics.create',$id)}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear tema') !!}</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -20,20 +20,29 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if(count($topics) > 0 )
+                            @foreach($topics as $topic)
                             <tr>
-                                <td>1</td>
-                                <td>Antropología</td>
-                                <td>Activo</td>
+                                <td>{{$topic->t_order}}</td>
+                                <td>{{$topic->t_name}}</td>
                                 <td>
-                                    <a href="{{route('areas.subjects.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    
-                                    <a href="" onclick="return confirm('{!! trans('Desea inactivar la moneda') !!}?');" class="btn btn-danger btn-xs"><i class="fas fa-ban"></i> {!! trans('Inactivar') !!}</a>
-                            
-                                   <a href="" class="btn btn-warning btn-xs" onclick="return confirm('{!! trans('Desea activar la moneda') !!}?');"><i class="fas fa-check"></i> {!! trans('Activar') !!}</a>
-                                
+                                    @if($topic->t_state == 1)
+                                    {!! trans('Activo') !!}
+                                    @else
+                                    {!! trans('Inactivo') !!}
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{route('areas.subjects.topics.edit',$topic->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    @if($topic->t_state == 1)
+                                    <a href="{{route('areas.subjects.topics.inactive',array($topic->id,$id))}}" onclick="return confirm('{!! trans('Desea inactivar el tema') !!}?');" class="btn btn-danger btn-xs"><i class="fas fa-ban"></i> {!! trans('Inactivar') !!}</a>
+                                    @else
+                                   <a href="{{route('areas.subjects.topics.active',array($topic->id,$id))}}" class="btn btn-warning btn-xs" onclick="return confirm('{!! trans('Desea activar el tema') !!}?');"><i class="fas fa-check"></i> {!! trans('Activar') !!}</a>
+                                   @endif
                                 </td>
                             </tr>
-                            
+                            @endforeach
+                            @endif 
                         </tbody>
                     </table>
                 </div>

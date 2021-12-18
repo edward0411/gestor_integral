@@ -36,29 +36,29 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="icofont-lock"></i>
               <p>
-                Administrador
+               <font size="">Administrador</font>  
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Clientes</p>
+                  <i class="icofont-users-social"></i>
+                  <p><font size="3">Clientes</font> Clientes</p>
                   <i class="right fas fa-angle-left"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{route('customers.index')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="icofont-users-alt-2"></i>
                       <p>Clientes Activos</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{route('customers.inactives')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="icofont-users-alt-2"></i>
                       <p>Clientes Inactivos</p>
                     </a>
                   </li>
@@ -66,38 +66,32 @@
               </li>
               <li class="nav-item">
                 <a href="{{route('tutors.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="icofont-users-alt-5"></i>
                   <p>Tutores</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('users.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Comerciales</p>
+                <a href="{{route('employees.index')}}" class="nav-link">
+                  <i class="icofont-people"></i>
+                  <p>Empleados</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('users.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Monitores</p>
-                </a>
-              </li>          
+              </li>         
               <li class="nav-item">
                 <a href="{{route('roles.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="icofont-users-alt-3"></i>
                   <p>Roles</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('countries.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="icofont-earth"></i>
                   <p>Países</p>
                 </a>
               </li>
               
               <li class="nav-item">
                 <a href="{{route('parametrics.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="icofont-chart-flow"></i>
                   <p>Paramétricas</p>
                 </a>
               </li>
@@ -105,13 +99,13 @@
              
               <li class="nav-item">
                 <a href="{{route('coins.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="icofont-coins"></i>
                   <p>Monedas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('areas.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="icofont-education"></i>
                   <p>Áreas</p>
                 </a>
               </li>

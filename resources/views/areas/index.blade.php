@@ -35,9 +35,9 @@
                                     <a href="{{route('areas.edit',$area->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
                                     <a href="{{route('areas.subjects.index',$area->id)}}" class="btn btn-primary btn-xs"><i class=" 	fas fa-clipboard-list"></i> {!! trans('Materias') !!}</a>
                                     @if($area->a_state == 1)
-                                    <a href="{{route('areas.inactive',$area->id)}}" onclick="return confirm('{!! trans('Desea inactivar la moneda') !!}?');" class="btn btn-danger btn-xs"><i class="fas fa-ban"></i> {!! trans('Inactivar') !!}</a>
+                                    <a href="{{route('areas.inactive',$area->id)}}" onclick="return confirm('{!! trans('Desea inactivar el área') !!}?');" class="btn btn-danger btn-xs"><i class="fas fa-ban"></i> {!! trans('Inactivar') !!}</a>
                                 @else
-                                   <a href="{{route('areas.active',$area->id)}}" class="btn btn-warning btn-xs" onclick="return confirm('{!! trans('Desea activar la moneda') !!}?');"><i class="fas fa-check"></i> {!! trans('Activar') !!}</a>
+                                   <a href="{{route('areas.active',$area->id)}}" class="btn btn-warning btn-xs" onclick="return confirm('{!! trans('Desea activar área') !!}?');"><i class="fas fa-check"></i> {!! trans('Activar') !!}</a>
                                 @endif
                                 </td>
                             </tr>

@@ -50,7 +50,7 @@ class SubjectsController extends Controller
         ->first();
 
         $value = DB::table('subjects')->max('s_order');
-        $max  = $value + 1;
+        $max  = $value + 100;
 
         return view('areas.subjects.edit',compact('subjects','max','id'));
     }
@@ -109,10 +109,12 @@ class SubjectsController extends Controller
         ->select('s_order')
         ->first();
 
-        $value = $order->s_order/100;
+        $value = $order->s_order * 100;
 
         /*if($order_requested < $value){
 
+        if($order_requested < $value){
+          //dd($order_requested);
             $number = ($value - 1);
 
             for ($i= $number; $i >= $order_requested ; $i--) {
@@ -148,5 +150,24 @@ class SubjectsController extends Controller
         $subject->update();
 
         return redirect()->route('areas.subjects.index',$request->id_area)->with('success','Registro actualizado con éxito');
+    }
+
+    public function active($id,$id_area)
+    {
+        $subject  = subject::where('id', $id)->firstOrFail();
+        $subject ->s_state = 1;
+        $subject ->update();
+
+        return redirect()->route  ('areas.subjects.index',$id_area)->with('success', trans('Registro activado con éxito'));
+    }
+
+    public function inactive($id,$id_area)
+    {
+        $subject  = subject::where('id', $id)->firstOrFail();
+        $subject ->s_state = 0;
+        $subject ->update();
+
+        return redirect()->route  ('areas.subjects.index',$id_area)->with('success', trans('Registro inactivado con éxito'));
+
     }
 }
