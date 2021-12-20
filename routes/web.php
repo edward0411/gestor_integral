@@ -37,7 +37,8 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('loginClients', 'Auth\LoginController@loginClients')->name('loginClients');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-
+Route::get('info.dataTreatment', 'Auth\LoginController@showViewdataTreatment')->name('system.info.dataTreatment');
+Route::get('info.termsConditions', 'Auth\LoginController@showViewtermsConditions')->name('system.info.termsConditions');
 
 Route::get('/', function () {return redirect()->route('home');}); 
 Route::group(['prefix' => 'panel/administrativo', 'middleware' => 'auth'], function () {

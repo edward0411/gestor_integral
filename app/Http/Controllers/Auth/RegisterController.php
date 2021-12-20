@@ -100,7 +100,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'u_key_number' => $data['u_key_number'],
-            'u_indicativo' => $data['u_indicativo'],
+            'u_indicativo' => '+'.$data['u_indicativo'],
             'u_name' => $data['u_name'],
             'u_nickname' => $data['u_nick_name'],
             'u_id_country' => $data['id_contry'],
@@ -120,11 +120,11 @@ class RegisterController extends Controller
             'u_nickname' => $data['u_nick_name'],
             'u_type_doc' => $data['u_type_doc'],
             'u_num_doc' => $data['u_num_doc'],
-            'u_indicativo' => $data['u_indicativo'],
             'u_id_country' => $data['id_contry'],
+            'u_indicativo' => '+'.$data['u_indicativo'],
             'u_id_means' => $data['id_means'],
             'u_state' => 0,
-            'u_line_first' => $data['u_line_first'],
+            'u_line_first' => 0,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

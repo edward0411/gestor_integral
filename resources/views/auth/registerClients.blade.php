@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="">
+            <div class=""  style="opacity: .9">
                 <div class="card card-outline card-warning">
                     <div class="card-header text-center ">
                         <a href="" class="h1"><b>Gestor</b>Integral</a>
@@ -68,12 +68,13 @@
                                     <div class="form-group col-md-4">
                                         <label for="u_indicativo" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Indicativo:</label>
                                         <div class="input-group mb-3">
-                                            <input id="u_indicativo" type="text" class="form-control form-control-sm" name="u_indicativo" value="+57" readonly>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
-                                                    <span class="fas fa-map-marker-alt"></span>
+                                                    <span class="fas fa-plus"></span>
                                                 </div>
                                             </div>
+                                            <input id="u_indicativo" type="number" class="form-control form-control-sm" name="u_indicativo" value="57">
+                                            
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
@@ -191,7 +192,7 @@
                                 <div class="icheck-warning">
                               <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                               <label for="agreeTerms">
-                               Acepto los <a href="#">terminos y condiciones</a>
+                               Acepto los <a href="{{route('system.info.termsConditions')}}" target="_blank">terminos y condiciones</a>
                               </label>
                             </div>
                                     </div>

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
             <div class="col-md-12 text-center">
-              <a href="" class="h1"><b>Gestor </b>Integral</a>
+              <a href="" class="h1" style="color: white;"><b>Gestor </b>Integral</a>
               <br>
               <br>
             </div>
@@ -58,7 +58,7 @@
                         <div class="col-6">
                             <div>
                                 <input type="checkbox" id="tyc" required>
-                                <a data-toggle="modal" data-target="#modal-show-page" href="">Tratamiento de datos</a>
+                                <a href="{{route('system.info.dataTreatment')}}" target="_blank">Tratamiento de datos</a>
                             </div>
                         </div>
                         <!-- /.col -->
@@ -67,19 +67,6 @@
                         </div>
                         <!-- /.col -->
                       </div>
-                      <div id="modal-show-page" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    
-                                    <h4 class="modal-title" id="myModalLabel">Tratamiento de datos</h4>
-                                </div>
-                                <div class="modal-body">
-                                    Aqui va todo el texto
-                                </div>  
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                      </div><!-- /.modal -->
                     </form>
             
                     <p class="mb-0">

@@ -22,6 +22,16 @@ trait loginUsers
         return view('auth.loginEmployees');
     }
 
+    public function showViewdataTreatment()
+    {
+        return view('auth.dataTreatment');
+    }
+
+    public function showViewtermsConditions()
+    {
+        return view('auth.termsConditions');
+    }
+
     public function loginClients(Request $request)
     {
         $this->validateLoginClients($request);

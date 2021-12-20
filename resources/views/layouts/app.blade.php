@@ -34,7 +34,7 @@
         }
     </style>
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background: url({{ asset('dist/img/LoginBackgroud.jpg')}})no-repeat center center fixed;background-size: cover">
     <div id="app" >
         <nav class="navbar navbar-expand-md">
             <div class="container"  style="background-color: warning!important;">
