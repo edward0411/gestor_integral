@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Traits\RegistersUsersClients;
 use App\Traits\RegistersUsersTutors;
+use App\Traits\Managment;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -27,6 +28,7 @@ class RegisterController extends Controller
     use RegistersUsers;
     use RegistersUsersClients;
     use RegistersUsersTutors;
+    use Managment;
 
     /**
      * Where to redirect users after registration.

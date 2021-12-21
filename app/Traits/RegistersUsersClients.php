@@ -31,7 +31,8 @@ trait RegistersUsersClients
             return $response;
         }
 
-        $user->assignRole('Cliente');
+        $rol = $this->getRoles()->where('id',$request->role)->first();
+        $user->assignRole($rol->name);
 
         return $request->wantsJson()
                     ? new JsonResponse([], 201)

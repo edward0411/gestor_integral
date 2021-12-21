@@ -17,6 +17,7 @@
                     <th>{!! trans('Nick Name') !!}</th>
                     <th>{!! trans('Número celular') !!}</th>
                     <th>{!! trans('Correo Electrónico') !!}</th>
+                    <th>{!! trans('Rol') !!}</th>
                     <th>{!! trans('Acciones') !!}</th>
                   </tr>
                 </thead>
@@ -27,9 +28,10 @@
                     <td>{{$employees->u_nickname}}</td>
                     <td>{{$employees->u_key_number}}</td>
                     <td>{{$employees->email}}</td>
+                    <td>{{$employees->name}}</td>
                     <td>
                       <a href="{{route('employees.edit',$employees->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                      <a href="{{route('employees.delete',,$employees->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                      <a href="{{route('employees.delete',$employees->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                     </td>
                   </tr>
                   @endforeach

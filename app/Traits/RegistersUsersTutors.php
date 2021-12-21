@@ -32,7 +32,8 @@ trait RegistersUsersTutors
             return $response;
         }
 
-        $user->assignRole('Tutor');
+        $rol = $this->getRoles()->where('id',$request->role)->first();
+        $user->assignRole($rol->name);
 
         return $request->wantsJson()
                     ? new JsonResponse([], 201)
