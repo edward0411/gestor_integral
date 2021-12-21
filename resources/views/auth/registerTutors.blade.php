@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="">
+            <div class="" style="opacity: .9">
                 <div class="card card-outline card-warning">
                     <div class="card-header text-center ">
                        
@@ -17,7 +17,7 @@
                                 <p class="login-box-msg">Registrar nuevo tutor</p>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label for="u_name" class="col-md-12 control-label">Nombre Completo:</label>
+                                        <label for="u_name" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Nombre Completo:</label>
                                         <div class="input-group mb-3">
                                             <input id="u_name" type="text" class="form-control form-control-sm @error('u_name') is-invalid @enderror" name="u_name" value="{{ old('u_name') }}" autocomplete="u_name" autofocus>
                                             <div class="input-group-append">
@@ -106,12 +106,13 @@
                                     <div class="form-group col-md-4">
                                         <label for="u_indicativo" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Indicativo:</label>
                                         <div class="input-group mb-3">
-                                            <input id="u_indicativo" type="text" class="form-control form-control-sm" name="u_indicativo" value="+57" readonly>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
-                                                    <span class="fas fa-map-marker-alt"></span>
+                                                    <span class="fas fa-plus"></span>
                                                 </div>
                                             </div>
+                                            <input id="u_indicativo" type="number" class="form-control form-control-sm" name="u_indicativo" value="57">
+                                            
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
@@ -155,22 +156,6 @@
                                             </span>
                                             @enderror
 
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="u_line_first" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Primera linea:</label>
-                                        <div class="input-group mb-3">
-                                            <select name="u_line_first" id="u_line_first" class="form-control form-control-sm" required>
-                                                <option value="">Seleccione...</option>
-                                                <option value="1">Si</option>
-                                                <option value="0">No</option>
-                                                
-                                            </select>
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-exclamation"></span>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
@@ -222,7 +207,7 @@
                                     <div class="icheck-warning">
                                         <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                         <label for="agreeTerms">
-                                        Acepto los <a href="#">terminos y condiciones</a>
+                                        Acepto los <a href="{{route('system.info.termsConditions')}}" target="_blank">terminos y condiciones</a>
                                         </label>
                                     </div>
                                 </div>

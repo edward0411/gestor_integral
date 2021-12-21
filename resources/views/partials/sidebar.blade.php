@@ -1,17 +1,15 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
-     <!-- <img src="{{ asset('image/logo.jpg') }}" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">-->
-      <span class="brand-text font-weight-light">Gestor Integral</span>
+      <center>
+        <img src="{{ asset('dist/img/logo.jpg') }}" alt="" style="opacity: .8">
+      </center>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <!--<div class="image">
-          <img src="{{ asset('dist/img/avatar.png') }}" class="img-circle elevation-2" alt="User Image">
-        </div>-->
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->u_nickname }}</a>
         </div>

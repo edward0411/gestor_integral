@@ -12,7 +12,7 @@
                 <!-- /.login-logo -->
                 <div class="card card-outline card-warning">
                   <div class="card-header text-center color-header">
-                    <a href="" class="h1"><b>Tutor</b></a>
+                    <a href="" class="h1" style="color: white;"><b>Tutor</b></a>
                   </div>
                   <div class="card-body">
                     <p class="login-box-msg">Regístrese para iniciar su sesión como tutor</p>
@@ -58,7 +58,7 @@
                         <div class="col-6">
                           <div>
                             <input type="checkbox" id="tyc" required>
-                            <a data-toggle="modal" data-target="#modal-show-page" href="">Tratamiento de datos</a>
+                            <a href="{{route('system.info.dataTreatment')}}" target="_blank">Tratamiento de datos</a> 
                           </div>
                         </div>
                         <!-- /.col -->
@@ -67,19 +67,6 @@
                         </div>
                         <!-- /.col -->
                       </div>
-                      <div id="modal-show-page" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    
-                                    <h4 class="modal-title" id="myModalLabel">Tratamiento de datos</h4>
-                                </div>
-                                <div class="modal-body">
-                                    Aqui va todo el texto
-                                </div>  
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                      </div><!-- /.modal -->
                     </form>
               
                     <p class="mb-1">
