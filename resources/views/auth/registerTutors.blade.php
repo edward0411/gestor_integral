@@ -88,15 +88,20 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="u_key_number" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Número celular: <small>(No usar ni puntos ni espacios.)</small></label>
+                                        <label for="id_contry" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Pais de origen:</label>
                                         <div class="input-group mb-3">
-                                            <input id="u_key_number" onkeyup="num(this);" onblur='num(this);' type="number" class="form-control form-control-sm @error('u_key_number') is-invalid @enderror" name="u_key_number" value="{{ old('u_key_number') }}" required autocomplete="u_key_number">
+                                            <select name="id_contry" id="id_contry" class="form-control form-control-sm" required onchange='loadCallsign();'>
+                                                <option value="">Seleccione...</option>
+                                                @foreach ($countries as $country)
+                                                <option value="{{$country->id}}">{{$country->c_name}}</option>
+                                                @endforeach
+                                            </select>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
-                                                    <span class="fas fa-phone"></span>
+                                                    <span class="fas fa-globe"></span>
                                                 </div>
                                             </div>
-                                            @error('u_key_number')
+                                            @error('id_contry')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -111,25 +116,20 @@
                                                     <span class="fas fa-plus"></span>
                                                 </div>
                                             </div>
-                                            <input id="u_indicativo" type="number" class="form-control form-control-sm" name="u_indicativo" value="57">
+                                            <input id="u_indicativo" type="number" class="form-control form-control-sm" name="u_indicativo">
                                             
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="id_contry" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Pais de origen:</label>
+                                        <label for="u_key_number" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Número celular: <small>(No usar ni puntos ni espacios.)</small></label>
                                         <div class="input-group mb-3">
-                                            <select name="id_contry" id="id_contry" class="form-control form-control-sm" required>
-                                                <option value="">Seleccione...</option>
-                                                @foreach ($countries as $country)
-                                                <option value="{{$country->id}}">{{$country->c_name}}</option>
-                                                @endforeach
-                                            </select>
+                                            <input id="u_key_number" onkeyup="num(this);" onblur='num(this);' type="number" class="form-control form-control-sm @error('u_key_number') is-invalid @enderror" name="u_key_number" value="{{ old('u_key_number') }}" required autocomplete="u_key_number">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
-                                                    <span class="fas fa-globe"></span>
+                                                    <span class="fas fa-phone"></span>
                                                 </div>
                                             </div>
-                                            @error('id_contry')
+                                            @error('u_key_number')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -228,4 +228,39 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+
+<script type="text/javascript">
+
+
+
+        var countries = [
+        @foreach($countries as $item)
+
+        { "id": "{{$item->id}}",
+        { "id": "{{$item->id}}",
+        "indicative_number": "{{$item->c_indicative}}",
+
+        },
+
+        @endforeach
+
+        ];
+
+        
+            function loadCallsign() {
+
+            var id_country = $("#id_country").val();
+
+            $.each(nuevo, function(id) {
+
+            document.getElementById('u_indicativo').value=id;
+            }
+        }
+
+    
+</script>
+
 @endsection

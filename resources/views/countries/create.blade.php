@@ -14,8 +14,12 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-md-6">
+                                <label for="c_indicative">{!! trans('Indicativo') !!}</label>
+                                <input type="text" class="form-control form-control-sm" id="c_indicative" name="c_indicative" value="{{ old('c_indicative') }}" required>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="c_name">{!! trans('Nombre') !!}</label>
-                                <input type="text" class="form-control form-control-sm" id="c_name" name="c_name" value="" required>
+                                <input type="text" class="form-control form-control-sm" id="c_name" name="c_name" value="{{ old('c_name') }}" required>
                             </div>
                         </div>
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>

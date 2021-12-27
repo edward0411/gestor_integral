@@ -14,7 +14,7 @@ trait RegistersUsersTutors
 
     public function showRegistrationTutorsForm()
     {  
-        $countries = DB::table('countries')->whereNull('deleted_at')->select('id','c_name')->get();
+        $countries = DB::table('countries')->whereNull('deleted_at')->select('id','c_indicative','c_name')->get();
         $means = Parametrics::where('p_category','=','means_type')->orderby('p_order')->get();
         $type_docs = Parametrics::where('p_category','=','type_documents')->orderby('p_order')->get();
         return view('auth.registerTutors',compact('countries','means','type_docs'));

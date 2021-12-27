@@ -13,7 +13,7 @@ trait RegistersUsersClients
 {
     public function showRegistrationClientsForm()
     {
-        $countries = DB::table('countries')->whereNull('deleted_at')->select('id','c_name')->get();
+        $countries = DB::table('countries')->whereNull('deleted_at')->select('id','c_indicative','c_name')->get();
         $coins = coins::all();
         $means = Parametrics::where('p_category','=','means_type')->get();
         return view('auth.registerClients',compact('countries','coins','means'));

@@ -36,7 +36,7 @@
             <a href="#" class="nav-link">
               <i class="icofont-lock"></i>
               <p>
-               <font size="">Administrador</font>  
+               <font size="4">Administrador</font>  
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -44,7 +44,7 @@
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="icofont-users-social"></i>
-                  <p><font size="3">Clientes</font> Clientes</p>
+                  <p><font size="3">Clientes</font></p>
                   <i class="right fas fa-angle-left"></i>
                 </a>
                 <ul class="nav nav-treeview">

@@ -14,6 +14,10 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-md-6">
+                                <label for="c_indicative">{!! trans('Indicativo') !!}</label>
+                                <input type="text" class="form-control form-control-sm" id="c_indicative" name="c_indicative" value="{{$country->c_indicative}}" required>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="c_name">{!! trans('Nombre') !!}</label>
                                 <input type="text" class="form-control form-control-sm" id="c_name" name="c_name" value="{{$country->c_name}}">
                             </div>

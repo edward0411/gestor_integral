@@ -14,6 +14,7 @@
                         <thead>
                             <tr class="bg-warning text-center">
                                 <th>{!! trans('Nombre') !!} </th>
+                                <th>{!! trans('Indicativo') !!} </th>
                                 <th>{!! trans('Acciones') !!}</th>
                             </tr>
                         </thead>
@@ -21,6 +22,7 @@
                             
                             @foreach($countries as $country)
                             <tr>
+                            <td>{{$country->c_indicative}}</td>
                             <td>{{$country->c_name}}</td>
                             <td>
                                 <a href="{{route('countries.edit',$country->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
