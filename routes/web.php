@@ -143,6 +143,12 @@ Route::post('/store/employees','EmployeesController@store')->name('employees.sto
 Route::post('/update/employees','EmployeesController@update')->name('employees.update');
 Route::get('/delete/employees/{id}', 'EmployeesController@delete')->name('employees.delete');
 
+////////Ruta Historiales /////////
+
+Route::get('/view/histories','HistoriesController@index')->name('histories.index');
+
+
+
 
 
 

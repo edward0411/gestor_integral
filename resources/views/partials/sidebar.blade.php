@@ -66,7 +66,22 @@
                 <a href="{{route('tutors.index')}}" class="nav-link">
                   <i class="icofont-users-alt-5"></i>
                   <p>Tutores</p>
+                  <i class="right fas fa-angle-left"></i>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('customers.index')}}" class="nav-link">
+                      <i class="icofont-users-alt-5"></i>
+                      <p>Tutores Activos</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                      <i class="icofont-users-alt-5"></i>
+                      <p>Tutores Inactivos</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="{{route('employees.index')}}" class="nav-link">
@@ -109,7 +124,71 @@
               </li>
             </ul>
           </li>
-           
+
+          <!-- /.Modulo Administrador -->
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="icofont-education"></i>
+              <p>
+               <font size="4">Pre Registros</font>  
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('histories.index')}}" class="nav-link">
+                  <i class="icofont-paper"></i>
+                  <p><font size="3">Historial</font></p>
+                </a>
+              </li>            
+            </ul>
+          </li>
+
+          <!-- /.Modulo Pre Registro -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="icofont-teacher"></i>
+              <p>
+               <font size="4">Mi Perfil</font>  
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Datos básicos</font></p>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="icofont-bill-alt"></i>
+                  <p><font size="3">Bonos</font></p>
+                </a>
+              </li> 
+            </ul>
+          </li>
+          <!-- /.Modulo Mi Perfil -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="icofont-phone"></i>
+              <p>
+               <font size="4">Comunicaciones</font>  
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="2">Bandeja de comunicaciones</font></p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- /.Modulo Comunicaciones -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
