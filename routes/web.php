@@ -146,6 +146,8 @@ Route::get('/delete/employees/{id}', 'EmployeesController@delete')->name('employ
 ////////Ruta Historiales /////////
 
 Route::get('/view/histories','HistoriesController@index')->name('histories.index');
+Route::get('/view/tutors_active','HistoriesController@index_tutors')->name('histories.index_tutors');
+Route::get('/histories/view_tutors','HistoriesController@view_tutors')->name('histories.view_tutors');
 
 
 

@@ -137,7 +137,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('histories.index')}}" class="nav-link">
+                <a href="{{route('histories.index_tutors')}}" class="nav-link">
                   <i class="icofont-paper"></i>
                   <p><font size="3">Historial</font></p>
                 </a>

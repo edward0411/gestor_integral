@@ -10,4 +10,14 @@ class HistoriesController extends Controller
 
         return view('histories.index');
     }
+
+    public function index_tutors(){
+
+        return view('histories.index_tutors');
+    }
+
+    public function view_tutors(){
+
+        return view('histories.view_tutors');
+    }
 }
