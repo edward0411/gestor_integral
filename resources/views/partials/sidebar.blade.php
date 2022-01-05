@@ -50,20 +50,20 @@
               @endcan
               @can('Administrador_tutores_ver')
               <li class="nav-item">
-                <a href="{{route('tutors.index')}}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="icofont-users-alt-5"></i>
                   <p>Tutores</p>
                   <i class="right fas fa-angle-left"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{route('customers.index')}}" class="nav-link">
+                    <a href="{{route('tutors.index')}}" class="nav-link">
                       <i class="icofont-users-alt-5"></i>
                       <p>Tutores Activos</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                    <a href="{{route('tutors.index')}}" class="nav-link">
                       <i class="icofont-users-alt-5"></i>
                       <p>Tutores Inactivos</p>
                     </a>
@@ -135,7 +135,7 @@
             <ul class="nav nav-treeview">
               @can('Preregistro_historial_ver')
               <li class="nav-item">
-                <a href="{{route('histories.index')}}" class="nav-link">
+                <a href="{{route('histories.index_tutors')}}" class="nav-link">
                   <i class="icofont-paper"></i>
                   <p><font size="3">Historial</font></p>
                 </a>

@@ -82,7 +82,7 @@ Route::get('/delete/countries/{id}', 'CountriesController@delete')->name('countr
 
 ///////// Rutas clientes  ////////////
 
-Route::get('/view/customers','CustomersController@index')->name('customers.index');
+Route::get('/view/customers','CustomersController@active')->name('customers.index');
 Route::get('/view/customers_inactives','CustomersController@inactive')->name('customers.inactives');
 Route::get('/create/customers','CustomersController@create')->name('customers.create');
 Route::get('/edit/customers','CustomersController@edit')->name('customers.edit');
@@ -147,6 +147,8 @@ Route::get('/delete/employees/{id}', 'EmployeesController@delete')->name('employ
 ////////Ruta Historiales /////////
 
 Route::get('/view/histories','HistoriesController@index')->name('histories.index');
+Route::get('/view/tutors_active','HistoriesController@index_tutors')->name('histories.index_tutors');
+Route::get('/histories/view_tutors','HistoriesController@view_tutors')->name('histories.view_tutors');
 
 Route::get('/clearcache', function () {
     Artisan::call('cache:clear');

@@ -1,5 +1,4 @@
 @extends('layouts.master_panel')
-@section('title','Tutores Activos')
 
 @section('content')
 <div class="container">
@@ -11,32 +10,33 @@
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
                             <tr class="bg-warning text-center">
-                                <th>{!! trans('Número de celular') !!}</th>
+                                <th>{!! trans('Id') !!}</th>
+                                <th>{!! trans('Nombre') !!}</th>
                                 <th>{!! trans('Nickname') !!} </th>
                                 <th>{!! trans('Correo') !!} </th>
-                                <th>{!! trans('País') !!}</th>
+                                <th>{!! trans('Estado') !!}</th>
                                 <th>{!! trans('Acciones') !!}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>3165349304</td>
+                                <td>1</td>
                                 <td>Pepito</td>
+                                <td>perez</td>
                                 <td>soporte@gmail.com.co</td>
-                                <td>Colombia</td>
+                                <td>Activo</td>
                                 <td>
-                                    <a href="{{route('customers.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                    <a href="{{route('histories.view_tutors')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Ver') !!}</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td>3116548977</td>
+                                <td>2</td>
                                 <td>Juanito</td>
+                                <td>loquiño</td>
                                 <td>prueba@gmail.con</td>
-                                <td>Brasil</td>
+                                <td>Activo</td>
                                 <td>
-                                    <a href="{{route('tutors.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                    <a href="{{route('histories.view_tutors')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Ver') !!}</a>
                                 </td>
                             </tr>
                         </tbody>
