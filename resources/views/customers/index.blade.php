@@ -1,14 +1,12 @@
 @extends('layouts.master_panel')
-@section('title', 'Clientes Activos')
+@section('title','Clientes Activos')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <a href="{{route('customers.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear cliente') !!}</a>
-                </div>
+               
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="tabledata1" class="table table-bordered table-striped">

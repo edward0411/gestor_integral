@@ -1,13 +1,11 @@
 @extends('layouts.master_panel')
+@section('title','Tutores Activos')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center align-items-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <a href="{{route('tutors.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear tutor') !!}</a>
-                </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="tabledata1" class="table table-bordered table-striped">

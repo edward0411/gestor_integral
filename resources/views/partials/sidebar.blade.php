@@ -63,20 +63,20 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a href="{{route('tutors.index')}}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="icofont-users-alt-5"></i>
                   <p>Tutores</p>
                   <i class="right fas fa-angle-left"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{route('customers.index')}}" class="nav-link">
+                    <a href="{{route('tutors.index')}}" class="nav-link">
                       <i class="icofont-users-alt-5"></i>
                       <p>Tutores Activos</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                    <a href="{{route('tutors.index')}}" class="nav-link">
                       <i class="icofont-users-alt-5"></i>
                       <p>Tutores Inactivos</p>
                     </a>

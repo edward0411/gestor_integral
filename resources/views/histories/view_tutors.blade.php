@@ -166,46 +166,32 @@
                 <div class="card-header color-header">
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Información del tutor') !!}</h5>
                 </div>
-
                 <form method="POST" action="" class="">
                     @csrf
                     <div class="card-body table-responsive">
 
                         <div class="row">
                             <div class="form-group col-md-4">
-
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="Pepito perez" disabled>
-
                             </div>
                             <div class="form-group col-md-4">
-
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="perez" disabled>
-
                             </div>
                             <div class="form-group col-md-4">
-
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="Cédula Ciudadania" disabled>
-
                             </div>
                             <div class="form-group col-md-4">
-
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="123456789" disabled>
-
                             </div>
                             <div class="form-group col-md-4">
-
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="311223344" disabled>
-
                             </div>
                             <div class="form-group col-md-4">
-
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="tutors123@gmail.com" disabled>
-
                             </div>
                         </div>
                     </div>
                     <hr>
-
                     <!-- /.card-body -->
                     <div class="card-body">
                         <div class="card-header color-header">
@@ -213,90 +199,233 @@
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
                             <table class="table table-bordered">
-                                <tbody>
+                                <thead>
                                     <tr>
                                         <th>{!! trans('Banco') !!}</th>
-                                        <td><input type="text" name="id_bank" value="{{ old('id_bank') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
                                         <th>{!! trans('Tipo de cuenta') !!}</th>
-                                        <td><input type="text" name="id_type_account" value="{{ old('id_type_account') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
-                                    </tr>
-                                    <tr>
                                         <th>{!! trans('Número de cuenta') !!}</th>
-                                        <td><input type="text" name="t_b_number_account" value="{{ old('t_b_number_account') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;">
-                                        </td>
                                         <th>{!! trans('Archivo') !!}</th>
-                                        <td><input type="text" name="t_b_namefile" value="{{ old('t_b_namefile') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;">
+                                        <th>{!! trans('Estado') !!}</th>
+                                        <th>{!! trans('Acciones') !!}</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Davivienda</td>
+                                        <td>Ahorros</td>
+                                        <td>999999999</td>
+                                        <td>pdf</td>
+                                        <td>Activo</td>
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Aprobar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Rechazar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>{!! trans('Estado') !!}</th>
-                                        <td><input type="text" min=0 step="0.01" name="t_b_state" value="{{ old('t_b_state') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
+                                        <td>Banco Colombia</td>
+                                        <td>Corriente</td>
+                                        <td>888888888</td>
+                                        <td>pdf</td>
+                                        <td>Activo</td>
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Aprobar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Rechazar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('No aceptado') !!}</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
                     <div class="card-body">
                         <div class="card-header color-header">
-                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Idiomas') !!}</h5>
+                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de Idiomas') !!}
+                            </h5>
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
                             <table class="table table-bordered">
-                                <tbody>
+                                <thead>
                                     <tr>
                                         <th>{!! trans('Idiomas') !!}</th>
-                                        <td><input type="text" name="id_language" value="{{ old('id_language') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
                                         <th>{!! trans('Archivos') !!}</th>
-                                        <td><input type="text" name="l_t_namefile" value="{{ old('l_t_namefile') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
-                                    </tr>
-                                    <tr>
                                         <th>{!! trans('Estado') !!}</th>
-                                        <td><input type="text" min=0 step="0.01" name="l_t_state" value="{{ old('l_t_state') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
+                                        <th>{!! trans('Acciones') !!}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Ingles</td>
+                                        <td>Excell</td>
+                                        <td>Activo</td>
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Aprobar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Rechazar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('No aceptado') !!}</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Frances</td>
+                                        <td>pdf</td>
+                                        <td>Activo</td>
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Aprobar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Rechazar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('No aceptado') !!}</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
                     <div class="card-body">
                         <div class="card-header color-header">
-                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Sistemas') !!}</h5>
+                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Información del Sistema') !!}
+                            </h5>
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
                             <table class="table table-bordered">
-                                <tbody>
+                                <thead>
                                     <tr>
                                         <th>{!! trans('Sistema') !!}</th>
-                                        <td><input type="text" name="id_system" value="{{ old('id_system') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
                                         <th>{!! trans('Archivos') !!}</th>
-                                        <td><input type="text" name="t_s_namefile" value="{{ old('t_s_namefile') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
-                                    </tr>
-                                    <tr>
                                         <th>{!! trans('Estado') !!}</th>
-                                        <td><input type="text" min=0 step="0.01" name="t_s_state" value="{{ old('t_s_state') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
+                                        <th>{!! trans('Acciones') !!}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Sistema de información</td>
+                                        <td>Excell</td>
+                                        <td>Activo</td>
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Aprobar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Rechazar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('No aceptado') !!}</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Sistema educativo</td>
+                                        <td>pdf</td>
+                                        <td>Activo</td>
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Aprobar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Rechazar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('No aceptado') !!}</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
                     <div class="card-body">
                         <div class="card-header color-header">
-                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Temas trabajables') !!}</h5>
+                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de Temas
+                                trabajables') !!}
+                            </h5>
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
                             <table class="table table-bordered">
-                                <tbody>
+                                <thead>
                                     <tr>
                                         <th>{!! trans('Temas') !!}</th>
-                                        <td><input type="text" name="id_topic" value="{{ old('id_topic') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
                                         <th>{!! trans('Archivos') !!}</th>
-                                        <td><input type="text" name="t_t_namefile" value="{{ old('t_t_namefile') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
-                                    </tr>
-                                    <tr>
                                         <th>{!! trans('Estado') !!}</th>
-                                        <td><input type="text" name="t_t_state" value="{{ old('t_t_state') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
+                                        <th>{!! trans('Acciones') !!}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Reforzamiento</td>
+                                        <td>Excell</td>
+                                        <td>Activo</td>
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Aprobar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Rechazar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('No aceptado') !!}</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Superstición</td>
+                                        <td>pdf</td>
+                                        <td>Activo</td>
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Aprobar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Rechazar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('No aceptado') !!}</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-header color-header">
+                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de Servicios') !!}
+                            </h5>
+                        </div>
+                        <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>{!! trans('Servicios') !!}</th>
+                                        <th>{!! trans('Estado') !!}</th>
+                                        <th>{!! trans('Acciones') !!}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Servicios de telecomunicaciones</td>
+                                        <td>Activo</td>
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Aprobar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Rechazar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('No aceptado') !!}</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Servicios editoriales</td>
+                                        <td>Activo</td>
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Aprobar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('Rechazar') !!}</a>
+                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
+                                                {!! trans('No aceptado') !!}</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -305,50 +434,57 @@
 
                     <div class="card-body">
                         <div class="card-header color-header">
-                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Servicios') !!}</h5>
+                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Primera Linea') !!}
+                            </h5>
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
-                                        <th>{!! trans('Servicios') !!}</th>
-                                        <td><input type="text" name="id_service" value="{{ old('id_service') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
-                                        <th>{!! trans('Estado') !!}</th>
-                                        <td><input type="text" name="t_t_state" value="{{ old('t_t_state') }}" maxlength="200" class="form-control form-control-sm" style="text-align:right;"> </td>
+                                        <th>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <legend class="col-form-label col-sm-6 pt-0">Pertenece al fondo</legend>
+                                                    <div class="col-sm-16">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="" id="" value="si" checked>
+                                                            <label class="form-check-label" for="">
+                                                                Si
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="" id="" value="no">
+                                                            <label class="form-check-label" for="">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    <button type="submit" class="btn btn-warning btn-xs">Guardar</button>
+                                                </div>
+                                            </div>
+                                            </th>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
                     <div class="card-body table-responsive">
-                        <button type="submit" id="" class="btn btn-warning btn-sm">{!! trans('Aprobar') !!}</button>
-                        <button type="submit" id="" class="btn btn-warning btn-sm">{!! trans('Rechazar') !!}</button>
-                        <button type="submit" id="" class="btn btn-warning btn-sm">{!! trans('No aceptado') !!}</button>
-                        <a href="" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
-
-
+                        <a href="{{route('histories.index_tutors')}}" class="btn btn-warning btn-sm float-right">{!!
+                            trans('Regresar') !!}</a>
                     </div>
-
-
             </div>
             <!-- /.card-body -->
-
-
-
             </form>
-
-
         </div>
         <!-- /.card-body -->
-
-
     </div>
     <!-- /.card -->
-
 </div>
-
 <!-- /.col -->
-</div>
 </div>
 @endsection
