@@ -29,15 +29,11 @@ class RolesController extends Controller
             if ($request->id_rol == 0) {
                 $role = roles::create(['name' => $request->name]);
                 $request->session()->flash('success', 'Rol creado con éxito');
-
-
             }else {
                 $role = roles::find($request->id_rol);
                 $role->name = $request->name;
                 $role->save();
-                $request->session()->flash('success', 'Rol actualizado con éxito');
-
-                 
+                $request->session()->flash('success', 'Rol actualizado con éxito');                
             }
 
             if(isset($errors)){
@@ -60,58 +56,28 @@ class RolesController extends Controller
         return view('roles.permission',compact('role','permissions_role','permissions'));
     }
 
-    public function permissionstore(Request $request){
+    public function permissionstore(Request $request)
+    {
         set_time_limit(0);
 
+        if(!isset($request->permisions))
+          {
+            return back()->with('error', trans('Debe asignar al menos un permiso al rol'));
+          }
+
         $role = roles::find($request->roleid);
+        $permissions_no_rol = $role->permissions->all();
 
-        $previous_permissions_role = $role->permissions->all();
-
-        Log::channel('database')->info( 
-            'Se han revocado los pernisos',
-            [
-                'user_id' => Auth::user()->id,
-                'user_email' => Auth::user()->mail,
-                'controller' => app('request')->route()->getAction()["controller"],
-                'rol afectado' => $role->name,
-                'permisos retirados' =>  $previous_permissions_role 
-                
-            ]                    
-        );
-
-        $permissions_no_rol =  Permission::all();
         foreach ($permissions_no_rol  as $permission_no_rol){          
             $role->revokePermissionTo($permission_no_rol);
         }
-       // dd($request);
-        if(isset($request->permision )){
-            foreach ($request->permision as $permision){
+       
+        if(isset($request->permisions )){
+            foreach ($request->permisions as $permision){
                 $role->givePermissionTo($permision);
-              }
+            }
         }
-        
-
-        //dd($rol);
-
-        $role_permissions = $role->permissions->all();
-
-        $informacionlog = 'Se han otorgado los pernisos';
-        $objetolog = [
-                'user_id' => Auth::user()->id,
-                'user_email' => Auth::user()->mail,
-                'controller' => app('request')->route()->getAction()["controller"],
-                'rol afectado' => $role->name,
-                'permisos asignados' => $role_permissions            
-                ];                
-
-
-        Log::channel('database')->info( 
-            $informacionlog ,
-            $objetolog
-        );
 
         return back()->with('success', 'Se han asignado los permisos');
-
     }
-
 }

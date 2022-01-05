@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@home')->name('home');
 
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::get('register.tutors', 'Auth\RegisterController@showRegistrationTutorsForm')->name('registerTutors');
@@ -36,6 +36,7 @@ Route::get('login.employee', 'Auth\LoginController@showLoginEmployeeForm')->name
 Route::post('login', 'Auth\LoginController@login');
 Route::post('loginClients', 'Auth\LoginController@loginClients')->name('loginClients');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('logouth', 'Auth\LoginController@logout')->name('logouth');
 
 Route::get('info.dataTreatment', 'Auth\LoginController@showViewdataTreatment')->name('system.info.dataTreatment');
 Route::get('info.termsConditions', 'Auth\LoginController@showViewtermsConditions')->name('system.info.termsConditions');
@@ -147,18 +148,73 @@ Route::get('/delete/employees/{id}', 'EmployeesController@delete')->name('employ
 
 Route::get('/view/histories','HistoriesController@index')->name('histories.index');
 
-
-
-
-
-
-
+Route::get('/clearcache', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    return '<h1>se ha borrado el cache</h1>';
+});
 
 Route::get('/createpermission',function(){
+
+    /*Permission::create(['name' => 'Administrador']);
+    
+    Permission::create(['name' => 'Administrador_clientes_ver']);
+    Permission::create(['name' => 'Administrador_clientes_crear']);
+    Permission::create(['name' => 'Administrador_clientes_editar']);
+    Permission::create(['name' => 'Administrador_clientes_activar']);
+    Permission::create(['name' => 'Administrador_clientes_inactivar']);
+    
+    Permission::create(['name' => 'Administrador_tutores_ver']);
+    Permission::create(['name' => 'Administrador_tutores_crear']);
+    Permission::create(['name' => 'Administrador_tutores_editar']);
+    Permission::create(['name' => 'Administrador_tutores_activar']);
+    Permission::create(['name' => 'Administrador_tutores_inactivar']);
+
+    Permission::create(['name' => 'Administrador_empleados_ver']);
+    Permission::create(['name' => 'Administrador_empleados_crear']);
+    Permission::create(['name' => 'Administrador_empleados_editar']);
+    Permission::create(['name' => 'Administrador_empleados_eliminar']);
+
+    Permission::create(['name' => 'Administrador_roles_ver']);
+    Permission::create(['name' => 'Administrador_roles_crear']);
+    Permission::create(['name' => 'Administrador_roles_editar']);
+    Permission::create(['name' => 'Administrador_roles_eliminar']);
+
+    Permission::create(['name' => 'Administrador_paises_ver']);
+    Permission::create(['name' => 'Administrador_paises_crear']);
+    Permission::create(['name' => 'Administrador_paises_editar']);
+    Permission::create(['name' => 'Administrador_paises_eliminar']);
 
     Permission::create(['name' => 'Administrador_parametricas_ver']);
     Permission::create(['name' => 'Administrador_parametricas_crear']);
     Permission::create(['name' => 'Administrador_parametricas_editar']);
+    Permission::create(['name' => 'Administrador_parametricas_eliminar']);
+
+    Permission::create(['name' => 'Administrador_monedas_ver']);
+    Permission::create(['name' => 'Administrador_monedas_crear']);
+    Permission::create(['name' => 'Administrador_monedas_editar']);
+    Permission::create(['name' => 'Administrador_monedas_eliminar']);
+
+    Permission::create(['name' => 'Administrador_areas_ver']);
+    Permission::create(['name' => 'Administrador_areas_crear']);
+    Permission::create(['name' => 'Administrador_areas_editar']);
+    Permission::create(['name' => 'Administrador_areas_eliminar']);
+
+    Permission::create(['name' => 'Preregistro']);
+
+    Permission::create(['name' => 'Preregistro_historial_ver']);
+    Permission::create(['name' => 'Preregistro_listado_ver']);
+
+    Permission::create(['name' => 'Perfil']);
+
+    Permission::create(['name' => 'Perfil_datosBasicos_ver']);
+    Permission::create(['name' => 'Perfil_bonos_ver']);
+
+    Permission::create(['name' => 'Comunicaciones']);
+
+    Permission::create(['name' => 'Comunicaciones_bandeja']);*/
 
     return '<h1>se han creado los permisos</h1>';
 });

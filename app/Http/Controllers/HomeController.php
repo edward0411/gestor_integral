@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,7 +25,27 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('home');
+        $id_rol = Auth::user()->roles()->first()->id;
+
+        switch ($id_rol) {
+            case '4':
+               return route('home');
+               break;
+            case '6':
+                if (Auth::user()->u_state == 0 || Auth::user()->u_state == 1 || Auth::user()->u_state == 3) {
+                    return redirect()->route('histories.index');
+                }elseif(Auth::user()->u_state == 2){
+                    return view('home');
+                }elseif(Auth::user()->u_state == 4){
+                    return redirect()->route('logouth');
+                }
+                
+                break;
+            default:
+                return view('home');
+                break;
+       }
+        
     }
 
     public function login()

@@ -32,7 +32,7 @@ trait RegistersUsersTutors
             return $response;
         }
 
-        $rol = $this->getRoles()->where('id',$request->role)->first();
+        $rol = $this->getRoles()->where('id',6)->first();
         $user->assignRole($rol->name);
 
         return $request->wantsJson()
