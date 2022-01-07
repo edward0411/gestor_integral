@@ -175,7 +175,7 @@
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="Pepito perez" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="perez" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="perez01215" disabled>
                             </div>
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="Cédula Ciudadania" disabled>
@@ -222,8 +222,6 @@
                                                 {!! trans('Aprobar') !!}</a>
                                             <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
                                                 {!! trans('Rechazar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -237,8 +235,6 @@
                                                 {!! trans('Aprobar') !!}</a>
                                             <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
                                                 {!! trans('Rechazar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -270,8 +266,6 @@
                                                 {!! trans('Aprobar') !!}</a>
                                             <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
                                                 {!! trans('Rechazar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
 
@@ -284,8 +278,6 @@
                                                 {!! trans('Aprobar') !!}</a>
                                             <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
                                                 {!! trans('Rechazar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -317,8 +309,6 @@
                                                 {!! trans('Aprobar') !!}</a>
                                             <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
                                                 {!! trans('Rechazar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
 
@@ -331,8 +321,6 @@
                                                 {!! trans('Aprobar') !!}</a>
                                             <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
                                                 {!! trans('Rechazar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -365,8 +353,6 @@
                                                 {!! trans('Aprobar') !!}</a>
                                             <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
                                                 {!! trans('Rechazar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
 
@@ -379,8 +365,6 @@
                                                 {!! trans('Aprobar') !!}</a>
                                             <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
                                                 {!! trans('Rechazar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -410,8 +394,6 @@
                                                 {!! trans('Aprobar') !!}</a>
                                             <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
                                                 {!! trans('Rechazar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
 
@@ -423,8 +405,6 @@
                                                 {!! trans('Aprobar') !!}</a>
                                             <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
                                                 {!! trans('Rechazar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('No aceptado') !!}</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -474,6 +454,12 @@
                         </div>
                     </div>
                     <div class="card-body table-responsive">
+                        <a href="" class="btn btn-warning btn-xs">
+                            {!! trans('Aprobar') !!}</a>
+                        <a href="" class="btn btn-warning btn-xs">
+                            {!! trans('Rechazar') !!}</a>
+                        <a href="" class="btn btn-warning btn-xs">
+                            {!! trans('No aceptado') !!}</a>
                         <a href="{{route('histories.index_tutors')}}" class="btn btn-warning btn-sm float-right">{!!
                             trans('Regresar') !!}</a>
                     </div>
