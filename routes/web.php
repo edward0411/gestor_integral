@@ -150,6 +150,11 @@ Route::get('/view/histories','HistoriesController@index')->name('histories.index
 Route::get('/view/tutors_active','HistoriesController@index_tutors')->name('histories.index_tutors');
 Route::get('/histories/view_tutors','HistoriesController@view_tutors')->name('histories.view_tutors');
 
+
+////////Cotizaciones///////////////
+Route::get('/view/cotizaciones','QuoteController@index')->name('quotes.index');
+Route::get('/view/cotizaciones/myQuotes','QuoteController@myQuotes')->name('quotes.myQuotes');
+
 Route::get('/clearcache', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
@@ -217,6 +222,22 @@ Route::get('/createpermission',function(){
     Permission::create(['name' => 'Comunicaciones']);
 
     Permission::create(['name' => 'Comunicaciones_bandeja']);*/
+
+    //Segunda ronda de permisos
+
+    Permission::create(['name' => 'Cotizaciones']);
+    Permission::create(['name' => 'Cotizaciones_pendientes_ver']);
+    Permission::create(['name' => 'Cotizaciones_historial_ver']);
+    Permission::create(['name' => 'Cotizaciones_misCotizaciones_ver']);
+    Permission::create(['name' => 'Billetera_virtual']);
+    Permission::create(['name' => 'Billetera_virtual_miBilletera_ver']);
+    Permission::create(['name' => 'Billetera_virtual_HistoriarPagos_ver']);
+    Permission::create(['name' => 'Pagos']);
+    Permission::create(['name' => 'Pagos_HistorialPagosClientes_ver']);
+    Permission::create(['name' => 'Reportes']);
+    Permission::create(['name' => 'Reportes_Listado_ver']);
+
+
 
     return '<h1>se han creado los permisos</h1>';
 });

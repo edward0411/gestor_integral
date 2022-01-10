@@ -28,18 +28,23 @@ class HomeController extends Controller
         $id_rol = Auth::user()->roles()->first()->id;
 
         switch ($id_rol) {
+            case '3':
+                return route('quotes.index');
+                break;
             case '4':
-               return route('home');
-               break;
+                return route('quotes.myQuotes');
+                break;
+            case '5':
+                return route('quotes.index');
+                break;
             case '6':
                 if (Auth::user()->u_state == 0 || Auth::user()->u_state == 1 || Auth::user()->u_state == 3) {
                     return redirect()->route('histories.index');
                 }elseif(Auth::user()->u_state == 2){
-                    return view('home');
+                    return route('quotes.myQuotes');
                 }elseif(Auth::user()->u_state == 4){
                     return redirect()->route('logouth');
-                }
-                
+                }               
                 break;
             default:
                 return view('home');
