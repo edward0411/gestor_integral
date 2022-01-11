@@ -144,11 +144,29 @@ Route::post('/store/employees','EmployeesController@store')->name('employees.sto
 Route::post('/update/employees','EmployeesController@update')->name('employees.update');
 Route::get('/delete/employees/{id}', 'EmployeesController@delete')->name('employees.delete');
 
-////////Ruta Historiales /////////
+////////Ruta Pre-registro /////////
 
-Route::get('/view/histories','HistoriesController@index')->name('histories.index');
-Route::get('/view/tutors_active','HistoriesController@index_tutors')->name('histories.index_tutors');
-Route::get('/histories/view_tutors','HistoriesController@view_tutors')->name('histories.view_tutors');
+Route::get('/view_registration/pre_registration','Pre_registrationController@index_registration')->name('pre_registration.index_registration');
+Route::get('/view_turors_list/pre_registration','Pre_registrationController@index_turors_list')->name('pre_registration.index_turors_list');
+Route::get('/view_tutors/pre_registration','Pre_registrationController@view_tutors')->name('pre_registration.view_tutors');
+
+/////////Rutas mi registro   ///////
+
+Route::get('/information_bank/pre_registration','Pre_registrationController@create_information_bank')->name('pre_registration.my_register.form_information_bank');
+Route::get('/information_language/pre_registration','Pre_registrationController@create_information_language')->name('pre_registration.my_register.form_information_language');
+Route::get('/information_topics_work/pre_registration','Pre_registrationController@create_information_topics_work')->name('pre_registration.my_register.form_information_topics_work');
+Route::get('/information_service/pre_registration','Pre_registrationController@create_information_service')->name('pre_registration.my_register.form_information_service');
+Route::get('/information_system/pre_registration','Pre_registrationController@create_information_system')->name('pre_registration.my_register.form_information_system');
+
+
+////////// Mi perfil y bonos /////////////////
+
+Route::get('/basic_data/profile','ProfileController@index_basic_data')->name('profile.index_basic_data');
+Route::get('/bonds/profile','ProfileController@index_bonds')->name('profile.index_bonds');
+Route::get('/create_bonds/profile','ProfileController@create_bonds')->name('profile.create_bonds');
+Route::get('/edit_bonds/profile','ProfileController@edit_bonds')->name('profile.edit_bonds');
+
+
 
 Route::get('/clearcache', function () {
     Artisan::call('cache:clear');

@@ -460,7 +460,7 @@
                             {!! trans('Rechazar') !!}</a>
                         <a href="" class="btn btn-warning btn-xs">
                             {!! trans('No aceptado') !!}</a>
-                        <a href="{{route('histories.index_tutors')}}" class="btn btn-warning btn-sm float-right">{!!
+                        <a href="{{route('pre_registration.index_turors_list')}}" class="btn btn-warning btn-sm float-right">{!!
                             trans('Regresar') !!}</a>
                     </div>
             </div>

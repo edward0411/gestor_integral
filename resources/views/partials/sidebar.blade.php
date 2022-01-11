@@ -135,15 +135,15 @@
             <ul class="nav nav-treeview">
               @can('Preregistro_historial_ver')
               <li class="nav-item">
-                <a href="{{route('histories.index_tutors')}}" class="nav-link">
+                <a href="{{route('pre_registration.index_registration')}}" class="nav-link">
                   <i class="icofont-paper"></i>
-                  <p><font size="3">Historial</font></p>
+                  <p><font size="3">Mi registro</font></p>
                 </a>
               </li>
               @endcan    
               @can('Preregistro_listado_ver')        
               <li class="nav-item">
-                <a href="{{route('histories.index')}}" class="nav-link">
+                <a href="{{route('pre_registration.index_turors_list')}}" class="nav-link">
                   <i class="icofont-paper"></i>
                   <p><font size="3">Listado</font></p>
                 </a>
@@ -165,7 +165,7 @@
             <ul class="nav nav-treeview">
               @can('Perfil_datosBasicos_ver')
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('profile.index_basic_data')}}" class="nav-link">
                   <i class="icofont-data"></i>
                   <p><font size="3">Datos básicos</font></p>
                 </a>
@@ -173,7 +173,7 @@
               @endcan
               @can('Perfil_bonos_ver')
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('profile.index_bonds')}}" class="nav-link">
                   <i class="icofont-bill-alt"></i>
                   <p><font size="3">Bonos</font></p>
                 </a>

@@ -19,30 +19,14 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>010</h3>
-
-                                        <p>Todos sus Datos</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="icofont-document-folder"></i>
-                                    </div>
-                                    <a href="" class="small-box-footer">Mas información <i
-                                            class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-lg-4 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-info">
-                                    <div class="inner">
                                         <h3>011</h3>
 
-                                        <p>Información Banacaria</p>
+                                        <p>Información Bancaria</p>
                                     </div>
                                     <div class="icon">
                                         <i class="icofont-notebook"></i>
                                     </div>
-                                    <a href="" class="small-box-footer">Mas información <i
+                                    <a href="{{route('pre_registration.my_register.form_information_bank')}}" class="small-box-footer">Mas información <i
                                             class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -58,7 +42,7 @@
                                     <div class="icon">
                                         <i class="icofont-support-faq"></i>
                                     </div>
-                                    <a href="" class="small-box-footer">Mas información <i
+                                    <a href="{{route('pre_registration.my_register.form_information_language')}}" class="small-box-footer">Mas información <i
                                             class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -74,7 +58,7 @@
                                     <div class="icon">
                                         <i class="icofont-clip-board"></i>
                                     </div>
-                                    <a href="" class="small-box-footer">Mas información <i
+                                    <a href="{{route('pre_registration.my_register.form_information_topics_work')}}" class="small-box-footer">Mas información <i
                                             class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -90,7 +74,7 @@
                                     <div class="icon">
                                         <i class="icofont-dashboard-web"></i>
                                     </div>
-                                    <a href="" class="small-box-footer">Mas información <i
+                                    <a href="{{route('pre_registration.my_register.form_information_service')}}" class="small-box-footer">Mas información <i
                                             class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -101,12 +85,12 @@
                                     <div class="inner">
                                         <h3>016</h3>
 
-                                        <p>Primera Linea </p>
+                                        <p>Sistemas</p>
                                     </div>
                                     <div class="icon">
                                         <i class="icofont-listine-dots"></i>
                                     </div>
-                                    <a href="" class="small-box-footer">Mas información <i
+                                    <a href="{{route('pre_registration.my_register.form_information_system')}}" class="small-box-footer">Mas información <i
                                             class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                         </div>

@@ -26,7 +26,7 @@
                                 <td>soporte@gmail.com.co</td>
                                 <td>Activo</td>
                                 <td>
-                                    <a href="{{route('histories.view_tutors')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Ver') !!}</a>
+                                    <a href="{{route('pre_registration.view_tutors')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Ver') !!}</a>
                                 </td>
                             </tr>
                             <tr>
@@ -36,7 +36,7 @@
                                 <td>prueba@gmail.con</td>
                                 <td>Activo</td>
                                 <td>
-                                    <a href="{{route('histories.view_tutors')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Ver') !!}</a>
+                                    <a href="{{route('pre_registration.view_tutors')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Ver') !!}</a>
                                 </td>
                             </tr>
                         </tbody>
