@@ -152,6 +152,118 @@
             </ul>
           </li>
           @endcan
+          @can('Cotizaciones')
+          <!-- /.Modulo Pre Registro -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="icofont-teacher"></i>
+              <p>
+               <font size="4">Cotizaciones</font>  
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              @can('Cotizaciones_pendientes_ver')
+              <li class="nav-item">
+                <a href="{{route('quotes.index')}}" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Cot. Pendientes</font></p>
+                </a>
+              </li>
+              @endcan
+              @can('Cotizaciones_historial_ver')
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="icofont-bill-alt"></i>
+                  <p><font size="3">Historial de Cotizaciones</font></p>
+                </a>
+              </li> 
+              @endcan
+              @can('Cotizaciones_misCotizaciones_ver')
+              <li class="nav-item">
+                <a href="{{route('quotes.myQuotes')}}" class="nav-link">
+                  <i class="icofont-bill-alt"></i>
+                  <p><font size="3">Mis Cotizaciones</font></p>
+                </a>
+              </li> 
+              @endcan
+            </ul>
+          </li>
+          @endcan
+          @can('Billetera_virtual')
+          <!-- /.Modulo Pre Registro -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="icofont-teacher"></i>
+              <p>
+               <font size="4">Billetera Virtual</font>  
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              @can('Billetera_virtual_miBilletera_ver')
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Mi Billetera</font></p>
+                </a>
+              </li>
+              @endcan
+              @can('Billetera_virtual_HistoriarPagos_ver')
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Hist. Pagos a tutores</font></p>
+                </a>
+              </li>
+              @endcan
+            </ul>
+          </li>
+          @endcan
+          @can('Pagos')
+          <!-- /.Modulo Pre Registro -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="icofont-teacher"></i>
+              <p>
+               <font size="4">Pagos</font>  
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              @can('Pagos_HistorialPagosClientes_ver')
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Hist. Pagos</font></p>
+                </a>
+              </li>
+              @endcan
+            </ul>
+          </li>
+          @endcan
+          @can('Reportes')
+          <!-- /.Modulo Pre Registro -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="icofont-teacher"></i>
+              <p>
+               <font size="4">Reportes</font>  
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              @can('Reportes_Listado_ver')
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Listado de Reportes</font></p>
+                </a>
+              </li>
+              @endcan
+            </ul>
+          </li>
+          @endcan
           @can('Perfil')
           <!-- /.Modulo Pre Registro -->
           <li class="nav-item">
