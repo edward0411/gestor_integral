@@ -14,8 +14,26 @@
                         @csrf
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="id_bank ">{!! trans('Temas Trabajables') !!}</label>
-                                <select name="id_bank " class="form-control form-control-sm" required>
+                                <label for="id_area">{!! trans('Áreas') !!}</label>
+                                <select name="id_area" class="form-control form-control-sm" onchange="fill_subjects()" required>
+                                    <option value="" selected>{!! trans('Seleccione...') !!}</option>
+                                    @foreach($areas as $area)
+                                    <option value="{{$area->id}}">{{$area->a_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="id_subject">{!! trans('Materias') !!}</label>
+                                <select name="id_subject" class="form-control form-control-sm" required>
+                                    <option value="" selected>{!! trans('Seleccione...') !!}</option>
+                                    
+                                    <option value="" ></option>
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="id_topic">{!! trans('Temas') !!}</label>
+                                <select name="id_topic" class="form-control form-control-sm" required>
                                     <option value="" selected>{!! trans('Seleccione...') !!}</option>
                                     
                                     <option value="" ></option>
@@ -38,4 +56,16 @@
         <!-- /.col -->
     </div>
 </div>
+@endsection
+
+@section('scripts')
+
+<script type="text/javascript">
+
+
+
+
+
+</script>
+
 @endsection
