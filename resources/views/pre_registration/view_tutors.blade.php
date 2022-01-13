@@ -177,7 +177,7 @@
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_nickname}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="Cédula Ciudadania" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->parametric->p_text}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_num_doc}}" disabled>
@@ -210,7 +210,7 @@
 
                                 </thead>
                                 <tbody>
-                                   
+
                                 </tbody>
                             </table>
                         </div>
@@ -231,7 +231,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
+
                                 </tbody>
                             </table>
                         </div>
