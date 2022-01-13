@@ -37,8 +37,14 @@ class Pre_registrationController extends Controller
 
     public function get_info_acount_bank(Request $request)
     {
-        $cuentas = $this->get_data_table('tutors_bank_details')
-        ->join('parametrics as p1','p1.id','=','tutors_bank_details.id_bank')
+        
+        if (isset($request->id_tutor)) {
+            $cuentas = $this->get_data_table('tutors_bank_details',$request->id_tutor);
+        }else{
+            $cuentas = $this->get_data_table('tutors_bank_details');
+        }
+        
+        $cuentas = $cuentas->join('parametrics as p1','p1.id','=','tutors_bank_details.id_bank')
         ->join('parametrics as p2','p2.id','=','tutors_bank_details.id_type_account')
         ->select('tutors_bank_details.*','p1.p_text as name_bank','p2.p_text as type_acount')
         ->get();
@@ -53,6 +59,11 @@ class Pre_registrationController extends Controller
 
     public function view_tutors(User $user){
         return view('pre_registration.view_tutors', compact('user'));
+    }
+
+    public function processRequest(Request $request)
+    {
+        dd($request);
     }
 
     ///////////informacion bancaria /////

@@ -161,7 +161,7 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center align-items-center">
-        <div class="col-9">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header color-header">
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Información del tutor') !!}</h5>
@@ -172,6 +172,7 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_name}}" disabled>
+                                <input type="hidden"  name="id_tutor" id="id_tutor" value="{{$user->id}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_nickname}}" disabled>
@@ -197,15 +198,16 @@
                             <h5 class="text-white" style="font-weight: bold;">{!! trans('Información bancaria') !!}</h5>
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
-                            <table class="table table-bordered">
+                            <table id="tbl_info_bancaria" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>{!! trans('Banco') !!}</th>
-                                        <th>{!! trans('Tipo de cuenta') !!}</th>
-                                        <th>{!! trans('Número de cuenta') !!}</th>
-                                        <th>{!! trans('Archivo') !!}</th>
-                                        <th>{!! trans('Estado') !!}</th>
-                                        <th>{!! trans('Acciones') !!}</th>
+                                        <th>N°</th>
+                                        <th>Banco</th>
+                                        <th>Tipo de cuenta</th>
+                                        <th>N° de cuenta</th>
+                                        <th>Archivo</th>
+                                        <th>Estado</th>
+                                        <th>Observaciones</th>
                                     </tr>
 
                                 </thead>
@@ -428,7 +430,10 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-    var colleccionCuentas = "";
+    $(document).ready(function() {
+        traerCuentasBanc();
+        
+    });
 
     function adicionarCuenta(id_cuenta = 0, name_bank = '', type_acount = '',number_acount = '',file ='',state = '',observations = '') {
         var state_text ='';
@@ -465,12 +470,12 @@
                 `+state_text+`
             </td>
             <td>
-                `+observations+`
+                <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_`+id_cuenta+`">`+observations+`</textarea>  
             </td>
             <td>  
-                <button type="button" class="btn btn-sm btn-primary" onclick="EditCell_acount(`+ id_cuenta +`)">Editar</button>
-                <button type="button" class="btn btn-sm btn-danger" onclick="deletesCell_relacion(`+id_cuenta+`)">Eliminar</button>          
-            </td>
+                <a href="#" onClick="ProcessRequest(`+id_cuenta+`,1,'tutors_bank_details','t_b_state')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Aprobar') !!}</a>
+                <a href="#" onClick="ProcessRequest(`+id_cuenta+`,2,'tutors_bank_details','t_b_state')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Rechazar') !!}</a>
+           </td>
         </tr>
         `;
         $("#tbl_info_bancaria tbody").append(cell);
@@ -478,10 +483,11 @@
 
 
     function traerCuentasBanc(){
-
+        var id= $('#id_tutor').val();
         var url="{{route('pre_registration.get_info_acount_bank')}}";
         var datos = {
-        "_token": $('meta[name="csrf-token"]').attr('content')
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+        "id_tutor": id,
         };
 
         $.ajax({
@@ -499,15 +505,20 @@
         });
     }
 
-    function deletesCell_relacion(id_cdr_cuenta) {
+    function ProcessRequest(id_cuenta,value,table,state) {
 
-        if(confirm('¿Desea eliminar el registro?')==false )
+        if(confirm('¿Desea confirmar el registro?')==false )
         {return false;}
 
-        var url="";
+        var obs = $('#observaciones_'+id_cuenta).val();
+        var url="{{route('pre_registration.process.request')}}";
         var datos = {
         "_token": $('meta[name="csrf-token"]').attr('content'),
-        "id_cdr_cuenta":id_cdr_cuenta
+        "id_cuenta":id_cuenta,
+        "value":value,
+        "table":table,
+        "state":state,
+        "obs":obs,
         };
 
         $.ajax({
@@ -520,7 +531,7 @@
                         $('#info_bancaria_mensaje').html(
                             `<div class="alert alert-success alert-block shadow">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
-                                    <strong>Se ha eliminado el registro</strong>
+                                    <strong>Se ha actualizado el registro</strong>
                             </div>`)
                 });
             }

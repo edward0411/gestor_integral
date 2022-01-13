@@ -19,9 +19,13 @@ trait Preregister
        return $query; 
     }
 
-    public function get_data_table($table)
+    public function get_data_table($table,$id = null)
     {
-        $id_user = Auth::user()->id;
+        if ($id) {
+            $id_user = $id;
+        }else{
+            $id_user = Auth::user()->id;
+        }
         $query = DB::table($table)->where('id_user',$id_user)->whereNull($table.'.deleted_at');
         return $query;
     }

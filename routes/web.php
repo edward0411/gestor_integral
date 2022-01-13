@@ -148,6 +148,7 @@ Route::get('/delete/employees/{id}', 'EmployeesController@delete')->name('employ
 
 Route::get('/view_registration/pre_registration','Pre_registrationController@index_registration')->name('pre_registration.index_registration');
 Route::get('/registration/get_info_acount_bank','Pre_registrationController@get_info_acount_bank')->name('pre_registration.get_info_acount_bank');
+Route::get('/registration/process/','Pre_registrationController@processRequest')->name('pre_registration.process.request');
 Route::post('/registration/acount_bank/store','Pre_registrationController@acount_bank_store')->name('pre_registration.acount_bank.store');
 Route::get('/view_turors_list/pre_registration','Pre_registrationController@index_turors_list')->name('pre_registration.index_turors_list');
 Route::get('/view_tutors/pre_registration/{user}','Pre_registrationController@view_tutors')->name('pre_registration.view_tutors');
