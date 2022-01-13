@@ -211,32 +211,7 @@
 
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Davivienda</td>
-                                        <td>Ahorros</td>
-                                        <td>999999999</td>
-                                        <td>pdf</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Banco Colombia</td>
-                                        <td>Corriente</td>
-                                        <td>888888888</td>
-                                        <td>pdf</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
                         </div>
@@ -257,29 +232,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Ingles</td>
-                                        <td>Excell</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Frances</td>
-                                        <td>pdf</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
                         </div>

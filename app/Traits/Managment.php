@@ -26,6 +26,4 @@ trait Managment
         $roles = DB::table('roles');
         return $roles;
     }
-
-
 }

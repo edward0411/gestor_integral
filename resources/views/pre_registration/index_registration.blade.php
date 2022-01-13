@@ -19,9 +19,11 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>011</h3>
-
-                                        <p>Información Bancaria</p>
+                                        <h5>{{$countData[0]}} - Pendientes</h5>
+                                        <h5>{{$countData[1]}} - Aprobadas</h5>
+                                        <h5>{{$countData[2]}} - Rechazadas</h5>
+                                        <br>
+                                        <h4>Información Bancaria</h4>
                                     </div>
                                     <div class="icon">
                                         <i class="icofont-notebook"></i>
@@ -35,9 +37,11 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>012</h3>
-
-                                        <p>Idiomas</p>
+                                        <h5>{{$countData[3]}} - Pendientes</h5>
+                                        <h5>{{$countData[4]}} - Aprobadas</h5>
+                                        <h5>{{$countData[5]}} - Rechazadas</h5>
+                                        <br>
+                                        <h4>Idiomas</h4>
                                     </div>
                                     <div class="icon">
                                         <i class="icofont-support-faq"></i>
@@ -51,9 +55,11 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>014</h3>
-
-                                        <p>Temas Trabajables</p>
+                                        <h5>{{$countData[6]}} - Pendientes</h5>
+                                        <h5>{{$countData[7]}} - Aprobadas</h5>
+                                        <h5>{{$countData[8]}} - Rechazadas</h5>
+                                        <br>
+                                        <h4>Temas Trabajables</h4>
                                     </div>
                                     <div class="icon">
                                         <i class="icofont-clip-board"></i>
@@ -67,9 +73,11 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>015</h3>
-
-                                        <p>Servicios</p>
+                                        <h5>{{$countData[9]}} - Pendientes</h5>
+                                        <h5>{{$countData[10]}} - Aprobadas</h5>
+                                        <h5>{{$countData[11]}} - Rechazadas</h5>
+                                        <br>
+                                        <h4>Servicios</h4>
                                     </div>
                                     <div class="icon">
                                         <i class="icofont-dashboard-web"></i>
@@ -83,9 +91,11 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>016</h3>
-
-                                        <p>Sistemas</p>
+                                        <h5>{{$countData[12]}} - Pendientes</h5>
+                                        <h5>{{$countData[13]}} - Aprobadas</h5>
+                                        <h5>{{$countData[14]}} - Rechazadas</h5>
+                                        <br>
+                                        <h4>Sistemas</h4>
                                     </div>
                                     <div class="icon">
                                         <i class="icofont-listine-dots"></i>

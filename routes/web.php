@@ -147,6 +147,8 @@ Route::get('/delete/employees/{id}', 'EmployeesController@delete')->name('employ
 ////////Ruta Pre-registro /////////
 
 Route::get('/view_registration/pre_registration','Pre_registrationController@index_registration')->name('pre_registration.index_registration');
+Route::get('/registration/get_info_acount_bank','Pre_registrationController@get_info_acount_bank')->name('pre_registration.get_info_acount_bank');
+Route::post('/registration/acount_bank/store','Pre_registrationController@acount_bank_store')->name('pre_registration.acount_bank.store');
 Route::get('/view_turors_list/pre_registration','Pre_registrationController@index_turors_list')->name('pre_registration.index_turors_list');
 Route::get('/view_tutors/pre_registration','Pre_registrationController@view_tutors')->name('pre_registration.view_tutors');
 
@@ -243,7 +245,7 @@ Route::get('/createpermission',function(){
 
     //Segunda ronda de permisos
 
-    Permission::create(['name' => 'Cotizaciones']);
+    /*Permission::create(['name' => 'Cotizaciones']);
     Permission::create(['name' => 'Cotizaciones_pendientes_ver']);
     Permission::create(['name' => 'Cotizaciones_historial_ver']);
     Permission::create(['name' => 'Cotizaciones_misCotizaciones_ver']);
@@ -253,7 +255,7 @@ Route::get('/createpermission',function(){
     Permission::create(['name' => 'Pagos']);
     Permission::create(['name' => 'Pagos_HistorialPagosClientes_ver']);
     Permission::create(['name' => 'Reportes']);
-    Permission::create(['name' => 'Reportes_Listado_ver']);
+    Permission::create(['name' => 'Reportes_Listado_ver']);*/
 
 
 
