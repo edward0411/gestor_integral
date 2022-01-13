@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Parametrics;
 use App\Models\TutorLanguage;
 use App\Models\TutorsBanks;
 use App\Models\TutorService;
@@ -77,6 +78,10 @@ class User extends Authenticatable
 
     public function tutorTopics() {
         return $this->hasMany(TutorTopic::class, 'id_user');
+    }
+
+    public function parametric() {
+        return $this->belongsTo(Parametrics::class, 'u_type_doc');
     }
 
     // scope
