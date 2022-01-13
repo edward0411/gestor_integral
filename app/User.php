@@ -31,7 +31,7 @@ class User extends Authenticatable
         'u_id_money',
         'u_line_first',
         'u_state',
-        'email', 
+        'email',
         'password',
     ];
 
@@ -52,4 +52,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relaciones
+    public function userActions() {
+        return $this->hasMany(UserAction::class);
+    }
+
+    // scope
+    function scopeRolUser($query, $rolName){
+        return $query->whereHas("roles", function($q) use($rolName){
+                                            $q->where("name", $rolName);
+                                        });
+    }
 }
