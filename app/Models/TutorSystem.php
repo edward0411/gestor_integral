@@ -6,10 +6,10 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TutorsBanks extends Model
+class TutorSystem extends Model
 {
     use SoftDeletes;
-    protected $table = 'tutors_bank_details';
+    protected $table = 'tutors_systems';
 
 
     // relaciones

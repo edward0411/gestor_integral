@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\Preregister;
 use App\Traits\Managment;
+use App\User;
 
 class Pre_registrationController extends Controller
 {
@@ -46,13 +47,12 @@ class Pre_registrationController extends Controller
     }
 
     public function index_turors_list(){
-
-        return view('pre_registration.index_turors_list');
+        $users = User::RolUser('tutor')->get();
+        return view('pre_registration.index_turors_list', compact('users'));
     }
 
-    public function view_tutors(){
-
-        return view('pre_registration.view_tutors');
+    public function view_tutors(User $user){
+        return view('pre_registration.view_tutors', compact('user'));
     }
 
     ///////////informacion bancaria /////
@@ -106,6 +106,5 @@ class Pre_registrationController extends Controller
 
         return view('pre_registration.my_register.form_information_system');
     }
-
 
 }

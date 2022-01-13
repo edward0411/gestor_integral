@@ -169,25 +169,24 @@
                 <form method="POST" action="" class="">
                     @csrf
                     <div class="card-body table-responsive">
-
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="Pepito perez" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_name}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="perez01215" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_nickname}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="Cédula Ciudadania" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="123456789" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_num_doc}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="311223344" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_key_number}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="tutors123@gmail.com" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->email}}" disabled>
                             </div>
                         </div>
                     </div>

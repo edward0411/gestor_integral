@@ -41,7 +41,7 @@ Route::get('logouth', 'Auth\LoginController@logout')->name('logouth');
 Route::get('info.dataTreatment', 'Auth\LoginController@showViewdataTreatment')->name('system.info.dataTreatment');
 Route::get('info.termsConditions', 'Auth\LoginController@showViewtermsConditions')->name('system.info.termsConditions');
 
-Route::get('/', function () {return redirect()->route('home');}); 
+Route::get('/', function () {return redirect()->route('home');});
 Route::group(['prefix' => 'panel/administrativo', 'middleware' => 'auth'], function () {
 
 
@@ -150,7 +150,7 @@ Route::get('/view_registration/pre_registration','Pre_registrationController@ind
 Route::get('/registration/get_info_acount_bank','Pre_registrationController@get_info_acount_bank')->name('pre_registration.get_info_acount_bank');
 Route::post('/registration/acount_bank/store','Pre_registrationController@acount_bank_store')->name('pre_registration.acount_bank.store');
 Route::get('/view_turors_list/pre_registration','Pre_registrationController@index_turors_list')->name('pre_registration.index_turors_list');
-Route::get('/view_tutors/pre_registration','Pre_registrationController@view_tutors')->name('pre_registration.view_tutors');
+Route::get('/view_tutors/pre_registration/{user}','Pre_registrationController@view_tutors')->name('pre_registration.view_tutors');
 
 /////////Rutas mi registro   ///////
 
@@ -186,13 +186,13 @@ Route::get('/clearcache', function () {
 Route::get('/createpermission',function(){
 
     /*Permission::create(['name' => 'Administrador']);
-    
+
     Permission::create(['name' => 'Administrador_clientes_ver']);
     Permission::create(['name' => 'Administrador_clientes_crear']);
     Permission::create(['name' => 'Administrador_clientes_editar']);
     Permission::create(['name' => 'Administrador_clientes_activar']);
     Permission::create(['name' => 'Administrador_clientes_inactivar']);
-    
+
     Permission::create(['name' => 'Administrador_tutores_ver']);
     Permission::create(['name' => 'Administrador_tutores_crear']);
     Permission::create(['name' => 'Administrador_tutores_editar']);

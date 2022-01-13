@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TutorsBanks extends Model
+class TutorLanguage extends Model
 {
     use SoftDeletes;
-    protected $table = 'tutors_bank_details';
+    protected $table = 'language_tutors';
 
 
     // relaciones
