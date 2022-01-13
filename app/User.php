@@ -2,6 +2,11 @@
 
 namespace App;
 
+use App\Models\TutorLanguage;
+use App\Models\TutorsBanks;
+use App\Models\TutorService;
+use App\Models\TutorSystem;
+use App\Models\TutorTopic;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -54,8 +59,24 @@ class User extends Authenticatable
     ];
 
     // relaciones
-    public function userActions() {
-        return $this->hasMany(UserAction::class);
+    public function tutorsBanks() {
+        return $this->hasMany(TutorsBanks::class, 'id_user');
+    }
+
+    public function tutorSystems() {
+        return $this->hasMany(TutorSystem::class, 'id_user');
+    }
+
+    public function tutorServices() {
+        return $this->hasMany(TutorService::class, 'id_user');
+    }
+
+    public function tutorLanguages() {
+        return $this->hasMany(TutorLanguage::class, 'id_user');
+    }
+
+    public function tutorTopics() {
+        return $this->hasMany(TutorTopic::class, 'id_user');
     }
 
     // scope
