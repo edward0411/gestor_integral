@@ -14,21 +14,8 @@
     <link rel="stylesheet" href=" {{ asset('plugins/fontawesome-free/css/all.min.css') }} ">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href=" {{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }} ">
-    <!-- iCheck -->
-    <link rel="stylesheet" href=" {{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }} ">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href=" {{ asset('plugins/jqvmap/jqvmap.min.css') }} ">
     <!-- Theme style -->
     <link rel="stylesheet" href=" {{ asset('dist/css/adminlte.min.css') }} ">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href=" {{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }} ">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href=" {{ asset('plugins/daterangepicker/daterangepicker.css') }} ">
-    <!-- summernote -->
-    <link rel="stylesheet" href=" {{ asset('plugins/summernote/summernote-bs4.css') }} ">
-    
     
     <link rel="stylesheet" href=" {{ asset('css/admin_panel.css') }}">
     <link rel="stylesheet" href=" {{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
@@ -105,28 +92,9 @@
         </aside>
         <!-- /.control-sidebar -->
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
-    <!-- jQuery -->
-<!-- InputMask -->
-
-<script src="{{ asset("plugins/moment/moment.min.js") }}"></script>
-<script src="{{ asset("plugins/inputmask/min/jquery.inputmask.bundle.min.js") }}"></script>
-<!-- date-range-picker -->
-<script src="{{ asset("plugins/daterangepicker/daterangepicker.js") }}"></script>
-<!-- bootstrap color picker -->
-<script src="{{ asset("plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js") }}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{{ asset("plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js") }}"></script>
-<!-- Bootstrap Switch -->
-<script src=".{{ asset("plugins/bootstrap-switch/js/bootstrap-switch.min.js") }}"></script>
-
-
-
-
 
 <!-- jQuery -->
-<script src="{{ asset("plugins/jquery/jquery.min.js") }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset("plugins/bootstrap/js/bootstrap.bundle.min.js") }}"></script>
 <!-- Bootstrap4 Duallistbox -->
@@ -160,53 +128,24 @@
 <script type="text/javascript" language="javascript" src="{{ asset("plugins/datatables-buttons/js/buttons.html5.min.js") }}"></script>
 <script type="text/javascript" language="javascript" src="{{ asset("plugins/datatables-buttons/js/buttons.print.min.js") }}"></script>
 
-<script src="{{ asset("/dist/js/jquery.form.min.js") }}"></script>
+ 
+<script src="https://malsup.github.io/jquery.form.js"></script> 
 
 <script type="text/javascript">
 
     $(document).ready(function(){
     
-      var height = $(window).height();
-          $('#capa_cargando').height(height);
+     
     
-    
-         $('form').each(function(){
-           $(this).submit(function(event){
-            bloquearPagina();
-           });
-         });
-    
-        console.log( $('form'));
-      });
-    
-    function habilitarPagina() {
-        document.getElementById('capa_cargando').style.visibility = 'hidden';
-    
-    }
-    
-    function bloquearPagina() {
-        document.getElementById('capa_cargando').style.visibility = 'visible';
-    
-    }
-    
-    
-      $(function () {
-    
+      $(function () {   
         $('.select2').select2()
-    
-        $('.select2A').select2()
-    
       });
     
-        $('.select2bs4').select2({
-          theme: 'bootstrap4'
-        });
-    
-    
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      });
     
         $('#tabledata1').DataTable( {
-    
-         
             responsive: true,
           dom: 'Bfrtlip',
             buttons: [
@@ -261,9 +200,7 @@
           }
         });
     
-       
-    
-    
+      });
       </script>
     @yield('script')
 </body>

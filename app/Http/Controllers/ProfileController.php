@@ -14,9 +14,10 @@ use App\Traits\Managment;
 
 class ProfileController extends Controller
 {
-
     use Managment;
     public function index_basic_data(){
+
+        $id_rol = Auth::user()->roles()->first()->id;
 
         $countries = $this->getInfoCountries()->get();
         $type_docs = $this->getDataParametrics('type_documents')->orderby('p_order')->get();
