@@ -426,3 +426,106 @@
 <!-- /.col -->
 </div>
 @endsection
+@section('script')
+<script type="text/javascript">
+    var colleccionCuentas = "";
+
+    function adicionarCuenta(id_cuenta = 0, name_bank = '', type_acount = '',number_acount = '',file ='',state = '',observations = '') {
+        var state_text ='';
+        if (state == 0) {
+            state_text ='Pendiente';
+        }else if(state == 1){
+            state_text ='Aprobado';
+        }else{
+            state_text ='Rechazado';
+        }
+
+        if (observations == null) {
+            observations = ''; 
+        }
+
+        var cell = `
+        <tr>
+            <td>
+                `+id_cuenta+`
+            </td>
+            <td>
+                `+name_bank+`
+            </td>
+            <td>
+                `+type_acount+`
+            </td>
+            <td style="text-align: right;">
+                `+number_acount+`
+            </td>
+            <td>
+                `+file+`
+            </td>
+            <td>
+                `+state_text+`
+            </td>
+            <td>
+                `+observations+`
+            </td>
+            <td>  
+                <button type="button" class="btn btn-sm btn-primary" onclick="EditCell_acount(`+ id_cuenta +`)">Editar</button>
+                <button type="button" class="btn btn-sm btn-danger" onclick="deletesCell_relacion(`+id_cuenta+`)">Eliminar</button>          
+            </td>
+        </tr>
+        `;
+        $("#tbl_info_bancaria tbody").append(cell);
+    }
+
+
+    function traerCuentasBanc(){
+
+        var url="{{route('pre_registration.get_info_acount_bank')}}";
+        var datos = {
+        "_token": $('meta[name="csrf-token"]').attr('content')
+        };
+
+        $.ajax({
+        type: 'GET',
+        url: url,
+        data: datos,
+        success: function(respuesta) {
+
+            $("#tbl_info_bancaria tbody").empty();
+            $.each(respuesta, function(index, elemento) {
+                adicionarCuenta(elemento.id,elemento.name_bank ?? '', elemento.type_acount ?? '',elemento.t_b_number_account ?? '',elemento.t_b_namefile ?? '',elemento.t_b_state, elemento.t_b_observations)
+                });
+                colleccionCuentas = respuesta;
+            }
+        });
+    }
+
+    function deletesCell_relacion(id_cdr_cuenta) {
+
+        if(confirm('¿Desea eliminar el registro?')==false )
+        {return false;}
+
+        var url="";
+        var datos = {
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+        "id_cdr_cuenta":id_cdr_cuenta
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: datos,
+            success: function(respuesta) {
+                $.each(respuesta, function(index, elemento) {
+                    traerCuentasBanc();
+                        $('#info_bancaria_mensaje').html(
+                            `<div class="alert alert-success alert-block shadow">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <strong>Se ha eliminado el registro</strong>
+                            </div>`)
+                });
+            }
+        });
+    }
+
+</script>
+@endsection
