@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="id_bank">{!! trans('Banco') !!}</label>
-                                <select name="id_bank" class="form-control form-control-sm" required>
+                                <select name="id_bank" id="id_bank" class="form-control form-control-sm" required>
                                     <option value="" selected>{!! trans('Seleccione...') !!}</option>
                                     @foreach($banks as $item)
                                       <option value="{{$item->id}}">{{$item->p_text}}</option>  
@@ -25,7 +25,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="id_type_account">{!! trans('Tipo de cuenta') !!}</label>
-                                <select name="id_type_account" class="form-control form-control-sm" required>
+                                <select name="id_type_account" id="id_type_account" class="form-control form-control-sm" required>
                                     <option value="" selected>{!! trans('Seleccione...') !!}</option>
                                     @foreach($type_acounts as $item)
                                         <option value="{{$item->id}}">{{$item->p_text}}</option>  
@@ -153,9 +153,10 @@
         });
 
         $('#id_acount_bank').val(id);
-        $('#valor_operacion').val(Number.parseFloat(datos[0].valor_operacion_rp).toFixed(2));
-        $('#observaciones').val(datos[0].observaciones);
-        $('#valor_disponible').val(valor_t);
+        $('#id_bank').val(datos[0].id_bank);
+        $('#id_type_account').val(datos[0].id_type_account);
+        $('#t_b_number_account').val(datos[0].t_b_number_account);
+        
 
     }
 
