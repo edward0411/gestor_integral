@@ -20,6 +20,7 @@ class TutorLanguage extends JsonResource
             'id_language'                       => $this->id_language,
             'language'                          => $this->parametric->p_text,
             'file'                              => $this->l_t_namefile,
+            'observation'                       => $this->observation,
             'state'                             => $this->l_t_state,
             'deleted_at'                        => $this->deleted_at,
             'updated_at'                        => $this->updated_at,

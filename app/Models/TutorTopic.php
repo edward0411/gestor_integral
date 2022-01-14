@@ -16,6 +16,7 @@ class TutorTopic extends Model
         'id_topic',
         't_t_namefile',
         't_t_state',
+        'observation'
     ];
 
     // relaciones

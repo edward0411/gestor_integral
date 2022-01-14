@@ -16,6 +16,7 @@ class TutorSystem extends Model
         'id_system',
         't_s_namefile',
         't_s_state',
+        'observation'
     ];
 
     // relaciones

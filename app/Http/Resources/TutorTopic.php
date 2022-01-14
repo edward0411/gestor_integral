@@ -22,6 +22,7 @@ class TutorTopic extends JsonResource
             'subject'                           => $this->topic->subject->s_name,
             'topic'                             => $this->topic->t_name,
             'file'                              => $this->t_t_namefile,
+            'observation'                       => $this->observation,
             'state'                             => $this->t_t_state,
             'deleted_at'                        => $this->deleted_at,
             'updated_at'                        => $this->updated_at,

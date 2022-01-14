@@ -233,6 +233,7 @@
                                         <th>{!! trans('Idiomas') !!}</th>
                                         <th>{!! trans('Archivos') !!}</th>
                                         <th>{!! trans('Estado') !!}</th>
+                                        <th>{!! trans('Observaciones') !!}</th>
                                         <th>{!! trans('Acciones') !!}</th>
                                     </tr>
                                 </thead>
@@ -257,6 +258,7 @@
                                         <th>{!! trans('Sistema') !!}</th>
                                         <th>{!! trans('Archivos') !!}</th>
                                         <th>{!! trans('Estado') !!}</th>
+                                        <th>{!! trans('Observaciones') !!}</th>
                                         <th>{!! trans('Acciones') !!}</th>
                                     </tr>
                                 </thead>
@@ -281,6 +283,7 @@
                                         <th>{!! trans('Temas') !!}</th>
                                         <th>{!! trans('Archivos') !!}</th>
                                         <th>{!! trans('Estado') !!}</th>
+                                        <th>{!! trans('Observaciones') !!}</th>
                                         <th>{!! trans('Acciones') !!}</th>
                                     </tr>
                                 </thead>
@@ -304,6 +307,7 @@
                                     <tr>
                                         <th>{!! trans('Servicios') !!}</th>
                                         <th>{!! trans('Estado') !!}</th>
+                                        <th>{!! trans('Observaciones') !!}</th>
                                         <th>{!! trans('Acciones') !!}</th>
                                     </tr>
                                 </thead>
@@ -481,7 +485,7 @@
                 `+state_text+`
             </td>
             <td>
-                <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_`+id_cuenta+`">`+observations+`</textarea>
+                <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_`+id_cuenta+`_tutors_bank_details">`+observations+`</textarea>
             </td>
             ${state == 0 &&`
                 <td>
@@ -504,6 +508,10 @@
                     <td>${elem.language}</td>
                     <td>${elem.file}</td>
                     <td>${state_text}</td>
+                    <td>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_language_tutors">${elem.observation ? elem.observation:'' }</textarea>
+                    </td>
+
                     ${elem.state == 0 &&`
                         <td>
                             <a href="#" onClick="ProcessRequest(${elem.id}, 1, 'language_tutors')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Aprobar') !!}</a>
@@ -524,6 +532,9 @@
                     <td>${elem.system}</td>
                     <td>${elem.file}</td>
                     <td>${state_text}</td>
+                    <td>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_systems">${elem.observation ? elem.observation:'' }</textarea>
+                    </td>
                     ${elem.state == 0 &&`
                         <td>
                             <a href="#" onClick="ProcessRequest(${elem.id}, 1, 'tutors_systems')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Aprobar') !!}</a>
@@ -544,6 +555,9 @@
                     <td>${elem.area}/${elem.subject}/${elem.topic}</td>
                     <td>${elem.file}</td>
                     <td>${state_text}</td>
+                    <td>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_topics">${elem.observation ? elem.observation:'' }</textarea>
+                    </td>
                     ${elem.state == 0 &&`
                         <td>
                             <a href="#" onClick="ProcessRequest(${elem.id}, 1, 'tutors_topics')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Aprobar') !!}</a>
@@ -563,6 +577,9 @@
                 <tr>
                     <td>${elem.service}</td>
                     <td>${state_text}</td>
+                    <td>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_services">${elem.observation ? elem.observation:'' }</textarea>
+                    </td>
                     ${elem.state == 0 &&`
                         <td>
                             <a href="#" onClick="ProcessRequest(${elem.id}, 1, 'tutors_services')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Aprobar') !!}</a>
@@ -674,35 +691,41 @@
     }
 
 
-    function ProcessRequest(id_cuenta,value,table) {
+    function ProcessRequest(id_cuenta, value, table) {
 
         if(confirm('¿Desea confirmar el registro?')==false )
         {return false;}
 
-        var observation = $('#observaciones_'+id_cuenta).val();
-        var url="{{route('pre_registration.process.request')}}";
-        var datos = {
-            "_token": $('meta[name="csrf-token"]').attr('content'),
-            "id_cuenta":    id_cuenta,
-            "value":        value,
-            "table":        table,
-            "observation":  observation,
-        };
+        var observation = $('#observaciones_'+id_cuenta+'_'+table).val();
+        if (observation) {
+            var url="{{route('pre_registration.process.request')}}";
+            var datos = {
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+                "id_cuenta":    id_cuenta,
+                "value":        value,
+                "table":        table,
+                "observation":  observation,
+            };
 
-        $.ajax({
-            type: 'GET',
-            url: url,
-            data: datos,
-            success: function(respuesta) {
-                console.log("res", respuesta);
-                traerCuentasBanc();
-                getLanguageInfo();
-                getSystemInfo();
-                getTopicInfo();
-                getServiceInfo();
-                messageInfo('infoMessage-'+table, respuesta.message);
-            }
-        });
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: datos,
+                success: function(respuesta) {
+                    console.log("res", respuesta);
+                    traerCuentasBanc();
+                    getLanguageInfo();
+                    getSystemInfo();
+                    getTopicInfo();
+                    getServiceInfo();
+                    messageInfo('infoMessage-'+table, respuesta.message);
+                }
+            });
+        }else{
+            if(confirm('La observacion es requerida')==false )
+            {return false;}
+        }
+
     }
 
     const messageInfo = (id, message)  => {

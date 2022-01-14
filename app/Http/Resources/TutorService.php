@@ -20,6 +20,7 @@ class TutorService extends JsonResource
             'id_service'                        => $this->id_service,
             'service'                           => $this->parametric->p_text,
             'state'                             => $this->t_s_state,
+            'observation'                       => $this->observation,
             'deleted_at'                        => $this->deleted_at,
             'updated_at'                        => $this->updated_at,
             'created_at'                        => $this->created_at,

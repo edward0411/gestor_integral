@@ -21,6 +21,7 @@ class TutorSystem extends JsonResource
             'system'                            => $this->parametric->p_text,
             'file'                              => $this->t_s_namefile,
             'state'                             => $this->t_s_state,
+            'observation'                       => $this->observation,
             'deleted_at'                        => $this->deleted_at,
             'updated_at'                        => $this->updated_at,
             'created_at'                        => $this->created_at,

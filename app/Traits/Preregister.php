@@ -48,24 +48,29 @@ trait Preregister
                 $tutor = TutorLanguage::find($data['id_cuenta']);
                 $tutor->update([
                     'l_t_state'         => $data['value'],
+                    'observation'       => $data['observation']
                 ]);
                 break;
             case 'tutors_systems':
                 $tutor = TutorSystem::find($data['id_cuenta']);
                 $tutor->update([
                     't_s_state'         => $data['value'],
+                    'observation'       => $data['observation']
+
                 ]);
                 break;
             case 'tutors_topics':
                 $tutor = TutorTopic::find($data['id_cuenta']);
                 $tutor->update([
                     't_t_state'         => $data['value'],
+                    'observation'       => $data['observation']
                 ]);
                 break;
             case 'tutors_services':
                 $tutor = TutorService::find($data['id_cuenta']);
                 $tutor->update([
                     't_s_state'         => $data['value'],
+                    'observation'       => $data['observation']
                 ]);
                 break;
 

@@ -14,6 +14,7 @@ class TutorService extends Model
         'id_user',
         'id_service',
         't_s_state',
+        'observation'
     ];
 
     // relaciones

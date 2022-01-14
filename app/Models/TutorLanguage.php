@@ -15,6 +15,7 @@ class TutorLanguage extends Model
         'id_language',
         'l_t_namefile',
         'l_t_state',
+        'observation'
     ];
 
     // relaciones
