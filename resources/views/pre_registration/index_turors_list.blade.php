@@ -1,4 +1,5 @@
 @extends('layouts.master_panel')
+@section('title','Tutores Registrados')
 
 @section('content')
 <div class="container">
