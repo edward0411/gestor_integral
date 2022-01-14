@@ -541,7 +541,7 @@
             state_text = handleState(elem.state)
             $("#tbl_info_topic tbody").append(`
                 <tr>
-                    <td>${elem.topic}</td>
+                    <td>${elem.area}/${elem.subject}/${elem.topic}</td>
                     <td>${elem.file}</td>
                     <td>${state_text}</td>
                     ${elem.state == 0 &&`
@@ -647,6 +647,7 @@
             url: url,
             data: datos,
             success: function(respuesta) {
+                console.log("topic", respuesta);
                 $("#tbl_info_topic tbody").empty();
                 paintInfoTopic(respuesta.data)
             }
