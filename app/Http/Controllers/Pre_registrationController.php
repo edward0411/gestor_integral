@@ -77,7 +77,7 @@ class Pre_registrationController extends Controller
         $user->update([
             'u_state' => $value
         ]);
-        return $this->index_turors_list();
+        return redirect()->action('Pre_registrationController@index_turors_list');
     }
 
     // guardar primera linea

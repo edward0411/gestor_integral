@@ -114,7 +114,7 @@ class User extends Authenticatable
             $state = 'RECHAZADO';
         }
         if ($this->u_state == User::NO_ACEPTADO) {
-            $state = 'NO_ACEPTADO';
+            $state = 'NO ACEPTADO';
         }
         return $state;
     }
