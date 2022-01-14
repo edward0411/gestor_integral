@@ -148,6 +148,12 @@ Route::get('/delete/employees/{id}', 'EmployeesController@delete')->name('employ
 
 Route::get('/view_registration/pre_registration','Pre_registrationController@index_registration')->name('pre_registration.index_registration');
 Route::get('/registration/get_info_acount_bank','Pre_registrationController@get_info_acount_bank')->name('pre_registration.get_info_acount_bank');
+Route::get('/registration/get_info_language','Pre_registrationController@get_info_language')->name('pre_registration.get_info_language');
+Route::get('/registration/get_info_system','Pre_registrationController@get_info_system')->name('pre_registration.get_info_system');
+Route::get('/registration/get_info_topic','Pre_registrationController@get_info_topic')->name('pre_registration.get_info_topic');
+Route::get('/registration/get_info_service','Pre_registrationController@get_info_service')->name('pre_registration.get_info_service');
+Route::get('/registration/save_line_first','Pre_registrationController@save_line_first')->name('pre_registration.save_line_first');
+Route::get('/registration/save_state_tutor/{user}/{value}','Pre_registrationController@save_state_tutor')->name('pre_registration.save_state_tutor');
 Route::get('/registration/process/','Pre_registrationController@processRequest')->name('pre_registration.process.request');
 Route::post('/registration/acount_bank/store','Pre_registrationController@acount_bank_store')->name('pre_registration.acount_bank.store');
 Route::get('/view_turors_list/pre_registration','Pre_registrationController@index_turors_list')->name('pre_registration.index_turors_list');

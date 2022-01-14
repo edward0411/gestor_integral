@@ -15,4 +15,16 @@ class Parametrics extends Model
     public function users() {
         return $this->hasMany(User::class, 'u_type_doc');
     }
+
+    public function tutorLanguages() {
+        return $this->hasMany(TutorLanguage::class, 'id_language');
+    }
+
+    public function tutorSystems() {
+        return $this->hasMany(TutorSystem::class, 'id_system');
+    }
+
+    public function tutorServices() {
+        return $this->hasMany(TutorService::class, 'id_service');
+    }
 }
