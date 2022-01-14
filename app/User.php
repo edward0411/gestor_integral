@@ -20,6 +20,11 @@ class User extends Authenticatable
     use HasRoles;
     use SoftDeletes;
 
+    const REGISTRADO    = 1;
+    const APROBADO      = 2;
+    const RECHAZADO     = 3;
+    const NO_ACEPTADO   = 4;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -89,5 +94,28 @@ class User extends Authenticatable
         return $query->whereHas("roles", function($q) use($rolName){
                                             $q->where("name", $rolName);
                                         });
+    }
+
+    function scopeStateUser($query, $state){
+        return $query->where('u_state', $state);
+    }
+
+    // Accessor
+    public function getStateAttribute()
+    {
+        $sate = null;
+        if ($this->u_state == User::REGISTRADO) {
+            $state = 'REGISTRADO';
+        }
+        if ($this->u_state == User::APROBADO) {
+            $state = 'APROBADO';
+        }
+        if ($this->u_state == User::RECHAZADO) {
+            $state = 'RECHAZADO';
+        }
+        if ($this->u_state == User::NO_ACEPTADO) {
+            $state = 'NO_ACEPTADO';
+        }
+        return $state;
     }
 }

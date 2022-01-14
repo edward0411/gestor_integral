@@ -62,8 +62,9 @@ class Pre_registrationController extends Controller
         return response()->json($cuentas);
     }
 
+    // listar los tutores
     public function index_turors_list(){
-        $users = User::RolUser('tutor')->get();
+        $users = User::rolUser('tutor')->stateUser(User::REGISTRADO)->get();
         return view('pre_registration.index_turors_list', compact('users'));
     }
 
