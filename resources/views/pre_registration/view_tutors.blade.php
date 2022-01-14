@@ -666,7 +666,6 @@
             url: url,
             data: datos,
             success: function(respuesta) {
-                console.log("res serv", respuesta);
                 $("#tbl_info_service tbody").empty();
                 paintInfoService(respuesta.data)
             }
@@ -679,14 +678,14 @@
         if(confirm('¿Desea confirmar el registro?')==false )
         {return false;}
 
-        var obs = $('#observaciones_'+id_cuenta).val();
+        var observation = $('#observaciones_'+id_cuenta).val();
         var url="{{route('pre_registration.process.request')}}";
         var datos = {
             "_token": $('meta[name="csrf-token"]').attr('content'),
-            "id_cuenta":id_cuenta,
-            "value":value,
-            "table":table,
-            "obs":obs,
+            "id_cuenta":    id_cuenta,
+            "value":        value,
+            "table":        table,
+            "observation":  observation,
         };
 
         $.ajax({

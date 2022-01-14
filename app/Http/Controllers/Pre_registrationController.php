@@ -78,7 +78,7 @@ class Pre_registrationController extends Controller
         ]);
         return $this->index_turors_list();
     }
-    
+
     // guardar primera linea
     public function save_line_first(Request $request){
         $user = User::find($request->id);
