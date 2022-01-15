@@ -35,14 +35,13 @@ trait Managment
         return $areas;
     }
 
-   ///public function getInfoSubjects(){
+   public function getInfoSubjects(){
 
-      //  $subjects = subjects::leftJoin('areas','areas.id','=','subjects.id_area')
-        //->select('subjects.*')
-        //->get();
-        //return $subjects;
+        $subjects = subjects::leftJoin('areas','areas.id','=','subjects.id_area')
+        ->select('subjects.*');
+        return $subjects;
 
-    //}
+    }
 
 
 }
