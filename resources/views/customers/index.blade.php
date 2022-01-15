@@ -1,5 +1,9 @@
 @extends('layouts.master_panel')
+@if($state == 1)
 @section('title','Clientes Activos')
+@elseif($state == 4)
+@section('title','Clientes Inactivos')
+@endif
 
 @section('content')
 <div class="container">
@@ -29,7 +33,9 @@
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->c_name}}</td>
                                     <td>{{$user->c_type_currency}} - {{$user->c_currency}}</td>
-                                    <td></td> 
+                                    <td>
+                                        
+                                    </td> 
                                 </tr>
                             @endforeach
                         </tbody>
