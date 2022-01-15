@@ -127,7 +127,7 @@ class Pre_registrationController extends Controller
 
     // retorna la informacion de lenguaje
     public function get_info_language(Request $request){
-        $infoLanguage = TutorLanguage::infoUser($request->id_tutor)->get();
+        $infoLanguage = TutorLanguage::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id)->get();
         return $this->successResponse(new TutorLanguageCollection($infoLanguage));
     }
 
