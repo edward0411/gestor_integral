@@ -209,6 +209,7 @@
                                         <th>Archivo</th>
                                         <th>Estado</th>
                                         <th>Observaciones</th>
+                                        <th>Acciones</th>
                                     </tr>
 
                                 </thead>

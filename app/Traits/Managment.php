@@ -8,6 +8,7 @@ use App\Models\Parametrics;
 use App\Models\Countries as countries;
 use App\Models\Areas as areas;
 use App\Models\Subjects;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 trait Managment
@@ -29,20 +30,19 @@ trait Managment
         return $roles;
     }
 
-    public function getInfoAreas(){
-
-        $areas = areas::select('id','a_name');
-        return $areas;
+    public function getInfoTable($table){
+        $query = DB::table($table);
+        return $query;
     }
 
-   ///public function getInfoSubjects(){
+    public function getInfoUsers($rol,$state)
+    {
+        $query = User::leftJoin('countries','countries.id','=','users.u_id_country')
+        ->leftJoin('model_has_roles as roles','roles.model_id','=','users.id')
+        ->leftJoin('coins','coins.id','=','users.u_id_money')
+        ->where('roles.role_id',$rol)
+        ->where('users.u_state',$state);
 
-      //  $subjects = subjects::leftJoin('areas','areas.id','=','subjects.id_area')
-        //->select('subjects.*')
-        //->get();
-        //return $subjects;
-
-    //}
-
-
+        return $query;
+    }
 }

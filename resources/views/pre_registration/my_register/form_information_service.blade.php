@@ -14,17 +14,13 @@
                         @csrf
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="id_bank ">{!! trans('Servicios') !!}</label>
-                                <select name="id_bank " class="form-control form-control-sm" required>
+                                <label for="id_service">{!! trans('Servicios') !!}</label>
+                                <select name="id_service" class="form-control form-control-sm" id="id_service" required>
                                     <option value="" selected>{!! trans('Seleccione...') !!}</option>
-                                    
-                                    <option value="" ></option>
-                                    
+                                    @foreach($list_services as $services)
+                                    <option value="{{$services->id}}" >{{$services->p_text}}</option> 
+                                    @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="t_b_namefile">{!! trans('Archivo') !!}</label>
-                                <input type="file" class="form-control form-control-sm" id="t_b_namefile" name="t_b_namefile" required>
                             </div>
                         </div>
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>

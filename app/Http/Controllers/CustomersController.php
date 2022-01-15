@@ -3,34 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User as clients;
+use App\Traits\Managment;
 
 class CustomersController extends Controller
 {
-    public function active(){
+    use Managment;
 
-        $data = clients::leftJoin('countries','countries.id','=','users.u_id_country')
-        ->leftJoin('model_has_roles as roles','roles.model_id','=','users.id')
-        ->leftJoin('coins','coins.id','=','users.u_id_money')
-        ->where('roles.role_id',4)
-        ->where('users.u_state',1)
-        ->select('users.*','countries.c_name','coins.c_currency','coins.c_type_currency')
-        ->get();
+    public function active()
+    {
+        $state = 1;
+        $data = $this->getInfoUsers(4,$state)->select('users.*','countries.c_name','coins.c_currency','coins.c_type_currency')
+        ->get();    
 
-        return view('customers.index',compact('data'));
+        return view('customers.index',compact('data','state'));
     }
 
-    public function inactive(){
+    public function inactive()
+    {
+        $state = 4;
+        $data = $this->getInfoUsers(4,$state)->select('users.*','countries.c_name','coins.c_currency','coins.c_type_currency')
+        ->get(); 
 
-        $data = clients::leftJoin('countries','countries.id','=','users.u_id_country')
-        ->leftJoin('model_has_roles as roles','roles.model_id','=','users.id')
-        ->leftJoin('coins','coins.id','=','users.u_id_money')
-        ->where('roles.role_id',4)
-        ->where('users.u_state',4)
-        ->select('users.*','countries.c_name','coins.c_currency','coins.c_type_currency')
-        ->get();
-
-        return view('customers.index',compact('data'));
+        return view('customers.index',compact('data','state'));
     }
 
     public function create(){
