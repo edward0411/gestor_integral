@@ -161,7 +161,7 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center align-items-center">
-        <div class="col-9">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header color-header">
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Información del tutor') !!}</h5>
@@ -169,25 +169,26 @@
                 <form method="POST" action="" class="">
                     @csrf
                     <div class="card-body table-responsive">
-
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="Pepito perez" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_name}}" disabled>
+                                <input type="hidden"  name="id_tutor" id="id_tutor" value="{{$user->id}}" disabled>
+                                <input type="hidden"  name="id_tutor" id="line_first" value="{{$user->u_line_first}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="perez01215" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_nickname}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="Cédula Ciudadania" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->parametric->p_text}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="123456789" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_num_doc}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="311223344" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->u_key_number}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="tutors123@gmail.com" disabled>
+                                <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{$user->email}}" disabled>
                             </div>
                         </div>
                     </div>
@@ -198,46 +199,25 @@
                             <h5 class="text-white" style="font-weight: bold;">{!! trans('Información bancaria') !!}</h5>
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
-                            <table class="table table-bordered">
+                            <table id="tbl_info_bancaria" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>{!! trans('Banco') !!}</th>
-                                        <th>{!! trans('Tipo de cuenta') !!}</th>
-                                        <th>{!! trans('Número de cuenta') !!}</th>
-                                        <th>{!! trans('Archivo') !!}</th>
-                                        <th>{!! trans('Estado') !!}</th>
-                                        <th>{!! trans('Acciones') !!}</th>
+                                        <th>N°</th>
+                                        <th>Banco</th>
+                                        <th>Tipo de cuenta</th>
+                                        <th>N° de cuenta</th>
+                                        <th>Archivo</th>
+                                        <th>Estado</th>
+                                        <th>Observaciones</th>
                                     </tr>
 
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Davivienda</td>
-                                        <td>Ahorros</td>
-                                        <td>999999999</td>
-                                        <td>pdf</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Banco Colombia</td>
-                                        <td>Corriente</td>
-                                        <td>888888888</td>
-                                        <td>pdf</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
+
                                 </tbody>
+                                <tfoot>
+                                    <div id="infoMessage-tutors_bank_details"></div>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -247,40 +227,22 @@
                             </h5>
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
-                            <table class="table table-bordered">
+                            <table id="tbl_info_language" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>{!! trans('Idiomas') !!}</th>
                                         <th>{!! trans('Archivos') !!}</th>
                                         <th>{!! trans('Estado') !!}</th>
+                                        <th>{!! trans('Observaciones') !!}</th>
                                         <th>{!! trans('Acciones') !!}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Ingles</td>
-                                        <td>Excell</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
 
-                                    <tr>
-                                        <td>Frances</td>
-                                        <td>pdf</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
                                 </tbody>
+                                <tfoot>
+                                    <div id="infoMessage-language_tutors"></div>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -290,40 +252,21 @@
                             </h5>
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
-                            <table class="table table-bordered">
+                            <table id="tbl_info_system" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>{!! trans('Sistema') !!}</th>
                                         <th>{!! trans('Archivos') !!}</th>
                                         <th>{!! trans('Estado') !!}</th>
+                                        <th>{!! trans('Observaciones') !!}</th>
                                         <th>{!! trans('Acciones') !!}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Sistema de información</td>
-                                        <td>Excell</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Sistema educativo</td>
-                                        <td>pdf</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
                                 </tbody>
+                                <tfoot>
+                                    <div id="infoMessage-tutors_systems"></div>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -334,40 +277,22 @@
                             </h5>
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
-                            <table class="table table-bordered">
+                            <table id="tbl_info_topic" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>{!! trans('Temas') !!}</th>
                                         <th>{!! trans('Archivos') !!}</th>
                                         <th>{!! trans('Estado') !!}</th>
+                                        <th>{!! trans('Observaciones') !!}</th>
                                         <th>{!! trans('Acciones') !!}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Reforzamiento</td>
-                                        <td>Excell</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
 
-                                    <tr>
-                                        <td>Superstición</td>
-                                        <td>pdf</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
                                 </tbody>
+                                <tfoot>
+                                    <div id="infoMessage-tutors_topics"></div>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -377,37 +302,21 @@
                             </h5>
                         </div>
                         <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
-                            <table class="table table-bordered">
+                            <table id="tbl_info_service" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>{!! trans('Servicios') !!}</th>
                                         <th>{!! trans('Estado') !!}</th>
+                                        <th>{!! trans('Observaciones') !!}</th>
                                         <th>{!! trans('Acciones') !!}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Servicios de telecomunicaciones</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
 
-                                    <tr>
-                                        <td>Servicios editoriales</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Aprobar') !!}</a>
-                                            <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i>
-                                                {!! trans('Rechazar') !!}</a>
-                                        </td>
-                                    </tr>
                                 </tbody>
+                                <tfoot>
+                                    <div id="infoMessage-tutors_services"></div>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -423,17 +332,22 @@
                                     <tr>
                                         <th>
                                             <div class="form-group">
+                                                <div>
+                                                    <div id="infoMessage-lineFirst"></div>
+                                                </div>
                                                 <div class="row">
                                                     <legend class="col-form-label col-sm-6 pt-0">Pertenece al fondo</legend>
-                                                    <div class="col-sm-16">
+
+                                                    <div class="col-sm-16" id="line_first">
+
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="" id="" value="si" checked>
+                                                            <input class="form-check-input" type="radio" name="line" id="line1" value="1">
                                                             <label class="form-check-label" for="">
-                                                                Si
+                                                                Sí
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="" id="" value="no">
+                                                            <input class="form-check-input" type="radio" name="line" id="line0" value="0">
                                                             <label class="form-check-label" for="">
                                                                 No
                                                             </label>
@@ -444,7 +358,8 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
-                                                    <button type="submit" class="btn btn-warning btn-xs">Guardar</button>
+                                                    <a href="#" class="btn btn-warning btn-xs" onclick="saveFirtsLine()">Guardar</a>
+                                                    {{-- <button class="btn btn-warning btn-xs" onclick="saveFirtsLine()">Guardar</button> --}}
                                                 </div>
                                             </div>
                                             </th>
@@ -454,11 +369,11 @@
                         </div>
                     </div>
                     <div class="card-body table-responsive">
-                        <a href="" class="btn btn-warning btn-xs">
+                        <a href="{{route('pre_registration.save_state_tutor', [$user->id, 2])}}" class="btn btn-warning btn-xs">
                             {!! trans('Aprobar') !!}</a>
-                        <a href="" class="btn btn-warning btn-xs">
+                        <a href="{{route('pre_registration.save_state_tutor', [$user->id, 3])}}" class="btn btn-warning btn-xs">
                             {!! trans('Rechazar') !!}</a>
-                        <a href="" class="btn btn-warning btn-xs">
+                        <a href="{{route('pre_registration.save_state_tutor', [$user->id, 4])}}" class="btn btn-warning btn-xs">
                             {!! trans('No aceptado') !!}</a>
                         <a href="{{route('pre_registration.index_turors_list')}}" class="btn btn-warning btn-sm float-right">{!!
                             trans('Regresar') !!}</a>
@@ -473,4 +388,354 @@
 </div>
 <!-- /.col -->
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+
+    // variables GLOBALES
+    var id = $('#id_tutor').val();
+
+    $(document).ready(function() {
+        traerCuentasBanc();
+        getLanguageInfo();
+        getSystemInfo();
+        getTopicInfo();
+        getServiceInfo();
+        handleFirtsLine();
+    });
+
+    const handleFirtsLine = () => {
+        var line = $('#line_first').val();
+        if (line == 1) {
+            $('#line1').attr('checked',  true)
+        }else if(line == 0){
+            $('#line0').attr('checked',  true)
+        }
+    }
+
+    const saveFirtsLine = () => {
+        if(confirm('¿Desea confirmar el registro?')==false )
+        {return false;}
+
+        var url ="{{route('pre_registration.save_line_first')}}";
+        var checked = null
+        $("input[type=radio]:checked").each(function(){
+            checked = $(this).val();
+        });
+        var datos = {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            "id": id,
+            "value": checked,
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: datos,
+            success: function(respuesta) {
+                handleFirtsLine();
+                messageInfo('infoMessage-lineFirst', respuesta.message);
+            }
+        });
+    }
+
+    const handleState = (state) => {
+        if (state == 0) {
+            state_text ='Pendiente';
+        }else if(state == 1){
+            state_text ='Aprobado';
+        }else{
+            state_text ='Rechazado';
+        }
+        return state_text;
+    }
+
+    function adicionarCuenta(id_cuenta = 0, name_bank = '', type_acount = '',number_acount = '',file ='',state = '',observations = '') {
+        var state_text ='';
+        if (state == 0) {
+            state_text ='Pendiente';
+        }else if(state == 1){
+            state_text ='Aprobado';
+        }else{
+            state_text ='Rechazado';
+        }
+
+        if (observations == null) {
+            observations = '';
+        }
+
+        var cell = `
+        <tr>
+            <td>
+                `+id_cuenta+`
+            </td>
+            <td>
+                `+name_bank+`
+            </td>
+            <td>
+                `+type_acount+`
+            </td>
+            <td style="text-align: right;">
+                `+number_acount+`
+            </td>
+            <td>
+                `+file+`
+            </td>
+            <td>
+                `+state_text+`
+            </td>
+            <td>
+                <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_`+id_cuenta+`_tutors_bank_details">`+observations+`</textarea>
+            </td>
+            ${state == 0 &&`
+                <td>
+                    <a href="#" onClick="ProcessRequest(`+id_cuenta+`,1,'tutors_bank_details')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Aprobar') !!}</a>
+                    <a href="#" onClick="ProcessRequest(`+id_cuenta+`,2,'tutors_bank_details')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Rechazar') !!}</a>
+                </td>
+            `}
+
+        </tr>
+        `;
+        $("#tbl_info_bancaria tbody").append(cell);
+    }
+
+    //pintar en tabla informacion de lenaguaje
+    const paintInfoLanguage = (data) => {
+        data.forEach(elem => {
+            state_text = handleState(elem.state)
+            $("#tbl_info_language tbody").append(`
+                <tr>
+                    <td>${elem.language}</td>
+                    <td>${elem.file}</td>
+                    <td>${state_text}</td>
+                    <td>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_language_tutors">${elem.observation ? elem.observation:'' }</textarea>
+                    </td>
+
+                    ${elem.state == 0 &&`
+                        <td>
+                            <a href="#" onClick="ProcessRequest(${elem.id}, 1, 'language_tutors')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Aprobar') !!}</a>
+                            <a href="#" onClick="ProcessRequest(${elem.id}, 2, 'language_tutors')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Rechazar') !!}</a>
+                        </td>
+                    `}
+                </tr>
+            `)
+        })
+    }
+
+    //pintar en tabla informacion de sistema
+    const paintInfoSystem = (data) => {
+        data.forEach(elem => {
+            state_text = handleState(elem.state)
+            $("#tbl_info_system tbody").append(`
+                <tr>
+                    <td>${elem.system}</td>
+                    <td>${elem.file}</td>
+                    <td>${state_text}</td>
+                    <td>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_systems">${elem.observation ? elem.observation:'' }</textarea>
+                    </td>
+                    ${elem.state == 0 &&`
+                        <td>
+                            <a href="#" onClick="ProcessRequest(${elem.id}, 1, 'tutors_systems')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Aprobar') !!}</a>
+                            <a href="#" onClick="ProcessRequest(${elem.id}, 2, 'tutors_systems')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Rechazar') !!}</a>
+                        </td>
+                    `}
+                </tr>
+            `)
+        })
+    }
+
+    //pintar en tabla informacion de trabajos
+    const paintInfoTopic = (data) => {
+        data.forEach(elem => {
+            state_text = handleState(elem.state)
+            $("#tbl_info_topic tbody").append(`
+                <tr>
+                    <td>${elem.area}/${elem.subject}/${elem.topic}</td>
+                    <td>${elem.file}</td>
+                    <td>${state_text}</td>
+                    <td>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_topics">${elem.observation ? elem.observation:'' }</textarea>
+                    </td>
+                    ${elem.state == 0 &&`
+                        <td>
+                            <a href="#" onClick="ProcessRequest(${elem.id}, 1, 'tutors_topics')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Aprobar') !!}</a>
+                            <a href="#" onClick="ProcessRequest(${elem.id}, 2, 'tutors_topics')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Rechazar') !!}</a>
+                        </td>
+                    `}
+                </tr>
+            `)
+        })
+    }
+
+     //pintar en tabla informacion de servicio
+     const paintInfoService = (data) => {
+        data.forEach(elem => {
+            state_text = handleState(elem.state)
+            $("#tbl_info_service tbody").append(`
+                <tr>
+                    <td>${elem.service}</td>
+                    <td>${state_text}</td>
+                    <td>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_services">${elem.observation ? elem.observation:'' }</textarea>
+                    </td>
+                    ${elem.state == 0 &&`
+                        <td>
+                            <a href="#" onClick="ProcessRequest(${elem.id}, 1, 'tutors_services')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Aprobar') !!}</a>
+                            <a href="#" onClick="ProcessRequest(${elem.id}, 2, 'tutors_services')" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Rechazar') !!}</a>
+                        </td>
+                    `}
+                </tr>
+            `)
+        })
+    }
+
+    function traerCuentasBanc(){
+        var url ="{{route('pre_registration.get_info_acount_bank')}}";
+        var datos = {
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+        "id_tutor": id,
+        };
+
+        $.ajax({
+        type: 'GET',
+        url: url,
+        data: datos,
+        success: function(respuesta) {
+
+            $("#tbl_info_bancaria tbody").empty();
+            $.each(respuesta, function(index, elemento) {
+                adicionarCuenta(elemento.id,elemento.name_bank ?? '', elemento.type_acount ?? '',elemento.t_b_number_account ?? '',elemento.t_b_namefile ?? '',elemento.t_b_state, elemento.t_b_observations)
+                });
+                colleccionCuentas = respuesta;
+            }
+        });
+    }
+
+    // traer informacion de idiomas
+    const getLanguageInfo = () => {
+        var url="{{route('pre_registration.get_info_language')}}";
+        var datos = {
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+        "id_tutor": id,
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: datos,
+            success: function(respuesta) {
+                $("#tbl_info_language tbody").empty();
+                paintInfoLanguage(respuesta.data)
+            }
+        });
+    }
+
+    // traer informacion de sistema
+    const getSystemInfo = () => {
+        var url="{{route('pre_registration.get_info_system')}}";
+        var datos = {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            "id_tutor": id,
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: datos,
+            success: function(respuesta) {
+                $("#tbl_info_system tbody").empty();
+                paintInfoSystem(respuesta.data)
+            }
+        });
+    }
+
+    // traer informacion de temas trabajables
+    const getTopicInfo = () => {
+        var url="{{route('pre_registration.get_info_topic')}}";
+        var datos = {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            "id_tutor": id,
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: datos,
+            success: function(respuesta) {
+                console.log("topic", respuesta);
+                $("#tbl_info_topic tbody").empty();
+                paintInfoTopic(respuesta.data)
+            }
+        });
+    }
+
+     // traer informacion de servicios
+     const getServiceInfo = () => {
+        var url="{{route('pre_registration.get_info_service')}}";
+        var datos = {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            "id_tutor": id,
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: datos,
+            success: function(respuesta) {
+                $("#tbl_info_service tbody").empty();
+                paintInfoService(respuesta.data)
+            }
+        });
+    }
+
+
+    function ProcessRequest(id_cuenta, value, table) {
+
+        if(confirm('¿Desea confirmar el registro?')==false )
+        {return false;}
+
+        var observation = $('#observaciones_'+id_cuenta+'_'+table).val();
+        if (observation) {
+            var url="{{route('pre_registration.process.request')}}";
+            var datos = {
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+                "id_cuenta":    id_cuenta,
+                "value":        value,
+                "table":        table,
+                "observation":  observation,
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: datos,
+                success: function(respuesta) {
+                    console.log("res", respuesta);
+                    traerCuentasBanc();
+                    getLanguageInfo();
+                    getSystemInfo();
+                    getTopicInfo();
+                    getServiceInfo();
+                    messageInfo('infoMessage-'+table, respuesta.message);
+                }
+            });
+        }else{
+            if(confirm('La observacion es requerida')==false )
+            {return false;}
+        }
+
+    }
+
+    const messageInfo = (id, message)  => {
+        $('#'+id).html(
+            `<div class="alert alert-success alert-block shadow">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>${message}</strong>
+            </div>`
+        )
+    }
+
+</script>
 @endsection

@@ -264,6 +264,7 @@
             </ul>
           </li>
           @endcan
+          
           @can('Perfil')
           <!-- /.Modulo Pre Registro -->
           <li class="nav-item">
@@ -275,6 +276,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @if((\Auth::user()->roles()->first()->id == 4) || (\Auth::user()->roles()->first()->id == 6))}}
               @can('Perfil_datosBasicos_ver')
               <li class="nav-item">
                 <a href="{{route('profile.index_basic_data')}}" class="nav-link">
@@ -283,6 +285,7 @@
                 </a>
               </li>
               @endcan
+              @endif
               @can('Perfil_bonos_ver')
               <li class="nav-item">
                 <a href="{{route('profile.index_bonds')}}" class="nav-link">
@@ -294,6 +297,7 @@
             </ul>
           </li>
           @endcan
+        
           @can('Comunicaciones')
           <li class="nav-item">
             <a href="#" class="nav-link">

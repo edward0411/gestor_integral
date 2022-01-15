@@ -1,4 +1,5 @@
 @extends('layouts.master_panel')
+@section('title','Tutores Registrados')
 
 @section('content')
 <div class="container">
@@ -19,26 +20,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Pepito</td>
-                                <td>perez</td>
-                                <td>soporte@gmail.com.co</td>
-                                <td>Activo</td>
-                                <td>
-                                    <a href="{{route('pre_registration.view_tutors')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Ver') !!}</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Juanito</td>
-                                <td>loquiño</td>
-                                <td>prueba@gmail.con</td>
-                                <td>Activo</td>
-                                <td>
-                                    <a href="{{route('pre_registration.view_tutors')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Ver') !!}</a>
-                                </td>
-                            </tr>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{$user->id}}</td>
+                                    <td>{{$user->u_name}}</td>
+                                    <td>{{$user->u_nickname}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->state}}</td>
+                                    <td>
+                                        <a href="{{route('pre_registration.view_tutors', $user->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Ver') !!}</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

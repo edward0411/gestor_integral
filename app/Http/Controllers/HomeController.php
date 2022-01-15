@@ -39,7 +39,7 @@ class HomeController extends Controller
                 break;
             case '6':
                 if (Auth::user()->u_state == 0 || Auth::user()->u_state == 1 || Auth::user()->u_state == 3) {
-                    return redirect()->route('histories.index');
+                    return redirect()->route('pre_registration.index_registration');
                 }elseif(Auth::user()->u_state == 2){
                     return route('quotes.myQuotes');
                 }elseif(Auth::user()->u_state == 4){
