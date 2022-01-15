@@ -137,10 +137,11 @@ class Pre_registrationController extends Controller
 
     public function create_information_topics_work(){
 
-        $areas = $this->getInfoAreas()->get();
-        $subjects = $this->getInfoSubjects()->get();
+        $areas = $this->getInfoTable('areas')->where('a_state',1)->get();
+        $subjects = $this->getInfoTable('subjects')->where('s_state',1)->get();
+        $topics = $this->getInfoTable('topics')->where('t_state',1)->get();
 
-        return view('pre_registration.my_register.form_information_topics_work',compact('areas','subjects'));
+        return view('pre_registration.my_register.form_information_topics_work',compact('areas','subjects','topics'));
     }
 
     // retorna la informacion de temas de trabajo

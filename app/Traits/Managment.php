@@ -30,18 +30,9 @@ trait Managment
         return $roles;
     }
 
-    public function getInfoAreas(){
-
-        $areas = areas::select('id','a_name');
-        return $areas;
-    }
-
-   public function getInfoSubjects(){
-
-        $subjects = subjects::leftJoin('areas','areas.id','=','subjects.id_area')
-        ->select('subjects.*');
-        return $subjects;
-
+    public function getInfoTable($table){
+        $query = DB::table($table);
+        return $query;
     }
 
     public function getInfoUsers($rol,$state)
