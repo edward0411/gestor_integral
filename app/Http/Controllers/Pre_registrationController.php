@@ -122,7 +122,9 @@ class Pre_registrationController extends Controller
 
     public function create_information_language(){
 
-        return view('pre_registration.my_register.form_information_language');
+        $list_languages = $this->getDataParametrics('param_list_languages')->orderby('p_order')->get();
+
+        return view('pre_registration.my_register.form_information_language',compact('list_languages'));
     }
 
     // retorna la informacion de lenguaje
@@ -136,9 +138,9 @@ class Pre_registrationController extends Controller
     public function create_information_topics_work(){
 
         $areas = $this->getInfoAreas()->get();
-       // $subjects = $this->getInfoSubjects()->get();
+        $subjects = $this->getInfoSubjects()->get();
 
-        return view('pre_registration.my_register.form_information_topics_work',compact('areas'));
+        return view('pre_registration.my_register.form_information_topics_work',compact('areas','subjects'));
     }
 
     // retorna la informacion de temas de trabajo
@@ -152,7 +154,9 @@ class Pre_registrationController extends Controller
 
     public function create_information_service(){
 
-        return view('pre_registration.my_register.form_information_service');
+        $list_services = $this->getDataParametrics('param_list_services')->orderby('p_order')->get();
+
+        return view('pre_registration.my_register.form_information_service',compact('list_services'));
     }
 
     // retorna la informacion de servicio
@@ -165,7 +169,9 @@ class Pre_registrationController extends Controller
 
     public function create_information_system(){
 
-        return view('pre_registration.my_register.form_information_system');
+        $list_systems = $this->getDataParametrics('param_list_systems')->orderby('p_order')->get();
+
+        return view('pre_registration.my_register.form_information_system',compact('list_systems'));
     }
 
     // retorna la informacion de sistema
