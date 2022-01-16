@@ -15,20 +15,29 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="id_user">{!! trans('Nick Name') !!}</label>
-                                <input type="text" class="form-control form-control-sm" id="id_user" name="id_user" value="" required>
+                                <select class="form-control form-control-sm select2" id="id_user" name="id_user" required>
+                                    <option value="">{!! trans('Selecione...') !!}</option> 
+                                    @foreach($data as $datas)
+                                    <option value="{{$datas->id}}" >{{$datas->u_nickname}}</option> 
+                                    @endforeach 
+                                </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="type_bono"> {!! trans('Clasificación') !!}</label>
-                                <select class="form-control form-control-sm" id="type_bono" name="type_bono" required>
-                                    <option value="">{!! trans('Selecione...') !!}</option>
-                                    
-                                </select>
+                                <select class="form-control form-control-sm" id="type_value" name="type_value" required>
+                                    <option value="">{!! trans('Selecione...') !!}</option> 
+                                @foreach($type_bonds as $bonds)
+                                <option value="{{$bonds->id}}" >{{$bonds->p_text}}</option> 
+                                @endforeach    
+                            </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="type_value"> {!! trans('Tipo') !!}</label>
                                 <select class="form-control form-control-sm" id="type_value" name="type_value" required>
-                                    <option value="">{!! trans('Selecione...') !!}</option>
-                                    
+                                    <option value="">{!! trans('Selecione...') !!}</option> 
+                                    @foreach($type_value as $value)
+                                    <option value="{{$value->id}}" >{{$value->p_text}}</option> 
+                                    @endforeach 
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
