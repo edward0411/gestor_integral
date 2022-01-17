@@ -140,6 +140,14 @@ trait Preregister
         }
     }
 
+    public function saveService($request)
+    {
+        $data                   = $request->all();
+        $data['id_user']        = Auth::user()->id;
+        $data['t_s_state']      = User::PENDIENTE;
+        $servioce               = TutorService::updateOrCreate(['id' => $data['id']], $data);
+    }
+
     public function saveFile($name, $path, $file){
         $name = $file->getClientOriginalName();
         $path = public_path() .$path;

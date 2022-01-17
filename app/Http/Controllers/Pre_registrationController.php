@@ -166,15 +166,26 @@ class Pre_registrationController extends Controller
 
     public function create_information_service(){
 
-        $list_services = $this->getDataParametrics('param_list_services')->orderby('p_order')->get();
+        $services = $this->getDataParametrics('param_list_services')->orderby('p_order')->get();
 
-        return view('pre_registration.my_register.form_information_service',compact('list_services'));
+        return view('pre_registration.my_register.form_information_service',compact('services'));
     }
 
     // retorna la informacion de servicio
     public function get_info_service(Request $request){
-        $infoService = TutorService::infoUser($request->id_tutor)->get();
+        $infoService = TutorService::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id)->get();
         return $this->successResponse(new TutorServiceCollection($infoService));
+    }
+
+    public function serviceStore(Request $request)
+    {
+        $this->saveService($request);
+        return $this->showMessage('Se ha guardado la información');
+    }
+
+    public function serviceDelete(TutorService $service){
+        $service->delete();
+        return $this->showMessage(' Se ha eliminado el registro');
     }
 
     ////////// informacion de sistemas /////////
