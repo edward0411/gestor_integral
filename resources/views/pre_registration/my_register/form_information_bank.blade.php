@@ -160,23 +160,23 @@
 
     }
 
-    function deletesCell_relacion(id_cdr_cuenta) {
+    function deletesCell_relacion(id_account) {
 
         if(confirm('¿Desea eliminar el registro?')==false )
         {return false;}
 
-        var url="";
+        var url = `{{url('/panel/administrativo/registration/acount_bank/delete/${id_account}')}}`;
         var datos = {
-        "_token": $('meta[name="csrf-token"]').attr('content'),
-        "id_cdr_cuenta":id_cdr_cuenta
+            "_token": $('meta[name="csrf-token"]').attr('content'),
         };
 
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: url,
             data: datos,
             success: function(respuesta) {
                 $.each(respuesta, function(index, elemento) {
+                    console.log("res", respuesta);
                     traerCuentasBanc();
                         $('#info_bancaria_mensaje').html(
                             `<div class="alert alert-success alert-block shadow">

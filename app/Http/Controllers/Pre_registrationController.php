@@ -7,6 +7,7 @@ use App\Http\Resources\TutorServiceCollection;
 use App\Http\Resources\TutorSystemCollection;
 use App\Http\Resources\TutorTopicCollection;
 use App\Models\TutorLanguage;
+use App\Models\TutorsBanks;
 use App\Models\TutorService;
 use App\Models\TutorSystem;
 use App\Models\TutorTopic;
@@ -117,6 +118,12 @@ class Pre_registrationController extends Controller
 
         return true;
     }
+
+    public function acountBankDelete(TutorsBanks $account){
+        $account->delete();
+        return $this->showMessage(' Se ha eliminado el registro');
+    }
+
 
     ////////informacion de idiomas ///////
 

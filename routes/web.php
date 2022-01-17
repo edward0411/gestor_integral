@@ -157,6 +157,7 @@ Route::get('/registration/save_line_first','Pre_registrationController@save_line
 Route::get('/registration/save_state_tutor/{user}/{value}','Pre_registrationController@save_state_tutor')->name('pre_registration.save_state_tutor');
 Route::get('/registration/process/','Pre_registrationController@processRequest')->name('pre_registration.process.request');
 Route::post('/registration/acount_bank/store','Pre_registrationController@acount_bank_store')->name('pre_registration.acount_bank.store');
+Route::post('/registration/acount_bank/delete/{account}','Pre_registrationController@acountBankDelete')->name('pre_registration.acount_bank.delete');//eliminar informacion bancaria  de tutor
 
 Route::post('/registration/language/store','Pre_registrationController@lenguageStore')->name('pre_registration.language.store');//crear o editar lenguajes  de tutor
 Route::post('/registration/language/delete/{language}','Pre_registrationController@lenguageDelete')->name('pre_registration.language.delete');//eliminar lenguajes  de tutor
