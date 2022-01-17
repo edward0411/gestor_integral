@@ -18,6 +18,8 @@ class TutorTopic extends JsonResource
             'id'                                => $this->id,
             'id_user'                           => $this->id_user,
             'id_topic'                          => $this->id_topic,
+            'id_subject'                        => $this->topic->subject->id,
+            'id_area'                           => $this->topic->subject->area->id,
             'area'                              => $this->topic->subject->area->a_name,
             'subject'                           => $this->topic->subject->s_name,
             'topic'                             => $this->topic->t_name,

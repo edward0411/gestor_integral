@@ -164,6 +164,10 @@ Route::post('/registration/service/store','Pre_registrationController@serviceSto
 Route::post('/registration/service/delete/{service}','Pre_registrationController@serviceDelete')->name('pre_registration.service.delete');//eliminar service  de tutor
 
 
+Route::post('/registration/topic/store','Pre_registrationController@topicStore')->name('pre_registration.topic.store');//crear o editar topic de tutor
+Route::post('/registration/topic/delete/{topic}','Pre_registrationController@topicDelete')->name('pre_registration.topic.delete');//eliminar topic  de tutor
+
+
 Route::post('/registration/system/store','Pre_registrationController@systemStore')->name('pre_registration.system.store');//crear o editar sistema de tutor
 Route::post('/registration/system/delete/{system}','Pre_registrationController@systemDelete')->name('pre_registration.system.delete');//eliminar sistema  de tutor
 

@@ -162,6 +162,20 @@ trait Preregister
         }
     }
 
+    public function saveTopic($request)
+    {
+        $data                   = $request->all();
+        $data['id_user']        = Auth::user()->id;
+        $data['t_t_state']      = User::PENDIENTE;
+        $system                 = TutorTopic::updateOrCreate(['id' => $data['id']], $data);
+
+        if($request->hasFile('file')){
+            $file = $request->file('file');
+            $system->t_t_namefile = $this->saveFile('\folders\topic', $file);
+            $system->save();
+        }
+    }
+
     public function saveFile($path, $file){
         $name = $file->getClientOriginalName();
         $path = public_path() .$path;

@@ -157,8 +157,19 @@ class Pre_registrationController extends Controller
 
     // retorna la informacion de temas de trabajo
     public function get_info_topic(Request $request){
-        $infoTopic = TutorTopic::infoUser($request->id_tutor)->get();
+        $infoTopic = TutorTopic::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id)->get();
         return $this->successResponse(new TutorTopicCollection($infoTopic));
+    }
+
+    public function topicStore(Request $request)
+    {
+        $this->saveTopic($request);
+        return $this->showMessage('Se ha guardado la información');
+    }
+
+    public function topicDelete(TutorTopic $topic){
+        $topic->delete();
+        return $this->showMessage(' Se ha eliminado el registro');
     }
 
 
