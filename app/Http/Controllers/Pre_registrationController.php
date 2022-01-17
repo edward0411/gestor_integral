@@ -122,15 +122,26 @@ class Pre_registrationController extends Controller
 
     public function create_information_language(){
 
-        $list_languages = $this->getDataParametrics('param_list_languages')->orderby('p_order')->get();
+        $languages = $this->getDataParametrics('param_list_languages')->orderby('p_order')->get();
 
-        return view('pre_registration.my_register.form_information_language',compact('list_languages'));
+        return view('pre_registration.my_register.form_information_language',compact('languages'));
     }
 
     // retorna la informacion de lenguaje
     public function get_info_language(Request $request){
         $infoLanguage = TutorLanguage::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id)->get();
         return $this->successResponse(new TutorLanguageCollection($infoLanguage));
+    }
+
+    public function lenguageStore(Request $request)
+    {
+        $this->saveLanguage($request);
+        return $this->showMessage('Se ha guardado la información');
+    }
+
+    public function lenguageDelete(TutorLanguage $language){
+        $language->delete();
+        return $this->showMessage(' Se ha eliminado el registro');
     }
 
     ////////// informacion temas trabajables /////

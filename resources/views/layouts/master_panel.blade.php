@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href=" {{ asset('dist/css/adminlte.min.css') }} ">
-    
+
     <link rel="stylesheet" href=" {{ asset('css/admin_panel.css') }}">
     <link rel="stylesheet" href=" {{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href=" {{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
@@ -60,7 +60,7 @@
               {{Session::get('success')}}
             </div>
         @endif
-        
+
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -76,7 +76,7 @@
             <!-- /.content -->
         </div>
 
-      
+
         <!-- /.content-wrapper -->
         <footer class="main-footer" style="width:100%; margin-left: 0px!important;background-color:#1A7C94 ;color:rgba(230,230,230,1);border-top:0px solid gray;">
             <div class="text-center">
@@ -128,31 +128,31 @@
 <script type="text/javascript" language="javascript" src="{{ asset("plugins/datatables-buttons/js/buttons.html5.min.js") }}"></script>
 <script type="text/javascript" language="javascript" src="{{ asset("plugins/datatables-buttons/js/buttons.print.min.js") }}"></script>
 
- 
-<script src="https://malsup.github.io/jquery.form.js"></script> 
+
+<script src="https://malsup.github.io/jquery.form.js"></script>
 
 <script type="text/javascript">
 
     $(document).ready(function(){
 
-        $(function () {   
+        $(function () {
             $('.select2').select2()
         });
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         });
-    
+
         $('#tabledata1').DataTable( {
             responsive: true,
             dom: 'Bfrtlip',
             buttons: [
-    
+
                 {
                     extend: 'excel',
                     text: '<i class="fas fa-file-excel"> Excel</i>',
                     className:'btn btn-default'
                     },
-    
+
                     {
                     extend: 'pdf',
                     text: '<i class="fas fa-file-pdf"> Pdf</i>',
@@ -190,13 +190,13 @@
             }
         }
         } );
-    
+
         $.ajaxSetup({
             headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    
+
       });
       </script>
     @yield('script')

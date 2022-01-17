@@ -9,23 +9,26 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear información de idiomas') !!}</h5>
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" id="form" action="{{route('pre_registration.acount_bank.store')}}"  enctype="multipart/form-data">
+                <form method="POST" id="form" action="{{route('pre_registration.language.store')}}"  enctype="multipart/form-data">
                     <div class="card-body">
                         @csrf
                         <div class="row">
                             <div class="form-group col-md-6">
-                                                <label for="id_language">{!! trans('Idiomas') !!}</label>
-                                <select name="id_language " class="form-control form-control-sm" id="id_language" required>
+                                <label for="id_language">{!! trans('Idiomas') !!}</label>
+                                <select name="id_language" class="form-control form-control-sm" id="id_language" required>
                                     <option value="" selected>{!! trans('Seleccione...') !!}</option>
-
-                                    <option value="" ></option>
+                                    @foreach($languages as $item)
+                                        <option value="{{$item->id}}">{{$item->p_text}}</option>
+                                    @endforeach
 
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="l_t_namefile">{!! trans('Archivo') !!}</label>
-                                <input type="file" class="form-control form-control-sm" id="l_t_namefile" name="l_t_namefile" required>
-                    </div>
+                                <label for="file">{!! trans('Archivo') !!}</label>
+                                <input type="file" class="form-control form-control-sm" id="file" name="file">
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" id="id" value="">
                         <button type="submit" id="save" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
                         <a href="{{route('pre_registration.index_registration')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
                         <br>
@@ -44,7 +47,7 @@
                                 </thead>
                                 <tbody></tbody>
                                 <tfoot>
-                                    <div id="message"></div>
+                                    <div id="message-language"></div>
                                 </tfoot>
                             </table>
                         </div>
@@ -59,46 +62,60 @@
 </div>
 @endsection
 @section('script')
+
+    {{-- js utiles --}}
+    <script type="text/javascript" src="{{ asset("js/events/util.js") }}"></script>
+
     <script type="text/javascript">
 
         // VARIABLES GLOBALES
         var id = null;
         var collection = "";
+        var dataError
+
 
         $(document).ready(function() {
             getInfo();
             handleReady();
         });
 
-        const handleState = (state) => {
-            if (state == 0) {
-                state_text ='Pendiente';
-            }else if(state == 1){
-                state_text ='Aprobado';
-            }else{
-                state_text ='Rechazado';
-            }
-            return state_text;
-        }
-
         const handleReady = () => {
             $('#form').ajaxForm({
                 dataType: 'json',
                 clearForm: true,
                 beforeSubmit: function(data) {
-                    $('#message').emtpy;
+                    $('#message-language').emtpy;
                     $('#save').prop('disabled',true);
                 },
                 success: function(data) {
-                    processRespuesta('message','success')
+                    console.log("res", data);
+                    processResponse('message-language','success', data.message)
                     getInfo();
                     $('#save').prop('disabled',false);
                 },
                 error: function(data) {
-                    processError(data, 'message')
+                    processError(data, 'message-language')
                     $('#save').prop('disabled',false);
                 }
             });
+        }
+
+        function processError(data, div) {
+            errors = "";
+            dataError = data;
+            $.each(data.responseJSON.errors, function(index, elemento) {
+                errors += "<li>"+elemento+"</li>"
+            })
+            if(errors==""){
+                errors = data.responseJSON.message;
+            }
+            $('#'+div).html(
+                `<div class="alert alert-danger alert-block shadow">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Error al guardar:</strong>
+                        ${errors}</br>
+                </div>`
+            )
         }
 
         //pintar en tabla
@@ -109,11 +126,9 @@
                     <tr>
                         <td>${elem.id}</td>
                         <td>${elem.language}</td>
-                        <td>${elem.file}</td>
+                        <td>${elem.file ? elem.file:'no posee archivo...'}</td>
                         <td>${state_text}</td>
-                        <td>
-                            <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_language_tutors">${elem.observation ? elem.observation:'' }</textarea>
-                        </td>
+                        <td>${elem.observation ? elem.observation:'' }</td>
                         <td>
                             <button type="button" class="btn btn-sm btn-primary" onclick="handleEdit(${elem.id})">Editar</button>
                             <button type="button" class="btn btn-sm btn-danger" onclick="handleDelete(${elem.id})">Eliminar</button>
@@ -124,7 +139,7 @@
         }
 
         const getInfo = () => {
-            var url="{{route('pre_registration.get_info_language')}}";
+            var url = "{{route('pre_registration.get_info_language')}}";
             var datos = {
                 "_token": $('meta[name="csrf-token"]').attr('content'),
                 "id_tutor": id ? id:null,
@@ -137,47 +152,38 @@
                 success: function(respuesta) {
                     $("#table tbody").empty();
                     paint(respuesta.data)
-                    collection = respuesta;
-                    console.log(console.log(respuesta);     }
+                    collection = respuesta.data;
+                    console.log(respuesta)
+                }
             });
         }
 
         const handleEdit = (id) =>  {
-
-            datos = $.grep(collection, function(n, i) {
+            data = $.grep(collection, function(n, i) {
                 return n.id === id;
             });
-
-            $('#id_acount_bank').val(id);
-            $('#id_bank').val(datos[0].id_bank);
-            $('#id_type_account').val(datos[0].id_type_account);
-            $('#t_b_number_account').val(datos[0].t_b_number_account);
-
+            $('#id').val(id);
+            $('#id_language').val(data[0].id_language);
         }
 
-        const handleDelete = (id) => {
+        const handleDelete = (id_language) => {
 
             if(confirm('¿Desea eliminar el registro?')==false )
             {return false;}
 
-            var url="";
+            var url = `{{url('/panel/administrativo/registration/language/delete/${id_language}')}}`;
             var datos = {
-            "_token": $('meta[name="csrf-token"]').attr('content'),
-            "id":id
+                "_token": $('meta[name="csrf-token"]').attr('content'),
             };
 
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: url,
                 data: datos,
                 success: function(respuesta) {
                     $.each(respuesta, function(index, elemento) {
-                        traerCuentasBanc();
-                            $('#info_bancaria_mensaje').html(
-                                `<div class="alert alert-success alert-block shadow">
-                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                        <strong>Se ha eliminado el registro</strong>
-                                </div>`)
+                        getInfo();
+                        processResponse('message-language','success', respuesta.message)
                     });
                 }
             });

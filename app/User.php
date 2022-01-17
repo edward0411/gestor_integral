@@ -20,6 +20,7 @@ class User extends Authenticatable
     use HasRoles;
     use SoftDeletes;
 
+    const PENDIENTE     = 0;
     const REGISTRADO    = 1;
     const APROBADO      = 2;
     const RECHAZADO     = 3;
@@ -104,6 +105,9 @@ class User extends Authenticatable
     public function getStateAttribute()
     {
         $sate = null;
+        if ($this->u_state == User::PENDIENTE) {
+            $state = 'PENDIENTE';
+        }
         if ($this->u_state == User::REGISTRADO) {
             $state = 'REGISTRADO';
         }

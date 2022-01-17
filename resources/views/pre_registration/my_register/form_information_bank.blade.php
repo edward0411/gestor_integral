@@ -12,14 +12,14 @@
                 <form role="form" method="POST" id="frm_store_scount_bank" action="{{route('pre_registration.acount_bank.store')}}"  enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                       
+
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="id_bank">{!! trans('Banco') !!}</label>
                                 <select name="id_bank" id="id_bank" class="form-control form-control-sm" required>
                                     <option value="" selected>{!! trans('Seleccione...') !!}</option>
                                     @foreach($banks as $item)
-                                      <option value="{{$item->id}}">{{$item->p_text}}</option>  
+                                      <option value="{{$item->id}}">{{$item->p_text}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -28,7 +28,7 @@
                                 <select name="id_type_account" id="id_type_account" class="form-control form-control-sm" required>
                                     <option value="" selected>{!! trans('Seleccione...') !!}</option>
                                     @foreach($type_acounts as $item)
-                                        <option value="{{$item->id}}">{{$item->p_text}}</option>  
+                                        <option value="{{$item->id}}">{{$item->p_text}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -88,7 +88,7 @@
         }
 
         if (observations == null) {
-            observations = ''; 
+            observations = '';
         }
 
         var cell = `
@@ -114,9 +114,9 @@
             <td>
                 `+observations+`
             </td>
-            <td>  
+            <td>
                 <button type="button" class="btn btn-sm btn-primary" onclick="EditCell_acount(`+ id_cuenta +`)">Editar</button>
-                <button type="button" class="btn btn-sm btn-danger" onclick="deletesCell_relacion(`+id_cuenta+`)">Eliminar</button>          
+                <button type="button" class="btn btn-sm btn-danger" onclick="deletesCell_relacion(`+id_cuenta+`)">Eliminar</button>
             </td>
         </tr>
         `;
@@ -156,7 +156,7 @@
         $('#id_bank').val(datos[0].id_bank);
         $('#id_type_account').val(datos[0].id_type_account);
         $('#t_b_number_account').val(datos[0].t_b_number_account);
-        
+
 
     }
 
@@ -210,7 +210,7 @@
     });
 
     function processRespuesta(div_mensaje, tipoalerta) {
- 
+
         $('#'+div_mensaje).html(
             `<div class="alert alert-`+tipoalerta+` alert-block shadow">
                 <button type="button" class="close" data-dismiss="alert">×</button>

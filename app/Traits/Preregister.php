@@ -11,6 +11,7 @@ use App\Models\TutorsBanks;
 use App\Models\TutorService;
 use App\Models\TutorSystem;
 use App\Models\TutorTopic;
+use App\User;
 use File;
 
 trait Preregister
@@ -18,7 +19,7 @@ trait Preregister
     public function consultTable($table,$state,$int)
     {
        $id_user = Auth::user()->id;
-       $query = DB::table($table)->where('id_user',$id_user)->where($state,$int)->get()->count();
+       $query = DB::table($table)->where('id_user',$id_user)->where($state,$int)->whereNull($table.'.deleted_at')->get()->count();
 
        return $query;
     }
@@ -123,6 +124,27 @@ trait Preregister
         } catch (\Throwable $th) {
             dd($th);
         }
+    }
+
+    public function saveLanguage($request)
+    {
+        $data                   = $request->all();
+        $data['id_user']        = Auth::user()->id;
+        $data['l_t_state']      = User::PENDIENTE;
+        $language               = TutorLanguage::updateOrCreate(['id' => $data['id']], $data);
+
+        if($request->hasFile('file')){
+            $file = $request->file('file');
+            $language->l_t_namefile = $this->saveFile($language->l_t_namefile, '\folders\languages', $file);
+            $language->save();
+        }
+    }
+
+    public function saveFile($name, $path, $file){
+        $name = $file->getClientOriginalName();
+        $path = public_path() .$path;
+        $file->move($path,$name);
+        return $name;
     }
 
 }
