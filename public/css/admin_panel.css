@@ -33,3 +33,23 @@
     background: #1A7C94 !important;
     color: #fff !important
 }
+
+.color-header-tutor {
+    background: #1A7C94 !important;
+    color: #fff !important
+}
+
+.color-commercial{
+    background: #fff600 !important;
+    opacity: 0.5;
+}
+
+.color-instructor{
+    background: #ff993e !important;
+    opacity: 0.5;
+}
+
+.color-client{
+    background: #115061 !important;
+    color: #fff !important
+}

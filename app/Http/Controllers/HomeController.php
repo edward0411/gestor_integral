@@ -29,13 +29,17 @@ class HomeController extends Controller
 
         switch ($id_rol) {
             case '3':
-                return route('quotes.index');
+                return redirect()->route('quotes.index');
                 break;
             case '4':
-                return route('quotes.myQuotes');
+                if (Auth::user()->u_state == 1 ) {
+                    return redirect()->route('quotes.myQuotes');
+                }elseif(Auth::user()->u_state == 4){
+                    return redirect()->route('logouth');
+                }
                 break;
             case '5':
-                return route('quotes.index');
+                return redirect()->route('quotes.index');
                 break;
             case '6':
                 if (Auth::user()->u_state == 0 || Auth::user()->u_state == 1 || Auth::user()->u_state == 3) {

@@ -34,6 +34,12 @@
                                     <td>{{$user->c_name}}</td>
                                     <td>{{$user->c_type_currency}} - {{$user->c_currency}}</td>
                                     <td>
+                                        @if($state == 1)
+                                        <a href="{{route('customers.edit',$user->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                        <a href="{{route('customers.processState',$user->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                        @elseif($state == 4)
+                                        <a href="{{route('customers.processState',$user->id)}}" class="btn btn-warning btn-xs" onclick="return confirm('{!! trans('Desea reactivar este registro') !!}?');"><i class="fas fa-check"></i> {!! trans('Reactivar') !!}</a>
+                                        @endif
                                         
                                     </td> 
                                 </tr>

@@ -310,7 +310,7 @@
             <ul class="nav nav-treeview">
               @can('Comunicaciones_bandeja')
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('communications.index')}}" class="nav-link">
                   <i class="icofont-data"></i>
                   <p><font size="2">Bandeja de comunicaciones</font></p>
                 </a>
