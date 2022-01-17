@@ -230,37 +230,8 @@
 </div>
 @endsection
 
-@section('scripts')
-
-<script type="text/javascript">
+@section('script')
 
 
-
-        var countries = [
-        @foreach($countries as $item)
-
-        { "id": "{{$item->id}}",
-        { "id": "{{$item->id}}",
-        "indicative_number": "{{$item->c_indicative}}",
-
-        },
-
-        @endforeach
-
-        ];
-
-        
-            function loadCallsign() {
-
-            var id_country = $("#id_country").val();
-
-            $.each(nuevo, function(id) {
-
-            document.getElementById('u_indicativo').value=id;
-            }
-        }
-
-    
-</script>
 
 @endsection

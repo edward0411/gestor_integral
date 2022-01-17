@@ -33,7 +33,12 @@ class ProfileController extends Controller
 
     public function create_bonds(){
 
-        return view('profile.create_bonds');
+        $state = 1;
+        $data = $this->getInfoUsers(4,$state)->select('users.u_nickname',)->get();  
+        $type_bonds = $this->getDataParametrics('param_type_bonds')->orderby('p_order')->get();
+        $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
+
+        return view('profile.create_bonds',compact('type_bonds','type_value','data'));
     }
 
     public function edit_bonds(){
