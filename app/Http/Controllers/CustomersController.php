@@ -27,13 +27,20 @@ class CustomersController extends Controller
         return view('customers.index',compact('data','state'));
     }
 
-    public function create(){
+    public function create()
+    {
 
         return view('customers.create');
     }
 
-    public function edit(){
-
+    public function edit($id)
+    {
+        dd($id);
         return view('customers.edit');
+    }
+
+    public function processState($id)
+    {
+        dd($id);
     }
 }

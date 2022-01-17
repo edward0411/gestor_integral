@@ -85,7 +85,8 @@ Route::get('/delete/countries/{id}', 'CountriesController@delete')->name('countr
 Route::get('/view/customers','CustomersController@active')->name('customers.index');
 Route::get('/view/customers_inactives','CustomersController@inactive')->name('customers.inactives');
 Route::get('/create/customers','CustomersController@create')->name('customers.create');
-Route::get('/edit/customers','CustomersController@edit')->name('customers.edit');
+Route::get('/edit/customers/{id}','CustomersController@edit')->name('customers.edit');
+Route::get('/processState/customers/{id}','CustomersController@processState')->name('customers.processState');
 
 ///////// Rutas tutores  ////////////
 
@@ -191,7 +192,10 @@ Route::get('/create_bonds/profile','ProfileController@create_bonds')->name('prof
 Route::get('/edit_bonds/profile','ProfileController@edit_bonds')->name('profile.edit_bonds');
 
 
+///////Rutas Comunicaciones/////////
 
+Route::get('/communications/index','CommunicationsController@index')->name('communications.index');
+Route::get('/communications/view_living/{id}','CommunicationsController@living')->name('communications.living');
 
 ////////Cotizaciones///////////////
 Route::get('/view/cotizaciones','QuoteController@index')->name('quotes.index');
