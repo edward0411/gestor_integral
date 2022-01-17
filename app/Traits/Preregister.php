@@ -135,7 +135,7 @@ trait Preregister
 
         if($request->hasFile('file')){
             $file = $request->file('file');
-            $language->l_t_namefile = $this->saveFile($language->l_t_namefile, '\folders\languages', $file);
+            $language->l_t_namefile = $this->saveFile('\folders\languages', $file);
             $language->save();
         }
     }
@@ -148,10 +148,24 @@ trait Preregister
         $servioce               = TutorService::updateOrCreate(['id' => $data['id']], $data);
     }
 
-    public function saveFile($name, $path, $file){
+    public function saveSystem($request)
+    {
+        $data                   = $request->all();
+        $data['id_user']        = Auth::user()->id;
+        $data['t_s_state']      = User::PENDIENTE;
+        $system                 = TutorSystem::updateOrCreate(['id' => $data['id']], $data);
+
+        if($request->hasFile('file')){
+            $file = $request->file('file');
+            $system->t_s_namefile = $this->saveFile('\folders\system', $file);
+            $system->save();
+        }
+    }
+
+    public function saveFile($path, $file){
         $name = $file->getClientOriginalName();
         $path = public_path() .$path;
-        $file->move($path,$name);
+        $file->move($path, $name);
         return $name;
     }
 

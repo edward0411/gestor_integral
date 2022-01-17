@@ -199,8 +199,19 @@ class Pre_registrationController extends Controller
 
     // retorna la informacion de sistema
     public function get_info_system(Request $request){
-        $infoLanguage = TutorSystem::infoUser($request->id_tutor)->get();
+        $infoLanguage = TutorSystem::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id)->get();
         return $this->successResponse(new TutorSystemCollection($infoLanguage));
+    }
+
+    public function systemStore(Request $request)
+    {
+        $this->saveSystem($request);
+        return $this->showMessage('Se ha guardado la información');
+    }
+
+    public function systemDelete(TutorSystem $system){
+        $system->delete();
+        return $this->showMessage(' Se ha eliminado el registro');
     }
 
 }
