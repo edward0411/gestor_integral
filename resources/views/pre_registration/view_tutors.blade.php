@@ -486,7 +486,7 @@
                 `+state_text+`
             </td>
             <td>
-                <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_`+id_cuenta+`_tutors_bank_details">`+observations+`</textarea>
+                <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_`+id_cuenta+`_tutors_bank_details" cols="5" rows="1">`+observations+`</textarea>
             </td>
             ${state == 0 &&`
                 <td>
@@ -510,7 +510,7 @@
                     <td>${elem.file}</td>
                     <td>${state_text}</td>
                     <td>
-                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_language_tutors">${elem.observation ? elem.observation:'' }</textarea>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_language_tutors" cols="5" rows="1">${elem.observation ? elem.observation:'' }</textarea>
                     </td>
 
                     ${elem.state == 0 &&`
@@ -534,7 +534,7 @@
                     <td>${elem.file}</td>
                     <td>${state_text}</td>
                     <td>
-                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_systems">${elem.observation ? elem.observation:'' }</textarea>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_systems" cols="5" rows="1">${elem.observation ? elem.observation:'' }</textarea>
                     </td>
                     ${elem.state == 0 &&`
                         <td>
@@ -557,7 +557,7 @@
                     <td>${elem.file}</td>
                     <td>${state_text}</td>
                     <td>
-                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_topics">${elem.observation ? elem.observation:'' }</textarea>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_topics" cols="5" rows="1">${elem.observation ? elem.observation:'' }</textarea>
                     </td>
                     ${elem.state == 0 &&`
                         <td>
@@ -579,7 +579,7 @@
                     <td>${elem.service}</td>
                     <td>${state_text}</td>
                     <td>
-                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_services">${elem.observation ? elem.observation:'' }</textarea>
+                        <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_services" cols="5" rows="1">${elem.observation ? elem.observation:'' }</textarea>
                     </td>
                     ${elem.state == 0 &&`
                         <td>
