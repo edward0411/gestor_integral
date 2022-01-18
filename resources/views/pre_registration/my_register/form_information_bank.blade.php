@@ -78,6 +78,7 @@
     var colleccionCuentas = "";
 
     function adicionarCuenta(id_cuenta = 0, name_bank = '', type_acount = '',number_acount = '',file ='',state = '',observations = '') {
+        
         var state_text ='';
         if (state == 0) {
             state_text ='Pendiente';
@@ -90,6 +91,16 @@
         if (observations == null) {
             observations = '';
         }
+
+        var completePath =  'folders/banks/' + file;
+
+        var link = '';
+          if(file == null || file == ""){
+            link =  `no posee archivo...`;
+          }else{
+            link =  `<a href="{{ asset('`+completePath+`')}}" target="_blank">`+file+`</a>`;
+          }
+
 
         var cell = `
         <tr>
@@ -106,7 +117,7 @@
                 `+number_acount+`
             </td>
             <td>
-                `+file+`
+                `+link+`
             </td>
             <td>
                 `+state_text+`
@@ -195,7 +206,7 @@
 
     $(document).ready(function() {
         traerCuentasBanc();
-        $('#frm_store_scount_bank').ajaxForm({
+        $('#frm_store_scount_bank_').ajaxForm({
             dataType: 'json',
             clearForm: true,
             beforeSubmit: function(data) {
