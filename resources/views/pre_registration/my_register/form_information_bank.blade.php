@@ -1,5 +1,5 @@
 @extends('layouts.master_panel')
-
+@section('title','Pre Registro')
 @section('content')
 <div class="container">
     <div class="row justify-content-center align-items-center">

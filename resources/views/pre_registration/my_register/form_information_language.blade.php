@@ -1,9 +1,10 @@
 @extends('layouts.master_panel')
+@section('title','Pre Registro')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center align-items-center">
-        <div class="col-9">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header color-header">
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear información de idiomas') !!}</h5>
@@ -25,7 +26,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="file">{!! trans('Archivo') !!}</label>
-                                <input type="file" class="form-control form-control-sm" id="file" name="file">
+                                <input type="file" class="form-control form-control-sm" id="file" name="l_t_namefile">
                             </div>
                         </div>
                         <input type="hidden" name="id" id="id" value="">

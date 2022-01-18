@@ -1,9 +1,10 @@
 @extends('layouts.master_panel')
+@section('title','Pre Registro')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center align-items-center">
-        <div class="col-9">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header color-header">
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear información de servicios') !!}</h5>

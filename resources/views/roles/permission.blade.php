@@ -1,12 +1,9 @@
-@extends('layouts.master_panel',
-$vars=[ 'breadcrum' => ['Administración','Roles', 'Permisos'],
-'title'=>'Roles - Permisos - ',
-'activeMenu'=>'6'
-])
+@extends('layouts.master_panel')
+@section('title','Roles permisos')
 @section('content')
 <div class="container">
     <div class="row justify-content-center align-items-center">
-        <div class="col-9">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header color-header">
                     <h3 class="card-title">Permisos para el rol <strong>{{ $role['name'] }}</strong></h3>

@@ -34,7 +34,7 @@ class ProfileController extends Controller
     public function create_bonds(){
 
         $state = 1;
-        $data = $this->getInfoUsers(4,$state)->select('users.u_nickname',)->get();  
+        $data = $this->getInfoUsers(4,$state)->select('users.id','users.u_nickname')->get();  
         $type_bonds = $this->getDataParametrics('param_type_bonds')->orderby('p_order')->get();
         $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
 
