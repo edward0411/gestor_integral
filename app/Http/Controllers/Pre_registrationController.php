@@ -24,6 +24,11 @@ class Pre_registrationController extends Controller
     use Managment;
     use ApiResponser;
 
+    const PENDIENTE     = 0;
+    const APROBADO      = 1;
+    const RECHAZADO     = 2;
+    const NO_ACEPTADO   = 3;
+
     public function index_registration(){
 
         $countData = [];
@@ -58,6 +63,7 @@ class Pre_registrationController extends Controller
         $cuentas = $cuentas->join('parametrics as p1','p1.id','=','tutors_bank_details.id_bank')
         ->join('parametrics as p2','p2.id','=','tutors_bank_details.id_type_account')
         ->select('tutors_bank_details.*','p1.p_text as name_bank','p2.p_text as type_acount')
+        ->whereIn('t_b_state', [Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])
         ->get();
 
         return response()->json($cuentas);
@@ -136,12 +142,18 @@ class Pre_registrationController extends Controller
 
     // retorna la informacion de lenguaje
     public function get_info_language(Request $request){
-        $infoLanguage = TutorLanguage::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id)->get();
-        return $this->successResponse(new TutorLanguageCollection($infoLanguage));
+        $infoLanguage = TutorLanguage::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id);
+        if (isset($request->state)) {
+            $infoLanguage->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO]);
+        }
+        return $this->successResponse(new TutorLanguageCollection($infoLanguage->get()));
     }
 
     public function lenguageStore(Request $request)
     {
+        if(!$request->id && TutorLanguage::infoUser(Auth::user()->id)->infoLanguage($request->id_language)->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])->first()){
+            return $this->showMessage('No se puede guardar porque ya existe un registro con esta información');
+        }
         $this->saveLanguage($request);
         return $this->showMessage('Se ha guardado la información');
     }
@@ -164,12 +176,18 @@ class Pre_registrationController extends Controller
 
     // retorna la informacion de temas de trabajo
     public function get_info_topic(Request $request){
-        $infoTopic = TutorTopic::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id)->get();
-        return $this->successResponse(new TutorTopicCollection($infoTopic));
+        $infoTopic = TutorTopic::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id);
+        if (isset($request->state)) {
+            $infoTopic->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO]);
+        }
+        return $this->successResponse(new TutorTopicCollection($infoTopic->get()));
     }
 
     public function topicStore(Request $request)
     {
+        if(!$request->id && TutorTopic::infoUser(Auth::user()->id)->infoTopic($request->id_topic)->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])->first()){
+            return $this->showMessage('No se puede guardar porque ya existe un registro con esta información');
+        }
         $this->saveTopic($request);
         return $this->showMessage('Se ha guardado la información');
     }
@@ -191,12 +209,18 @@ class Pre_registrationController extends Controller
 
     // retorna la informacion de servicio
     public function get_info_service(Request $request){
-        $infoService = TutorService::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id)->get();
-        return $this->successResponse(new TutorServiceCollection($infoService));
+        $infoService = TutorService::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id);
+        if (isset($request->state)) {
+            $infoService->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO]);
+        }
+        return $this->successResponse(new TutorServiceCollection($infoService->get()));
     }
 
     public function serviceStore(Request $request)
     {
+        if(!$request->id && TutorService::infoUser(Auth::user()->id)->infoService($request->id_service)->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])->first()){
+            return $this->showMessage('No se puede guardar porque ya existe un registro con esta información');
+        }
         $this->saveService($request);
         return $this->showMessage('Se ha guardado la información');
     }
@@ -217,12 +241,18 @@ class Pre_registrationController extends Controller
 
     // retorna la informacion de sistema
     public function get_info_system(Request $request){
-        $infoLanguage = TutorSystem::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id)->get();
-        return $this->successResponse(new TutorSystemCollection($infoLanguage));
+        $inforSystem = TutorSystem::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id);
+        if (isset($request->state)) {
+            $inforSystem->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO]);
+        }
+        return $this->successResponse(new TutorSystemCollection($inforSystem->get()));
     }
 
     public function systemStore(Request $request)
     {
+        if(!$request->id && TutorSystem::infoUser(Auth::user()->id)->infoSystem($request->id_system)->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])->first()){
+            return $this->showMessage('No se puede guardar porque ya existe un registro con esta información');
+        }
         $this->saveSystem($request);
         return $this->showMessage('Se ha guardado la información');
     }

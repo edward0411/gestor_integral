@@ -31,4 +31,12 @@ class TutorLanguage extends Model
     function scopeInfoUser($query, $id){
         return $query->where('id_user', $id);
     }
+
+    function scopeInfoLanguage($query, $id){
+        return $query->where('id_language', $id);
+    }
+
+    function scopeInfoState($query, array $state){
+        return $query->whereIn('l_t_state', $state);
+    }
 }

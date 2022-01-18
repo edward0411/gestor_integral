@@ -35,13 +35,13 @@
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{route('customers.index')}}" class="nav-link">
-                      <i class="icofont-users-alt-2"></i>
+                      <i class="icofont-checked"></i>
                       <p>Clientes Activos</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{route('customers.inactives')}}" class="nav-link">
-                      <i class="icofont-users-alt-2"></i>
+                      <i class="icofont-close-squared-alt"></i>
                       <p>Clientes Inactivos</p>
                     </a>
                   </li>
@@ -58,13 +58,13 @@
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{route('tutors.index')}}" class="nav-link">
-                      <i class="icofont-users-alt-5"></i>
+                      <i class="icofont-check-circled"></i>
                       <p>Tutores Activos</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('tutors.index')}}" class="nav-link">
-                      <i class="icofont-users-alt-5"></i>
+                    <a href="{{route('tutors.inactives')}}" class="nav-link">
+                      <i class="icofont-close-circled"></i>
                       <p>Tutores Inactivos</p>
                     </a>
                   </li>
@@ -144,7 +144,7 @@
               @can('Preregistro_listado_ver')        
               <li class="nav-item">
                 <a href="{{route('pre_registration.index_turors_list')}}" class="nav-link">
-                  <i class="icofont-paper"></i>
+                  <i class="icofont-tasks"></i>
                   <p><font size="3">Listado</font></p>
                 </a>
               </li>
@@ -311,7 +311,7 @@
               @can('Comunicaciones_bandeja')
               <li class="nav-item">
                 <a href="{{route('communications.index')}}" class="nav-link">
-                  <i class="icofont-data"></i>
+                  <i class="icofont-ui-browser"></i>
                   <p><font size="2">Bandeja de comunicaciones</font></p>
                 </a>
               </li>

@@ -90,7 +90,8 @@ Route::get('/processState/customers/{id}','CustomersController@processState')->n
 
 ///////// Rutas tutores  ////////////
 
-Route::get('/view/tutors','TutorsController@index')->name('tutors.index');
+Route::get('/view/tutors','TutorsController@active')->name('tutors.index');
+Route::get('/view/tutors_inactives','TutorsController@inactive')->name('tutors.inactives');
 Route::get('/create/tutors','TutorsController@create')->name('tutors.create');
 Route::get('/edit/tutors','TutorsController@edit')->name('tutors.edit');
 

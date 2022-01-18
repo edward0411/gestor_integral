@@ -1,9 +1,10 @@
 @extends('layouts.master_panel')
+@section('title','Pre Registro')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center align-items-center">
-        <div class="col-9">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header color-header">
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear información de temas trabajables') !!}</h5>
@@ -34,7 +35,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="file">{!! trans('Archivo') !!}</label>
-                                <input type="file" class="form-control form-control-sm" id="file" name="file">
+                                <input type="file" class="form-control form-control-sm" id="file" name="t_t_namefile">
                             </div>
                         </div>
                         <input type="hidden" name="id" id="id" value="">
@@ -143,6 +144,7 @@
                 console.log("res", data);
                 processResponse('message-topic','success', data.message)
                 getInfo();
+                clear('id');
                 $('#save').prop('disabled',false);
             },
             error: function(data) {
@@ -182,7 +184,9 @@
                     <td>${state_text}</td>
                     <td>${elem.observation ? elem.observation:'' }</td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-primary" onclick="handleEdit(${elem.id})">Editar</button>
+                        ${state_text != 'Aprobado' ?`
+                            <button type="button" class="btn btn-sm btn-primary" onclick="handleEdit(${elem.id})">Editar</button>
+                        `:``}
                         <button type="button" class="btn btn-sm btn-danger" onclick="handleDelete(${elem.id})">Eliminar</button>
                     </td>
                 </tr>
@@ -195,6 +199,7 @@
         var datos = {
             "_token": $('meta[name="csrf-token"]').attr('content'),
             "id_tutor": id ? id:null,
+            "state": 'Rechazado',
         };
 
         $.ajax({

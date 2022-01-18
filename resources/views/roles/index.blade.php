@@ -1,8 +1,5 @@
-@extends('layouts.master_panel',
-$vars=[ 'breadcrum' => ['Administración','Roles'],
-'title'=>'Roles',
-'activeMenu'=>'6'
-])
+@extends('layouts.master_panel')
+@section('title','Roles')
 @section('content')
 <div class="container">
     <div class="row justify-content-center align-items-center">

@@ -10,6 +10,13 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <div class="card-header color-header">
+                    @if($state == 1)
+                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de clientes activos') !!}</h5>
+                    @elseif($state == 4)
+                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de clientes inactivos') !!}</h5>
+                    @endif
+                  </div>
                
                 <!-- /.card-header -->
                 <div class="card-body">

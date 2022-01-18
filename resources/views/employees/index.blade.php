@@ -1,11 +1,15 @@
 @extends('layouts.master_panel')
+@section('title','Empleados')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-header">
+            <div class="card-header color-header">
+              <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de empleados') !!}</h5>
+            </div>
+            <div class="card-body">
               <a href="{{route('employees.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear Empleado') !!}</a>
             </div>
             <!-- /.card-header -->

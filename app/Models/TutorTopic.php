@@ -33,5 +33,11 @@ class TutorTopic extends Model
         return $query->where('id_user', $id);
     }
 
+    function scopeInfoTopic($query, $id){
+        return $query->where('id_topic', $id);
+    }
 
+    function scopeInfoState($query, array $state){
+        return $query->whereIn('t_t_state', $state);
+    }
 }

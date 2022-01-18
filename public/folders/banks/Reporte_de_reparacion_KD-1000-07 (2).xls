@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>Reporte reparación de motores</title>
+    <style> 
+            h1{
+                font-size: 18px;
+            }
+            table,th, td {    
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            border-color:  #000;
+            padding:2px;
+            border-spacing: 1px; 
+            vertical-align: top;
+            font-size: 11px;
+            }
+
+            .title  {
+                text-align: center;
+                font-weight: bold;
+                font-size: 16px;
+                background-color: #3366ff;
+                color: #fff;
+
+            }  
+            .subtitle  {
+                text-align: center;
+                font-weight: bold;
+                background-color: #3366ff;
+                color: #fff;
+            }  
+            .rightcell  {
+                text-align: right;
+                font-weight: bold;
+            }  
+            .leftcell  {
+                text-align: left;
+                font-weight: bold;
+            } 
+            .color{
+          background-color: #3366ff;
+          color: #fff;
+            } 
+            .logo {
+            float: left;
+            }
+            .titulo{
+                float: center;
+            }
+
+
+   
+      
+    </style>
+</head>
+<body>
+    <table border="1" style="border-collapse: collapse; width:100%;">
+        <tr>
+            <td colspan="5">
+                <div class="logo">
+                    <center>
+                        <img src="http://rhombweb.test/image/logoReporte.png" height="auto" width="100">
+                    </center>                  
+                </div><br>
+                <div class="titulo">
+                    <h1  style="text-align: center">Reporte de reparación realizados</h1>  
+                </div>
+             </td>  
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+        </tr>  
+        <tr>
+            <th class="title">Máquina asignada</th>
+            <th class="title">Fecha reparación</th>
+            <th class="title">Fecha salida</th>
+            <th class="title">Observaciones entrada</th>
+            <th class="title">Observaciones salida</th>
+        </tr>
+                        <tr>
+          <td>16 KD-1000-07</td>
+          <td>2019-04-10 - 07:00</td>
+          <td>2019-04-10 - 17:00</td>
+          <td>10/04/2019
+Se realiza alistamiento y lavado de partes móviles  del motor 
+Se realiza instalación de bancada al cigüeñal 
+se instala cigüeñal con bancadas en el bloque 
+11/04/2019
+Se continua con el armado del motor 
+12/04/2019
+Se realiza asentamiento de culata e instalación 
+13/04/2019
+Se continua con el ensamble del motor 
+Se realiza el montaje del motor en su respectivo skit
+Se le acondiciona aceite y refrigerante
+Se realiza encendido del motor para verificar posibles fugas  
+15/04/2019
+Se continua con la puesta apunto del motor, realizando,asentamiento de anillos de piston, calibracion de RPM  ( Max= 2950- Min = 1150)</td>
+          <td>10/04/2019
+Continuar con el armado del motor 
+Las medidas de los anillos en estándar en las camisas del bloque rectificado 
+cilindro 1= .22mm
+cilindro 2 = .22mm
+cilindro 3=  .22mm
+cilindro 4=  .22mm     ( dando la especificación técnica del fabricante con sus medidas estándar  .20-.35mm)
+Las medidas de los muñones de bancada del cigüeñal. 
+-bancada 47.947mm             (especificación fabricante    47.934-47950mm)
+Medidas del muñón del árbol de elevas  DE=35.938mm DI=36.058mm &gt;0.12mm ( especificación del fabricante  .017mm)
+13/04/2019
+Pendiente asentamiento de anillos del pistón, calibración  de RPM ,instalación de guardas y silenciador  
+15/04/2019
+Se realiza instalación de bomba de inyección usada, con inyectores reparados. 
+Se realiza instalación de turbo usado mas no reparado. 
+
+dando cierre a la reparación del motor en un estado OPERATIVO.</td>
+        </tr>
+                        <tr>
+            <td colspan="5" style="padding: 20px;border-top: 0px; border-right: 0px; border-bottom: 0px solid;border-left: 0px;">
+                <center>
+                __________________________________________
+                </center>
+            </td>
+        </tr>       
+            <td colspan="5" style="padding: 5px;border-top: 0px; border-right: 0px; border-bottom: 0px solid;border-left: 0px;">
+                <center>
+                MANTENIMIENTO
+                </center>
+            </td>
+        </tr>
+
+    </table> 
+</body>
+</html>
+        
+        
+
+
+   
+   
+  
+  
+  
+
+
+
+
+

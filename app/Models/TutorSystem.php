@@ -32,4 +32,12 @@ class TutorSystem extends Model
     function scopeInfoUser($query, $id){
         return $query->where('id_user', $id);
     }
+
+    function scopeInfoSystem($query, $id){
+        return $query->where('id_system', $id);
+    }
+
+    function scopeInfoState($query, array $state){
+        return $query->whereIn('t_s_state', $state);
+    }
 }

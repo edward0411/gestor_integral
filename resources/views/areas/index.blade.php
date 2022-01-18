@@ -1,14 +1,18 @@
 @extends('layouts.master_panel')
+@section('title','Áreas')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <a href="{{route('areas.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear área') !!}</a>
+                <div class="card-header color-header">
+                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de áreas') !!}</h5>
                 </div>
                 <!-- /.card-header -->
+                <div class="card-body">
+                    <a href="{{route('areas.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear área') !!}</a>
+                  </div>
                 <div class="card-body">
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>

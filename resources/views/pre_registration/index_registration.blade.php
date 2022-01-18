@@ -1,16 +1,12 @@
 @extends('layouts.master_panel')
-
-
-
+@section('title','Pre Registro')
 @section('content')
-
-
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
-            <div class="col-9">
+            <div class="col-12">
                 <div class="card" style="background-color:rgba(255,255,255,0.85);">
                     <div class="card-header color-header">
-                        <h5 class="card-title" style="font-weight: bold;">Pre Registro</h5>
+                        <h5 class="card-title" style="font-weight: bold;">Mi Registro</h5>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -105,21 +101,14 @@
                                 </div>
                         </div>
                         <!-- /.row -->
-
                     </div>
                     <!-- /.card-body -->
-
                 </div>
                 <!-- /.card-->
-
             </div>
             <!-- /.col-->
-
         </div>
         <!-- /.row-->
-
     </div>
-    <!-- /.container-->
-
-
+<!-- /.container-->
 @endsection

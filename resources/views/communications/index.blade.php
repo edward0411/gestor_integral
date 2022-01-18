@@ -6,6 +6,10 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <div class="card-header color-header">
+                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de comunicaciones') !!}</h5>
+                  </div>
+                  <!-- /.card-header -->
                 <div class="card-body">
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
