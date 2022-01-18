@@ -62,9 +62,14 @@ class Pre_registrationController extends Controller
 
         $cuentas = $cuentas->join('parametrics as p1','p1.id','=','tutors_bank_details.id_bank')
         ->join('parametrics as p2','p2.id','=','tutors_bank_details.id_type_account')
-        ->select('tutors_bank_details.*','p1.p_text as name_bank','p2.p_text as type_acount')
-        ->whereIn('t_b_state', [Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])
-        ->get();
+        ->select('tutors_bank_details.*','p1.p_text as name_bank','p2.p_text as type_acount');
+
+        if (isset($request->id_tutor)) {
+            $cuentas = $cuentas->whereIn('t_b_state', [Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])
+            ->get();     
+        }else{
+            $cuentas = $cuentas->get();
+        }
 
         return response()->json($cuentas);
     }
