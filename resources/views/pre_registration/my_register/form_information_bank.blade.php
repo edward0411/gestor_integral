@@ -115,7 +115,9 @@
                 `+observations+`
             </td>
             <td>
-                <button type="button" class="btn btn-sm btn-primary" onclick="EditCell_acount(`+ id_cuenta +`)">Editar</button>
+                ${state_text != 'Aprobado' ?`
+                    <button type="button" class="btn btn-sm btn-primary" onclick="EditCell_acount(`+ id_cuenta +`)">Editar</button>
+                `:``}
                 <button type="button" class="btn btn-sm btn-danger" onclick="deletesCell_relacion(`+id_cuenta+`)">Eliminar</button>
             </td>
         </tr>
