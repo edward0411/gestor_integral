@@ -90,6 +90,7 @@
                     console.log("res", data);
                     processResponse('message-system','success', data.message)
                     getInfo();
+                    clear('id');
                     $('#save').prop('disabled',false);
                 },
                 error: function(data) {

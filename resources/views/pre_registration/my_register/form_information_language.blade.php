@@ -91,6 +91,7 @@
                     console.log("res", data);
                     processResponse('message-language','success', data.message)
                     getInfo();
+                    clear('id')
                     $('#save').prop('disabled',false);
                 },
                 error: function(data) {

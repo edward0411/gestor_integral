@@ -30,4 +30,12 @@ class TutorService extends Model
     function scopeInfoUser($query, $id){
         return $query->where('id_user', $id);
     }
+
+    function scopeInfoService($query, $id){
+        return $query->where('id_service', $id);
+    }
+
+    function scopeInfoState($query, array $state){
+        return $query->whereIn('t_s_state', $state);
+    }
 }

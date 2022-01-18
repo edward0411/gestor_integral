@@ -18,3 +18,7 @@ const handleState = (state) => {
     }
     return state_text;
 }
+
+const clear = (id) =>  {
+    $('#'+id).val("");
+}

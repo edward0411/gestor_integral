@@ -143,6 +143,7 @@
                 console.log("res", data);
                 processResponse('message-topic','success', data.message)
                 getInfo();
+                clear('id');
                 $('#save').prop('disabled',false);
             },
             error: function(data) {

@@ -34,7 +34,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="t_b_number_account">{!! trans('Número de cuenta') !!}</label>
-                                <input type="text" class="form-control form-control-sm" id="t_b_number_account" name="t_b_number_account" required>
+                                <input type="number" class="form-control form-control-sm" id="t_b_number_account" name="t_b_number_account" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="t_b_namefile">{!! trans('Archivo') !!}</label>
@@ -156,9 +156,12 @@
         $('#id_bank').val(datos[0].id_bank);
         $('#id_type_account').val(datos[0].id_type_account);
         $('#t_b_number_account').val(datos[0].t_b_number_account);
-
-
     }
+
+    const clear = () =>  {
+            $('#id_acount_bank').val("");
+        }
+
 
     function deletesCell_relacion(id_account) {
 
@@ -200,6 +203,7 @@
             success: function(data) {
                 processRespuesta('info_bancaria_mensaje','success')
                 traerCuentasBanc();
+                clear()
                 $('#btn_cuenta_guardar').prop('disabled',false);
             },
             error: function(data) {

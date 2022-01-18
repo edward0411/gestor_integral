@@ -16,6 +16,7 @@ use File;
 
 trait Preregister
 {
+ 
     public function consultTable($table,$state,$int)
     {
        $id_user = Auth::user()->id;
