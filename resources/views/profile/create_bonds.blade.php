@@ -1,17 +1,31 @@
 @extends('layouts.master_panel')
+@section('css')
+<style>
+     .select2-container--default .select2-selection--single {
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            height: calc(1.8125rem + 2px);
+            font-size: .875rem;
+            padding: .25rem .5rem;
+            color: #495057;
+            line-height: 1.5;
+        }
+</style>
+@endsection
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center align-items-center">
-        <div class="col-9">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header color-header">
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear Bono') !!}</h5>
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" action="">
+                <form method="POST" action="{{route('profile.store')}}">
+                    @csrf
                     <div class="card-body">
-                        @csrf
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="id_user">{!! trans('Nick Name') !!}</label>
@@ -23,8 +37,8 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="type_bono"> {!! trans('Clasificación') !!}</label>
-                                <select class="form-control form-control-sm" id="type_value" name="type_value" required>
+                                <label for="type_bond"> {!! trans('Clasificación') !!}</label>
+                                <select class="form-control form-control-sm" id="type_bond" name="type_bond" required>
                                     <option value="">{!! trans('Selecione...') !!}</option> 
                                 @foreach($type_bonds as $bonds)
                                 <option value="{{$bonds->id}}" >{{$bonds->p_text}}</option> 

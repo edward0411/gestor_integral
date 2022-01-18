@@ -26,28 +26,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>pepito</td>
-                        <td>Bonos de deuda privada</td>
-                        <td>Bonos Ordinarios</td>
-                        <td>100</td>
-                        <td>Activo</td>
-                        <td>
-                            <a href="{{route('profile.edit_bonds')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>juanito</td>
-                        <td>Bono de deuda pública</td>
-                        <td>Bonos obligatoriamente convertibles en acciones</td>
-                        <td>200</td>
-                        <td>Activo</td>
-                        <td>
-                            <a href="{{route('profile.edit_bonds')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
-                        </td>
-                    </tr>               
+                  @foreach($bonds as $bond)
+                  <tr>
+                    <td>{{$bond->u_nickname}}</td>
+                    <td>{{$bond->p_text}}</td>
+                    <td>{{$bond->text}}</td>
+                    <td style="text-align: right">$ {{number_format((float)$bond->b_value, 2, '.', '')}}</td>
+                    <td> @if($bond->b_state == 1)
+                      {!! trans('Activo') !!}
+                      @else
+                      {!! trans('Inactivo') !!}
+                      @endif</td>
+                    <td>
+                        <a href="{{route('profile.edit_bonds',$bond->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                        <a href="{{route('profile.delete',$bond->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                    </td>
+                </tr>
+                  @endforeach              
                 </tbody>
               </table>
             </div>
