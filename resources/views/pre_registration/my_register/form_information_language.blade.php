@@ -146,6 +146,7 @@
             var datos = {
                 "_token": $('meta[name="csrf-token"]').attr('content'),
                 "id_tutor": id ? id:null,
+                "state": 'Rechazado',
             };
 
             $.ajax({
@@ -154,6 +155,7 @@
                 data: datos,
                 success: function(respuesta) {
                     $("#table tbody").empty();
+                    console.log("res", respuesta);
                     paint(respuesta.data)
                     collection = respuesta.data;
                     console.log(respuesta)

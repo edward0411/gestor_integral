@@ -198,6 +198,7 @@
         var datos = {
             "_token": $('meta[name="csrf-token"]').attr('content'),
             "id_tutor": id ? id:null,
+            "state": 'Rechazado',
         };
 
         $.ajax({
