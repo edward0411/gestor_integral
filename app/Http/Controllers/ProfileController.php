@@ -43,8 +43,8 @@ class ProfileController extends Controller
 
     public function create_bonds(){
 
-        $state = 1;
-        $data = $this->getInfoUsers(6,$state)->select('users.id','users.u_nickname')->get();  
+        $state = 2;
+        $data = $this->getInfoUsers(4,$state)->select('users.id','users.u_nickname')->get();  
         $type_bonds = $this->getDataParametrics('param_type_bonds')->orderby('p_order')->get();
         $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
 
@@ -61,10 +61,8 @@ class ProfileController extends Controller
         ->where('bonds.id',$id)
         ->get();
 
-       // dd($bonds);
-
-        $state = 1;
-        $data = $this->getInfoUsers(6,$state)->select('users.id','users.u_nickname')->get();  
+        $state = 2;
+        $data = $this->getInfoUsers(4,$state)->select('users.id','users.u_nickname')->get();  
         $type_bonds = $this->getDataParametrics('param_type_bonds')->orderby('p_order')->get();
         $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
 
@@ -75,7 +73,21 @@ class ProfileController extends Controller
     public function store(Request $request){
 
         try {
-            $bonds = new bonds;
+
+            if($request->id_type_value == 21)
+            {
+                if($request->b_value > 100)
+                {
+                    return redirect()->back()->with('error', 'Si el tipo de del bono o anticipo es porcentaje el valor no puede ser superior a 100.'); 
+                }
+            }
+            if(!isset($request->id))
+            {
+                $bonds = new bonds;
+            }else{
+                $bonds = bonds::where('id', '=', $request->id)->first();
+            }
+            
             $bonds->id_user = $request->id_user;
             $bonds->id_type_bond = $request->type_bond;
             $bonds->id_type_value = $request->type_value;
@@ -94,7 +106,7 @@ class ProfileController extends Controller
     public function update(Request $request){
 
         try {
-            $bonds = bonds::where('id', '=', $request->id)->first();
+            
             $bonds->id_user = $request->id_user;
             $bonds->id_type_bond = $request->type_bond;
             $bonds->id_type_value = $request->type_value;
@@ -116,6 +128,7 @@ class ProfileController extends Controller
         try {
             $bonds = bonds::where('id','=',$id)->firstOrFail();
             $bonds->deleted_by = Auth::user()->id;
+            $bonds->save();
             $bonds->delete();
             return redirect()->route('profile.index_bonds')->with('success', trans('Registro eliminado con éxito'));
         } catch (\Throwable $th) {

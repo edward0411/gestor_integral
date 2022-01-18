@@ -31,7 +31,11 @@
                     <td>{{$bond->u_nickname}}</td>
                     <td>{{$bond->p_text}}</td>
                     <td>{{$bond->text}}</td>
+                    @if($bond->id_type_value == 21)
+                    <td style="text-align: right"> {{number_format((float)$bond->b_value, 2, '.', '')}} %</td>
+                    @else
                     <td style="text-align: right">$ {{number_format((float)$bond->b_value, 2, '.', '')}}</td>
+                    @endif
                     <td> @if($bond->b_state == 1)
                       {!! trans('Activo') !!}
                       @else

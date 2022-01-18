@@ -9,7 +9,7 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Editar Bono') !!}</h5>
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" action="{{route('profile.update')}}">
+                <form method="POST" action="{{route('profile.store')}}">
                     <div class="card-body">
                         @csrf
                         <div class="row">
@@ -24,20 +24,23 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="type_bond"> {!! trans('Clasificación') !!}</label>
-                                <select class="form-control form-control-sm" id="id_type_bond" name="id_type_bond" required>
-                                    <option value="">Seleccione</option>
+                                <select class="form-control form-control-sm" id="type_bond" name="type_bond" required>
+                                    <option value="">Seleccione...</option>
                                     @foreach($type_bonds as $bond)
                                     <option value="{{$bond->id}}" {{ $bond->id == $bonds[0]->id_type_bond ? 'selected' : '' }}>{{$bond->p_text}}</option> 
                                     @endforeach                                   
                                 </select>
                             </div>
+                            
                             <div class="form-group col-md-6">
                                 <label for="id_type_value"> {!! trans('Tipo') !!}</label>
-                                <select class="form-control form-control-sm" id="id_type_value" name="id_type_value" required>
-                                    <option value="">Seleccione</option>
+                                <select class="form-control form-control-sm" id="type_value" name="type_value" required>
+                                    <option value="">Seleccione...</option>
                                     @foreach($type_value as $value)
-                                    <option value="{{$value->id}}" {{ $bond->id == $bonds[0]->id_type_value ? 'selected' : '' }}>{{$value->p_text}}</option> 
+                                   
+                                    <option value="{{$value->id}}" {{ $value->id == $bonds[0]->id_type_value ? 'selected' : '' }}>{{$value->p_text}}</option> 
                                     @endforeach 
+                                   
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
