@@ -194,7 +194,6 @@ Route::get('/bonds/profile','ProfileController@index_bonds')->name('profile.inde
 Route::get('/create_bonds/profile','ProfileController@create_bonds')->name('profile.create_bonds');
 Route::post('/store/profile','ProfileController@store')->name('profile.store');
 Route::get('/edit_bonds/profile/{id}','ProfileController@edit_bonds')->name('profile.edit_bonds');
-Route::post('/update/profile','ProfileController@update')->name('profile.update');
 Route::get('/delete/profile/{id}', 'ProfileController@delete')->name('profile.delete');
 
 
