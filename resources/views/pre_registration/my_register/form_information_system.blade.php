@@ -91,6 +91,7 @@
                     console.log("res", data);
                     processResponse('message-system','success', data.message)
                     getInfo();
+                    clear('id');
                     $('#save').prop('disabled',false);
                 },
                 error: function(data) {
@@ -130,7 +131,9 @@
                         <td>${state_text}</td>
                         <td>${elem.observation ? elem.observation:'' }</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-primary" onclick="handleEdit(${elem.id})">Editar</button>
+                            ${state_text != 'Aprobado' ?`
+                                <button type="button" class="btn btn-sm btn-primary" onclick="handleEdit(${elem.id})">Editar</button>
+                            `:``}
                             <button type="button" class="btn btn-sm btn-danger" onclick="handleDelete(${elem.id})">Eliminar</button>
                         </td>
                     </tr>
@@ -143,6 +146,7 @@
             var datos = {
                 "_token": $('meta[name="csrf-token"]').attr('content'),
                 "id_tutor": id ? id:null,
+                "state": 'Rechazado',
             };
 
             $.ajax({
