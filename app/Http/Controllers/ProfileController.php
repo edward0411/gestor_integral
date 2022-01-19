@@ -96,31 +96,15 @@ class ProfileController extends Controller
             $bonds->created_by = Auth::user()->id;
             $bonds->save();
 
-            return redirect()->route('profile.index_bonds')->with('success','Registro creado con éxito');
-
+            if(!isset($request->id))
+            {
+                return redirect()->route('profile.index_bonds')->with('success','Registro creado con éxito');
+            }else{
+                return redirect()->route('profile.index_bonds')->with('success','Registro actualizado con éxito');
+            }
         } catch (\Throwable $th) {
             dd($th);
         }
-    }
-
-    public function update(Request $request){
-
-        try {
-            
-            $bonds->id_user = $request->id_user;
-            $bonds->id_type_bond = $request->type_bond;
-            $bonds->id_type_value = $request->type_value;
-            $bonds->b_value = $request->b_value;
-            $bonds->b_state = 1;
-            $bonds->updated_by = Auth::user()->id;
-            $bonds->save();
-
-            return redirect()->route('profile.index_bonds')->with('success','Registro actualizado con éxito');
-
-        } catch (\Throwable $th) {
-             dd($th);
-        }
-
     }
 
     public function delete($id){

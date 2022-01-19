@@ -28,7 +28,7 @@
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->state}}</td>
                                     <td>
-                                        <a href="{{route('pre_registration.view_tutors', $user->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Ver') !!}</a>
+                                        <a href="{{route('pre_registration.view_tutors', $user->id)}}" class="btn btn-warning btn-xs"><i class="icofont-eye-alt"></i> {!! trans('Ver') !!}</a>
                                     </td>
                                 </tr>
                             @endforeach
