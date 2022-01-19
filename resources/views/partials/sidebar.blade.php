@@ -156,7 +156,7 @@
           <!-- /.Modulo Pre Registro -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="icofont-teacher"></i>
+              <i class="icofont-money"></i>
               <p>
                <font size="4">Cotizaciones</font>  
                 <i class="right fas fa-angle-left"></i>
@@ -194,7 +194,7 @@
           <!-- /.Modulo Pre Registro -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="icofont-teacher"></i>
+              <i class="icofont-wallet"></i>
               <p>
                <font size="4">Billetera Virtual</font>  
                 <i class="right fas fa-angle-left"></i>
@@ -224,7 +224,7 @@
           <!-- /.Modulo Pre Registro -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="icofont-teacher"></i>
+              <i class="icofont-coins"></i>
               <p>
                <font size="4">Pagos</font>  
                 <i class="right fas fa-angle-left"></i>
@@ -246,7 +246,7 @@
           <!-- /.Modulo Pre Registro -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="icofont-teacher"></i>
+              <i class="icofont-tasks"></i>
               <p>
                <font size="4">Reportes</font>  
                 <i class="right fas fa-angle-left"></i>

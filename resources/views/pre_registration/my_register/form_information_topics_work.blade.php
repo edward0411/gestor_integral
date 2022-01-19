@@ -180,7 +180,7 @@
                 <tr>
                     <td>${elem.id}</td>
                     <td>${elem.area}/${elem.subject}/${elem.topic}</td>
-                    <td>${elem.file ? elem.file:'no posee archivo...'}</td>
+                    <td>${elem.file ? `<a href="{{ asset('folders/topic/${elem.file}')}}" target="_blank">${elem.file}</a>`:'no posee archivo...'}</td>
                     <td>${state_text}</td>
                     <td>${elem.observation ? elem.observation:'' }</td>
                     <td>
