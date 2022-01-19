@@ -16,7 +16,7 @@ use File;
 
 trait Preregister
 {
- 
+
     public function consultTable($table,$state,$int)
     {
        $id_user = Auth::user()->id;
@@ -86,7 +86,7 @@ trait Preregister
     {
         try {
 
-            dd(public_path());
+            // dd(public_path());
 
             if($request->id_acount_bank == 0)
             {
@@ -108,7 +108,7 @@ trait Preregister
 
             $id_register = $register->id;
 
-            
+
 
             if($request->hasFile('t_b_namefile')){
                 $image_path = public_path() .'\folders\banks'.$register->t_b_namefile;
