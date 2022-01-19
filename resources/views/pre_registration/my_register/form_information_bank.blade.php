@@ -78,7 +78,7 @@
     var colleccionCuentas = "";
 
     function adicionarCuenta(id_cuenta = 0, name_bank = '', type_acount = '',number_acount = '',file ='',state = '',observations = '') {
-        
+
         var state_text ='';
         if (state == 0) {
             state_text ='Pendiente';
@@ -95,11 +95,11 @@
         var completePath =  'folders/banks/' + file;
 
         var link = '';
-          if(file == null || file == ""){
+        if(file == null || file == ""){
             link =  `no posee archivo...`;
-          }else{
+        }else{
             link =  `<a href="{{ asset('`+completePath+`')}}" target="_blank">`+file+`</a>`;
-          }
+        }
 
 
         var cell = `

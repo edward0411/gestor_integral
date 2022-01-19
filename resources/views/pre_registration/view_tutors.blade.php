@@ -422,8 +422,18 @@
         return state_text;
     }
 
+
+
     function adicionarCuenta(id_cuenta = 0, name_bank = '', type_acount = '',number_acount = '',file ='',state = '',observations = '') {
         var state_text ='';
+        var link = '';
+        var completePath =  'folders/banks/' + file;
+
+        if(file == null || file == ""){
+            link =  `no posee archivo...`;
+        }else{
+            link =  `<a href="{{ asset('`+completePath+`')}}" target="_blank">`+file+`</a>`;
+        }
         if (state == 0) {
             state_text ='Pendiente';
         }else if(state == 1){
@@ -451,7 +461,7 @@
                 `+number_acount+`
             </td>
             <td>
-                `+file+`
+                `+link+`
             </td>
             <td>
                 `+state_text+`
@@ -478,7 +488,7 @@
             $("#tbl_info_language tbody").append(`
                 <tr>
                     <td>${elem.language}</td>
-                    <td>${elem.file}</td>
+                    <td>${elem.file ? `<a href="{{ asset('folders/language/${elem.file}')}}" target="_blank">${elem.file}</a>`:'no posee archivo...'}</td>
                     <td>${state_text}</td>
                     <td>
                         <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_language_tutors" cols="5" rows="1">${elem.observation ? elem.observation:'' }</textarea>
@@ -502,7 +512,7 @@
             $("#tbl_info_system tbody").append(`
                 <tr>
                     <td>${elem.system}</td>
-                    <td>${elem.file}</td>
+                    <td>${elem.file ? `<a href="{{ asset('folders/system/${elem.file}')}}" target="_blank">${elem.file}</a>`:'no posee archivo...'}</td>
                     <td>${state_text}</td>
                     <td>
                         <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_systems" cols="5" rows="1">${elem.observation ? elem.observation:'' }</textarea>
@@ -525,7 +535,7 @@
             $("#tbl_info_topic tbody").append(`
                 <tr>
                     <td>${elem.area}/${elem.subject}/${elem.topic}</td>
-                    <td>${elem.file}</td>
+                    <td>${elem.file ? `<a href="{{ asset('folders/topic/${elem.file}')}}" target="_blank">${elem.file}</a>`:'no posee archivo...'}</td>
                     <td>${state_text}</td>
                     <td>
                         <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_${elem.id}_tutors_topics" cols="5" rows="1">${elem.observation ? elem.observation:'' }</textarea>
