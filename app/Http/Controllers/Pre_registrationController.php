@@ -66,7 +66,7 @@ class Pre_registrationController extends Controller
 
         if (isset($request->id_tutor)) {
             $cuentas = $cuentas->whereIn('t_b_state', [Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])
-            ->get();     
+            ->get();
         }else{
             $cuentas = $cuentas->get();
         }
@@ -148,7 +148,7 @@ class Pre_registrationController extends Controller
     // retorna la informacion de lenguaje
     public function get_info_language(Request $request){
         $infoLanguage = TutorLanguage::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id);
-        if (isset($request->state)) {
+        if ($request->id_tutor) {
             $infoLanguage->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO]);
         }
         return $this->successResponse(new TutorLanguageCollection($infoLanguage->get()));
@@ -182,7 +182,7 @@ class Pre_registrationController extends Controller
     // retorna la informacion de temas de trabajo
     public function get_info_topic(Request $request){
         $infoTopic = TutorTopic::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id);
-        if (isset($request->state)) {
+        if ($request->id_tutor) {
             $infoTopic->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO]);
         }
         return $this->successResponse(new TutorTopicCollection($infoTopic->get()));
@@ -215,7 +215,7 @@ class Pre_registrationController extends Controller
     // retorna la informacion de servicio
     public function get_info_service(Request $request){
         $infoService = TutorService::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id);
-        if (isset($request->state)) {
+        if ($request->id_tutor) {
             $infoService->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO]);
         }
         return $this->successResponse(new TutorServiceCollection($infoService->get()));
@@ -247,7 +247,7 @@ class Pre_registrationController extends Controller
     // retorna la informacion de sistema
     public function get_info_system(Request $request){
         $inforSystem = TutorSystem::infoUser($request->id_tutor ? $request->id_tutor:Auth::user()->id);
-        if (isset($request->state)) {
+        if ($request->id_tutor) {
             $inforSystem->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO]);
         }
         return $this->successResponse(new TutorSystemCollection($inforSystem->get()));
