@@ -64,7 +64,7 @@ class CreateRequestTables extends Migration
         Schema::create('request_history', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('start_date')->comment('fecha de inicio');
-            $table->dateTime('ending_date')->comment('fecha fin');
+            $table->dateTime('end_date')->comment('fecha fin');
 
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('requests');
@@ -114,13 +114,48 @@ class CreateRequestTables extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('request_themes', function (Blueprint $table) {
+        Schema::create('request_topics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('theme_id')->comment('id de la relacion, topic, language, system');
-            $table->enum('category',['TOPIC','SYSTEM','LANGUAGE'])->comment('categoria de solicitud');
 
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('requests');
+
+            $table->unsignedInteger('tutor_topic_id');
+            $table->foreign('tutor_topic_id')->references('id')->on('tutors_topics');
+
+            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->integer('created_by')->nullable()->unsigned();
+            $table->integer('updated_by')->nullable()->unsigned();
+            $table->integer('deleted_by')->nullable()->unsigned();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('request_systems', function (Blueprint $table) {
+            $table->bigIncrements('id');
+
+            $table->unsignedBigInteger('request_id');
+            $table->foreign('request_id')->references('id')->on('requests');
+
+            $table->unsignedInteger('tutor_system_id');
+            $table->foreign('tutor_system_id')->references('id')->on('tutors_systems');
+
+            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->integer('created_by')->nullable()->unsigned();
+            $table->integer('updated_by')->nullable()->unsigned();
+            $table->integer('deleted_by')->nullable()->unsigned();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('request_languages', function (Blueprint $table) {
+            $table->bigIncrements('id');
+
+            $table->unsignedBigInteger('request_id');
+            $table->foreign('request_id')->references('id')->on('requests');
+
+            $table->unsignedInteger('language_tutor_id');
+            $table->foreign('language_tutor_id')->references('id')->on('language_tutors');
 
             $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
