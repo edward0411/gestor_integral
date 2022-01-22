@@ -86,8 +86,6 @@ trait Preregister
     {
         try {
 
-            // dd(public_path());
-
             if($request->id_acount_bank == 0)
             {
                 $register = new TutorsBanks();
