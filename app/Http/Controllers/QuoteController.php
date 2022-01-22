@@ -15,4 +15,14 @@ class QuoteController extends Controller
     {
         return view('quotes.MyQuotes');
     }
+
+    public function create_quotes(){
+
+        return view('quotes.create_my_quotes');
+    }
+
+    public function edit_quotes(){
+
+        return view('quotes.edit_my_quotes');
+    }
 }
