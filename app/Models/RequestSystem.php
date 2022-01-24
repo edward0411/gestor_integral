@@ -12,7 +12,7 @@ class RequestSystem extends Model
 
     protected $fillable = [
         'request_id',
-        'tutor_system_id',
+        'system_id',
         'status',
         'created_by',
         'updated_by',
@@ -26,6 +26,6 @@ class RequestSystem extends Model
     }
 
     public function tutorSystem() {
-        return $this->belongsTo(TutorSystem::class, 'tutor_system_id');
+        return $this->belongsTo(Parametrics::class, 'system_id');
     }
 }

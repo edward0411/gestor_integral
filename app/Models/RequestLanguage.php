@@ -12,7 +12,7 @@ class RequestLanguage extends Model
 
     protected $fillable = [
         'request_id',
-        'language_tutor_id',
+        'language_id',
         'status',
         'created_by',
         'updated_by',
@@ -26,6 +26,6 @@ class RequestLanguage extends Model
     }
 
     public function tutorLanguage() {
-        return $this->belongsTo(TutorLanguage::class, 'language_tutor_id');
+        return $this->belongsTo(Parametrics::class, 'language_id');
     }
 }
