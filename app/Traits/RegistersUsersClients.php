@@ -1,5 +1,6 @@
 <?php namespace app\Traits;
 
+use App\Http\Helpers\EmailHelper;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ trait RegistersUsersClients
     }
 
     public function register_clients(Request $request)
-    {   
+    {
         $this->validator_client($request->all())->validate();
 
         event(new Registered($user = $this->create_client($request->all())));
@@ -33,6 +34,9 @@ trait RegistersUsersClients
 
         $rol = $this->getRoles()->where('id',4)->first();
         $user->assignRole($rol->name);
+
+        if ($user->email) EmailHelper::SendEmailWelcome($user);
+
 
         return $request->wantsJson()
                     ? new JsonResponse([], 201)
