@@ -12,7 +12,7 @@ class RequestTopic extends Model
 
     protected $fillable = [
         'request_id',
-        'tutor_topic_id',
+        'topic_id',
         'status',
         'created_by',
         'updated_by',
@@ -26,6 +26,6 @@ class RequestTopic extends Model
     }
 
     public function tutorTopic() {
-        return $this->belongsTo(TutorTopic::class, 'tutor_topic_id');
+        return $this->belongsTo(Parametrics::class, 'topic_id');
     }
 }
