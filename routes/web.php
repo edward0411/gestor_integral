@@ -210,6 +210,7 @@ Route::get('/view/cotizaciones','QuoteController@index')->name('quotes.index');
 Route::get('/view/cotizaciones/myQuotes','QuoteController@myQuotes')->name('quotes.myQuotes');
 Route::get('/create_quotes/cotizaciones/myQuotes','QuoteController@create_quotes')->name('quotes.create_my_quotes');
 Route::get('/edit_quotes/cotizaciones/myQuotes','QuoteController@edit_quotes')->name('quotes.edit_my_quotes');
+Route::post('/store_quotes/cotizaciones/myQuotes','QuoteController@store_quotes')->name('quotes.store_quotes');
 
 Route::get('/clearcache', function () {
     Artisan::call('cache:clear');
