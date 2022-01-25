@@ -34,6 +34,8 @@ trait RegistersUsersClients
         $rol = $this->getRoles()->where('id',4)->first();
         $user->assignRole($rol->name);
 
+        
+
         return $request->wantsJson()
                     ? new JsonResponse([], 201)
                     : redirect($this->redirectPath());
