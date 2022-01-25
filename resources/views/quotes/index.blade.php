@@ -1,5 +1,5 @@
 @extends('layouts.master_panel')
-@section('title','Empleados')
+@section('title','Cotizaciones')
 
 @section('content')
 <div class="container">

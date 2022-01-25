@@ -38,6 +38,7 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('loginClients', 'Auth\LoginController@loginClients')->name('loginClients');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('logouth', 'Auth\LoginController@logout')->name('logouth');
+Route::get('refresh-captcha', 'Auth\LoginController@refreshCaptcha')->name('refreshCaptcha');
 
 Route::get('info.dataTreatment', 'Auth\LoginController@showViewdataTreatment')->name('system.info.dataTreatment');
 Route::get('info.termsConditions', 'Auth\LoginController@showViewtermsConditions')->name('system.info.termsConditions');
@@ -178,6 +179,8 @@ Route::post('/registration/system/delete/{system}','Pre_registrationController@s
 Route::get('/view_turors_list/pre_registration','Pre_registrationController@index_turors_list')->name('pre_registration.index_turors_list');
 Route::get('/view_tutors/pre_registration/{user}','Pre_registrationController@view_tutors')->name('pre_registration.view_tutors');
 
+Route::get('/prueba/{id}','Pre_registrationController@prueba');
+
 /////////Rutas mi registro   ///////
 
 Route::get('/information_bank/pre_registration','Pre_registrationController@create_information_bank')->name('pre_registration.my_register.form_information_bank');
@@ -207,13 +210,14 @@ Route::get('/view/cotizaciones','QuoteController@index')->name('quotes.index');
 Route::get('/view/cotizaciones/myQuotes','QuoteController@myQuotes')->name('quotes.myQuotes');
 Route::get('/create_quotes/cotizaciones/myQuotes','QuoteController@create_quotes')->name('quotes.create_my_quotes');
 Route::get('/edit_quotes/cotizaciones/myQuotes','QuoteController@edit_quotes')->name('quotes.edit_my_quotes');
+Route::post('/store_quotes/cotizaciones/myQuotes','QuoteController@store_quotes')->name('quotes.store_quotes');
 
 Route::get('/clearcache', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
     Artisan::call('route:clear');
     Artisan::call('view:clear');
-    return '<h1>se ha borrado el cache</h1>';
+    return redirect()->back();
 });
 
 Route::get('/createpermission',function(){

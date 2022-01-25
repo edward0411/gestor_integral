@@ -48,7 +48,10 @@ class Pre_registrationController extends Controller
         $countData[13] = $this->consultTable('tutors_systems','t_s_state',1);
         $countData[14] = $this->consultTable('tutors_systems','t_s_state',2);
 
-        return view('pre_registration.index_registration',compact('countData'));
+        $id_user = Auth::user()->id;
+        $user = User::find($id_user);
+
+        return view('pre_registration.index_registration',compact('countData','user'));
     }
 
     public function get_info_acount_bank(Request $request)
@@ -265,6 +268,11 @@ class Pre_registrationController extends Controller
     public function systemDelete(TutorSystem $system){
         $system->delete();
         return $this->showMessage(' Se ha eliminado el registro');
+    }
+
+    public function prueba($id)
+    {
+        
     }
 
 }

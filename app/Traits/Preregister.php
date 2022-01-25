@@ -122,6 +122,8 @@ trait Preregister
                 $register->save();
             }
 
+            $this->validateStateTutors(Auth::user()->id);
+
             return true;
 
         } catch (\Throwable $th) {
@@ -149,6 +151,8 @@ trait Preregister
         $data['id_user']        = Auth::user()->id;
         $data['t_s_state']      = User::PENDIENTE;
         $servioce               = TutorService::updateOrCreate(['id' => $data['id']], $data);
+
+        $this->validateStateTutors($data['id_user']);
     }
 
     public function saveSystem($request)
@@ -177,6 +181,8 @@ trait Preregister
             $system->t_t_namefile = $this->saveFile('\folders\topic', $file);
             $system->save();
         }
+
+        $this->validateStateTutors($data['id_user']);
     }
 
     public function saveFile($path, $file){
@@ -184,6 +190,20 @@ trait Preregister
         $path = public_path() .$path;
         $file->move($path, $name);
         return $name;
+    }
+
+    public function validateStateTutors($id)
+    {
+        $user = User::find($id);
+
+        if(($user->u_state == 0) || ($user->u_state == 3))
+        {
+           if (($user->tutorsBanks()->whereIn('t_b_state',[0,1])->get()->count() > 0) && ($user->tutorServices()->whereIn('t_s_state',[0,1])->get()->count() > 0)&&($user->tutorTopics()->whereIn('t_t_state',[0,1])->get()->count() > 0)) {
+               $user->u_state = 1;
+               $user->save();
+           }
+        }
+        return true;
     }
 
 }
