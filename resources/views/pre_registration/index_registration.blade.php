@@ -8,8 +8,16 @@
                     <div class="card-header color-header">
                         <h5 class="card-title" style="font-weight: bold;">Mi Registro</h5>
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
+                    <input type="hidden" name="" id="state_user" value="{{$user->u_state}}">
+                    <div  class="card-body">
+                        <div id="color_state_user" class="small-box">
+                            <div class="inner"> <h4>Estado:</h4>
+                                <p id="text_state">
+                                   
+                                </p>
+                            </div> 
+                        </div>
+                        <span>Estado: {{$user->u_state}}</span>
                         <div class="row">
                             <div class="col-lg-4 col-6">
                                 <!-- small box -->
@@ -111,4 +119,25 @@
         <!-- /.row-->
     </div>
 <!-- /.container-->
+@endsection
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function() {
+        var val = $('#state_user').val();
+        
+        if (val == 0) {
+            $("#color_state_user").addClass("bg-yellow"); 
+            $("#text_state").html("Creado sin información suficiente"); 
+        }else if (val == 1) {
+            $("#color_state_user").addClass("bg-primary"); 
+            $("#text_state").html("Pendiente por aprobación"); 
+        }else if (val == 2) {
+            $("#color_state_user").addClass("bg-success"); 
+            $("#text_state").html("Aprobado"); 
+        }else if (val == 3) {
+            $("#color_state_user").addClass("bg-danger");
+            $("#text_state").html("Rechazado");  
+        }
+    });
+</script>
 @endsection

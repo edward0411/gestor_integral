@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{route('home')}}" class="brand-link">
+    <a href="{{url('panel/administrativo/clearcache')}}" class="brand-link">
       <center>
         <img src="{{ asset('dist/img/logo.jpg') }}" alt="" style="opacity: .8">
       </center>

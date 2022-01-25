@@ -186,6 +186,20 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="captcha" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i>Captcha</label>
+                                       
+                                            <span class="captcha-image">{!! Captcha::img() !!}</span> &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-warning refresh-button"><i class="fas fa-sync"></i></button>
+                                            <hr>
+                                            <input id="captcha" type="text" class="form-control @error('captcha') is-invalid @enderror" name="captcha" required>
+                                            @error('captcha')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                       
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">
@@ -213,4 +227,18 @@
     </div>
 </div>
 @endsection
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.refresh-button').click(function() {
+            $.ajax({
+                type: 'get',
+                url: '{{ route('refreshCaptcha') }}',
+                success:function(data) {
+                    $('.captcha-image').html(data.captcha);
+                }
+            });
+        });
+    });
+</script>
 

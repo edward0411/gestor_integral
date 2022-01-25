@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'id_means' => ['required', 'numeric'],
             'id_money' => ['required', 'numeric'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'captcha' => 'required|captcha', 
         ]);
     }
 
@@ -86,6 +87,7 @@ class RegisterController extends Controller
             'id_means' => ['required', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'captcha' => 'required|captcha', 
         ]);
     }
 
