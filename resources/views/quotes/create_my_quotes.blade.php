@@ -9,7 +9,7 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear cotización') !!}</h5>
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" action="{{route('quotes.store_quotes')}}">
+                <form method="POST" action="{{route('quotes.store_quotes')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row">
@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="id_service">{!! trans('Tipo de servicio') !!}</label>
-                                <select name="id_service" id="id_service" class="form-control form-control-sm" required>
+                                <select name="id_service" id="id_service"  class="form-control form-control-sm" onChange="viewQuestions();" required>
                                     <option value="">Seleccione...</option>
                                     @foreach($services as $service)
                                     <option value="{{$service->id}}">{{$service->p_text}}</option>
@@ -28,47 +28,56 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="card-header color-header">
-                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Preguntas') !!}</h5>
-                        </div>
-                        <div class="card-body" style="border: 1px solid #cccccc;">
-                            <div class="rows">
-                                <div class="form-group col-md-6">
-                                    <label for="question_1">{!! trans('Pregunta 1') !!}</label>
-                                    <input type="text" class="form-control form-control-sm" id="question_1" name="question_1" value="" required>
-                                </div>
-                                <div class="form-group col-md-6 float-right">
-                                    <label for="answer_1">{!! trans('Respuesta 1') !!}</label>
-                                    <input type="text" class="form-control form-control-sm" id="answer_1" name="answer_1" value="" required>
-                                </div>
-                            </div><br><br>
-                            <div class="rows">
-                                <div class="form-group col-md-6">
-                                    <label for="question_2">{!! trans('Pregunta 2') !!}</label>
-                                    <input type="text" class="form-control form-control-sm" id="question_2" name="question_2" value="" required>
-                                </div>
-                                <div class="form-group col-md-6 float-right">
-                                    <label for="answer_2">{!! trans('Respuesta 2') !!}</label>
-                                    <input type="text" class="form-control form-control-sm" id="answer_2" name="answer_2" value="" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                     <div class="card-body">
                         <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
                             <!-- Accordion card -->
+                            <div class="card">
+                                 <!-- Card header -->
+                                 <div class="card-header" role="tab" id="headingTwo1">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1"
+                                    href="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+                                        <h5 class="mb-0">
+                                            Preguntas <i class="icofont-arrow-down float-right"></i>
+                                        </h5>
+                                    </a>
+                                </div>
+                                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                                data-parent="#accordionEx1">
+                                    <div class="card-body">
+                                        <div class="card-header color-header">
+                                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Preguntas') !!}</h5>
+                                        </div>
+                                        <div class="card-body" style="border: 1px solid #cccccc;">
+                                            <table id="table_questios" class="table table-bordered">
+                                                <thead class="bg-warning text-center">
+                                                    <tr>
+                                                        <th>Pregunta</th>
+                                                        <th>respuesta</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
                             <!-- Idiomas -->
                             <div class="card">
                                 <!-- Card header -->
-                                <div class="card-header" role="tab" id="headingTwo1">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+                                <div class="card-header" role="tab" id="headingTwo2">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo21" aria-expanded="false" aria-controls="collapseTwo21">
                                         <h5 class="mb-0">
                                             Idiomas <i class="icofont-arrow-down float-right"></i>
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1" data-parent="#accordionEx1">
+                                <div id="collapseTwo21" class="collapse" role="tabpanel" aria-labelledby="headingTwo21"
+                                data-parent="#accordionEx1">
                                     <!-- Idiomas -->
                                     <div class="card-body">
                                         <div class="card-header color-header">
@@ -94,14 +103,14 @@
                             <!-- Sistemas -->
                             <div class="card">
                                 <!-- Card header -->
-                                <div class="card-header" role="tab" id="headingTwo2">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo21" aria-expanded="false" aria-controls="collapseTwo21">
+                                <div class="card-header" role="tab" id="headingThree31">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseThree31" aria-expanded="false" aria-controls="collapseThree31">
                                         <h5 class="mb-0">
                                             Sistemas <i class="icofont-arrow-down float-right"></i>
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="collapseTwo21" class="collapse" role="tabpanel" aria-labelledby="headingTwo21" data-parent="#accordionEx1">
+                                <div id="collapseThree31" class="collapse" role="tabpanel" aria-labelledby="headingThree31" data-parent="#accordionEx1">
                                     <div class="card-body">
                                         <div class="card-header color-header">
                                             <h5 class="text-white" style="font-weight: bold;">{!! trans('Sistemas') !!}</h5>
@@ -126,14 +135,14 @@
                             <!-- Temas -->
                             <div class="card">
                                 <!-- Card header -->
-                                <div class="card-header" role="tab" id="headingThree31">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseThree31" aria-expanded="false" aria-controls="collapseThree31">
+                                <div class="card-header" role="tab" id="headingFour41">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseFour41" aria-expanded="false" aria-controls="collapseFour41">
                                         <h5 class="mb-0">
                                             Temas <i class="icofont-arrow-down float-right"></i>
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="collapseThree31" class="collapse" role="tabpanel" aria-labelledby="headingThree31" data-parent="#accordionEx1">
+                                <div id="collapseFour41" class="collapse" role="tabpanel" aria-labelledby="headingFour41" data-parent="#accordionEx1">
                                     <!-- Temas -->
                                     <div class="card-body">
                                         <div class="card-header color-header">
@@ -161,14 +170,14 @@
                             <!-- Archivos -->
                             <div class="card">
                                 <!-- Card header -->
-                                <div class="card-header" role="tab" id="headingFour41">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseFour41" aria-expanded="false" aria-controls="collapseFour41">
+                                <div class="card-header" role="tab" id="headingFive51">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseFive51" aria-expanded="false" aria-controls="collapseFive51">
                                         <h5 class="mb-0">
                                             Archivos <i class="icofont-arrow-down float-right"></i>
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="collapseFour41" class="collapse" role="tabpanel" aria-labelledby="headingFour41" data-parent="#accordionEx1">
+                                <div id="collapseFive51" class="collapse" role="tabpanel" aria-labelledby="headingFive51" data-parent="#accordionEx1">
                                     <div class="card-body">
                                         <div class="card-header color-header">
                                             <h5 class="text-white" style="font-weight: bold;">{!! trans('Archivos') !!}</h5>
@@ -360,6 +369,16 @@ function addLanguage()
         @endforeach
     ];
 
+    var questions = [
+        @foreach($question as $item)
+            {   "id_question": "{{$item->id}}",
+                "question": "{{$item->question}}",
+                "id_type_service": "{{$item->type_service_id }}",
+                "question_type": "{{$item->question_type}}",
+            },
+        @endforeach
+    ];
+
     function fill_subjects(id){
 
         var selectedarea = $("#id_area_"+id).children("option:selected").val();
@@ -385,6 +404,48 @@ function addLanguage()
         $.each(nuevo, function(key, value) {
             $('#id_topic_'+id).append($('<option></option>').val(value.id_topic).html(value.topics_name));
         });
+    }
+
+    function viewQuestions(){
+
+        var idSelected = $('#id_service').val();
+
+        nuevo = $.grep(questions, function(n, i) {
+            return n.id_type_service === idSelected
+        });
+        $("#table_questios tbody").empty();
+        $.each(nuevo, function(key, value) {
+            if(value.question_type == "ABIERTA"){
+               var cell = `
+                        <tr>
+                            <td>
+                                <p>`+value.question+`</p> 
+                                <input type="hidden" name="question[]" value="`+value.id_question+`">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control form-control-sm" id="question" name="answer[]" value="" required>
+                            </td>
+                        </tr>
+                        `;
+                $("#table_questios tbody").append(cell);
+            }else{
+                var cell = `
+                        <tr>
+                            <td>
+                                <p>`+value.question+`</p> 
+                                <input type="hidden" name="question[]" value="`+value.id_question+`">
+                            </td>
+                            <td>
+                                <input type="checkbox" value="si"  name="answer[]" /> Si<br/>
+                                <input type="checkbox" value="no"  name="answer[]" /> No<br/>
+                            </td>
+                        </tr>
+                        `;
+                $("#table_questios tbody").append(cell);
+            }
+           
+        });
+        
     }
 
 </script>

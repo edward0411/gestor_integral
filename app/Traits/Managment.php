@@ -14,6 +14,7 @@ use App\Models\TutorsBanks;
 use App\Models\TutorService;
 use App\Models\TutorSystem;
 use App\Models\TutorTopic;
+use App\Models\RequestQuestion;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -105,5 +106,12 @@ trait Managment
                 # code...
                 break;
             }
+    }
+
+    public function getRequest_questions()
+    {
+        $question = DB::table('request_questions')
+        ->leftJoin('parametrics','parametrics.id','=','request_questions.type_service_id');
+        return $question;
     }
 }

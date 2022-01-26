@@ -28,8 +28,9 @@ class QuoteController extends Controller
         $areas = $this->getInfoTable('areas')->where('a_state',1)->get();
         $subjects = $this->getInfoTable('subjects')->where('s_state',1)->get();
         $topics = $this->getInfoTable('topics')->where('t_state',1)->get();
+        $question = $this->getRequest_questions('request_questions')->where('status',1)->select('request_questions.id','question','question_type','type_service_id')->get();
 
-        return view('quotes.create_my_quotes',compact('languages','list_systems','areas','subjects','topics','services'));
+        return view('quotes.create_my_quotes',compact('languages','list_systems','areas','subjects','topics','services','question'));
     }
 
     public function edit_quotes(){
@@ -40,8 +41,9 @@ class QuoteController extends Controller
         $areas = $this->getInfoTable('areas')->where('a_state',1)->get();
         $subjects = $this->getInfoTable('subjects')->where('s_state',1)->get();
         $topics = $this->getInfoTable('topics')->where('t_state',1)->get();
+        $question = $this->getRequest_questions('request_questions')->where('status',1)->select('request_questions.id','question','question_type','type_service_id')->get();
 
-        return view('quotes.edit_my_quotes',compact('languages','list_systems','areas','subjects','topics','services'));
+        return view('quotes.edit_my_quotes',compact('languages','list_systems','areas','subjects','topics','services','question'));
     }
 
     public function store_quotes(Request $request){
