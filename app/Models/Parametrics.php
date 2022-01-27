@@ -11,6 +11,15 @@ class Parametrics extends Model
     use SoftDeletes;
     protected $table = 'parametrics';
 
+    protected $fillable = [
+        'p_category',
+        'p_text',
+        'p_order',
+        'created_by',
+        'updated_by',
+        'deleted_by',
+    ];
+
     // relaciones
     public function users() {
         return $this->hasMany(User::class, 'u_type_doc');
@@ -27,4 +36,10 @@ class Parametrics extends Model
     public function tutorServices() {
         return $this->hasMany(TutorService::class, 'id_service');
     }
+
+    // scope
+    function scopeHandleText($query, $text){
+        return $query->where('p_text', $text);
+    }
+
 }

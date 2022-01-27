@@ -9,7 +9,7 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Editar cotización') !!}</h5>
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" action="">
+                <form method="POST" action="{{route('quotes.store_quotes')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row">
@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="id_service">{!! trans('Tipo de servicio') !!}</label>
-                                <select name="id_service" id="id_service" class="form-control form-control-sm">
+                                <select name="id_service" id="id_service"  class="form-control form-control-sm" onChange="viewQuestions();" required>
                                     <option value="">Seleccione...</option>
                                     @foreach($services as $service)
                                     <option value="{{$service->id}}">{{$service->p_text}}</option>
@@ -28,47 +28,56 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="card-header color-header">
-                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Preguntas') !!}</h5>
-                        </div>
-                        <div class="card-body" style="border: 1px solid #cccccc;">
-                            <div class="rows">
-                                <div class="form-group col-md-6">
-                                    <label for="u_key_number">{!! trans('Pregunta 1') !!}</label>
-                                    <input type="text" class="form-control form-control-sm" id="u_key_number" name="u_key_number " value="" required>
-                                </div>
-                                <div class="form-group col-md-6 float-right">
-                                    <label for="u_key_number">{!! trans('Respuesta 1') !!}</label>
-                                    <input type="text" class="form-control form-control-sm" id="u_key_number" name="u_key_number " value="" required>
-                                </div>
-                            </div><br><br>
-                            <div class="rows">
-                                <div class="form-group col-md-6">
-                                    <label for="u_key_number">{!! trans('Pregunta 2') !!}</label>
-                                    <input type="text" class="form-control form-control-sm" id="u_key_number" name="u_key_number " value="" required>
-                                </div>
-                                <div class="form-group col-md-6 float-right">
-                                    <label for="u_key_number">{!! trans('Respuesta 2') !!}</label>
-                                    <input type="text" class="form-control form-control-sm" id="u_key_number" name="u_key_number " value="" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                     <div class="card-body">
                         <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
                             <!-- Accordion card -->
+                            <div class="card">
+                                 <!-- Card header -->
+                                 <div class="card-header" role="tab" id="headingTwo1">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1"
+                                    href="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+                                        <h5 class="mb-0">
+                                            Preguntas <i class="icofont-arrow-down float-right"></i>
+                                        </h5>
+                                    </a>
+                                </div>
+                                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                                data-parent="#accordionEx1">
+                                    <div class="card-body">
+                                        <div class="card-header color-header">
+                                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Preguntas') !!}</h5>
+                                        </div>
+                                        <div class="card-body" style="border: 1px solid #cccccc;">
+                                            <table id="table_questios" class="table table-bordered">
+                                                <thead class="bg-warning text-center">
+                                                    <tr>
+                                                        <th>Pregunta</th>
+                                                        <th>respuesta</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
                             <!-- Idiomas -->
                             <div class="card">
                                 <!-- Card header -->
-                                <div class="card-header" role="tab" id="headingTwo1">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+                                <div class="card-header" role="tab" id="headingTwo2">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo21" aria-expanded="false" aria-controls="collapseTwo21">
                                         <h5 class="mb-0">
                                             Idiomas <i class="icofont-arrow-down float-right"></i>
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1" data-parent="#accordionEx1">
+                                <div id="collapseTwo21" class="collapse" role="tabpanel" aria-labelledby="headingTwo21"
+                                data-parent="#accordionEx1">
                                     <!-- Idiomas -->
                                     <div class="card-body">
                                         <div class="card-header color-header">
@@ -94,14 +103,14 @@
                             <!-- Sistemas -->
                             <div class="card">
                                 <!-- Card header -->
-                                <div class="card-header" role="tab" id="headingTwo2">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo21" aria-expanded="false" aria-controls="collapseTwo21">
+                                <div class="card-header" role="tab" id="headingThree31">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseThree31" aria-expanded="false" aria-controls="collapseThree31">
                                         <h5 class="mb-0">
                                             Sistemas <i class="icofont-arrow-down float-right"></i>
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="collapseTwo21" class="collapse" role="tabpanel" aria-labelledby="headingTwo21" data-parent="#accordionEx1">
+                                <div id="collapseThree31" class="collapse" role="tabpanel" aria-labelledby="headingThree31" data-parent="#accordionEx1">
                                     <div class="card-body">
                                         <div class="card-header color-header">
                                             <h5 class="text-white" style="font-weight: bold;">{!! trans('Sistemas') !!}</h5>
@@ -126,14 +135,14 @@
                             <!-- Temas -->
                             <div class="card">
                                 <!-- Card header -->
-                                <div class="card-header" role="tab" id="headingThree31">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseThree31" aria-expanded="false" aria-controls="collapseThree31">
+                                <div class="card-header" role="tab" id="headingFour41">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseFour41" aria-expanded="false" aria-controls="collapseFour41">
                                         <h5 class="mb-0">
                                             Temas <i class="icofont-arrow-down float-right"></i>
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="collapseThree31" class="collapse" role="tabpanel" aria-labelledby="headingThree31" data-parent="#accordionEx1">
+                                <div id="collapseFour41" class="collapse" role="tabpanel" aria-labelledby="headingFour41" data-parent="#accordionEx1">
                                     <!-- Temas -->
                                     <div class="card-body">
                                         <div class="card-header color-header">
@@ -161,14 +170,14 @@
                             <!-- Archivos -->
                             <div class="card">
                                 <!-- Card header -->
-                                <div class="card-header" role="tab" id="headingFour41">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseFour41" aria-expanded="false" aria-controls="collapseFour41">
+                                <div class="card-header" role="tab" id="headingFive51">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseFive51" aria-expanded="false" aria-controls="collapseFive51">
                                         <h5 class="mb-0">
                                             Archivos <i class="icofont-arrow-down float-right"></i>
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="collapseFour41" class="collapse" role="tabpanel" aria-labelledby="headingFour41" data-parent="#accordionEx1">
+                                <div id="collapseFive51" class="collapse" role="tabpanel" aria-labelledby="headingFive51" data-parent="#accordionEx1">
                                     <div class="card-body">
                                         <div class="card-header color-header">
                                             <h5 class="text-white" style="font-weight: bold;">{!! trans('Archivos') !!}</h5>
@@ -238,7 +247,7 @@ function addLanguage()
         <tr>
             <td>
               <div class="form-group">
-                <select name="id_language" id="id_language" class="form-control form-control-sm">
+                <select name="id_language[]" id="id_language" class="form-control form-control-sm">
                                     <option value="">Seleccione idioma</option>
                                     @foreach($languages as $item)
                                         <option value="{{$item->id}}">{{$item->p_text}}</option>
@@ -265,7 +274,7 @@ function addLanguage()
         <tr>
             <td>
               <div class="form-group">
-                <select name="id_system" id="id_system" class="form-control form-control-sm">
+                <select name="id_system[]" id="id_system" class="form-control form-control-sm">
                                     <option value="">Seleccione sistema</option>
                                 @foreach($list_systems as $systems)
                                     <option value="{{$systems->id}}" >{{$systems->p_text}}</option>
@@ -293,7 +302,7 @@ function addLanguage()
         <tr>
             <td>
               <div class="form-group">
-                <select name="id_area" id="id_area" class="form-control form-control-sm" onchange="fill_subjects()" required>
+                <select name="id_area" id="id_area_`+total+`" class="form-control form-control-sm" onchange="fill_subjects(`+total+`)" required>
                                     <option value="">Seleccione área</option>
                                       @foreach($areas as $area)
                                         <option value="{{$area->id}}">{{$area->a_name}}</option>
@@ -303,12 +312,12 @@ function addLanguage()
             </td>
             <td>
             <div class="form-group">
-                <select name="id_subject" id="id_subject" class="form-control form-control-sm" onchange="fill_topics()" required></select>
+                <select name="id_subject" id="id_subject_`+total+`" class="form-control form-control-sm" onchange="fill_topics(`+total+`)" required></select>
               </div>
             </td>
             <td>
             <div class="form-group">
-                <select name="id_topic" id="id_topic" class="form-control form-control-sm" required></select>
+                <select name="id_topic[]" id="id_topic_`+total+`" class="form-control form-control-sm" required></select>
               </div>
             </td>
             <td>
@@ -329,7 +338,7 @@ function addLanguage()
         <tr>
             <td>
               <div class="form-group">
-                                <input type="file" class="form-control form-control-sm" id="file" name="file" value="" required>
+                                <input type="file" class="form-control form-control-sm" id="file_`+total+`" name="file[]" value="" required>
                             </div>
             </td>
             <td>
@@ -360,31 +369,83 @@ function addLanguage()
         @endforeach
     ];
 
-    function fill_subjects(){
+    var questions = [
+        @foreach($question as $item)
+            {   "id_question": "{{$item->id}}",
+                "question": "{{$item->question}}",
+                "id_type_service": "{{$item->type_service_id }}",
+                "question_type": "{{$item->question_type}}",
+            },
+        @endforeach
+    ];
 
-        var selectedarea = $("#id_area").children("option:selected").val();
+    function fill_subjects(id){
+
+        var selectedarea = $("#id_area_"+id).children("option:selected").val();
         nuevo = $.grep(subjects, function(n, i) {
             return n.id_area === selectedarea
         });
 
-        $('#id_subject').empty()
-        $('#id_subject').append($('<option></option>').val('').html('Seleccione...'));
+        $('#id_subject_'+id).empty()
+        $('#id_subject_'+id).append($('<option></option>').val('').html('Seleccione...'));
         $.each(nuevo, function(key, value) {
-            $('#id_subject').append($('<option></option>').val(value.id_subject).html(value.subjects_name));
+            $('#id_subject_'+id).append($('<option></option>').val(value.id_subject).html(value.subjects_name));
         });
     }
 
-    function fill_topics(){
-        var selectedSubject = $("#id_subject").children("option:selected").val();
+    function fill_topics(id){
+        var selectedSubject = $("#id_subject_"+id).children("option:selected").val();
         nuevo = $.grep(topics, function(n, i) {
             return n.id_subject === selectedSubject
         });
 
-        $('#id_topic').empty()
-        $('#id_topic').append($('<option></option>').val('').html('Seleccione...'));
+        $('#id_topic_'+id).empty()
+        $('#id_topic_'+id).append($('<option></option>').val('').html('Seleccione...'));
         $.each(nuevo, function(key, value) {
-            $('#id_topic').append($('<option></option>').val(value.id_topic).html(value.topics_name));
+            $('#id_topic_'+id).append($('<option></option>').val(value.id_topic).html(value.topics_name));
         });
+    }
+
+    function viewQuestions(){
+
+        var idSelected = $('#id_service').val();
+
+        nuevo = $.grep(questions, function(n, i) {
+            return n.id_type_service === idSelected
+        });
+        $("#table_questios tbody").empty();
+        $.each(nuevo, function(key, value) {
+            if(value.question_type == "ABIERTA"){
+               var cell = `
+                        <tr>
+                            <td>
+                                <p>`+value.question+`</p> 
+                                <input type="hidden" name="question[]" value="`+value.id_question+`">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control form-control-sm" id="question" name="answer[]" value="" required>
+                            </td>
+                        </tr>
+                        `;
+                $("#table_questios tbody").append(cell);
+            }else{
+                var cell = `
+                        <tr>
+                            <td>
+                                <p>`+value.question+`</p> 
+                                <input type="hidden" name="question[]" value="`+value.id_question+`">
+                            </td>
+                            <td>
+                                <input type="checkbox" value="si"  name="answer[]" /> Si<br/>
+                                <input type="checkbox" value="no"  name="answer[]" /> No<br/>
+                            </td>
+                        </tr>
+                        `;
+                $("#table_questios tbody").append(cell);
+            }
+           
+        });
+        
     }
 
 </script>

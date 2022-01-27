@@ -10,6 +10,21 @@ class Subjects extends Model
     use SoftDeletes;
     protected $table = 'subjects';
 
+    protected $fillable = [
+        'id_area',
+        's_name',
+        's_order',
+        's_state',
+        'created_by',
+        'updated_by',
+        'deleted_by',
+    ];
+
+    const NAME = [
+        'Enfermeria basica',
+    ];
+
+    const ACTIVO = 1;
 
     // relaciones
     public function area() {
