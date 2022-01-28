@@ -28,7 +28,7 @@ class CreateRequestTables extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('date_delivery')->comment('fecha de entrega');
-            $table->string('observation')->nullable();
+            $table->text('observation')->nullable();
 
             $table->unsignedInteger('type_service_id')->comment('tipo de servicio');
             $table->foreign('type_service_id')->references('id')->on('parametrics');
@@ -168,7 +168,7 @@ class CreateRequestTables extends Migration
         Schema::create('request_quote_tutors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('value')->comment('valor de la cotización del tutor');
-            $table->string('observation')->nullable();
+            $table->text('observation')->nullable();
 
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('requests');
@@ -187,7 +187,7 @@ class CreateRequestTables extends Migration
         Schema::create('request_quotes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('value')->comment('valor de la cotización');
-            $table->string('observation')->nullable();
+            $table->text('observation')->nullable();
 
             $table->unsignedBigInteger('request_quote_tutor_id');
             $table->foreign('request_quote_tutor_id')->references('id')->on('request_quote_tutors');
