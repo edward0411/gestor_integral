@@ -31,6 +31,11 @@ trait Managment
         return $query;
     }
 
+    public function get_date_now()
+    {
+        return Carbon::now()->parse()->format('Y-m-d');
+    }
+
     public function getRoles()
     {
         $roles = DB::table('roles');

@@ -152,44 +152,106 @@
             </ul>
           </li>
           @endcan
-          @can('Cotizaciones')
           <!-- /.Modulo Pre Registro -->
+          
+          
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="icofont-money"></i>
               <p>
-               <font size="4">Cotizaciones</font>  
+               <font size="4">Procesos </font>  
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              @can('Cotizaciones_pendientes_ver')
+             
               <li class="nav-item">
-                <a href="{{route('quotes.index')}}" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="icofont-data"></i>
-                  <p><font size="3">Cot. Pendientes</font></p>
+                  <p><font size="3">Solicitudes</font></p>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('process.request.index')}}" class="nav-link">
+                      <i class="icofont-checked"></i>
+                      <p>Mis solicitudes</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                      <i class="icofont-close-squared-alt"></i>
+                      <p>List. Solicitudes</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
-              @endcan
-              @can('Cotizaciones_historial_ver')
+              
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="icofont-bill-alt"></i>
-                  <p><font size="3">Historial de Cotizaciones</font></p>
+                <a href="" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Cotizaciones</font></p>
                 </a>
-              </li> 
-              @endcan
-              @can('Cotizaciones_misCotizaciones_ver')
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('customers.index')}}" class="nav-link">
+                      <i class="icofont-checked"></i>
+                      <p>Mis Cotizaciones</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                      <i class="icofont-close-squared-alt"></i>
+                      <p>List. cotizaciones</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              
               <li class="nav-item">
-                <a href="{{route('quotes.myQuotes')}}" class="nav-link">
-                  <i class="icofont-bill-alt"></i>
-                  <p><font size="3">Mis Cotizaciones</font></p>
+                <a href="" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Trabajos</font></p>
                 </a>
-              </li> 
-              @endcan
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('customers.index')}}" class="nav-link">
+                      <i class="icofont-checked"></i>
+                      <p>Mis trabajos</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                      <i class="icofont-close-squared-alt"></i>
+                      <p>List. trabajos</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Entregables</font></p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('customers.index')}}" class="nav-link">
+                      <i class="icofont-checked"></i>
+                      <p>Mis entregable</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                      <i class="icofont-close-squared-alt"></i>
+                      <p>List. entregables</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
             </ul>
           </li>
-          @endcan
+
           @can('Billetera_virtual')
           <!-- /.Modulo Pre Registro -->
           <li class="nav-item">

@@ -205,12 +205,11 @@ Route::get('/delete/profile/{id}', 'ProfileController@delete')->name('profile.de
 Route::get('/communications/index','CommunicationsController@index')->name('communications.index');
 Route::get('/communications/view_living/{id}','CommunicationsController@living')->name('communications.living');
 
-////////Cotizaciones///////////////
-Route::get('/view/cotizaciones','QuoteController@index')->name('quotes.index');
-Route::get('/view/cotizaciones/myQuotes','QuoteController@myQuotes')->name('quotes.myQuotes');
-Route::get('/create_quotes/cotizaciones/myQuotes','QuoteController@create_quotes')->name('quotes.create_my_quotes');
-Route::get('/edit_quotes/cotizaciones/myQuotes','QuoteController@edit_quotes')->name('quotes.edit_my_quotes');
-Route::post('/store_quotes/cotizaciones/myQuotes','QuoteController@store_quotes')->name('quotes.store_quotes');
+////////Procesos///////////////
+Route::get('/process/request/index','ProcessController@index_request')->name('process.request.index');
+Route::get('/process/request/create','ProcessController@create_request')->name('process.request.create');
+Route::post('/process/request/store','ProcessController@store_request')->name('process.request.store');
+Route::get('/edit_quotes/cotizaciones/myQuotes','ProcessController@edit_quotes')->name('quotes.edit_my_quotes');
 
 Route::get('/clearcache', function () {
     Artisan::call('cache:clear');
