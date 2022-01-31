@@ -108,5 +108,9 @@
             <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
             <!-- styles Gestor-->
             <script type="text/javascript" language="javascript" src="{{ asset("dist/js/styles_gestor.js") }}"></script>
+
+            <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+            
+            @yield('script')
 </body>
 </html>

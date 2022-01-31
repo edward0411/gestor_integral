@@ -65,7 +65,7 @@ class RegisterController extends Controller
     protected function validator_client(array $data)
     {
         return Validator::make($data, [
-            'u_nick_name' => ['required', 'string', 'max:50'],
+            'u_nickname' => ['required', 'string', 'max:50','unique:users'],
             'u_key_number' => ['required', 'string','min:8', 'max:15'],
             'id_contry' => ['required', 'numeric'],
             'id_means' => ['required', 'numeric'],
@@ -79,10 +79,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'u_name' => ['max:50'],
-            'u_nick_name' => ['required', 'string', 'max:50'],
+            'u_nickname' => ['required', 'string', 'max:50'],
             'u_type_doc' => ['required', 'string'],
             'u_num_doc' => ['required', 'string'],
-            'u_key_number' => ['required', 'string', 'min:8', 'max:15','unique:users'],
+            'u_key_number' => ['required', 'string', 'min:8', 'max:15'],
             'id_contry' => ['required', 'numeric'],
             'id_means' => ['required', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -104,9 +104,9 @@ class RegisterController extends Controller
     {
         return User::create([
             'u_key_number' => $data['u_key_number'],
-            'u_indicativo' => '+'.$data['u_indicativo'],
+            'u_indicativo' => $data['u_indicativo'],
             'u_name' => $data['u_name'],
-            'u_nickname' => $data['u_nick_name'],
+            'u_nickname' => $data['u_nickname'],
             'u_id_country' => $data['id_contry'],
             'u_id_means' => $data['id_means'],
             'u_id_money' => $data['id_money'],
@@ -121,11 +121,11 @@ class RegisterController extends Controller
         return User::create([
             'u_key_number' => $data['u_key_number'],
             'u_name' => $data['u_name'],
-            'u_nickname' => $data['u_nick_name'],
+            'u_nickname' => $data['u_nickname'],
             'u_type_doc' => $data['u_type_doc'],
             'u_num_doc' => $data['u_num_doc'],
             'u_id_country' => $data['id_contry'],
-            'u_indicativo' => '+'.$data['u_indicativo'],
+            'u_indicativo' => $data['u_indicativo'],
             'u_id_means' => $data['id_means'],
             'u_state' => 0,
             'u_line_first' => 0,

@@ -22,7 +22,7 @@ trait Managment
 { 
     public function getInfoCountries()
     {
-        $countries = countries::select('id','c_name');
+        $countries = countries::select('id','c_indicative','c_name');
         return $countries;
     }
     public function getDataParametrics($category)
@@ -45,6 +45,7 @@ trait Managment
     public function getInfoUsers($rol,$state)
     {
         $query = User::leftJoin('countries','countries.id','=','users.u_id_country')
+        ->leftJoin('countries as coun','coun.id','=','users.u_indicativo')
         ->leftJoin('model_has_roles as roles','roles.model_id','=','users.id')
         ->leftJoin('coins','coins.id','=','users.u_id_money')
         ->where('roles.role_id',$rol)

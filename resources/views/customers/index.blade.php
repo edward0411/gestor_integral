@@ -16,14 +16,17 @@
                     @elseif($state == 4)
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de clientes inactivos') !!}</h5>
                     @endif
-                  </div>
-               
+                  </div>   
                 <!-- /.card-header -->
+                <div class="card-body">
+                    @if($state == 1)
+                    <a href="{{route('customers.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear clientes') !!}</a>      
+                    @endif
+                  </div>
                 <div class="card-body">
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
                             <tr class="bg-warning text-center">
-                               
                                 <th>{!! trans('Nickname') !!} </th>
                                 <th>{!! trans('Número de celular') !!} </th>
                                 <th>{!! trans('Correo') !!} </th>

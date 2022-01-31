@@ -88,14 +88,16 @@ Route::get('/view/customers','CustomersController@active')->name('customers.inde
 Route::get('/view/customers_inactives','CustomersController@inactive')->name('customers.inactives')->middleware('permission:Administrador_clientes_inactivar');
 Route::get('/create/customers','CustomersController@create')->name('customers.create')->middleware('permission:Administrador_clientes_crear');
 Route::get('/edit/customers/{id}','CustomersController@edit')->name('customers.edit')->middleware('permission:Administrador_clientes_editar');
-Route::get('/processState/customers/{id}','CustomersController@processState')->name('customers.processState')->middleware('permission:Administrador_parametricas_ver');
+Route::get('/processState/customers/{id}','CustomersController@processState')->name('customers.processState');//->middleware('permission:Administrador_parametricas_ver');
+Route::post('/store/customers','CustomersController@store_customer')->name('customers.store_customer');//->middleware('permission:Administrador_parametricas_ver');
 
 ///////// Rutas tutores  ////////////
 
 Route::get('/view/tutors','TutorsController@active')->name('tutors.index')->middleware('permission:Administrador_tutores_activar');
 Route::get('/view/tutors_inactives','TutorsController@inactive')->name('tutors.inactives')->middleware('permission:Administrador_tutores_inactivar');
 Route::get('/create/tutors','TutorsController@create')->name('tutors.create')->middleware('permission:Administrador_tutores_crear');
-Route::get('/edit/tutors','TutorsController@edit')->name('tutors.edit')->middleware('permission:Administrador_tutores_editar');
+Route::get('/edit/tutors/{id}','TutorsController@edit')->name('tutors.edit')->middleware('permission:Administrador_tutores_editar');
+Route::post('/store/tutors','TutorsController@store_tutor')->name('tutors.store_tutor');//->middleware('permission:Administrador_tutores_editar');
 
 ////////// Rutas monedas //////////
 
