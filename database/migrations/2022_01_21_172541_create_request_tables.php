@@ -48,7 +48,7 @@ class CreateRequestTables extends Migration
 
         Schema::create('request_files', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('file');
+            $table->string('file')->nullable();
 
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('requests');
