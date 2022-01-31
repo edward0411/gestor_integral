@@ -9,7 +9,8 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear cotización') !!}</h5>
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" action="{{route('quotes.store_quotes')}}" enctype="multipart/form-data">
+                
+                <form method="POST" action="{{route('process.request.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row">
@@ -212,7 +213,7 @@
                        <!-- /.card-body -->
                     <div class="card-body">
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
-                        <a href="{{route('quotes.myQuotes')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar')
+                        <a href="{{route('process.request.index')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar')
                             !!}</a>
                     </div>
                     <!-- /.card-body -->
