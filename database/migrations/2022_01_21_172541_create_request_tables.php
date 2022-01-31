@@ -17,7 +17,7 @@ class CreateRequestTables extends Migration
             $table->bigIncrements('id');
             $table->string('name');
 
-            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();
             $table->integer('deleted_by')->nullable()->unsigned();
@@ -28,7 +28,7 @@ class CreateRequestTables extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('date_delivery')->comment('fecha de entrega');
-            $table->string('observation')->nullable();
+            $table->text('observation')->nullable();
 
             $table->unsignedInteger('type_service_id')->comment('tipo de servicio');
             $table->foreign('type_service_id')->references('id')->on('parametrics');
@@ -48,12 +48,12 @@ class CreateRequestTables extends Migration
 
         Schema::create('request_files', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('file');
+            $table->string('file')->nullable();
 
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('requests');
 
-            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();
             $table->integer('deleted_by')->nullable()->unsigned();
@@ -72,7 +72,7 @@ class CreateRequestTables extends Migration
             $table->unsignedBigInteger('request_state_id');
             $table->foreign('request_state_id')->references('id')->on('request_states');
 
-            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();
             $table->integer('deleted_by')->nullable()->unsigned();
@@ -88,7 +88,7 @@ class CreateRequestTables extends Migration
             $table->unsignedInteger('type_service_id')->comment('tipo de servicio');
             $table->foreign('type_service_id')->references('id')->on('parametrics');
 
-            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();
             $table->integer('deleted_by')->nullable()->unsigned();
@@ -106,7 +106,7 @@ class CreateRequestTables extends Migration
             $table->unsignedBigInteger('request_question_id');
             $table->foreign('request_question_id')->references('id')->on('request_questions');
 
-            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();
             $table->integer('deleted_by')->nullable()->unsigned();
@@ -123,7 +123,7 @@ class CreateRequestTables extends Migration
             $table->unsignedInteger('tutor_topic_id');
             $table->foreign('tutor_topic_id')->references('id')->on('tutors_topics');
 
-            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();
             $table->integer('deleted_by')->nullable()->unsigned();
@@ -140,7 +140,7 @@ class CreateRequestTables extends Migration
             $table->unsignedInteger('tutor_system_id');
             $table->foreign('tutor_system_id')->references('id')->on('tutors_systems');
 
-            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();
             $table->integer('deleted_by')->nullable()->unsigned();
@@ -157,7 +157,7 @@ class CreateRequestTables extends Migration
             $table->unsignedInteger('language_tutor_id');
             $table->foreign('language_tutor_id')->references('id')->on('language_tutors');
 
-            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();
             $table->integer('deleted_by')->nullable()->unsigned();
@@ -168,7 +168,7 @@ class CreateRequestTables extends Migration
         Schema::create('request_quote_tutors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('value')->comment('valor de la cotización del tutor');
-            $table->string('observation')->nullable();
+            $table->text('observation')->nullable();
 
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('requests');
@@ -176,7 +176,7 @@ class CreateRequestTables extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();
             $table->integer('deleted_by')->nullable()->unsigned();
@@ -187,12 +187,12 @@ class CreateRequestTables extends Migration
         Schema::create('request_quotes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('value')->comment('valor de la cotización');
-            $table->string('observation')->nullable();
+            $table->text('observation')->nullable();
 
             $table->unsignedBigInteger('request_quote_tutor_id');
             $table->foreign('request_quote_tutor_id')->references('id')->on('request_quote_tutors');
 
-            $table->enum('status',['ACTIVO','DESACTIVADO'])->default('ACTIVO');
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->integer('created_by')->nullable()->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();
             $table->integer('deleted_by')->nullable()->unsigned();

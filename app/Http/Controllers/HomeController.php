@@ -33,7 +33,7 @@ class HomeController extends Controller
                 break;
             case '4':
                 if (Auth::user()->u_state == 1 ) {
-                    return redirect()->route('quotes.myQuotes');
+                    return redirect()->route('process.request.index');
                 }elseif(Auth::user()->u_state == 4){
                     return redirect()->route('logouth');
                 }

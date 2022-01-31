@@ -18,4 +18,14 @@ class RequestState extends Model
         'deleted_by',
     ];
 
+    const NAME = [
+        'CREADA',
+        'ENVIADA AL TUTOR',
+        'EN COTIZACIÓN',
+        'EN DESARROLLO',
+        'ENTREGABLE PDT EN APROBACIÓN',
+        'ENTREGABLE APROBADO',
+        'ENTREGABLE RECHAZADO',
+    ];
+
 }
