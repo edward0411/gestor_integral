@@ -20,7 +20,17 @@ class Areas extends Model
     ];
 
     const NAME = [
-        'Salud Ocupacional',
+        'Ciencias Humanas',
+        'Ciencias Sociales',
+        'Arte y Diseño',
+        'Otras áreas',
+        'Ciencias Exactas',
+        'Ciencias Económicas',
+        'Ciencias de la Salud',
+        'Ciencias Legales',
+        'Ingenierías y Arquitectura',
+        'Educación',
+        'Idiomas',
     ];
 
     const ACTIVO = 1;
@@ -29,4 +39,10 @@ class Areas extends Model
     public function subjects() {
         return $this->hasMany(Subjects::class, 'id_area');
     }
+
+    // scope
+    function scopeHandleText($query, $text){
+        return $query->where('a_name', $text);
+    }
+
 }

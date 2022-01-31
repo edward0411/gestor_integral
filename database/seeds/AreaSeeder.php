@@ -14,8 +14,8 @@ class AreaSeeder extends Seeder
     {
         for ($i=0; $i <count(Areas::NAME); $i++) {
             Areas::create([
-                'a_name'          => Areas::NAME[$i],
-                'a_order'       => 100,
+                'a_name'        => Areas::NAME[$i],
+                'a_order'       => 100 * ($i+1),
                 'a_state'       => Areas::ACTIVO
             ]);
         }
