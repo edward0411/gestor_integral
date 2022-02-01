@@ -19,8 +19,8 @@
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
                             <tr class="bg-warning text-center">
-                                <th>{!! trans('Nombre') !!} </th>
                                 <th>{!! trans('Indicativo') !!} </th>
+                                <th>{!! trans('Nombre') !!} </th>
                                 <th>{!! trans('Acciones') !!}</th>
                             </tr>
                         </thead>

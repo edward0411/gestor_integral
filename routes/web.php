@@ -58,9 +58,9 @@ Route::get('/edit/users','UsersController@edit')->name('users.edit');
 
 ///////// Rutas roles  ////////////
 
-Route::get('/view/roles','RolesController@index')->name('roles.index')->middleware('permission:Administrador_roles_ver');
-Route::post('/create/roles','RolesController@store')->name('roles.store')->middleware('permission:Administrador_roles_crear');
-Route::get('/edit/roles','RolesController@edit')->name('roles.edit')->middleware('permission:Administrador_roles_editar');
+Route::get('/view/roles','RolesController@index')->name('roles.index');//->middleware('permission:Administrador_roles_ver');
+Route::post('/create/roles','RolesController@store')->name('roles.store');//->middleware('permission:Administrador_roles_crear');
+Route::get('/edit/roles','RolesController@edit')->name('roles.edit');//->middleware('permission:Administrador_roles_editar');
 Route::get('/permision/roles/{id_rol}','RolesController@permissionindex')->name('roles.permission');//->middleware('permission:Administrador_usuarios_ver');
 Route::post('/permision_store/roles','RolesController@permissionstore')->name('roles.permission.store');//->middleware('permission:Administrador_usuarios_ver');
 
@@ -281,11 +281,11 @@ Route::get('/createpermission',function(){
 
     Permission::create(['name' => 'Comunicaciones']);
 
-    Permission::create(['name' => 'Comunicaciones_bandeja']);*/
+    Permission::create(['name' => 'Comunicaciones_bandeja']);
 
     //Segunda ronda de permisos
 
-    /*Permission::create(['name' => 'Cotizaciones']);
+    Permission::create(['name' => 'Cotizaciones']);
     Permission::create(['name' => 'Cotizaciones_pendientes_ver']);
     Permission::create(['name' => 'Cotizaciones_historial_ver']);
     Permission::create(['name' => 'Cotizaciones_misCotizaciones_ver']);
@@ -295,13 +295,13 @@ Route::get('/createpermission',function(){
     Permission::create(['name' => 'Pagos']);
     Permission::create(['name' => 'Pagos_HistorialPagosClientes_ver']);
     Permission::create(['name' => 'Reportes']);
-    Permission::create(['name' => 'Reportes_Listado_ver']);*/
+    Permission::create(['name' => 'Reportes_Listado_ver']);
 
     Permission::create(['name' => 'Administrador_monedas_inactivar']);
     Permission::create(['name' => 'Administrador_monedas_activar']);
 
     Permission::create(['name' => 'Administrador_monedas_inactivar']);
-    Permission::create(['name' => 'Administrador_monedas_activar']);
+    Permission::create(['name' => 'Administrador_monedas_activar']);*/
 
 
 
