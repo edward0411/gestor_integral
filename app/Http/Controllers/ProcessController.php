@@ -5,14 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Traits\Managment;
 use App\Traits\Process;
+use App\Traits\ApiResponser;
 use Session;
 
 
 class ProcessController extends Controller
 {
+    const CREADA               = 1;
+    const ENVIADA_TUTOR        = 2;
+    const EN_COTIZACIÓN        = 3;
+    const EN_DEARROLLO         = 4;
+    const ENTREGABLE           = 5;
+    const ENTREGABLE_APROBADO  = 6;
+    const ENTREGABLE_RECHAZADO = 7;
 
     use Managment;
-    use Process;
+    use Process;  
+    use ApiResponser;
 
     public function index_request()
     {
@@ -47,9 +56,9 @@ class ProcessController extends Controller
 
     public function store_request(Request $request){
 
-        $this->validateRequest($request);
-        
+        $this->validateRequest($request);      
         $this->saveRequest($request);
+        return redirect()->route('process.request.index')->with('success','Registro actualizado con éxito');
     }
 
     public function validateRequest($request)
@@ -58,19 +67,21 @@ class ProcessController extends Controller
         $messages = [];
         $files = $request->file("file");
 
-        foreach($files as $key => $file)
-        {  
-            $name = $file->getClientOriginalName();
-            $extFile = $file->getClientOriginalExtension();
-            $sizeFile[$key] =  $file->getSize();
-
-            if(intval($sizeFile[$key]) >= 10000000)
-            {
-                $rules['fileZise'.$key] = 'required';
-                $messages['fileZise'.$key.'.required'] =trans('El tamaño máximo permitido es de :size, El archivo es :file', ['size' => '10MB','file' => $name]);               
-            }         
+        if($files != null){
+            foreach($files as $key => $file)
+            {  
+                $name = $file->getClientOriginalName();
+                $extFile = $file->getClientOriginalExtension();
+                $sizeFile[$key] =  $file->getSize();
+    
+                if(intval($sizeFile[$key]) >= 10000000)
+                {
+                    $rules['fileZise'.$key] = 'required';
+                    $messages['fileZise'.$key.'.required'] =trans('El tamaño máximo permitido es de :size, El archivo es :file', ['size' => '10MB','file' => $name]);               
+                }         
+            }
+            $this->validate($request, $rules, $messages);
         }
-        $this->validate($request, $rules, $messages);
 
         return true;
     }

@@ -5,20 +5,21 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use File;
+use Illuminate\Support\Str;
+
 use App\Models\Request as solicitud;
 use App\Models\RequestHistory as history;
+use App\Models\RequestResponse as responses;
+use App\Models\RequestLanguage as lanjuage;
+use App\Models\RequestSystem as systems;
+use App\Models\RequestTopic as topics;
+use App\Models\RequestFile as filesRequest;
 
 
 trait Process
 {
-    const CREADA               = 1;
-    const ENVIADA_TUTOR        = 2;
-    const EN_COTIZACIÓN        = 3;
-    const EN_DEARROLLO         = 4;
-    const ENTREGABLE           = 5;
-    const ENTREGABLE_APROBADO  = 6;
-    const ENTREGABLE_RECHAZADO = 7;
-
 
     public function saveRequest($data)
     {
@@ -26,8 +27,10 @@ trait Process
 
             if (isset($data->id_request)) {         
                 $register = solicitud::find($data->id_request);
+                $register->updated_by = Auth::user()->id;
             }else{
                 $register = new solicitud();
+                $register->created_by = Auth::user()->id;
             }
             $register->date_delivery = $data->deliver_date;
             $register->observation = $data->observations;
@@ -38,22 +41,42 @@ trait Process
             }else{
                 $register->user_id = Auth::user()->id;
             }
-            if (isset($data->id_request)) {         
-                $register->created_by = Auth::user()->id;
-            }else{
-                $register->created_by = Auth::user()->id;
-            }
-            $register->save();        
+            $register->save();  
+
             $id_request = $register->id;
-    
-            $this->changeHistoryState($id_request,Process::CREADA);
+
+            if ($data->id_request != null) {         
+                $this->changeHistoryState($id_request,1);
+            }else{
+                $this->deletaDataTable($id_request,'request_responses'); 
+                $this->deletaDataTable($id_request,'request_languages'); 
+                $this->deletaDataTable($id_request,'request_systems'); 
+                $this->deletaDataTable($id_request,'request_topics'); 
+                $this->deletaDataTable($id_request,'request_files'); 
+            }
+
+            if (isset($data->question)) {
+                $this->saveQuestionsRequest($data->question,$data->answer,$id_request);
+            }
+            if (isset($data->id_language)) {
+                $this->saveLanjuagesRequest($data->id_language,$id_request);
+            }
+            if (isset($data->id_system)) {
+                $this->saveSystemsRequest($data->id_system,$id_request);
+            }
+            if (isset($data->id_topic)) {
+                $this->saveTopicsRequest($data->id_topic,$id_request);
+            }
+            if ($data->hasFile('file')) {
+                $files = $data->file("file");
+                $this->saveFilesRequest($files,$id_request);
+            }
+
+            return true;
             
         } catch (\Exception $e) {
-            return $this->errorResponse($e->getMessage(), 409);
+            dd($e);
         }
-
-        
-
     }
 
     public function changeHistoryState($id,$state,$state_old = null)
@@ -73,6 +96,130 @@ trait Process
             $state->created_by = Auth::user()->id;
             $state->save();
 
+            return true;  
+          
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage(), 409);
+        }
+    }
+
+    public function deletaDataTable($id,$table)
+    {
+        try {            
+            $registers = DB::table($table)->where('request_id')->get();
+
+            if (count($registers) > 0) {
+                foreach ($registers as $key => $reg) {
+                    $reg->update([
+                        'deleted_at' => Carbon::now()->parse()->format('Y-m-d H:m:s'),
+                        'deleted_by' => Auth::user()->id,
+                     ]);
+                 }
+            }           
+            return true;  
+          
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage(), 409);
+        }
+    }
+
+    public function saveQuestionsRequest($question,$answers,$id)
+    {
+        try {
+            foreach ($question as $key => $value) {
+                $register = new responses();
+                $register->response = $answers[$key];
+                $register->request_id = $id;
+                $register->request_question_id = $value;
+                $register->created_by = Auth::user()->id;
+                $register->save();
+            }
+            return true;  
+          
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage(), 409);
+        }
+    }
+
+    public function saveLanjuagesRequest($data,$id)
+    {
+        try {
+            foreach ($data as $key => $value) {
+                $register = new lanjuage();
+                $register->request_id = $id;
+                $register->language_id  = $value;
+                $register->created_by = Auth::user()->id;
+                $register->save();
+            }
+            return true;  
+          
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage(), 409);
+        }
+    }
+
+    public function saveSystemsRequest($data,$id)
+    {
+        try {
+            foreach ($data as $key => $value) {
+                $register = new systems();
+                $register->request_id = $id;
+                $register->system_id  = $value;
+                $register->created_by = Auth::user()->id;
+                $register->save();
+            }
+            return true;  
+          
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage(), 409);
+        }
+    }
+
+    public function saveTopicsRequest($data,$id)
+    {
+        try {
+            foreach ($data as $key => $value) {
+                $register = new topics();
+                $register->request_id = $id;
+                $register->topic_id   = $value;
+                $register->created_by = Auth::user()->id;
+                $register->save();
+            }
+           
+            return true;  
+          
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage(), 409);
+        }
+    }
+
+    public function saveFilesRequest($data,$id)
+    {
+        try {
+            foreach ($data as $key => $value) {
+
+                $register = new filesRequest();          
+                $register->request_id = $id;
+                $register->created_by = Auth::user()->id;
+                $register->save();
+                $file_exist = filesRequest::where('request_id',$id)->get();
+
+                if(count($file_exist) > 0)
+                {
+                    foreach ($file_exist as $key => $item) {
+                        $file_path = public_path() .'/folders/request/files_request_'.$id.'/file_'.$item->file;
+                        if (File::exists($file_path)) {
+                            File::delete($file_path);
+                        }
+                    }
+                }          
+                $name = $value->getClientOriginalName();
+                $path = public_path() .'/folders/request/files_request_'.$id.'/file_'.$register->id;            
+                $value->move($path,$name);            
+                $register->file = $name;
+                $register->save();              
+            }    
+            
             return true;  
           
         } catch (\Exception $e) {

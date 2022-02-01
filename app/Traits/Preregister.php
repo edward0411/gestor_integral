@@ -106,8 +106,6 @@ trait Preregister
 
             $id_register = $register->id;
 
-
-
             if($request->hasFile('t_b_namefile')){
                 $image_path = public_path() .'\folders\banks'.$register->t_b_namefile;
                 if (File::exists($image_path)) {
