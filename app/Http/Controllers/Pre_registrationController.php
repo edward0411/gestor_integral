@@ -29,8 +29,8 @@ class Pre_registrationController extends Controller
     const RECHAZADO     = 2;
     const NO_ACEPTADO   = 3;
 
-    public function index_registration(){
-
+    public function index_registration()
+    {
         $countData = [];
         $countData[0] = $this->consultTable('tutors_bank_details','t_b_state',0);
         $countData[1] = $this->consultTable('tutors_bank_details','t_b_state',1);
@@ -56,7 +56,6 @@ class Pre_registrationController extends Controller
 
     public function get_info_acount_bank(Request $request)
     {
-
         if (isset($request->id_tutor)) {
             $cuentas = $this->get_data_table('tutors_bank_details',$request->id_tutor);
         }else{
@@ -68,8 +67,7 @@ class Pre_registrationController extends Controller
         ->select('tutors_bank_details.*','p1.p_text as name_bank','p2.p_text as type_acount');
 
         if (isset($request->id_tutor)) {
-            $cuentas = $cuentas->whereIn('t_b_state', [Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])
-            ->get();
+            $cuentas = $cuentas->whereIn('t_b_state', [Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])->get();
         }else{
             $cuentas = $cuentas->get();
         }
@@ -78,17 +76,20 @@ class Pre_registrationController extends Controller
     }
 
     // listar los tutores
-    public function index_turors_list(){
+    public function index_turors_list()
+    {
         $users = User::rolUser('tutor')->stateUser(User::REGISTRADO)->get();
         return view('pre_registration.index_turors_list', compact('users'));
     }
 
-    public function view_tutors(User $user){
+    public function view_tutors(User $user)
+    {
         return view('pre_registration.view_tutors', compact('user'));
     }
 
     // guardar estado del tutor
-    public function save_state_tutor(User $user, $value){
+    public function save_state_tutor(User $user, $value)
+    {
         $user->update([
             'u_state' => $value
         ]);
@@ -96,7 +97,8 @@ class Pre_registrationController extends Controller
     }
 
     // guardar primera linea
-    public function save_line_first(Request $request){
+    public function save_line_first(Request $request)
+    {
         $user = User::find($request->id);
         $user->update([
             'u_line_first' => $request->value
