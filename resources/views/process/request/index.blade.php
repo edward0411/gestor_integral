@@ -23,6 +23,7 @@
                     <th>{!! trans('Fecha de inicio') !!}</th>
                     <th>{!! trans('Fecha final') !!}</th>
                     <th>{!! trans('Servicio') !!}</th>
+                    <th>{!! trans('Servicio') !!}</th>
                     <th>{!! trans('Acciones') !!}</th>
                   </tr>
                 </thead>
