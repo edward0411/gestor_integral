@@ -75,6 +75,7 @@ class Pre_registrationController extends Controller
         return response()->json($cuentas);
     }
 
+   
     // listar los tutores
     public function index_turors_list()
     {

@@ -7,7 +7,7 @@ use App\Traits\Managment;
 use App\Traits\Process;
 use App\Traits\ApiResponser;
 use Session;
-
+use Illuminate\Support\Facades\Auth;
 
 class ProcessController extends Controller
 {
@@ -23,12 +23,24 @@ class ProcessController extends Controller
     use Process;  
     use ApiResponser;
 
-    public function index_request()
+    public function index_request($id_rol)
     {
-        return view('process.request.index');
+        $data = $this->getInfoRequest($id_rol,ProcessController::CREADA)->get();
+
+        if ($id_rol == 4) {
+            return view('process.request.index',compact('data'));
+        }
+        return view('process.request.list_request',compact('data'));
     }
 
     public function create_request(){
+
+        $users = [];
+
+        if(Auth::user()->roles()->first()->id == 3)
+        {
+            $users = $this->infoClients();
+        }
         
         $services = $this->getDataParametrics('param_list_services')->orderby('p_order')->get();
         $languages = $this->getDataParametrics('param_list_languages')->orderby('p_order')->get();
@@ -38,7 +50,7 @@ class ProcessController extends Controller
         $topics = $this->getInfoTable('topics')->where('t_state',1)->get();
         $question = $this->getRequest_questions('request_questions')->where('status',1)->select('request_questions.id','question','question_type','type_service_id')->get();
 
-        return view('process.request.create',compact('languages','list_systems','areas','subjects','topics','services','question'));
+        return view('process.request.create',compact('languages','list_systems','areas','subjects','topics','services','question','users'));
     }
 
     public function edit_quotes(){
@@ -58,7 +70,7 @@ class ProcessController extends Controller
 
         $this->validateRequest($request);      
         $this->saveRequest($request);
-        return redirect()->route('process.request.index')->with('success','Registro actualizado con éxito');
+        return redirect()->route('process.request.index',Auth::user()->roles()->first()->id)->with('success','Registro actualizado con éxito');
     }
 
     public function validateRequest($request)
