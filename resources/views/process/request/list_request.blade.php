@@ -1,5 +1,5 @@
 @extends('layouts.master_panel')
-@section('title','Mis Solicitudes')
+@section('title','Listado de Solicitudes')
 
 @section('content')
 <div class="container">
@@ -20,6 +20,7 @@
                 <thead>
                   <tr class="bg-warning text-center">
                     <th>{!! trans('Numeral') !!} </th>
+                    <th>{!! trans('Cliente') !!} </th>
                     <th>{!! trans('Fecha de inicio') !!}</th>
                     <th>{!! trans('Fecha final') !!}</th>
                     <th>{!! trans('Servicio') !!}</th>
@@ -31,6 +32,7 @@
                     @foreach($data as $key => $value)
                     <tr>
                       <td>{{$value->id}}</td>
+                      <td>{{$value->users->u_nickname}}</td>
                       <td>{{$value->created_at}}</td>
                       <td>{{$value->date_delivery}}</td>
                       <td>{{$value->parametric->p_text}}</td>

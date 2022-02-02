@@ -208,7 +208,7 @@ Route::get('/communications/index','CommunicationsController@index')->name('comm
 Route::get('/communications/view_living/{id}','CommunicationsController@living')->name('communications.living');
 
 ////////Procesos///////////////
-Route::get('/process/request/index','ProcessController@index_request')->name('process.request.index');
+Route::get('/process/request/index/{rol}','ProcessController@index_request')->name('process.request.index');
 Route::get('/process/request/create','ProcessController@create_request')->name('process.request.create');
 Route::post('/process/request/store','ProcessController@store_request')->name('process.request.store');
 Route::get('/process/request/edit_my_quotes','ProcessController@edit_request')->name('process.request.edit_my_quotes');
@@ -236,7 +236,7 @@ Route::get('/clearcache', function () {
 
 Route::get('/createpermission',function(){
 
-    /*Permission::create(['name' => 'Administrador']);
+    Permission::create(['name' => 'Administrador']);
 
     Permission::create(['name' => 'Administrador_clientes_ver']);
     Permission::create(['name' => 'Administrador_clientes_crear']);
@@ -310,11 +310,7 @@ Route::get('/createpermission',function(){
     Permission::create(['name' => 'Reportes']);
     Permission::create(['name' => 'Reportes_Listado_ver']);
 
-    Permission::create(['name' => 'Administrador_monedas_inactivar']);
-    Permission::create(['name' => 'Administrador_monedas_activar']);
-
-    Permission::create(['name' => 'Administrador_monedas_inactivar']);
-    Permission::create(['name' => 'Administrador_monedas_activar']);*/
+    
 
 
 

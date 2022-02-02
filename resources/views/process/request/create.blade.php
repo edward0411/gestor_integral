@@ -14,11 +14,30 @@
                     @csrf
                     <div class="card-body">
                         <div class="row">
-                            <div class="form-group col-md-6">
+                            @if(Auth::user()->roles()->first()->id == 3)
+                                <div class="form-group col-md-4">
+                            @else
+                                <div class="form-group col-md-6">
+                            @endif
+                            
                                 <label for="deliver_date">{!! trans('Fecha de entrega') !!}</label>
                                 <input type="date" class="form-control form-control-sm" id="deliver_date" name="deliver_date" value="" required>
                             </div>
-                            <div class="form-group col-md-6">
+
+                            @if(Auth::user()->roles()->first()->id == 3)
+                            <div class="form-group col-md-4">
+                                    <label for="id_client">{!! trans('Clientes') !!}</label>
+                                    <select name="id_client" id="id_client"  class="form-control form-control-sm" required>
+                                        <option value="">Seleccione...</option>
+                                        @foreach($users as $user)
+                                        <option value="{{$user->id}}">{{$user->u_nickname}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                            @else
+                                <div class="form-group col-md-6">
+                            @endif
                                 <label for="id_service">{!! trans('Tipo de servicio') !!}</label>
                                 <select name="id_service" id="id_service"  class="form-control form-control-sm" onChange="viewQuestions();" required>
                                     <option value="">Seleccione...</option>
@@ -213,7 +232,7 @@
                        <!-- /.card-body -->
                     <div class="card-body">
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
-                        <a href="{{route('process.request.index')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar')
+                        <a href="{{route('process.request.index',Auth::user()->roles()->first()->id)}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar')
                             !!}</a>
                     </div>
                     <!-- /.card-body -->

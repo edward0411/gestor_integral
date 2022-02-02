@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use File;
 use Illuminate\Support\Str;
 
+use App\User;
 use App\Models\Request as solicitud;
 use App\Models\RequestHistory as history;
 use App\Models\RequestResponse as responses;
@@ -16,10 +17,29 @@ use App\Models\RequestLanguage as lanjuage;
 use App\Models\RequestSystem as systems;
 use App\Models\RequestTopic as topics;
 use App\Models\RequestFile as filesRequest;
-
+use Facade\Ignition\QueryRecorder\Query;
 
 trait Process
 {
+    public function getInfoRequest($id_rol)
+    {
+        $query = solicitud::orderBy('date_delivery');
+
+        if($id_rol == 4){
+            $query = $query->where('user_id',Auth::user()->id);
+        }
+        return $query;
+    }
+
+    public function infoClients()
+    {
+        $clients = User::join('model_has_roles as m','m.model_id','=','users.id')
+        ->where('m.role_id',4)
+        ->select('users.id','users.u_nickname')
+        ->get();
+
+        return $clients;
+    }
 
     public function saveRequest($data)
     {
