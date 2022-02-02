@@ -122,24 +122,24 @@ Route::get('/active/areas/{id}', 'AreasController@active')->name('areas.active')
 
 ////////// Rutas materias //////////
 
-Route::get('/view/areas/subjects/{id}','SubjectsController@index')->name('areas.subjects.index')->middleware('permission:Administrador_materias_ver');
-Route::get('/create/areas/subjects/{id}','SubjectsController@create')->name('areas.subjects.create')->middleware('permission:Administrador_materias_crear');
-Route::get('/edit/areas/subjects/{id}','SubjectsController@edit')->name('areas.subjects.edit')->middleware('permission:Administrador_materias_editar');
-Route::post('/store/areas/subjects','SubjectsController@store')->name('areas.subjects.store')->middleware('permission:Administrador_materias_crear');
-Route::post('/update/areas/subjects','SubjectsController@update')->name('areas.subjects.update')->middleware('permission:Administrador_materias_editar');
-Route::get('/inactive/areas/subjects/{id}/{id_area}', 'SubjectsController@inactive')->name('areas.subjects.inactive')->middleware('permission:Administrador_materias_inactivar');
-Route::get('/active/areas/subjects/{id}/{id_area}', 'SubjectsController@active')->name('areas.subjects.active')->middleware('permission:Administrador_materias_activar');
+Route::get('/view/areas/subjects/{id}','SubjectsController@index')->name('areas.subjects.index');//->middleware('permission:Administrador_materias_ver');
+Route::get('/create/areas/subjects/{id}','SubjectsController@create')->name('areas.subjects.create');//->middleware('permission:Administrador_materias_crear');
+Route::get('/edit/areas/subjects/{id}','SubjectsController@edit')->name('areas.subjects.edit');//->middleware('permission:Administrador_materias_editar');
+Route::post('/store/areas/subjects','SubjectsController@store')->name('areas.subjects.store');//->middleware('permission:Administrador_materias_crear');
+Route::post('/update/areas/subjects','SubjectsController@update')->name('areas.subjects.update');//->middleware('permission:Administrador_materias_editar');
+Route::get('/inactive/areas/subjects/{id}/{id_area}', 'SubjectsController@inactive')->name('areas.subjects.inactive');//->middleware('permission:Administrador_materias_inactivar');
+Route::get('/active/areas/subjects/{id}/{id_area}', 'SubjectsController@active')->name('areas.subjects.active');//->middleware('permission:Administrador_materias_activar');
 
 
 ////////// Rutas temas //////////
 
-Route::get('/view/areas/subjects/topics/{id}','TopicsController@index')->name('areas.subjects.topics.index')->middleware('permission:Administrador_parametricas_ver');
-Route::get('/create/subjects/topics/{id}','TopicsController@create')->name('areas.subjects.topics.create')->middleware('permission:Administrador_parametricas_ver');
-Route::get('/edit/subjects/topics/{id}','TopicsController@edit')->name('areas.subjects.topics.edit')->middleware('permission:Administrador_parametricas_ver');
-Route::post('/store/areas/subjects/topics','TopicsController@store')->name('areas.subjects.topics.store')->middleware('permission:Administrador_parametricas_ver');
-Route::post('/update/areas/subjects/topics','TopicsController@update')->name('areas.subjects.topics.update')->middleware('permission:Administrador_parametricas_ver');
-Route::get('/inactive/areas/subjects/topics/{id}/{id_subject}', 'TopicsController@inactive')->name('areas.subjects.topics.inactive')->middleware('permission:Administrador_parametricas_ver');
-Route::get('/active/areas/subjects/topics/{id}/{id_subject}', 'TopicsController@active')->name('areas.subjects.topics.active')->middleware('permission:Administrador_parametricas_ver');
+Route::get('/view/areas/subjects/topics/{id}','TopicsController@index')->name('areas.subjects.topics.index');//->middleware('permission:Administrador_parametricas_ver');
+Route::get('/create/subjects/topics/{id}','TopicsController@create')->name('areas.subjects.topics.create');//->middleware('permission:Administrador_parametricas_ver');
+Route::get('/edit/subjects/topics/{id}','TopicsController@edit')->name('areas.subjects.topics.edit');//->middleware('permission:Administrador_parametricas_ver');
+Route::post('/store/areas/subjects/topics','TopicsController@store')->name('areas.subjects.topics.store');//->middleware('permission:Administrador_parametricas_ver');
+Route::post('/update/areas/subjects/topics','TopicsController@update')->name('areas.subjects.topics.update');//->middleware('permission:Administrador_parametricas_ver');
+Route::get('/inactive/areas/subjects/topics/{id}/{id_subject}', 'TopicsController@inactive')->name('areas.subjects.topics.inactive');//->middleware('permission:Administrador_parametricas_ver');
+Route::get('/active/areas/subjects/topics/{id}/{id_subject}', 'TopicsController@active')->name('areas.subjects.topics.active');//->middleware('permission:Administrador_parametricas_ver');
 
 //////////// Rutas empleados //////////
 
@@ -211,7 +211,20 @@ Route::get('/communications/view_living/{id}','CommunicationsController@living')
 Route::get('/process/request/index','ProcessController@index_request')->name('process.request.index');
 Route::get('/process/request/create','ProcessController@create_request')->name('process.request.create');
 Route::post('/process/request/store','ProcessController@store_request')->name('process.request.store');
-Route::get('/edit_quotes/cotizaciones/myQuotes','ProcessController@edit_quotes')->name('quotes.edit_my_quotes');
+Route::get('/process/request/edit_my_quotes','ProcessController@edit_request')->name('process.request.edit_my_quotes');
+
+/////////Rutas cotizaciones //////////
+
+Route::get('/process/quotes/index','ProcessController@index_quotes')->name('process.quotes.index');
+Route::get('/process/quotes/create','ProcessController@create_quotes')->name('process.quotes.create');
+Route::get('/process/quotes/edit','ProcessController@edit_quotes')->name('process.quotes.edit');
+
+/////////Rutas trabajos //////////
+
+Route::get('/process/works/index','ProcessController@index_works')->name('process.works.index');
+Route::get('/process/works/create','ProcessController@create_works')->name('process.works.create');
+Route::get('/process/works/edit','ProcessController@edit_works')->name('process.works.edit');
+
 
 Route::get('/clearcache', function () {
     Artisan::call('cache:clear');
