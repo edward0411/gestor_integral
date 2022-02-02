@@ -14,6 +14,9 @@ class RequestQuote extends Model
         'value',
         'observation',
         'request_quote_tutor_id',
+        'value_utility',
+        'private_note',
+        'utility_type_id',
         'status',
         'created_by',
         'updated_by',
@@ -24,5 +27,13 @@ class RequestQuote extends Model
     // relaciones
     public function requestQuoteTutor() {
         return $this->belongsTo(RequestQuoteTutor::class, 'request_quote_tutor_id');
+    }
+
+    public function utilityType() {
+        return $this->belongsTo(Parametrics::class, 'utility_type_id');
+    }
+
+    public function bondQuotes() {
+        return $this->hasMany(BondQuote::class, 'bond_id');
     }
 }
