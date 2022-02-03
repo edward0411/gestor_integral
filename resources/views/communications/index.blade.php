@@ -34,8 +34,13 @@
                                     <td>N/A</td>
                                     <td>{{ $communication->request->created_at }}</td>
                                     <td>{{ $communication->request->requestState->name }}</td>
-                                    <td>
-                                        <a href="{{ route('communications.living', $communication->id) }}" class="btn btn-warning btn-xs"><i class="fas fa-eye"></i> {!! trans('Ver') !!}</a>
+                                    <td>                                         
+                                        <a href="{{ route('communications.living', $communication->id) }}" class="btn btn-warning btn-xs">
+                                            <i class="fas fa-eye"></i> {!! trans('Ver ') !!}                                            
+                                            @if (count($communication->messages))
+                                                <span class="badge bg-danger"> {{ count($communication->messages) }}</span>
+                                            @endif
+                                        </a>                                        
                                     </td>
                                 </tr>
                             @endforeach

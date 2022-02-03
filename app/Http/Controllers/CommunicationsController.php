@@ -16,6 +16,8 @@ class CommunicationsController extends Controller
     {
         $communications = Communications::with(['request' => function ($query) {
             $query->with('requestState');
+        }, 'messages' => function ($query) {
+            $query->where('m_state', 0);
         }, 'user'])->get();
         return view('communications.index', compact('communications'));
     }
@@ -26,8 +28,12 @@ class CommunicationsController extends Controller
             $query->with('parametric');
             $query->with('requestState');
         }, 'messages' => function($query) {
-            $query->with('user');
+            $query->with(['user' => function ($query){
+                $query->with('roles');
+            }]);
         }, 'user'])->find($id);
+        # mark as reading messages
+        $communication->messages()->where('m_state', 0)->update(['m_state' => 1]);
         return view('communications.living', compact('communication'));
     }
 

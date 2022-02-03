@@ -52,12 +52,26 @@
                 </div>
                 <hr>
                 <div class="row">
-                    @foreach($communication->messages as $message)                    
+                    @foreach($communication->messages as $message)
+                        @php
+                            $roleIDs = array_map(function ($i) {return $i['id'];}, $message->user->roles->toArray())
+                        @endphp
                         <div class="form-group col-md-9 {{ $message->id_user == auth()->user()->id ? 'float-right' : 'float-left' }}">
                             <div class="card-body">
-                                <div class="card-header color-instructor">
-                                    <h5 class="text-white" style="font-weight: bold;">{{ $message->user->u_nickname }} </h5>                                    
-                                </div>
+                                @if (in_array(1, $roleIDs))
+                                    <div class="card-header color-header">
+                                @endif
+                                @if (in_array(6, $roleIDs))
+                                    <div class="card-header color-instructor">
+                                @endif
+                                @if (in_array(3, $roleIDs))
+                                    <div class="card-header color-comercial">
+                                @endif
+                                @if (in_array(4, $roleIDs))
+                                    <div class="card-header color-client">
+                                @endif
+                                    <h5 class="text-white" style="font-weight: bold;">{{ $message->user->u_nickname }} </h5>                       
+                                </div>                                    
                                 <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
                                     <p>{{ $message->m_text_message }}</p>
                                     <small style="text-align:rigth;">Enviado el {{ $message->m_date_message }}.</small>
