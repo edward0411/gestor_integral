@@ -18,6 +18,7 @@ class RequestQuote extends Model
         'private_note',
         'utility_type_id',
         'status',
+        'status',
         'created_by',
         'updated_by',
         'deleted_by',

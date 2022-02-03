@@ -5,14 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BondQuote extends Model
+class Payment extends Model
 {
     use SoftDeletes;
-    protected $table = 'bond_quotes';
+    protected $table = 'payments';
 
     protected $fillable = [
-        'bond_id',
+        'value',
+        'payment_type',
+        'payment_reference',
+        'observation',
         'request_quote_id',
+        'status',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -20,11 +24,10 @@ class BondQuote extends Model
 
 
     // relaciones
-    public function bond() {
-        return $this->belongsTo(Bonds::class, 'bond_id');
-    }
-
     public function requestQuote() {
         return $this->belongsTo(RequestQuote::class, 'request_quote_id');
     }
+
+    // scope
+   
 }
