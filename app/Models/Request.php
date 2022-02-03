@@ -64,4 +64,9 @@ class Request extends Model
         return $this->hasMany(RequestTopic::class, 'request_id');
     }
 
+
+    public function communications()
+    {
+        return $this->hasOne(Communications::class, 'id_request');
+    }
 }

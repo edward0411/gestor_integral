@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Messages;
 use App\Models\Parametrics;
 use App\Models\TutorLanguage;
 use App\Models\TutorsBanks;
@@ -88,6 +89,11 @@ class User extends Authenticatable
 
     public function parametric() {
         return $this->belongsTo(Parametrics::class, 'u_type_doc');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Messages::class, 'id_user');
     }
 
     // scope

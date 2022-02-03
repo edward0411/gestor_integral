@@ -206,6 +206,7 @@ Route::get('/delete/profile/{id}', 'ProfileController@delete')->name('profile.de
 
 Route::get('/communications/index','CommunicationsController@index')->name('communications.index');
 Route::get('/communications/view_living/{id}','CommunicationsController@living')->name('communications.living');
+Route::post('/communications/{communication}/messages','CommunicationsController@storeMesage')->name('communications.messages.store');
 
 ////////Procesos///////////////
 Route::get('/process/request/index/{rol}','ProcessController@index_request')->name('process.request.index');
