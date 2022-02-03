@@ -49,11 +49,15 @@ class CreatePaymentsTable extends Migration
 
         Schema::table('request_quotes', function (Blueprint $table) {
             $table->float('value')->change();
-            $table->float('value_utility')->after('value');
+            $table->float('value_utility',10)->after('value');
             $table->text('private_note')->nullable()->after('observation');
 
             $table->unsignedInteger('utility_type_id')->comment('tipo de utilidad')->after('request_quote_tutor_id');
             $table->foreign('utility_type_id')->references('id')->on('parametrics');
+        });
+
+        Schema::table('request_quote_tutors', function (Blueprint $table) {
+            $table->float('value')->change();
         });
     }
 
