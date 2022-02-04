@@ -169,7 +169,6 @@ class CreateRequestTables extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('value')->comment('valor de la cotización del tutor');
             $table->text('observation')->nullable();
-            $table->date('application_date')->nullable();
 
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('requests');
