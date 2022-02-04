@@ -15,11 +15,19 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="u_name">{!! trans(' Nombre Completo') !!}</label>
+                                <input type="text" class="form-control form-control-sm" id="u_name" name="u_name" value="client1" readonly>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="u_name">{!! trans('Solicitud') !!}</label>
                                 <input type="text" class="form-control form-control-sm" id="u_name" name="u_name" value="{{ old('u_name') }}" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="u_nickname">{!! trans('Nick Name') !!}</label>
-                                <input type="text" class="form-control form-control-sm" id="u_nickname" name="u_nickname" value="{{ old('u_nickname') }}">
+                                <input type="text" class="form-control form-control-sm" id="u_nickname" name="u_nickname" value="{{ old('u_nickname') }}" readonly>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="u_name">{!! trans('Solicitud') !!}</label>
+                                <input type="text" class="form-control form-control-sm" id="u_name" name="u_name" value="{{ old('u_name') }}" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="u_type_doc">{!! trans('Tipo de Documento') !!}</label>
@@ -29,6 +37,10 @@
                                     <option value="{{$type->id}}">{{$type->p_text}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="u_name">{!! trans('Solicitud') !!}</label>
+                                <input type="text" class="form-control form-control-sm" id="u_name" name="u_name" value="{{ old('u_name') }}" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="u_num_doc">{!! trans('Número Documento') !!}</label>
