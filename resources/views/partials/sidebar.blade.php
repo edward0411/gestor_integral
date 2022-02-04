@@ -343,7 +343,7 @@
               @if((\Auth::user()->roles()->first()->id == 4) || (\Auth::user()->roles()->first()->id == 6))
               @can('Perfil_datosBasicos_ver')
               <li class="nav-item">
-                <a href="{{route('profile.index_basic_data')}}" class="nav-link">
+                <a href="{{route('profile.index_basic_data',\Auth::user()->id)}}" class="nav-link">
                   <i class="icofont-data"></i>
                   <p><font size="3">Datos básicos</font></p>
                 </a>

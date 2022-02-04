@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Messages;
 use App\Models\Parametrics;
+use App\Models\Coins;
 use App\Models\TutorLanguage;
 use App\Models\TutorsBanks;
 use App\Models\TutorService;
@@ -89,6 +90,13 @@ class User extends Authenticatable
 
     public function parametric() {
         return $this->belongsTo(Parametrics::class, 'u_type_doc');
+    }
+
+    public function means() {
+        return $this->belongsTo(Parametrics::class, 'u_id_means');
+    }
+    public function coins() {
+        return $this->belongsTo(Coins::class, 'u_id_money');
     }
 
     public function messages()

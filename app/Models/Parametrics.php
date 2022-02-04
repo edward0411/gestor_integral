@@ -25,6 +25,10 @@ class Parametrics extends Model
         return $this->hasMany(User::class, 'u_type_doc');
     }
 
+    public function users_means() {
+        return $this->hasMany(User::class, 'u_id_means');
+    }
+
     public function tutorLanguages() {
         return $this->hasMany(TutorLanguage::class, 'id_language');
     }
@@ -41,5 +45,6 @@ class Parametrics extends Model
     function scopeHandleText($query, $text){
         return $query->where('p_text', $text);
     }
+
 
 }
