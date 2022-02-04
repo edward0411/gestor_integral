@@ -14,7 +14,7 @@
                     @csrf
                     <div class="card-body">
                         <div class="row">
-                            @if(Auth::user()->roles()->first()->id == 3)
+                            @if(Auth::user()->roles()->first()->id != 4)
                                 <div class="form-group col-md-4">
                             @else
                                 <div class="form-group col-md-6">
@@ -24,7 +24,7 @@
                                 <input type="date" class="form-control form-control-sm" id="deliver_date" name="deliver_date" value="" required>
                             </div>
 
-                            @if(Auth::user()->roles()->first()->id == 3)
+                            @if(Auth::user()->roles()->first()->id != 4)
                             <div class="form-group col-md-4">
                                     <label for="id_client">{!! trans('Clientes') !!}</label>
                                     <select name="id_client" id="id_client"  class="form-control form-control-sm" required>
