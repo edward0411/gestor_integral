@@ -192,7 +192,6 @@
             data: datos,
             success: function(respuesta) {
                 $.each(respuesta, function(index, elemento) {
-                    console.log("res", respuesta);
                     traerCuentasBanc();
                         $('#info_bancaria_mensaje').html(
                             `<div class="alert alert-success alert-block shadow">

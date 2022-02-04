@@ -9,6 +9,7 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Editar cotización') !!}</h5>
                 </div>
                 <!-- /.card-header -->
+                
                 <form method="POST" action="{{route('process.request.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
@@ -212,7 +213,7 @@
                        <!-- /.card-body -->
                     <div class="card-body">
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
-                        <a href="{{route('process.request.index')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar')
+                        <a href="{{route('process.quotes.index')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar')
                             !!}</a>
                     </div>
                     <!-- /.card-body -->

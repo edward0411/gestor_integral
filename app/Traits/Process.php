@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use File;
 use Illuminate\Support\Str;
 
+use App\User;
 use App\Models\Request as solicitud;
 use App\Models\RequestHistory as history;
 use App\Models\RequestResponse as responses;
@@ -16,21 +17,46 @@ use App\Models\RequestLanguage as lanjuage;
 use App\Models\RequestSystem as systems;
 use App\Models\RequestTopic as topics;
 use App\Models\RequestFile as filesRequest;
-
+use App\Models\Communications;
+use Facade\Ignition\QueryRecorder\Query;
+use GuzzleHttp\Psr7\Message;
 
 trait Process
 {
+    public function getInfoRequest($id_rol)
+    {
+        $query = solicitud::orderBy('date_delivery');
+
+        if($id_rol == 4){
+            $query = $query->where('user_id',Auth::user()->id);
+        }
+        return $query;
+    }
+
+    public function infoClients()
+    {
+        $clients = User::join('model_has_roles as m','m.model_id','=','users.id')
+        ->where('m.role_id',4)
+        ->select('users.id','users.u_nickname')
+        ->get();
+
+        return $clients;
+    }
 
     public function saveRequest($data)
     {
         try {
-
+            $communication = null;
             if (isset($data->id_request)) {         
                 $register = solicitud::find($data->id_request);
                 $register->updated_by = Auth::user()->id;
             }else{
                 $register = new solicitud();
                 $register->created_by = Auth::user()->id;
+                $communication = new Communications([
+                    'id_user' => Auth::user()->id,
+                    'c_status' => 1
+                ]);                
             }
             $register->date_delivery = $data->deliver_date;
             $register->observation = $data->observations;
@@ -41,7 +67,21 @@ trait Process
             }else{
                 $register->user_id = Auth::user()->id;
             }
-            $register->save();  
+            $register->save();            
+            if (!is_null($communication)) {            
+                $register->communications()->save($communication);
+                $communication->messages()->create([
+                    'id_user' => 1,
+                    'm_date_message' => date('Y-m-d H:i:s'),
+                    'm_text_message' => sprintf(
+                        'Bienvenido a tusTareas.com nos complace darte la bienvenida a nuestra plataforma,'
+                        . 'por medio de esta sala puedes dejar tus comentarios, dudas e inquietudes sobre tu cotización #%d,'
+                        .' nuestro personal está atento a responder tus mensajes', 
+                        $communication->id
+                    ),
+                    'm_state' => 0,
+                ]);
+            }
 
             $id_request = $register->id;
 
@@ -71,6 +111,8 @@ trait Process
                 $files = $data->file("file");
                 $this->saveFilesRequest($files,$id_request);
             }
+
+            
 
             return true;
             

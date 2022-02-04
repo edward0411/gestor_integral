@@ -171,14 +171,16 @@
                   <p><font size="3">Solicitudes</font></p>
                 </a>
                 <ul class="nav nav-treeview">
+                  @if(\Auth::user()->roles()->first()->id == 4)
                   <li class="nav-item">
-                    <a href="{{route('process.request.index')}}" class="nav-link">
+                    <a href="{{route('process.request.index',Auth::user()->roles()->first()->id)}}" class="nav-link">
                       <i class="icofont-checked"></i>
                       <p>Mis solicitudes</p>
                     </a>
                   </li>
+                  @endif
                   <li class="nav-item">
-                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                    <a href="{{route('process.request.index',Auth::user()->roles()->first()->id)}}" class="nav-link">
                       <i class="icofont-close-squared-alt"></i>
                       <p>List. Solicitudes</p>
                     </a>
@@ -193,7 +195,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{route('customers.index')}}" class="nav-link">
+                    <a href="{{route('process.quotes.index')}}" class="nav-link">
                       <i class="icofont-checked"></i>
                       <p>Mis Cotizaciones</p>
                     </a>
@@ -214,7 +216,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{route('customers.index')}}" class="nav-link">
+                    <a href="{{route('process.works.index')}}" class="nav-link">
                       <i class="icofont-checked"></i>
                       <p>Mis trabajos</p>
                     </a>

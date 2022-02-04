@@ -29,11 +29,11 @@ class HomeController extends Controller
 
         switch ($id_rol) {
             case '3':
-                return redirect()->route('quotes.index');
+                return redirect()->route('process.request.index',$id_rol);
                 break;
             case '4':
                 if (Auth::user()->u_state == 1 ) {
-                    return redirect()->route('process.request.index');
+                    return redirect()->route('process.request.index',$id_rol);
                 }elseif(Auth::user()->u_state == 4){
                     return redirect()->route('logouth');
                 }
