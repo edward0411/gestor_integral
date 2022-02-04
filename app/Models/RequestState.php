@@ -28,4 +28,9 @@ class RequestState extends Model
         'ENTREGABLE RECHAZADO',
     ];
 
+    // scope
+    function scopeHandleState($query, $state){
+        return $query->where('name', $state);
+    }
+
 }
