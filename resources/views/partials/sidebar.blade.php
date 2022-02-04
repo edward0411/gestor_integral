@@ -12,15 +12,15 @@
           <a href="#" class="d-block">{{ Auth::user()->u_nickname }}</a>
         </div>
       </div>
-  
+
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        @can('Administrador')         
+        @can('Administrador')
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="icofont-lock"></i>
             <p>
-              <font size="4">Administrador</font>  
+              <font size="4">Administrador</font>
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -77,9 +77,9 @@
                   <i class="icofont-people"></i>
                   <p>Empleados</p>
                 </a>
-              </li> 
+              </li>
               @endcan
-              @can('Administrador_roles_ver')        
+              @can('Administrador_roles_ver')
               <li class="nav-item">
                 <a href="{{route('roles.index')}}" class="nav-link">
                   <i class="icofont-users-alt-3"></i>
@@ -120,7 +120,7 @@
               </li>
               @endcan
             </ul>
-          </li>      
+          </li>
           <!-- /.Modulo Administrador -->
         @endcan
         @can('Preregistro')
@@ -128,18 +128,20 @@
             <a href="#" class="nav-link">
               <i class="icofont-education"></i>
               <p>
-               <font size="4">Pre Registros</font>  
+               <font size="4">Pre Registros</font>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               @can('Preregistro_historial_ver')
+              @if(\Auth::user()->roles()->first()->id == 6)
               <li class="nav-item">
                 <a href="{{route('pre_registration.index_registration')}}" class="nav-link">
                   <i class="icofont-paper"></i>
                   <p><font size="3">Mi registro</font></p>
                 </a>
               </li>
+              @endif
               @endcan    
               @can('Preregistro_listado_ver')        
               <li class="nav-item">
@@ -148,23 +150,23 @@
                   <p><font size="3">Listado</font></p>
                 </a>
               </li>
-              @endcan            
+              @endcan
             </ul>
           </li>
           @endcan
           <!-- /.Modulo Pre Registro -->
-          
-          
+
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="icofont-money"></i>
               <p>
-               <font size="4">Procesos </font>  
+               <font size="4">Procesos </font>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-             
+
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="icofont-data"></i>
@@ -179,15 +181,17 @@
                     </a>
                   </li>
                   @endif
+                  @if(\Auth::user()->roles()->first()->id != 4)
                   <li class="nav-item">
                     <a href="{{route('process.request.index',Auth::user()->roles()->first()->id)}}" class="nav-link">
                       <i class="icofont-close-squared-alt"></i>
                       <p>List. Solicitudes</p>
                     </a>
                   </li>
+                  @endif
                 </ul>
               </li>
-              
+
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="icofont-data"></i>
@@ -208,7 +212,7 @@
                   </li>
                 </ul>
               </li>
-              
+
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="icofont-data"></i>
@@ -229,7 +233,7 @@
                   </li>
                 </ul>
               </li>
-              
+
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="icofont-data"></i>
@@ -260,7 +264,7 @@
             <a href="#" class="nav-link">
               <i class="icofont-wallet"></i>
               <p>
-               <font size="4">Billetera Virtual</font>  
+               <font size="4">Billetera Virtual</font>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -290,18 +294,26 @@
             <a href="#" class="nav-link">
               <i class="icofont-coins"></i>
               <p>
-               <font size="4">Pagos</font>  
+               <font size="4">Pagos</font>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               @can('Pagos_HistorialPagosClientes_ver')
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="icofont-data"></i>
-                  <p><font size="3">Hist. Pagos</font></p>
-                </a>
-              </li>
+                @if((\Auth::user()->roles()->first()->id == 4)))
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                        <i class="icofont-data"></i>
+                        <p><font size="3">Mis Pagos</font></p>
+                        </a>
+                    </li>
+                @endif
+                <li class="nav-item">
+                    <a href="{{route('payment.index')}}" class="nav-link">
+                    <i class="icofont-data"></i>
+                    <p><font size="3">Hist. Pagos</font></p>
+                    </a>
+                </li>
               @endcan
             </ul>
           </li>
@@ -312,7 +324,7 @@
             <a href="#" class="nav-link">
               <i class="icofont-tasks"></i>
               <p>
-               <font size="4">Reportes</font>  
+               <font size="4">Reportes</font>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -328,14 +340,14 @@
             </ul>
           </li>
           @endcan
-          
+
           @can('Perfil')
           <!-- /.Modulo Pre Registro -->
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="icofont-teacher"></i>
               <p>
-               <font size="4">Mi Perfil</font>  
+               <font size="4">Mi Perfil</font>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -356,18 +368,18 @@
                   <i class="icofont-bill-alt"></i>
                   <p><font size="3">Bonos</font></p>
                 </a>
-              </li> 
+              </li>
               @endcan
             </ul>
           </li>
           @endcan
-        
+
           @can('Comunicaciones')
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="icofont-phone"></i>
               <p>
-               <font size="4">Comunicaciones</font>  
+               <font size="4">Comunicaciones</font>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>

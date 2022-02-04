@@ -46,5 +46,8 @@ class Parametrics extends Model
         return $query->where('p_text', $text);
     }
 
+    function scopeHandleCategory($query, $category){
+        return $query->where('p_category', $category);
+    }
 
 }

@@ -24,16 +24,12 @@
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{ $communication->request->date_delivery }}" disabled>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="">Monitor:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{ $communication->request->requestState->name }}" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Comercial:</label>
+                            <label for="">Estado de solicitud:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{ $communication->request->requestState->name }}" disabled>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="">Tipo de Servicio:</label>
-                            <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{ $communication->request->parametric->p_text }}" disabled>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{ $communication->request->parametric->p_text }}" disabled>
                         </div>
                     </div>
                 </div>
@@ -56,6 +52,10 @@
                         @php
                             $roleIDs = array_map(function ($i) {return $i['id'];}, $message->user->roles->toArray())
                         @endphp
+                        
+                        @if($message->id_user == auth()->user()->id)                        
+                            <div class="form-group col-md-3 float-left"></div>
+                        @endif                  
                         <div class="form-group col-md-9 {{ $message->id_user == auth()->user()->id ? 'float-right' : 'float-left' }}">
                             <div class="card-body">
                                 @if (in_array(1, $roleIDs))
@@ -78,7 +78,9 @@
                                 </div>
                             </div>  
                         </div>
-                        <div class="form-group col-md-3 {{ $message->id_user == auth()->user()->id ? 'float-left' : 'float-right' }}"></div>
+                        @if($message->id_user != auth()->user()->id)
+                            <div class="form-group col-md-3 float-left"></div>
+                        @endif
                     @endforeach                                       
                 </div>
                 

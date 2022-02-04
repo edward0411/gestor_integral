@@ -208,6 +208,12 @@ Route::get('/communications/index','CommunicationsController@index')->name('comm
 Route::get('/communications/view_living/{id}','CommunicationsController@living')->name('communications.living');
 Route::post('/communications/{communication}/messages','CommunicationsController@storeMesage')->name('communications.messages.store');
 
+///////Rutas de pagos /////////
+Route::get('/payment/index','PaymentController@index')->name('payment.index');
+Route::get('/payment/show/{quote}','PaymentController@show')->name('payment.show');
+
+
+
 ////////Procesos///////////////
 Route::get('/process/request/index/{rol}','ProcessController@index_request')->name('process.request.index');
 Route::get('/process/request/create','ProcessController@create_request')->name('process.request.create');
@@ -236,82 +242,6 @@ Route::get('/clearcache', function () {
 });
 
 Route::get('/createpermission',function(){
-
-    Permission::create(['name' => 'Administrador']);
-
-    Permission::create(['name' => 'Administrador_clientes_ver']);
-    Permission::create(['name' => 'Administrador_clientes_crear']);
-    Permission::create(['name' => 'Administrador_clientes_editar']);
-    Permission::create(['name' => 'Administrador_clientes_activar']);
-    Permission::create(['name' => 'Administrador_clientes_inactivar']);
-
-    Permission::create(['name' => 'Administrador_tutores_ver']);
-    Permission::create(['name' => 'Administrador_tutores_crear']);
-    Permission::create(['name' => 'Administrador_tutores_editar']);
-    Permission::create(['name' => 'Administrador_tutores_activar']);
-    Permission::create(['name' => 'Administrador_tutores_inactivar']);
-
-    Permission::create(['name' => 'Administrador_empleados_ver']);
-    Permission::create(['name' => 'Administrador_empleados_crear']);
-    Permission::create(['name' => 'Administrador_empleados_editar']);
-    Permission::create(['name' => 'Administrador_empleados_eliminar']);
-
-    Permission::create(['name' => 'Administrador_roles_ver']);
-    Permission::create(['name' => 'Administrador_roles_crear']);
-    Permission::create(['name' => 'Administrador_roles_editar']);
-    Permission::create(['name' => 'Administrador_roles_eliminar']);
-
-    Permission::create(['name' => 'Administrador_paises_ver']);
-    Permission::create(['name' => 'Administrador_paises_crear']);
-    Permission::create(['name' => 'Administrador_paises_editar']);
-    Permission::create(['name' => 'Administrador_paises_eliminar']);
-
-    Permission::create(['name' => 'Administrador_parametricas_ver']);
-    Permission::create(['name' => 'Administrador_parametricas_crear']);
-    Permission::create(['name' => 'Administrador_parametricas_editar']);
-    Permission::create(['name' => 'Administrador_parametricas_eliminar']);
-
-    Permission::create(['name' => 'Administrador_monedas_ver']);
-    Permission::create(['name' => 'Administrador_monedas_crear']);
-    Permission::create(['name' => 'Administrador_monedas_editar']);
-    Permission::create(['name' => 'Administrador_monedas_eliminar']);
-    Permission::create(['name' => 'Administrador_monedas_inactivar']);
-    Permission::create(['name' => 'Administrador_monedas_activar']);
-
-    Permission::create(['name' => 'Administrador_areas_ver']);
-    Permission::create(['name' => 'Administrador_areas_crear']);
-    Permission::create(['name' => 'Administrador_areas_editar']);
-    Permission::create(['name' => 'Administrador_areas_eliminar']);
-
-    Permission::create(['name' => 'Preregistro']);
-
-    Permission::create(['name' => 'Preregistro_historial_ver']);
-    Permission::create(['name' => 'Preregistro_listado_ver']);
-
-    Permission::create(['name' => 'Perfil']);
-
-    Permission::create(['name' => 'Perfil_datosBasicos_ver']);
-    Permission::create(['name' => 'Perfil_bonos_ver']);
-
-    Permission::create(['name' => 'Comunicaciones']);
-
-    Permission::create(['name' => 'Comunicaciones_bandeja']);
-
-    //Segunda ronda de permisos
-
-    Permission::create(['name' => 'Cotizaciones']);
-    Permission::create(['name' => 'Cotizaciones_pendientes_ver']);
-    Permission::create(['name' => 'Cotizaciones_historial_ver']);
-    Permission::create(['name' => 'Cotizaciones_misCotizaciones_ver']);
-    Permission::create(['name' => 'Billetera_virtual']);
-    Permission::create(['name' => 'Billetera_virtual_miBilletera_ver']);
-    Permission::create(['name' => 'Billetera_virtual_HistoriarPagos_ver']);
-    Permission::create(['name' => 'Pagos']);
-    Permission::create(['name' => 'Pagos_HistorialPagosClientes_ver']);
-    Permission::create(['name' => 'Reportes']);
-    Permission::create(['name' => 'Reportes_Listado_ver']);
-
-    
 
 
 
