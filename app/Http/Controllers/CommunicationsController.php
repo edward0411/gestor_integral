@@ -14,11 +14,16 @@ class CommunicationsController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
         $communications = Communications::with(['request' => function ($query) {
             $query->with('requestState');
         }, 'messages' => function ($query) {
             $query->where('m_state', 0);
-        }, 'user'])->get();
+        }, 'user']);
+        if (!$user->hasRole('Administrador')) {
+            $communications = $communications->where('id_user', $user->id);
+        }
+        $communications = $communications->get();
         return view('communications.index', compact('communications'));
     }
 
