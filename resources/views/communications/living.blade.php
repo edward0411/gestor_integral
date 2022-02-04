@@ -24,16 +24,12 @@
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{ $communication->request->date_delivery }}" disabled>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="">Monitor:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{ $communication->request->requestState->name }}" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Comercial:</label>
+                            <label for="">Estado de solicitud:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{ $communication->request->requestState->name }}" disabled>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="">Tipo de Servicio:</label>
-                            <input type="text" class="form-control form-control-sm" name="maquina" style="text-align:center;" value="{{ $communication->request->parametric->p_text }}" disabled>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{ $communication->request->parametric->p_text }}" disabled>
                         </div>
                     </div>
                 </div>
