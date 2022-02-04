@@ -16,6 +16,7 @@ class Payment extends Model
         'payment_reference',
         'observation',
         'request_quote_id',
+        'vaucher',
         'status',
         'created_by',
         'updated_by',
@@ -29,5 +30,5 @@ class Payment extends Model
     }
 
     // scope
-   
+
 }

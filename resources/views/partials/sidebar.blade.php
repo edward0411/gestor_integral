@@ -303,7 +303,7 @@
                     </li>
                 @endif
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('payment.index')}}" class="nav-link">
                     <i class="icofont-data"></i>
                     <p><font size="3">Hist. Pagos</font></p>
                     </a>

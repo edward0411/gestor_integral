@@ -207,6 +207,12 @@ Route::get('/delete/profile/{id}', 'ProfileController@delete')->name('profile.de
 Route::get('/communications/index','CommunicationsController@index')->name('communications.index');
 Route::get('/communications/view_living/{id}','CommunicationsController@living')->name('communications.living');
 
+///////Rutas de pagos /////////
+Route::get('/payment/index','PaymentController@index')->name('payment.index');
+Route::get('/payment/show/{quote}','PaymentController@show')->name('payment.show');
+
+
+
 ////////Procesos///////////////
 Route::get('/process/request/index','ProcessController@index_request')->name('process.request.index');
 Route::get('/process/request/create','ProcessController@create_request')->name('process.request.create');
@@ -223,7 +229,7 @@ Route::get('/clearcache', function () {
 
 Route::get('/createpermission',function(){
 
- 
+
 
     return '<h1>se han creado los permisos</h1>';
 });

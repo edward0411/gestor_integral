@@ -37,4 +37,11 @@ class RequestQuote extends Model
     public function bondQuotes() {
         return $this->hasMany(BondQuote::class, 'bond_id');
     }
+
+    public function payments() {
+        return $this->hasMany(Payment::class, 'request_quote_id');
+    }
+
+    // Accessor
+    
 }

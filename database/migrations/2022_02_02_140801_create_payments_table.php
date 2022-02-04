@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->enum('payment_type',['PARCIAL','TOTAL']);
             $table->string('payment_reference')->unique()->comment('refrencia de pago');
             $table->text('observation')->nullable();
+            $table->string('vaucher')->nullable();
 
             $table->unsignedBigInteger('request_quote_id');
             $table->foreign('request_quote_id')->references('id')->on('request_quotes');

@@ -15,6 +15,7 @@ class RequestQuoteTutor extends Model
         'observation',
         'request_id',
         'user_id',
+        'application_date',
         'status',
         'created_by',
         'updated_by',

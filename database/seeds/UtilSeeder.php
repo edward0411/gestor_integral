@@ -50,6 +50,7 @@ class UtilSeeder extends Seeder
                 'value'             => rand(20000, 50000),
                 'observation'       => collect(['Todo bien', 'por favor evaluar presupuesto','todo indica que esta bien'])->random(),
                 'request_id'        => Request::all()->random()->id,
+                'application_date'  => Carbon::now(),
                 'user_id'           => User::all()->random()->id,
             ]);
         }
