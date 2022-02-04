@@ -134,14 +134,16 @@
             </a>
             <ul class="nav nav-treeview">
               @can('Preregistro_historial_ver')
+              @if(\Auth::user()->roles()->first()->id == 6)
               <li class="nav-item">
                 <a href="{{route('pre_registration.index_registration')}}" class="nav-link">
                   <i class="icofont-paper"></i>
                   <p><font size="3">Mi registro</font></p>
                 </a>
               </li>
-              @endcan
-              @can('Preregistro_listado_ver')
+              @endif
+              @endcan    
+              @can('Preregistro_listado_ver')        
               <li class="nav-item">
                 <a href="{{route('pre_registration.index_turors_list')}}" class="nav-link">
                   <i class="icofont-tasks"></i>
@@ -179,12 +181,14 @@
                     </a>
                   </li>
                   @endif
+                  @if(\Auth::user()->roles()->first()->id != 4)
                   <li class="nav-item">
                     <a href="{{route('process.request.index',Auth::user()->roles()->first()->id)}}" class="nav-link">
                       <i class="icofont-close-squared-alt"></i>
                       <p>List. Solicitudes</p>
                     </a>
                   </li>
+                  @endif
                 </ul>
               </li>
 
@@ -351,7 +355,7 @@
               @if((\Auth::user()->roles()->first()->id == 4) || (\Auth::user()->roles()->first()->id == 6))
               @can('Perfil_datosBasicos_ver')
               <li class="nav-item">
-                <a href="{{route('profile.index_basic_data')}}" class="nav-link">
+                <a href="{{route('profile.index_basic_data',\Auth::user()->id)}}" class="nav-link">
                   <i class="icofont-data"></i>
                   <p><font size="3">Datos básicos</font></p>
                 </a>
