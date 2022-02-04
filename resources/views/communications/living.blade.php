@@ -56,6 +56,10 @@
                         @php
                             $roleIDs = array_map(function ($i) {return $i['id'];}, $message->user->roles->toArray())
                         @endphp
+                        
+                        @if($message->id_user == auth()->user()->id)                        
+                            <div class="form-group col-md-3 float-left"></div>
+                        @endif                  
                         <div class="form-group col-md-9 {{ $message->id_user == auth()->user()->id ? 'float-right' : 'float-left' }}">
                             <div class="card-body">
                                 @if (in_array(1, $roleIDs))
@@ -78,7 +82,9 @@
                                 </div>
                             </div>  
                         </div>
-                        <div class="form-group col-md-3 {{ $message->id_user == auth()->user()->id ? 'float-left' : 'float-right' }}"></div>
+                        @if($message->id_user != auth()->user()->id)
+                            <div class="form-group col-md-3 float-left"></div>
+                        @endif
                     @endforeach                                       
                 </div>
                 

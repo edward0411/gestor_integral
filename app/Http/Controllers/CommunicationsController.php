@@ -17,8 +17,11 @@ class CommunicationsController extends Controller
         $user = Auth::user();
         $communications = Communications::with(['request' => function ($query) {
             $query->with('requestState');
-        }, 'messages' => function ($query) {
-            $query->where('m_state', 0);
+        }, 'messages' => function ($query) use ($user) {
+            $query->where([
+                ['m_state', '=', 0],
+                ['id_user', '<>', $user->id],
+            ]);
         }, 'user']);
         if (!$user->hasRole('Administrador')) {
             $communications = $communications->where('id_user', $user->id);
@@ -33,12 +36,16 @@ class CommunicationsController extends Controller
             $query->with('parametric');
             $query->with('requestState');
         }, 'messages' => function($query) {
+            $query->orderBy('m_date_message', 'desc');
             $query->with(['user' => function ($query){
                 $query->with('roles');
             }]);
         }, 'user'])->find($id);
         # mark as reading messages
-        $communication->messages()->where('m_state', 0)->update(['m_state' => 1]);
+        $communication->messages()->where([
+            ['m_state', '=', 0],
+            ['id_user', '<>', Auth::user()->id],
+        ])->update(['m_state' => 1]);
         return view('communications.living', compact('communication'));
     }
 
