@@ -134,12 +134,14 @@
             </a>
             <ul class="nav nav-treeview">
               @can('Preregistro_historial_ver')
+              @if(\Auth::user()->roles()->first()->id == 6)
               <li class="nav-item">
                 <a href="{{route('pre_registration.index_registration')}}" class="nav-link">
                   <i class="icofont-paper"></i>
                   <p><font size="3">Mi registro</font></p>
                 </a>
               </li>
+              @endif
               @endcan    
               @can('Preregistro_listado_ver')        
               <li class="nav-item">
@@ -179,12 +181,14 @@
                     </a>
                   </li>
                   @endif
+                  @if(\Auth::user()->roles()->first()->id != 4)
                   <li class="nav-item">
                     <a href="{{route('process.request.index',Auth::user()->roles()->first()->id)}}" class="nav-link">
                       <i class="icofont-close-squared-alt"></i>
                       <p>List. Solicitudes</p>
                     </a>
                   </li>
+                  @endif
                 </ul>
               </li>
               
