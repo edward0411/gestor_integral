@@ -211,6 +211,10 @@ Route::post('/communications/{communication}/messages','CommunicationsController
 ///////Rutas de pagos /////////
 Route::get('/payment/index','PaymentController@index')->name('payment.index');
 Route::get('/payment/show/{quote}','PaymentController@show')->name('payment.show');
+Route::post('/payment/store/{quote}','PaymentController@store')->name('payment.store');
+Route::get('/payment/delete/{payment}','PaymentController@delete')->name('payment.delete');
+Route::get('/payment/showPayment/{payment}','PaymentController@showPayment')->name('payment.showPayment');
+Route::post('/payment/edit/{quote}','PaymentController@edit')->name('payment.edit');
 
 
 

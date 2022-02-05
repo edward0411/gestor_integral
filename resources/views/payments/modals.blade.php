@@ -8,19 +8,36 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-                <label >Estado de agendamiento</label>
-                <select class="form-control" >
-                    <option value="Elegir">Elegir</option>
-                    {{-- @foreach($status as $value)
-                        <option class="font-weight-bold text-uppercase" style="color: {{$value->colour}}" value="{{$value->id}}">{{$value->name}}</option>
-                    @endforeach --}}
-                </select>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" >Guardar</button>
-        </div>
+        <form method="POST" id="formEdit" action="{{route('payment.edit', $quote->id)}}"  enctype="multipart/form-data">
+            @csrf
+            <div class="card-body table-responsive">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="">Valor</label>
+                        <input type="number" class="form-control form-control-sm" name="value" id="valueEdit" style="text-align:center;" required>
+                        <input type="hidden" class="form-control form-control-sm" name="id" id="id" style="text-align:center;">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Referencia de pago</label>
+                        <input type="text" class="form-control form-control-sm" name="payment_reference" id="referenceEdit"  style="text-align:center;" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Vaucher</label>
+                        <input type="file" class="form-control form-control-sm" name="vaucher" id="vaucherEdit"  style="text-align:center;">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Observación</label>
+                        <textarea class="form-control form-control-sm" name="observation" id="observationEdit" cols="5" rows="1"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" >Guardar</button>
+            </div>
+            <div id="message"></div>
+
+        </form>
       </div>
     </div>
 </div>
@@ -36,31 +53,35 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="card-body table-responsive">
-
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="">Valor</label>
-                    <input type="number" class="form-control form-control-sm" name="" style="text-align:center;" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="">Referencia de pago</label>
-                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="">Vaucher</label>
-                    <input type="file" class="form-control form-control-sm" name="" style="text-align:center;" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="">Observación</label>
-                    <textarea class="form-control form-control-sm" name="observaciones" id="observaciones_`+id_cuenta+`_tutors_bank_details" cols="5" rows="1"></textarea>
+        <form method="POST" id="form" action="{{route('payment.store', $quote->id)}}"  enctype="multipart/form-data">
+            @csrf
+            <div class="card-body table-responsive">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="">Valor</label>
+                        <input type="number" class="form-control form-control-sm" name="value" id="value" style="text-align:center;" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Referencia de pago</label>
+                        <input type="text" class="form-control form-control-sm" name="payment_reference" id="payment_reference"  style="text-align:center;" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Vaucher</label>
+                        <input type="file" class="form-control form-control-sm" name="vaucher" id="vaucher"  style="text-align:center;">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Observación</label>
+                        <textarea class="form-control form-control-sm" name="observation" id="observation" cols="5" rows="1"></textarea>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" >Guardar</button>
-        </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" >Guardar</button>
+            </div>
+            <div id="message"></div>
+
+        </form>
       </div>
     </div>
 </div>
