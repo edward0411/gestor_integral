@@ -109,19 +109,20 @@
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de pagos') !!}</h5>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('process.request.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
+                    <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalCreate"><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
                   </div>
                 <div class="card-body table-responsive">
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
                           <tr class="bg-warning text-center">
-                            <th>{!! trans('Numeral') !!} </th>
+                            <th>{!! trans('Numeral de pagos') !!} </th>
                             <th>{!! trans('Valor') !!}</th>
                             <th>{!! trans('Tipo de pago') !!}</th>
                             <th>{!! trans('Referencia de pago') !!}</th>
                             <th>{!! trans('Vaucher') !!}</th>
                             <th>{!! trans('Observacion') !!}</th>
                             <th>{!! trans('Fecha de pago') !!}</th>
+                            <th>{!! trans('Acciones') !!}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -134,6 +135,10 @@
                                 <td>{{$payment->vaucher ? $payment->vaucher:'sin vaucher...' }}</td>
                                 <td>{{$payment->observation ? $payment->observation:'Sin observación...'}}</td>
                                 <td>{{$payment->created_at}}</td>
+                                <td>
+                                    <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                </td>
                             </tr>
                           @endforeach
                         </tbody>
@@ -142,6 +147,8 @@
             </div>
         </div>
     </div>
+    @include('payments.modals')
+
 </div>
 
 @endsection
