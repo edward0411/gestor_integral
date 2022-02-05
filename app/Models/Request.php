@@ -22,6 +22,8 @@ class Request extends Model
         'deleted_by',
     ];
 
+    
+
 
     // relaciones
     public function users() {

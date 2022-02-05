@@ -25,7 +25,7 @@ class ProcessController extends Controller
 
     public function index_request($id_rol)
     {
-        $data = $this->getInfoRequest($id_rol,ProcessController::CREADA)->get();
+        $data = $this->getInfoRequest($id_rol)->get();
 
         if ($id_rol == 4) {
             return view('process.request.index',compact('data'));
@@ -37,7 +37,7 @@ class ProcessController extends Controller
 
         $users = [];
 
-        if(Auth::user()->roles()->first()->id == 3)
+        if(Auth::user()->roles()->first()->id != 4)
         {
             $users = $this->infoClients();
         }
@@ -53,7 +53,16 @@ class ProcessController extends Controller
         return view('process.request.create',compact('languages','list_systems','areas','subjects','topics','services','question','users'));
     }
 
-    public function edit_request(){
+    public function edit_request($id){
+
+        $users = [];
+
+        if(Auth::user()->roles()->first()->id != 4)
+        {
+            $users = $this->infoClients();
+        }
+
+        $request = $this->getInfoRequest(Auth::user()->roles()->first()->id)->where('id',$id)->first();
 
         $services = $this->getDataParametrics('param_list_services')->orderby('p_order')->get();
         $languages = $this->getDataParametrics('param_list_languages')->orderby('p_order')->get();
@@ -63,7 +72,7 @@ class ProcessController extends Controller
         $topics = $this->getInfoTable('topics')->where('t_state',1)->get();
         $question = $this->getRequest_questions('request_questions')->where('status',1)->select('request_questions.id','question','question_type','type_service_id')->get();
 
-        return view('process.request.edit_my_quotes',compact('languages','list_systems','areas','subjects','topics','services','question'));
+        return view('process.request.edit',compact('request','languages','list_systems','areas','subjects','topics','services','question','users'));
     }
 
     public function store_request(Request $request){
@@ -96,6 +105,29 @@ class ProcessController extends Controller
         }
 
         return true;
+    }
+
+    public function delete_file(Request $request)
+    {
+        $this->deleteFile($request->id);
+
+        return true;
+    }
+
+    public function change_estate($id, $state = null)
+    {
+        if ($state == null) {
+           $state = 2;
+        }
+        $this->changeState($id,$state);
+
+        return redirect()->route('process.request.index',Auth::user()->roles()->first()->id)->with('success','Registro actualizado con éxito');
+    }
+
+    public function delete_request($id)
+    {
+        $this->deleteRequest($id);
+        return redirect()->route('process.request.index',Auth::user()->roles()->first()->id)->with('success','Registro eliminado con éxito');
     }
 
 

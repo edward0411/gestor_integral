@@ -59,13 +59,15 @@ trait Process
                 ]);                
             }
             $register->date_delivery = $data->deliver_date;
-            $register->observation = $data->observations;
+           
             $register->type_service_id  = $data->id_service;
             $register->request_state_id  = 1;
             if (isset($data->id_client)) {         
                 $register->user_id = $data->id_client;
+                $register->note_private_comercial = $data->note_private;
             }else{
                 $register->user_id = Auth::user()->id;
+                $register->observation = $data->observations;
             }
             $register->save();            
             if (!is_null($communication)) {            
@@ -85,14 +87,18 @@ trait Process
 
             $id_request = $register->id;
 
-            if ($data->id_request != null) {         
+            if (!isset($data->id_request)) {  
                 $this->changeHistoryState($id_request,1);
             }else{
                 $this->deletaDataTable($id_request,'request_responses'); 
                 $this->deletaDataTable($id_request,'request_languages'); 
                 $this->deletaDataTable($id_request,'request_systems'); 
                 $this->deletaDataTable($id_request,'request_topics'); 
-                $this->deletaDataTable($id_request,'request_files'); 
+                if ($data->hasFile('file')) {
+                    if (count($data->files_changes) == count($data->File('file'))) { 
+                        $this->deletaDataTable($id_request,'request_files'); 
+                    }
+                }
             }
 
             if (isset($data->question)) {
@@ -124,35 +130,38 @@ trait Process
     public function changeHistoryState($id,$state,$state_old = null)
     {
         try {
+
             if ($state_old != null) {              
                 $consult = history::where('request_id',$id)->where('request_state_id',$state_old)->first();
                 $consult->end_date = $this->get_date_now();
                 $consult->updated_by = Auth::user()->id;
                 $consult->save();
             }
-
-            $state = new history();
-            $state->start_date = $this->get_date_now();
-            $state->request_id  = $id;
-            $state->request_state_id = $state;
-            $state->created_by = Auth::user()->id;
-            $state->save();
-
+            
+            $history = new history();
+            $history->start_date = $this->get_date_now();
+            $history->request_id  = $id;
+            $history->request_state_id = $state;
+            $history->created_by = Auth::user()->id;
+            $history->save();
             return true;  
           
         } catch (\Exception $e) {
-            return $this->errorResponse($e->getMessage(), 409);
+            dd($e);
         }
     }
 
     public function deletaDataTable($id,$table)
     {
         try {            
-            $registers = DB::table($table)->where('request_id')->get();
+            $registers = DB::table($table)->where('request_id',$id)->get();
 
             if (count($registers) > 0) {
                 foreach ($registers as $key => $reg) {
-                    $reg->update([
+
+                   DB::table($table)
+                    ->where('id',$reg->id)
+                    ->update([
                         'deleted_at' => Carbon::now()->parse()->format('Y-m-d H:m:s'),
                         'deleted_by' => Auth::user()->id,
                      ]);
@@ -163,6 +172,22 @@ trait Process
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage(), 409);
         }
+    }
+
+    public function deleteFile($id)
+    {
+        $file_exist = filesRequest::find($id);
+        $file_exist->deleted_by = Auth::user()->id;
+        $file_exist->save();
+        $file_exist->delete();
+
+        if(isset($file_exist))
+        {
+            $file_path = public_path() .'/folders/request/files_request_'.$file_exist->request_id.'/file_'.$file_exist->id.'/'.$file_exist->file.'';
+            if (File::exists($file_path)) {
+                File::delete($file_path);
+            }  
+        }      
     }
 
     public function saveQuestionsRequest($question,$answers,$id)
@@ -267,6 +292,34 @@ trait Process
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage(), 409);
         }
+    }
+
+    public function changeState($id,$state)
+    {
+        $state_old = null;
+        if ($state == 2) {
+            $state_old = 1;
+        }
+ 
+        $this->changeHistoryState($id,$state,$state_old);
+
+        $register = solicitud::find($id);
+        $register->request_state_id = $state;
+        $register->updated_by = Auth::user()->id;
+        $register->save();
+
+        return true;
+       
+    }
+
+    public function deleteRequest($id)
+    {
+        $register = solicitud::find($id);
+        $register->deleted_by = Auth::user()->id;
+        $register->save();
+        $register->delete();
+
+        return true;
     }
     
 }
