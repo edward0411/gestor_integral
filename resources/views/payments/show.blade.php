@@ -50,6 +50,10 @@
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->value_utility)}}" disabled>
                         </div>
                         <div class="form-group col-md-4">
+                            <label for="">Saldo:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->balance)}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label for="">observación:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->observation ? $quote->observation:'sin observación...'}}" disabled>
                         </div>

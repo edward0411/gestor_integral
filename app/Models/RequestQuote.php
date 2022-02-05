@@ -43,5 +43,12 @@ class RequestQuote extends Model
     }
 
     // Accessor
-    
+    public function getBalanceAttribute()//calcular el saldo total de la cotización
+    {
+        $total = 0;
+        foreach ($this->payments as $payment) {
+            $total = $total + $payment->value;
+        }
+        return $this->value - $total;
+    }
 }
