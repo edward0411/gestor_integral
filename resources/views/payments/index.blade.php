@@ -14,8 +14,8 @@
               <table id="tabledata1" class="table table-bordered table-striped">
                 <thead>
                   <tr class="bg-warning text-center">
-                    <th>{!! trans('Numeral') !!} </th>
-                    <th>{!! trans('Solicitud') !!}</th>
+                    <th>{!! trans('Numeral de solicitud') !!} </th>
+                    <th>{!! trans('Tipo de servicio') !!}</th>
                     <th>{!! trans('Cliente') !!}</th>
                     <th>{!! trans('Fecha de inicio de solicitud') !!}</th>
                     <th>{!! trans('Fecha de entrega') !!}</th>

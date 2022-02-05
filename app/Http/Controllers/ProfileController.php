@@ -12,18 +12,23 @@ use App\Models\Parametrics as parametrics;
 use App\User as profile;
 use App\Models\Bonds as bonds;
 use App\Traits\Managment;
+use App\Models\Coins as coins;
 
 class ProfileController extends Controller
 {
     use Managment;
-    public function index_basic_data(){
+    public function index_basic_data($id){
 
         $id_rol = Auth::user()->roles()->first()->id;
-
-        $countries = $this->getInfoCountries()->get();
+        
+        $state = 1;
+        $data = $this->getInfoUsers($id_rol,$state)->where('users.id',$id)->select('users.*','countries.c_name','coun.c_indicative','coins.c_currency','coins.c_type_currency')->first();
+        $countries = $this->getInfoCountries()->orderBy('c_name')->get();
         $type_docs = $this->getDataParametrics('type_documents')->orderby('p_order')->get();
+        $means = $this->getDataParametrics('means_type')->orderby('p_order')->get();
+        $coins = coins::all();
 
-        return view('profile.index_basic_data',compact('countries','type_docs'));
+        return view('profile.index_basic_data',compact('data','state','countries','type_docs','means','coins'));
 
     }
 

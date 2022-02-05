@@ -50,6 +50,10 @@
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->value_utility)}}" disabled>
                         </div>
                         <div class="form-group col-md-4">
+                            <label for="">Saldo:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->balance)}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label for="">observación:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->observation ? $quote->observation:'sin observación...'}}" disabled>
                         </div>
@@ -61,28 +65,64 @@
                             <label for="">Tipo de utilidad:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->utilityType->p_text}}" disabled>
                         </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Fecha de cotización:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->created_at}}" disabled>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-header color-header">
+                    <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de Cotización de tutor') !!}</h5>
+                </div>
+                <div class="card-body table-responsive">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="">Valor:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->requestQuoteTutor->value)}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Posible fecha de entrega:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{$quote->requestQuoteTutor->application_date}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">observación:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->requestQuoteTutor->observation ? $quote->requestQuoteTutor->observation:'sin observación...'}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Fecha de la cotizacion del tutor:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->requestQuoteTutor->created_at}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Nombre del tutor:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->requestQuoteTutor->user->u_name}}" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header color-header">
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de pagos') !!}</h5>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('process.request.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
+                    <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalCreate"><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
                   </div>
                 <div class="card-body table-responsive">
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
                           <tr class="bg-warning text-center">
-                            <th>{!! trans('Numeral') !!} </th>
+                            <th>{!! trans('Numeral de pagos') !!} </th>
                             <th>{!! trans('Valor') !!}</th>
                             <th>{!! trans('Tipo de pago') !!}</th>
                             <th>{!! trans('Referencia de pago') !!}</th>
                             <th>{!! trans('Vaucher') !!}</th>
                             <th>{!! trans('Observacion') !!}</th>
                             <th>{!! trans('Fecha de pago') !!}</th>
+                            <th>{!! trans('Acciones') !!}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -95,6 +135,10 @@
                                 <td>{{$payment->vaucher ? $payment->vaucher:'sin vaucher...' }}</td>
                                 <td>{{$payment->observation ? $payment->observation:'Sin observación...'}}</td>
                                 <td>{{$payment->created_at}}</td>
+                                <td>
+                                    <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                </td>
                             </tr>
                           @endforeach
                         </tbody>
@@ -103,6 +147,8 @@
             </div>
         </div>
     </div>
+    @include('payments.modals')
+
 </div>
 
 @endsection

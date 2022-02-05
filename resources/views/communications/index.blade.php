@@ -16,9 +16,9 @@
                             <tr class="bg-warning text-center">
                                 <th>{!! trans('N° de proceso') !!} </th>
                                 <th>{!! trans('Cliente') !!} </th>
-                                <th>{!! trans('Tutor') !!} </th>
-                                <th>{!! trans('Comercial') !!}</th>
-                                <th>{!! trans('Monitor') !!}</th>
+                                @if(Auth::user()->roles()->first()->id != 4)
+                                    <th>{!! trans('Tutor') !!} </th>
+                                @endif
                                 <th>{!! trans('Fecha de inicio') !!}</th>
                                 <th>{!! trans('Estado') !!}</th>
                                 <th>{!! trans('Acciones') !!}</th>
@@ -29,9 +29,9 @@
                                 <tr>
                                     <td>#{{ $communication->request->id }}</td>
                                     <td>{{ $communication->user->u_nickname }}</td>
-                                    <td>N/A</td>
-                                    <td>N/A</td>
-                                    <td>N/A</td>
+                                    @if(Auth::user()->roles()->first()->id != 4)
+                                        <td>N/A</td>
+                                    @endif
                                     <td>{{ $communication->request->created_at }}</td>
                                     <td>{{ $communication->request->requestState->name }}</td>
                                     <td>                                         

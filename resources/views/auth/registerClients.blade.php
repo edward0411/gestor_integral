@@ -143,7 +143,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="email" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Correo electronico:</label>
+                                        <label for="email" class="col-md-12 control-label"> Correo electronico:</label>
                                         <div class="input-group mb-3">
                                             <input id="email" type="email" class="form-control form-control-sm @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
                                             <div class="input-group-append">
