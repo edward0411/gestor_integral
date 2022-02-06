@@ -136,8 +136,8 @@
                                 <td>{{$payment->observation ? $payment->observation:'Sin observación...'}}</td>
                                 <td>{{$payment->created_at}}</td>
                                 <td>
-                                    <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                    <a href="" class="btn btn-warning btn-xs" onclick="showPayment({{$payment->id}})" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    <a href="{{route('payment.delete', $payment->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                                 </td>
                             </tr>
                           @endforeach
@@ -151,4 +151,86 @@
 
 </div>
 
+@endsection
+@section('script')
+
+    {{-- js utiles --}}
+    <script type="text/javascript" src="{{ asset("js/events/util.js") }}"></script>
+
+    <script type="text/javascript">
+
+        // VARIABLES GLOBALES
+        var id = null;
+        var collection = "";
+        var dataError
+
+        $(document).ready(function() {
+            handleReady();
+        });
+
+        const handleReady = () => {
+            $('#form').ajaxForm({
+                dataType: 'json',
+                clearForm: true,
+                beforeSubmit: function(data) {
+                    $('#message').emtpy;
+                },
+                success: function(data) {
+                    console.log("res", data);
+                    if (data.response) {
+                        processResponse('message', 'succes', data.message)
+                        location.reload();
+                    }else{
+                        processResponse('message', 'danger', data.message)
+                    }
+                },
+                error: function(data) {
+                    processError(data, 'message')
+                }
+            });
+        }
+
+        function processError(data, div) {
+            errors = "";
+            dataError = data;
+            $.each(data.responseJSON.errors, function(index, elemento) {
+                errors += "<li>"+elemento+"</li>"
+            })
+            if(errors==""){
+                errors = data.responseJSON.message;
+            }
+            processResponse('message', 'danger', 'Error al guardar: '+data.message)
+        }
+
+        const showPayment = (id) => {
+            var url = `{{url('/panel/administrativo/payment/showPayment/${id}')}}`;
+            var data = {
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: data,
+                success: function(response) {
+                    paint(response.data)
+                }
+            });
+        }
+
+        const paint = (data) => {
+            $("#id").val(data.id);
+            $("#valueEdit").val(data.value);
+            $("#referenceEdit").val(data.payment_reference);
+            $("#observationEdit").val(data.observation);
+        }
+
+        // const handlerClear = () => {
+        //     $("#value").empty();
+        //     $("#reference").empty();
+        //     $("#observation").empty();
+        //     $("#vaucher").empty();
+        // }
+
+    </script>
 @endsection
