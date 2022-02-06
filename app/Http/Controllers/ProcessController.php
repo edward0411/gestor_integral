@@ -130,7 +130,6 @@ class ProcessController extends Controller
         return redirect()->route('process.request.index',Auth::user()->roles()->first()->id)->with('success','Registro eliminado con éxito');
     }
 
-
     /////////// Cotizaciones  //////////
 
     public function index_quotes()
