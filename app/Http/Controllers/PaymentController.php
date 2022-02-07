@@ -53,15 +53,18 @@ class PaymentController extends Controller
         try {
             if ($quote->balance > 0) {
                 if ($request->value <= $quote->balance) {
-                    $data['request_quote_id']   = $quote->id;
-                    $data['payment_type']       = $request->value == $quote->balance ? 'TOTAL':'PARCIAL';
-                    $payment                    =  Payment::create($data);
-                    if($request->hasFile('vaucher')){
-                        $file = $request->file('vaucher');
-                        $payment->vaucher = UtilHelper::saveFile('\folders\payments', $file);
-                        $payment->save();
+                    if ($request->value > 0) {
+                        $data['request_quote_id']   = $quote->id;
+                        $data['payment_type']       = $request->value == $quote->balance ? 'TOTAL':'PARCIAL';
+                        $payment                    =  Payment::create($data);
+                        if($request->hasFile('vaucher')){
+                            $file = $request->file('vaucher');
+                            $payment->vaucher = UtilHelper::saveFile('\folders\payments', $file);
+                            $payment->save();
+                        }
+                        return $this->showMessage('Pago realizado con exito');
                     }
-                    return $this->showMessage('Pago realizado con exito');
+                    return $this->showMessage('No se puede realizar un pago negativo o de 0', 400, false);
                 }
                 return $this->showMessage('El pago no puede exceder el saldo', 400, false);
             }

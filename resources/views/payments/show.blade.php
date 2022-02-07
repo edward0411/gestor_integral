@@ -160,9 +160,6 @@
     <script type="text/javascript">
 
         // VARIABLES GLOBALES
-        var id = null;
-        var collection = "";
-        var dataError
 
         $(document).ready(function() {
             handleReady();
@@ -181,6 +178,7 @@
                         processResponse('message', 'succes', data.message)
                         location.reload();
                     }else{
+                        console.log("res else", data);
                         processResponse('message', 'danger', data.message)
                     }
                 },
