@@ -109,7 +109,7 @@
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de pagos') !!}</h5>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalCreate"><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
+                    <a href="#" class="btn btn-warning btn-sm {{$quote->balance <= 0 ? 'disabled':''}} " data-toggle="modal" data-target="#modalCreate" ><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
                   </div>
                 <div class="card-body table-responsive">
                     <table id="tabledata1" class="table table-bordered table-striped">
