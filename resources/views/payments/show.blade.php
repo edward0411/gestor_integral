@@ -132,7 +132,11 @@
                                 <td>${{number_format($payment->value)}}</td>
                                 <td>{{$payment->payment_type}}</td>
                                 <td>{{$payment->payment_reference}}</td>
-                                <td>{{$payment->vaucher ? $payment->vaucher:'sin vaucher...' }}</td>
+                                <td>@if ($payment->vaucher)
+                                        <a href="{{ asset('folders/payments/'.$payment->vaucher)}}" target="_blank">{{$payment->vaucher}}</a></td>
+                                    @else
+                                        Sin vaucher...
+                                    @endif
                                 <td>{{$payment->observation ? $payment->observation:'Sin observación...'}}</td>
                                 <td>{{$payment->created_at}}</td>
                                 <td>
