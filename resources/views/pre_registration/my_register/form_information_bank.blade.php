@@ -205,7 +205,7 @@
 
     $(document).ready(function() {
         traerCuentasBanc();
-        $('#frm_store_scount_bank_').ajaxForm({
+        $('#frm_store_scount_bank').ajaxForm({
             dataType: 'json',
             clearForm: true,
             beforeSubmit: function(data) {

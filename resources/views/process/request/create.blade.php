@@ -6,13 +6,14 @@
         <div class="col-12">
             <div class="card ">
                 <div class="card-header color-header">
-                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear cotización') !!}</h5>
+                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear solicitud') !!}</h5>
                 </div>
                 <!-- /.card-header -->
                 
                 <form method="POST" action="{{route('process.request.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
+                        <h4>Diligencia la información necesaria para tu cotización y al final da click en el botón guardar</h4>
                         <div class="row">
                             @if(Auth::user()->roles()->first()->id != 4)
                                 <div class="form-group col-md-4">
@@ -221,6 +222,7 @@
                         </div>
                     </div>
                      <!-- /Accordion card -->
+                    @if(\Auth::user()->roles()->first()->id == 4)
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-md-12">
@@ -229,6 +231,17 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                    @if(\Auth::user()->roles()->first()->id != 4)
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="note_private">{!! trans('Nota interna comercial') !!}</label>
+                                <textarea name="note_private" id="" class="form-control form-control-sm" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                        <!-- /.card-body -->
                     <div class="card-body">
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
@@ -357,9 +370,10 @@ function addLanguage()
       var cell =  `
         <tr>
             <td>
-              <div class="form-group">
-                                <input type="file" class="form-control form-control-sm" id="file_`+total+`" name="file[]" value="" required>
-                            </div>
+                <div class="form-group">
+                    <input type="hidden" name="files_changes_`+total+`" value="`+total+`">
+                    <input type="file" class="form-control form-control-sm" id="file_`+total+`" name="file[]" value="" required>
+                </div>
             </td>
             <td>
               <button type="button" class="btn btn-danger btn-sm  delete-cell" onclick="deletesCell(this)">{!! trans('Eliminar') !!}</button>

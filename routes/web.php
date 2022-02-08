@@ -226,6 +226,10 @@ Route::post('/communications/{communication}/messages','CommunicationsController
 ///////Rutas de pagos /////////
 Route::get('/payment/index','PaymentController@index')->name('payment.index');
 Route::get('/payment/show/{quote}','PaymentController@show')->name('payment.show');
+Route::post('/payment/store/{quote}','PaymentController@store')->name('payment.store');
+Route::get('/payment/delete/{payment}','PaymentController@delete')->name('payment.delete');
+Route::get('/payment/showPayment/{payment}','PaymentController@showPayment')->name('payment.showPayment');
+Route::post('/payment/edit/{quote}','PaymentController@edit')->name('payment.edit');
 
 
 
@@ -233,7 +237,10 @@ Route::get('/payment/show/{quote}','PaymentController@show')->name('payment.show
 Route::get('/process/request/index/{rol}','ProcessController@index_request')->name('process.request.index');
 Route::get('/process/request/create','ProcessController@create_request')->name('process.request.create');
 Route::post('/process/request/store','ProcessController@store_request')->name('process.request.store');
-Route::get('/process/request/edit_my_quotes','ProcessController@edit_request')->name('process.request.edit_my_quotes');
+Route::get('/process/request/edit/{id}','ProcessController@edit_request')->name('process.request.edit');
+Route::get('/process/request/delete/{id}','ProcessController@delete_request')->name('process.request.delete');
+Route::get('/process/request/delete_file','ProcessController@delete_file')->name('process.request.delete_file');
+Route::get('/process/request/change_estate/{id}','ProcessController@change_estate')->name('process.request.change_estate');
 
 /////////Rutas cotizaciones //////////
 

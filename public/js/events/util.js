@@ -1,5 +1,6 @@
 
 const processResponse = (div, type, message) => {
+    console.log("mensaje "+div);
     $('#'+div).html(
         `<div class="alert alert-${type} alert-block shadow">
             <button type="button" class="close" data-dismiss="alert">×</button>

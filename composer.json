@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
-        "doctrine/dbal": "2.*",
+        "doctrine/dbal": "^2.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -52,7 +52,8 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/Http/Helpers/EmailHelper.php"
+            "app/Http/Helpers/EmailHelper.php",
+            "app/Http/Helpers/UtilHelper.php"
         ]
     },
     "minimum-stability": "dev",

@@ -36,8 +36,10 @@
                       <td>{{$value->parametric->p_text}}</td>
                       <td>{{$value->requestState->name}}</td>
                       <td>
-                        <a href="" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>  
-                        <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                        @if($value->request_state_id == 1)
+                        <a href="{{route('process.request.edit',$value->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>  
+                        @endif
+                        <a href="{{route('process.request.delete',$value->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                       </td>
                     </tr>
                     @endforeach
