@@ -123,4 +123,22 @@ class ProfileController extends Controller
             dd($th);
         }
     }
+
+    public function change_password(){
+
+       
+
+        return view('profile.change_password');
+
+    }
+
+    public function change_password_store(request $request)
+    {
+       dd($request);
+        
+        return back()->with('success','se ha cambiado la clave');
+
+        //dd($request);
+
+    }
 }

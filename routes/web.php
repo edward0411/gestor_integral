@@ -15,6 +15,15 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+if ($options['reset'] ?? true) {
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+ }
+ 
+ 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -200,6 +209,12 @@ Route::get('/create_bonds/profile','ProfileController@create_bonds')->name('prof
 Route::post('/store/profile','ProfileController@store')->name('profile.store');
 Route::get('/edit_bonds/profile/{id}','ProfileController@edit_bonds')->name('profile.edit_bonds');
 Route::get('/delete/profile/{id}', 'ProfileController@delete')->name('profile.delete');
+
+//////// Cambiar contraaeña /////////
+Route::get('/change_password/profile/{id}','ProfileController@change_password')->name('profile.change_password');
+Route::post('/change_password_store/profile','ProfileController@change_password_store')->name('profile.change_password_store');
+
+
 
 
 ///////Rutas Comunicaciones/////////

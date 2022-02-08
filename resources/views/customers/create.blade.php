@@ -23,7 +23,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="u_key_number">{!! trans('Número de celular') !!} <small>(No usar ni puntos ni espacios.)</small></label>
-                                <input type="text" class="form-control form-control-sm" onkeyup="num(this);" onblur='num(this);' id="u_key_number" name="u_key_number " value="{{ old('u_key_number') }}" required>
+                                <input type="text" class="form-control form-control-sm" onkeyup="num(this);" onblur='num(this);' id="u_key_number" name="u_key_number" value="{{ old('u_key_number') }}" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="u_id_country">{!! trans('País de origen') !!}</label>

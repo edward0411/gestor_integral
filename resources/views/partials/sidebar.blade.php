@@ -362,6 +362,12 @@
               </li>
               @endcan
               @endif
+              <li class="nav-item">
+                <a href="{{route('profile.change_password',\Auth::user()->id)}}" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Cambiar contraseña</font></p>
+                </a>
+              </li>
               @can('Perfil_bonos_ver')
               <li class="nav-item">
                 <a href="{{route('profile.index_bonds')}}" class="nav-link">

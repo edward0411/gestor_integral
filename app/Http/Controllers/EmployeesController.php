@@ -33,7 +33,7 @@ class EmployeesController extends Controller
 
     public function create(){
 
-        $countries = $this->getInfoCountries()->get();
+        $countries = $this->getInfoCountries()->orderBy('c_name')->get();
         $type_docs = $this->getDataParametrics('type_documents')->orderby('p_order')->get();
         $roles = $this->getRoles()->orWhereNotIn('id',[1,4,6])->orderby('name')->get();
         return view('employees.create',compact('countries','type_docs','roles')); 
@@ -48,7 +48,7 @@ class EmployeesController extends Controller
         ->leftJoin('roles','roles.id','=','model_has_roles.role_id')
         ->select('users.*','parametrics.p_text','countries.c_name','roles.name')
         ->where('users.id',$id)
-        ->get();
+        ->first();
 
         $countries = $this->getInfoCountries()->get();
         $type_docs = $this->getDataParametrics('type_documents')->orderby('p_order')->get();
@@ -76,11 +76,11 @@ class EmployeesController extends Controller
            $employee = new employees();
            $employee->u_name = $request->u_name;
            $employee->u_nickname = $request->u_nick_name;
-           $employee->u_indicativo = '+57';
            $employee->u_type_doc = $request->u_type_doc;
            $employee->u_num_doc = $request->u_num_doc;
            $employee->u_key_number = $request->u_key_number;
            $employee->u_id_country = $request->id_contry;
+           $employee->u_indicativo = $request->u_indicativo;
            $employee->email = $request->email;
            $employee->password = $password;
            $employee->u_state = 1;

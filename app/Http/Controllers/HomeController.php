@@ -39,7 +39,7 @@ class HomeController extends Controller
                 }
                 break;
             case '5':
-                return redirect()->route('quotes.index');
+                return redirect()->route('process.quotes.index');
                 break;
             case '6':
                 if (Auth::user()->u_state == 0 || Auth::user()->u_state == 1 || Auth::user()->u_state == 3) {

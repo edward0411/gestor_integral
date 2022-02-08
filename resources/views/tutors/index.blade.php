@@ -36,14 +36,14 @@
                         </thead>
                         @foreach ($data as $user)
                         <tr>
-                            <td>{{$user->u_nickname}}</td>
                             <td>{{$user->u_indicativo}} {{$user->u_key_number}}</td>
+                            <td>{{$user->u_nickname}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->c_name}}</td>
                             <td>
                                 @if($state == 1)
                                 <a href="{{route('tutors.edit',$user->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea inactivar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Inactivar') !!}</a>
                                 @elseif($state == 4)
                                 <a href="" class="btn btn-warning btn-xs" onclick="return confirm('{!! trans('Desea reactivar este registro') !!}?');"><i class="fas fa-check"></i> {!! trans('Reactivar') !!}</a>
                                 @endif

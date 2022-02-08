@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Traits\Managment;
 use App\Models\Coins as coins;
+use App\User as customers;
 use App\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class CustomersController extends Controller
 {
@@ -54,10 +57,57 @@ class CustomersController extends Controller
 
     public function store_customer(Request $request){
 
-        dd($request);
+        //dd($request);
+        
+        $this->validate($request,[
+            'u_nickname' => ['required', 'string', 'max:50','unique:users'],
+            'u_key_number' => ['required', 'string','min:8', 'max:15'],
+            'u_id_country' => ['required', 'numeric'],
+            'u_indicativo' => ['required'],
+            'u_id_means' => ['required', 'numeric'],
+            'u_id_money' => ['required', 'numeric'],
+           ]);
 
-        return view('customers.index');
+        try {
+
+           $pass = $request->u_nick_name.'_'.$request->u_num_doc;
+
+           $password = Hash::make($pass);
+
+           $customer = new customers();
+           $customer->u_name = $request->u_name;
+           $customer->u_nickname = $request->u_nickname;
+           $customer->u_key_number = $request->u_key_number;
+           $customer->u_id_country = $request->u_id_country;
+           $customer->u_indicativo = $request->u_indicativo;
+           $customer->u_id_means = $request->u_id_means;
+           $customer->u_id_money = $request->u_id_money;
+           $customer->email = $request->email;
+           $customer->password = $password;
+           $customer->u_state = 1;
+           $customer->created_by = Auth::user()->id;
+           $customer->save();
+
+           $rol = $this->getRoles()->where('id',4)->first();
+           $customer->assignRole($rol->name);
+
+    
+           return redirect()->route('customers.index')->with('success','Registro creado con éxito');
+        } catch (\Throwable $th) {
+            //throw $th;
+            dd($th);
+        }
+
     }
+
+   /* public function active_state($id)
+    {
+        $customer_active  = customers::where('id', $id)->firstOrFail();
+        $customer_active ->u_state = 1;
+        $customer_active ->update();
+
+        return redirect()->route  ('customers.index')->with('success', trans('Registro activado con éxito'));
+    }*/
 
     public function processState($id)
     {
