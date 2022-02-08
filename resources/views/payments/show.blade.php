@@ -37,6 +37,36 @@
 
             <div class="card">
                 <div class="card-header color-header">
+                    <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de Cotización de tutor') !!}</h5>
+                </div>
+                <div class="card-body table-responsive">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="">Valor:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->requestQuoteTutor->value)}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Posible fecha de entrega:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{$quote->requestQuoteTutor->application_date}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">observación:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->requestQuoteTutor->observation ? $quote->requestQuoteTutor->observation:'sin observación...'}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Fecha de la cotizacion del tutor:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->requestQuoteTutor->created_at}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Nombre del tutor:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->requestQuoteTutor->user->u_name}}" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header color-header">
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de Cotización') !!}</h5>
                 </div>
                 <div class="card-body table-responsive">
@@ -68,36 +98,6 @@
                         <div class="form-group col-md-4">
                             <label for="">Fecha de cotización:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->created_at}}" disabled>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header color-header">
-                    <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de Cotización de tutor') !!}</h5>
-                </div>
-                <div class="card-body table-responsive">
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label for="">Valor:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->requestQuoteTutor->value)}}" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Posible fecha de entrega:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{$quote->requestQuoteTutor->application_date}}" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="">observación:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->requestQuoteTutor->observation ? $quote->requestQuoteTutor->observation:'sin observación...'}}" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Fecha de la cotizacion del tutor:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->requestQuoteTutor->created_at}}" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Nombre del tutor:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->requestQuoteTutor->user->u_name}}" disabled>
                         </div>
                     </div>
                 </div>
