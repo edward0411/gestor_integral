@@ -115,7 +115,7 @@
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
                           <tr class="bg-warning text-center">
-                            <th>{!! trans('Numeral de pagos') !!} </th>
+                            <th>{!! trans('Numeral de pago') !!} </th>
                             <th>{!! trans('Valor') !!}</th>
                             <th>{!! trans('Tipo de pago') !!}</th>
                             <th>{!! trans('Referencia de pago') !!}</th>
@@ -141,6 +141,11 @@
                                 </td>
                             </tr>
                           @endforeach
+                          <td class="color-header">TOTAL</td>
+                          <td class="color-header">${{number_format($quote->payments->sum('value'))}}</td>
+                          <td class="color-header">SALDO</td>
+                          <td class="color-header">${{number_format($quote->balance)}}</td>
+
                         </tbody>
                       </table>
                 </div>
