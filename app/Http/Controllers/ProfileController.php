@@ -141,4 +141,9 @@ class ProfileController extends Controller
         //dd($request);
 
     }
+
+    public function list_basic_data(){
+
+        return view('profile.list_basic_data');
+    }
 }

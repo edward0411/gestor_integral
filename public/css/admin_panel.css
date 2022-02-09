@@ -39,17 +39,27 @@
     color: #fff !important
 }
 
-.color-commercial{
+.color-commercial {
     background: #fff600 !important;
     opacity: 0.5;
 }
 
-.color-instructor{
+.color-instructor {
     background: #ff993e !important;
     opacity: 0.5;
 }
 
-.color-client{
+.color-client {
     background: #115061 !important;
     color: #fff !important
-}   
+}
+
+td {
+    font-family: Arial, Verdana !important;
+    font-size: 12px !important;
+}
+
+th {
+    font-family: Arial, Verdana !important;
+    font-size: 12px !important;
+}
