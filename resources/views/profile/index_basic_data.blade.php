@@ -14,7 +14,7 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Editar perfil') !!}</h5>
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" action="">
+                <form method="POST" action="{{route('profile.request')}}">
                     <div class="card-body">
                         @csrf
                         <div class="row">
@@ -100,7 +100,7 @@
                             <div class="form-group col-md-3">
                                 <label for="">{!! trans('Número Documento') !!}</label>
                                 <input type="text" class="form-control form-control-sm" id="" name="p_num_doc" value="{{$data->u_num_doc}}" readonly>
-                                 
+
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="observations_doc">{!! trans('Solicitud') !!}</label>
@@ -126,7 +126,7 @@
                             <div class="form-group col-md-3">
                                 <label for="">{!! trans('Pais de origen') !!}</label>
                                 <input type="text" class="form-control form-control-sm" id="" name="p_id_country" value="{{$data->c_name}}" readonly>
-                            </div>                         
+                            </div>
                             <div class="form-group col-md-3">
                                 <label for="u_id_country">{!! trans('Solicitud') !!}</label>
                                 <select name="u_id_country" id="u_id_country" class="form-control form-control-sm" onChange="bringIndicative();">

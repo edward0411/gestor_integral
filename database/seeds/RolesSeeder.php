@@ -94,8 +94,8 @@ class RolesSeeder extends Seeder
         $superadmin->givePermissionTo(Permission::all());
         $config     = Role::create(['name' => 'Configuracion']);
         $comercial  = Role::create(['name' => 'Comercial']);
-        $client     = Role::create(['name' => 'Cliente']);
+        $client     = Role::create(['name' => 'Cliente'])->givePermissionTo(['Perfil_datosBasicos_ver','Perfil']);
         $monitor    = Role::create(['name' => 'Monitor']);
-        $tutor      = Role::create(['name' => 'Tutor']);
+        $tutor      = Role::create(['name' => 'Tutor'])->givePermissionTo(['Perfil_datosBasicos_ver','Perfil']);
     }
 }

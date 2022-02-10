@@ -20,7 +20,7 @@ class ProfileController extends Controller
     public function index_basic_data($id){
 
         $id_rol = Auth::user()->roles()->first()->id;
-        
+
         $state = 1;
         $data = $this->getInfoUsers($id_rol,$state)->where('users.id',$id)->select('users.*','countries.c_name','coun.c_indicative','coins.c_currency','coins.c_type_currency')->first();
         $countries = $this->getInfoCountries()->orderBy('c_name')->get();
@@ -126,7 +126,7 @@ class ProfileController extends Controller
 
     public function change_password(){
 
-       
+
 
         return view('profile.change_password');
 
@@ -135,7 +135,7 @@ class ProfileController extends Controller
     public function change_password_store(request $request)
     {
        dd($request);
-        
+
         return back()->with('success','se ha cambiado la clave');
 
         //dd($request);
@@ -145,5 +145,9 @@ class ProfileController extends Controller
     public function list_basic_data(){
 
         return view('profile.list_basic_data');
+    }
+
+    public function storeRequestUser(Request $request){
+        return $request;
     }
 }
