@@ -105,7 +105,7 @@ class ProfileController extends Controller
 
             if(!isset($request->id))
             {
-                return redirect()->route('profile.index_bonds')->with('ss','Registro creado con éxito');
+                return redirect()->route('profile.index_bonds')->with('success','Registro creado con éxito');
             }else{
                 return redirect()->route('profile.index_bonds')->with('success','Registro actualizado con éxito');
             }
