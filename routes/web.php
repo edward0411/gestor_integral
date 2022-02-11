@@ -245,7 +245,8 @@ Route::get('/process/request/change_estate/{id}','ProcessController@change_estat
 /////////Rutas cotizaciones //////////
 
 Route::get('/process/quotes/index','ProcessController@index_quotes')->name('process.quotes.index');
-Route::get('/process/quotes/create','ProcessController@create_quotes')->name('process.quotes.create');
+Route::get('/process/quotes/create/{id}','ProcessController@create_quotes')->name('process.quotes.create');
+Route::post('/process/quotes/store','ProcessController@store_quotes')->name('process.quotes.store');
 Route::get('/process/quotes/edit','ProcessController@edit_quotes')->name('process.quotes.edit');
 
 /////////Rutas trabajos //////////

@@ -45,7 +45,7 @@ class HomeController extends Controller
                 if (Auth::user()->u_state == 0 || Auth::user()->u_state == 1 || Auth::user()->u_state == 3) {
                     return redirect()->route('pre_registration.index_registration');
                 }elseif(Auth::user()->u_state == 2){
-                    return route('quotes.myQuotes');
+                    return redirect()->route('process.request.index',$id_rol);
                 }elseif(Auth::user()->u_state == 4){
                     return redirect()->route('logouth');
                 }               

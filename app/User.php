@@ -114,7 +114,7 @@ class User extends Authenticatable
     }
 
     function scopeStateUser($query, $state){
-        return $query->where('u_state', $state);
+        return $query->whereIn('u_state', $state);
     }
 
     // Accessor
