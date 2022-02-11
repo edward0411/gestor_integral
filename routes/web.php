@@ -211,6 +211,7 @@ Route::post('/store/profile','ProfileController@store')->name('profile.store');
 Route::get('/edit_bonds/profile/{id}','ProfileController@edit_bonds')->name('profile.edit_bonds');
 Route::get('/delete/profile/{id}', 'ProfileController@delete')->name('profile.delete');
 Route::post('/user/request/changed', 'ProfileController@storeRequestUser')->name('profile.request');
+Route::get('/user/request/changed/view/{user}', 'ProfileController@showRequestUser')->name('profile.request.show');
 
 //////// Cambiar contraaeña /////////
 Route::get('/change_password/profile/{id}','ProfileController@change_password')->name('profile.change_password');

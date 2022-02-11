@@ -15,6 +15,7 @@ use App\Models\Bonds as bonds;
 use App\Models\ChangedRequest;
 use App\Traits\Managment;
 use App\Models\Coins as coins;
+use App\User;
 
 class ProfileController extends Controller
 {
@@ -146,8 +147,13 @@ class ProfileController extends Controller
     }
 
     public function list_basic_data(){
+        $requestUsers = User::stateUser()->get();
+        return view('profile.list_basic_data', compact('requestUsers'));
+    }
 
-        return view('profile.list_basic_data');
+    public function showRequestUser(User $user){
+        return $requestUsers = ChangedRequest::handleUser($user->id)->get();
+        return view('profile.list_basic_data', compact('requestUsers'));
     }
 
     public function storeRequestUser(Request $request){

@@ -16,18 +16,20 @@
                         <thead>
                             <tr class="bg-warning text-center">
                                 <th>{!! trans('Usuario') !!}</th>
-                                <th>{!! trans('Fecha de modificación') !!}</th>
+                                <th>{!! trans('Nick Name') !!}</th>
                                 <th>{!! trans('Acciones') !!}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Cliente2</td>
-                                <td>2022 - 02 - 08</td>
-                                <td>
-                                    <a href=""class="btn btn-warning btn-xs"><i class="far fa-eye"></i> {!!trans('Ver') !!}</a>
-                                </td>
-                            </tr>
+                            @foreach ($requestUsers as $requestUser)
+                                <tr>
+                                    <td>{{$requestUser->u_name}}</td>
+                                    <td>{{$requestUser->u_nickname}}</td>
+                                    <td>
+                                        <a href="{{route('profile.request.show', $requestUser->id)}}" class="btn btn-warning btn-xs"><i class="far fa-eye"></i> {!!trans('Ver') !!}</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

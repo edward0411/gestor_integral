@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\ChangedRequest;
 use App\Models\Messages;
 use App\Models\Parametrics;
 use App\Models\Coins;
@@ -58,7 +59,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
 
     /**
      * The attributes that should be cast to native types.
@@ -97,6 +98,7 @@ class User extends Authenticatable
     public function means() {
         return $this->belongsTo(Parametrics::class, 'u_id_means');
     }
+
     public function coins() {
         return $this->belongsTo(Coins::class, 'u_id_money');
     }
@@ -106,6 +108,11 @@ class User extends Authenticatable
         return $this->hasMany(Messages::class, 'id_user');
     }
 
+    public function changedRequests()
+    {
+        return $this->hasMany(ChangedRequest::class, 'id_user');
+    }
+
     // scope
     function scopeRolUser($query, $rolName){
         return $query->whereHas("roles", function($q) use($rolName){
@@ -113,7 +120,13 @@ class User extends Authenticatable
                                         });
     }
 
-    function scopeStateUser($query, $state){
+    function scopeStateUser($query){
+        return $query->whereHas('changedRequests', function($q){
+                                                    $q->where("request_state", ChangedRequest::PENDIENTE);
+                                                });
+    }
+
+    function scopeRequestUser($query, $state){
         return $query->where('u_state', $state);
     }
 
