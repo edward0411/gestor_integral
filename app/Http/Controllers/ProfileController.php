@@ -152,8 +152,21 @@ class ProfileController extends Controller
     }
 
     public function showRequestUser(User $user){
-        return $requestUsers = ChangedRequest::handleUser($user->id)->get();
-        return view('profile.list_basic_data', compact('requestUsers'));
+        $requestUsers = ChangedRequest::handleUser($user->id)->get();
+        return view('profile.show_changed_request', compact('requestUsers','user'));
+    }
+
+    public function handlerRequestUsersState(ChangedRequest $request, $state){
+        $request->update([
+            'request_state' => $state
+        ]);
+        if ($state == ChangedRequest::APROBADO) {
+            $user = User::find($request->id_user);
+            $user->update([
+                $request->request_name => $request->request_value
+            ]);
+        }
+        return redirect()->back()->with('success', trans('Registro guardado con exito'));
     }
 
     public function storeRequestUser(Request $request){

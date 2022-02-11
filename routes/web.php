@@ -212,6 +212,7 @@ Route::get('/edit_bonds/profile/{id}','ProfileController@edit_bonds')->name('pro
 Route::get('/delete/profile/{id}', 'ProfileController@delete')->name('profile.delete');
 Route::post('/user/request/changed', 'ProfileController@storeRequestUser')->name('profile.request');
 Route::get('/user/request/changed/view/{user}', 'ProfileController@showRequestUser')->name('profile.request.show');
+Route::post('/user/request/changed/{request}/state/{state}', 'ProfileController@handlerRequestUsersState')->name('profile.request.state');
 
 //////// Cambiar contraaeña /////////
 Route::get('/change_password/profile/{id}','ProfileController@change_password')->name('profile.change_password');

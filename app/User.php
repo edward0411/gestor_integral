@@ -6,6 +6,7 @@ use App\Models\ChangedRequest;
 use App\Models\Messages;
 use App\Models\Parametrics;
 use App\Models\Coins;
+use App\Models\Countries;
 use App\Models\TutorLanguage;
 use App\Models\TutorsBanks;
 use App\Models\TutorService;
@@ -101,6 +102,10 @@ class User extends Authenticatable
 
     public function coins() {
         return $this->belongsTo(Coins::class, 'u_id_money');
+    }
+
+    public function country() {
+        return $this->belongsTo(Countries::class, 'u_id_country');
     }
 
     public function messages()
