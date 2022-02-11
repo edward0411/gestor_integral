@@ -39,17 +39,39 @@
     color: #fff !important
 }
 
-.color-commercial{
+.color-commercial {
     background: #fff600 !important;
     opacity: 0.5;
 }
 
-.color-instructor{
+.color-instructor {
     background: #ff993e !important;
     opacity: 0.5;
 }
 
-.color-client{
+.color-client {
     background: #115061 !important;
     color: #fff !important
-}   
+}
+
+td {
+    font-family: Arial, Verdana !important;
+    font-size: 12px !important;
+}
+
+th {
+    font-family: Arial, Verdana !important;
+    font-size: 12px !important;
+}
+
+.select2-container .select2-selection--single {
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+    display: block !important;
+    height: 31px !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    color: #495057 !important;
+    background-color: #fff !important;
+    border: 1px solid #ced4da !important;
+}

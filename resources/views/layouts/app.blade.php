@@ -110,6 +110,8 @@
             <script type="text/javascript" language="javascript" src="{{ asset("dist/js/styles_gestor.js") }}"></script>
 
             <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
             
             @yield('script')
 </body>

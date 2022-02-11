@@ -187,18 +187,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="captcha" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i>Captcha</label>
+                                        <label for="captcha" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Captcha</label>
                                        
-                                            <span class="captcha-image">{!! Captcha::img() !!}</span> &nbsp;&nbsp;
-                                            <button type="button" class="btn btn-warning refresh-button"><i class="fas fa-sync"></i></button>
-                                            <hr>
-                                            <input id="captcha" type="text" class="form-control @error('captcha') is-invalid @enderror" name="captcha" required>
-                                            @error('captcha')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                       
+                                        <div class="g-recaptcha" data-sitekey="6LeKyW8eAAAAABWWPQ0D5UPOqdhMaA_3VnvXSHPY"></div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -264,6 +255,8 @@ $(document).ready(function() {
         });
 
     }
+
+  
 
 </script>
 

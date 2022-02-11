@@ -8,6 +8,7 @@ use App\User as tutors;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TutorsController extends Controller
 {
@@ -55,19 +56,34 @@ class TutorsController extends Controller
 
     public function store_tutor(Request $request){
 
-       // dd($request);
+        // dd($request);
+        if (!isset($request->id)) {
+            $this->validate($request, [
+                'u_name' => ['max:50'],
+                'u_nickname' => ['required', 'string', 'max:50'],
+                'u_type_doc' => ['required', 'string'],
+                'u_num_doc' => ['required', 'string'],
+                'u_id_country' => ['required', 'numeric'],
+                'u_indicativo' => ['required'],
+                'u_key_number' => ['required', 'string', 'min:8', 'max:15'],
+                'u_id_means' => ['required', 'numeric'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            ]);
+        } else {
+            $user = User::find($request->id);
+            if ($user->id != $request->email) {
+                $validate =  DB::table('users')->where([
+                    ["email", "=", $request->email],
+                    ["u_state", 1]
+                ])->get();
+                if (!isset($validate[0])) {
 
-        $this->validate($request,[
-            'u_name' => ['max:50'],
-            'u_nickname' => ['required', 'string', 'max:50'],
-            'u_type_doc' => ['required', 'string'],
-            'u_num_doc' => ['required', 'string'],
-            'u_id_country' => ['required', 'numeric'],
-            'u_indicativo' => ['required'],
-            'u_key_number' => ['required', 'string', 'min:8', 'max:15'],
-            'u_id_means' => ['required', 'numeric'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-           ]);
+                    if ($request->email > 0) {
+                        return back()->with('error', trans('El correo ya se encuentra registrado a un usuario'));
+                    }
+                }
+            }
+        }
 
         try {
 
@@ -75,26 +91,40 @@ class TutorsController extends Controller
 
            $password = Hash::make($pass);
 
-           $customer = new tutors();
-           $customer->u_name = $request->u_name;
-           $customer->u_nickname = $request->u_nickname;
-           $customer->u_type_doc = $request->u_type_doc;
-           $customer->u_num_doc = $request->u_num_doc;           
-           $customer->u_key_number = $request->u_key_number;
-           $customer->u_id_country = $request->u_id_country;
-           $customer->u_indicativo = $request->u_indicativo;
-           $customer->u_id_means = $request->u_id_means;
-           $customer->email = $request->email;
-           $customer->password = $password;
-           $customer->u_state = 1;
-           $customer->created_by = Auth::user()->id;
-           $customer->save();
+           if (!isset($request->id)) {
+            $tutor = new tutors;
+        } else {
+            $tutor = tutors::where('id', '=', $request->id)->first();
+        }
+           $tutor->u_name = $request->u_name;
+           $tutor->u_nickname = $request->u_nickname;
+           $tutor->u_type_doc = $request->u_type_doc;
+           $tutor->u_num_doc = $request->u_num_doc;           
+           $tutor->u_key_number = $request->u_key_number;
+           $tutor->u_id_country = $request->u_id_country;
+           $tutor->u_indicativo = $request->u_indicativo;
+           $tutor->u_id_means = $request->u_id_means;
+           $tutor->email = $request->email;
+           $tutor->password = $password;
+           $tutor->u_state = 1;
+           if (!isset($request->id)) {
+            $tutor->created_by = Auth::user()->id;
+        } else {
+            $tutor->updated_by = Auth::user()->id;
+        }
+           $tutor->save();
 
            $rol = $this->getRoles()->where('id',6)->first();
-           $customer->assignRole($rol->name);
+           $tutor->assignRole($rol->name);
+
+           if (!isset($request->id)) {
+            return redirect()->route('tutors.index')->with('success','Registro creado con éxito');
+        } else {
+            return redirect()->route('tutors.index')->with('success', 'Registro actualizado con éxito');
+        }
 
     
-           return redirect()->route('tutors.index')->with('success','Registro creado con éxito');
+           
         } catch (\Throwable $th) {
             //throw $th;
             dd($th);

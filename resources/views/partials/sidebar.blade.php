@@ -365,6 +365,12 @@
               @endcan
               @endif
               <li class="nav-item">
+                <a href="{{route('profile.list_basic_data',\Auth::user()->id)}}" class="nav-link">
+                  <i class="icofont-data"></i>
+                  <p><font size="3">Solicitud usuario</font></p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{route('profile.change_password',\Auth::user()->id)}}" class="nav-link">
                   <i class="icofont-data"></i>
                   <p><font size="3">Cambiar contraseña</font></p>
