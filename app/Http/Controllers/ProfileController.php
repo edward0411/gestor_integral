@@ -48,7 +48,7 @@ class ProfileController extends Controller
 
     public function create_bonds(){
 
-        $state = 2;
+        $state = 1;
         $data = $this->getInfoUsers(4,$state)->select('users.id','users.u_nickname')->get();
         $type_bonds = $this->getDataParametrics('param_type_bonds')->orderby('p_order')->get();
         $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
@@ -66,7 +66,7 @@ class ProfileController extends Controller
         ->where('bonds.id',$id)
         ->get();
 
-        $state = 2;
+        $state = 1;
         $data = $this->getInfoUsers(4,$state)->select('users.id','users.u_nickname')->get();
         $type_bonds = $this->getDataParametrics('param_type_bonds')->orderby('p_order')->get();
         $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
@@ -82,7 +82,7 @@ class ProfileController extends Controller
 
                 if($request->b_value > 100)
                 {
-                    return redirect()->back()->with('error', 'Si el tipo de del bono o anticipo es porcentaje, el valor no puede ser superior a 100.');
+                    return redirect()->back()->with('error', 'Si el tipo de bono o anticipo es porcentaje, el valor no puede ser superior a 100.');
                 }
             }
             if(!isset($request->id))

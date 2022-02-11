@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="u_nickname">{!! trans('Nick name') !!} <small>(No usar espacios.)</small></label>
-                                <input type="text" class="form-control form-control-sm" id="u_nickname" name="u_nickname" value="{{$data[0]->u_nickname}}"onchange="spc();" required>
+                                <input type="text" class="form-control form-control-sm" id="u_nickname" name="u_nickname" value="{{$data[0]->u_nickname}}" onchange="spc();" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="u_key_number">{!! trans('Número de celular') !!} <small>(No usar ni puntos ni espacios.)</small></label>

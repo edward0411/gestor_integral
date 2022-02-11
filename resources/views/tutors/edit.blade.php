@@ -25,6 +25,7 @@
                                 <label for="u_type_doc">{!! trans('Tipo de documento') !!}</label>
                                 <select name="u_type_doc" id="u_type_doc" class="form-control form-control-sm">
                                     <option value="">Seleccione...</option>
+
                                     @foreach($type_docs as $document)
                                     <option value="{{$document->id}}" {{ $document->id == $data[0]->u_type_doc ? 'selected' : '' }}>{{$document->p_text}}</option>
                                     @endforeach
@@ -49,11 +50,11 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="u_key_number">{!! trans('Número de celular') !!} <small>(No usar ni puntos ni espacios.)</small></label>
-                                <input type="text" class="form-control form-control-sm" onkeyup="num(this);" onblur='num(this);' id="u_key_number" name="u_key_number " value="{{$data[0]->u_key_number}}" required>
+                                <input type="text" class="form-control form-control-sm" onkeyup="num(this);" onblur='num(this);' id="u_key_number" name="u_key_number" value="{{$data[0]->u_key_number}}" required>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="u_id_money">{!! trans('Medio de contacto') !!}</label>
-                                <select name="u_id_money" id="u_id_money" class="form-control form-control-sm">
+                                <label for="u_id_means">{!! trans('Medio de contacto') !!}</label>
+                                <select name="u_id_means" id="u_id_means" class="form-control form-control-sm">
                                     <option value="">Seleccione...</option>
                                     @foreach ($means as $mean)
                                     <option value="{{$mean->id}}" {{ $mean->id == $data[0]->u_id_means ? 'selected' : '' }}>{{$mean->p_text}}</option>
@@ -65,6 +66,7 @@
                                 <input type="email" class="form-control form-control-sm" id="email" name="email" value="{{$data[0]->email}}" required>
                             </div>
                         </div>
+                        <input type="hidden" name="id" value="{{$data[0]->id}}">
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
                         <a href="{{route('tutors.index')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
                     </div>

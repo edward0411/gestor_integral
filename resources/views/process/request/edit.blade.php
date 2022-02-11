@@ -30,7 +30,7 @@
                             @if(Auth::user()->roles()->first()->id != 4)
                             <div class="form-group col-md-4">
                                     <label for="id_client">{!! trans('Clientes') !!}</label>
-                                    <select name="id_client" id="id_client"  class="form-control form-control-sm" required>
+                                    <select name="id_client" id="id_client"  class="form-control form-control-sm select2" required>
                                         <option value="">Seleccione...</option>
                                         @foreach($users as $user)
                                         <option value="{{$user->id}}" {{ $user->id == $request->user_id ? 'selected' : '' }}>{{$user->u_nickname}}</option>
@@ -117,7 +117,11 @@
                                     <!-- Idiomas -->
                                     <div class="card-body">
                                         <div class="card-header color-header">
-                                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Idiomas') !!}</h5>
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <h5 class="text-white" style="font-weight: bold;">{!! trans('Idiomas') !!} / <small>Seleccione si es diferente a español</small> </h5> 
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="card-body" style="border: 1px solid #cccccc;">
                                             <label for="descripcion">{!! trans('Agregar Idioma') !!}</label> <i id="addElementLanguage" data-count="0" class="fas fa-plus-square add-item"></i><br>
@@ -166,7 +170,11 @@
                                 <div id="collapseThree31" class="collapse" role="tabpanel" aria-labelledby="headingThree31" data-parent="#accordionEx1">
                                     <div class="card-body">
                                         <div class="card-header color-header">
-                                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Sistemas') !!}</h5>
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <h5 class="text-white" style="font-weight: bold;">{!! trans('Sistemas') !!} / <small>Si requiere un software diferente a office o manual</small></h5>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="card-body" style="border: 1px solid #cccccc;">
                                             <label for="descripcion">{!! trans('Agregar Sistema') !!}</label> <i id="addElementSystem" data-count="0" class="fas fa-plus-square add-item"></i><br>
@@ -204,6 +212,7 @@
                             </div>
                             <!-- /Sistemas -->
                             <!-- Temas -->
+                            @if(Auth::user()->roles()->first()->id != 4)
                             <div class="card">
                                 <!-- Card header -->
                                 <div class="card-header" role="tab" id="headingFour41">
@@ -283,6 +292,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             <!-- /Temas -->
                             <!-- Archivos -->
                             
@@ -298,7 +308,11 @@
                                 <div id="collapseFive51" class="collapse" role="tabpanel" aria-labelledby="headingFive51" data-parent="#accordionEx1">
                                     <div class="card-body">
                                         <div class="card-header color-header">
-                                            <h5 class="text-white" style="font-weight: bold;">{!! trans('Archivos') !!}</h5>
+                                            <div>
+                                                <div>
+                                                    <h5 class="text-white" style="font-weight: bold;">{!! trans('Archivos') !!} / <small>El peso permitido es maximo de 10 MB</small></h5>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="card-body" style="border: 1px solid #cccccc;">
                                             <label for="descripcion">{!! trans('Agregar Archivo') !!}</label> <i id="addElementFile" data-count="{{count($request->requestFiles)}}" class="fas fa-plus-square add-item"></i><br>
