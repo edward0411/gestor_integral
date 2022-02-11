@@ -21,8 +21,8 @@ if ($options['reset'] ?? true) {
     Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
  }
- 
- 
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -210,6 +210,8 @@ Route::get('/create_bonds/profile','ProfileController@create_bonds')->name('prof
 Route::post('/store/profile','ProfileController@store')->name('profile.store');
 Route::get('/edit_bonds/profile/{id}','ProfileController@edit_bonds')->name('profile.edit_bonds');
 Route::get('/delete/profile/{id}', 'ProfileController@delete')->name('profile.delete');
+Route::post('/user/request/changed', 'ProfileController@storeRequestUser')->name('profile.request');
+Route::get('/user/request/changed/view/{user}', 'ProfileController@showRequestUser')->name('profile.request.show');
 
 //////// Cambiar contraaeña /////////
 Route::get('/change_password/profile/{id}','ProfileController@change_password')->name('profile.change_password');

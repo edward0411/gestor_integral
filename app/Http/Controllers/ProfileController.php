@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\UtilHelper;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -11,16 +12,19 @@ use App\Models\Countries as countries;
 use App\Models\Parametrics as parametrics;
 use App\User as profile;
 use App\Models\Bonds as bonds;
+use App\Models\ChangedRequest;
 use App\Traits\Managment;
 use App\Models\Coins as coins;
+use App\User;
 
 class ProfileController extends Controller
 {
     use Managment;
+
     public function index_basic_data($id){
 
         $id_rol = Auth::user()->roles()->first()->id;
-        
+
         $state = 1;
         $data = $this->getInfoUsers($id_rol,$state)->where('users.id',$id)->select('users.*','countries.c_name','coun.c_indicative','coins.c_currency','coins.c_type_currency')->first();
         $countries = $this->getInfoCountries()->orderBy('c_name')->get();
@@ -126,7 +130,7 @@ class ProfileController extends Controller
 
     public function change_password(){
 
-       
+
 
         return view('profile.change_password');
 
@@ -135,7 +139,7 @@ class ProfileController extends Controller
     public function change_password_store(request $request)
     {
        dd($request);
-        
+
         return back()->with('success','se ha cambiado la clave');
 
         //dd($request);
@@ -143,7 +147,103 @@ class ProfileController extends Controller
     }
 
     public function list_basic_data(){
+        $requestUsers = User::stateUser()->get();
+        return view('profile.list_basic_data', compact('requestUsers'));
+    }
 
-        return view('profile.list_basic_data');
+    public function showRequestUser(User $user){
+        return $requestUsers = ChangedRequest::handleUser($user->id)->get();
+        return view('profile.list_basic_data', compact('requestUsers'));
+    }
+
+    public function storeRequestUser(Request $request){
+        $data       = [];
+        $handler    = 0;
+        $user_id    = Auth::user()->id;
+
+        $this->validate($request,
+            [
+                'u_nickname'        => 'bail|nullable|string|unique:users,u_nickname,'.$user_id,
+                'u_num_doc'         => 'bail|nullable|numeric|unique:users,u_num_doc,'.$user_id,
+                'email'             => 'bail|nullable|email|unique:users,email,'.$user_id,
+                'u_key_number'      => 'bail|nullable|numeric|unique:users,u_key_number,'.$user_id,
+
+            ],
+            [
+                'u_nickname.unique'     => 'El Nombre de usuario está en uso',
+                'u_num_doc.unique'      => 'EL documento está en uso',
+                'email.unique'          => 'EL email está en uso',
+                'u_key_number.unique'   => 'EL numero de telefono está en uso',
+            ]
+        );
+        try {
+            if ($request->u_name) {
+                if(ChangedRequest::handleUser($user_id)->handleName('u_name')->handleState(ChangedRequest::PENDIENTE)->first()) return redirect()->back()->with('error', trans('Usted tiene una solitud de nombre en curso'));
+                array_push($data, $this->handlerArrayRequestUser($user_id, 'u_name', $request->u_name, $request->observation_name));
+                $handler++;
+            }
+            if ($request->u_nickname) {
+                if(ChangedRequest::handleUser($user_id)->handleName('u_nickname')->handleState(ChangedRequest::PENDIENTE)->first()) return redirect()->back()->with('error', trans('Usted tiene una solitud de nombre de usuario en curso'));
+                array_push($data, $this->handlerArrayRequestUser($user_id, 'u_nickname', $request->u_nickname, $request->observation_nickname));
+                $handler++;
+            }
+            if ($request->u_type_doc) {
+                if(ChangedRequest::handleUser($user_id)->handleName('u_type_doc')->handleState(ChangedRequest::PENDIENTE)->first()) return redirect()->back()->with('error', trans('Usted tiene una solitud de tipo de documento en curso'));
+                array_push($data, $this->handlerArrayRequestUser($user_id, 'u_type_doc', $request->u_type_doc, $request->observation_type));
+                $handler++;
+            }
+            if ($request->u_num_doc) {
+                if(ChangedRequest::handleUser($user_id)->handleName('u_num_doc')->handleState(ChangedRequest::PENDIENTE)->first()) return redirect()->back()->with('error', trans('Usted tiene una solitud de numero de documento en curso'));
+                array_push($data, $this->handlerArrayRequestUser($user_id, 'u_num_doc', $request->u_num_doc, $request->observation_doc));
+                $handler++;
+            }
+            if ($request->u_id_country) {
+                if(ChangedRequest::handleUser($user_id)->handleName('u_id_country')->handleState(ChangedRequest::PENDIENTE)->first()) return redirect()->back()->with('error', trans('Usted tiene una solitud de paies en curso'));
+                array_push($data, $this->handlerArrayRequestUser($user_id, 'u_id_country', $request->u_id_country, $request->observation_country));
+                $handler++;
+            }
+            if ($request->u_indicativo) {
+                if(ChangedRequest::handleUser($user_id)->handleName('u_indicativo')->handleState(ChangedRequest::PENDIENTE)->first()) return redirect()->back()->with('error', trans('Usted tiene una solitud de indicativo en curso'));
+                array_push($data, $this->handlerArrayRequestUser($user_id, 'u_indicativo', $request->u_indicativo, $request->observation_indicative));
+                $handler++;
+            }
+            if ($request->u_key_number) {
+                if(ChangedRequest::handleUser($user_id)->handleName('u_key_number')->handleState(ChangedRequest::PENDIENTE)->first()) return redirect()->back()->with('error', trans('Usted tiene una solitud de numero de telefono en curso'));
+                array_push($data, $this->handlerArrayRequestUser($user_id, 'u_key_number', $request->u_key_number, $request->observation_number));
+                $handler++;
+            }
+            if ($request->u_id_means) {
+                if(ChangedRequest::handleUser($user_id)->handleName('u_id_means')->handleState(ChangedRequest::PENDIENTE)->first()) return redirect()->back()->with('error', trans('Usted tiene una solitud de medio de contacto en curso'));
+                array_push($data, $this->handlerArrayRequestUser($user_id, 'u_id_means', $request->u_id_means, $request->observation_means));
+                $handler++;
+            }
+            if ($request->email) {
+                if(ChangedRequest::handleUser($user_id)->handleName('email')->handleState(ChangedRequest::PENDIENTE)->first()) return redirect()->back()->with('error', trans('Usted tiene una solitud de email en curso'));
+                array_push($data, $this->handlerArrayRequestUser($user_id, 'email', $request->email, $request->observation_email));
+                $handler++;
+            }
+
+            if ($handler > 0) {
+                for ($i=0; $i < $handler ; $i++) {
+                    ChangedRequest::create($data[$i]);
+                }
+            }else{
+                return redirect()->back()->with('error', trans('Debe ingresar alguna solicitud '));
+            }
+            return redirect()->back()->with('success', trans('Registro guardado con exito'));
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
+    function handlerArrayRequestUser($id, $name, $value, $observation){
+        return [
+            'id_user'               => $id,
+            'request_name'          => $name,
+            'request_value'         => $value,
+            'request_observation'   => $observation,
+            'created_by'            => $id,
+        ];
     }
 }
