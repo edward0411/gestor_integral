@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(QuestionSeeder::class);
         $this->call(RequestStateSeeder::class);
         $this->call(UtilSeeder::class);
+        $this->call(WalletSeeder::class);
     }
 }

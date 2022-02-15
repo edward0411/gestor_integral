@@ -61,7 +61,7 @@ class CreateWalletTables extends Migration
 
         Schema::create('wallet_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->BigInteger('value')->comment('valor de pago');
+            $table->float('value')->comment('valor de pago');
             $table->string('reference')->comment('referencia');
             $table->string('vaucher')->nullable()->comment('factura');
             $table->text('observation')->nullable();
