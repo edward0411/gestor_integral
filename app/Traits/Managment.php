@@ -9,6 +9,7 @@ use App\Models\Countries as countries;
 use App\Models\Areas as areas;
 use App\Models\Subjects;
 use App\User;
+use App\Models\Bonds as bonds;
 use App\Models\TutorLanguage;
 use App\Models\TutorsBanks;
 use App\Models\TutorService;
@@ -119,5 +120,11 @@ trait Managment
         $question = DB::table('request_questions')
         ->leftJoin('parametrics','parametrics.id','=','request_questions.type_service_id');
         return $question;
+    }
+
+    public function infoBonds($state){
+
+        $query = bonds::where('b_state',$state);
+        return $query;
     }
 }

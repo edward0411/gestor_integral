@@ -379,7 +379,7 @@
               </li>
               @can('Perfil_bonos_ver')
               <li class="nav-item">
-                <a href="{{route('profile.index_bonds')}}" class="nav-link">
+                <a href="{{route('profile.index_bonds',1)}}" class="nav-link">
                   <i class="icofont-bill-alt"></i>
                   <p><font size="3">Bonos</font></p>
                 </a>
