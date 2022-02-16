@@ -9,6 +9,8 @@ use App\User;
 class Coins extends Model
 {
     use SoftDeletes;
+    protected $table = 'coins';
+
 
     public function users() {
         return $this->hasMany(User::class, 'u_id_money');

@@ -17,6 +17,7 @@ use App\Models\RequestLanguage as lanjuage;
 use App\Models\RequestSystem as systems;
 use App\Models\RequestTopic as topics;
 use App\Models\RequestFile as filesRequest;
+use App\Models\RequestQuoteTutor as requestTutor;
 use App\Models\Communications;
 use Facade\Ignition\QueryRecorder\Query;
 use GuzzleHttp\Psr7\Message;
@@ -29,6 +30,32 @@ trait Process
 
         if($id_rol == 4){
             $query = $query->where('user_id',Auth::user()->id);
+        }elseif($id_rol == 6){
+
+            $query =$query->where('request_state_id',2);
+
+            $arrayServices = [];
+            $arrayTopics = [];
+
+            $user = User::find(Auth::user()->id);
+
+            $services = $user->tutorServices->where('t_s_state',1)->toArray();
+            $topics = $user->tutorTopics->where('t_t_state',1)->toArray();
+
+            foreach ($services as $key => $value) {
+                array_push($arrayServices,$value['id_service']);
+            }
+            foreach ($topics as $key => $value) {
+                array_push($arrayTopics,$value['id_topic']);
+            }
+            if (count($arrayServices) > 0) {
+                $query = $query->whereIn('type_service_id',$arrayServices);
+            }
+            
+            if (count($arrayTopics) > 0) {  
+                $query = $query->join('request_topics','request_topics.request_id','=','requests.id')
+                ->whereIn('request_topics.topic_id',$arrayTopics);
+            }
         }
         return $query;
     }
@@ -131,7 +158,7 @@ trait Process
     {
         try {
 
-            if ($state_old != null) {              
+            if ($state_old != null) {           
                 $consult = history::where('request_id',$id)->where('request_state_id',$state_old)->first();
                 $consult->end_date = $this->get_date_now();
                 $consult->updated_by = Auth::user()->id;
@@ -246,6 +273,7 @@ trait Process
     {
         try {
             foreach ($data as $key => $value) {
+        
                 $register = new topics();
                 $register->request_id = $id;
                 $register->topic_id   = $value;
@@ -256,7 +284,7 @@ trait Process
             return true;  
           
         } catch (\Exception $e) {
-            return $this->errorResponse($e->getMessage(), 409);
+            dd($e);
         }
     }
 
@@ -318,6 +346,20 @@ trait Process
         $register->deleted_by = Auth::user()->id;
         $register->save();
         $register->delete();
+
+        return true;
+    }
+
+    public function saveQuotes($data)
+    {
+        $register = new requestTutor();
+        $register->value = $data->value;
+        $register->observation = $data->comentarios_tutor;
+        $register->request_id  = $data->id_request;
+        $register->user_id  = Auth::user()->id;
+        $register->application_date = $data->fecha_postulada;
+        $register->created_by = Auth::user()->id;
+        $register->save();
 
         return true;
     }

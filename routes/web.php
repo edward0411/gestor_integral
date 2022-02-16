@@ -212,6 +212,7 @@ Route::get('/edit_bonds/profile/{id}','ProfileController@edit_bonds')->name('pro
 Route::get('/delete/profile/{id}', 'ProfileController@delete')->name('profile.delete');
 Route::post('/user/request/changed', 'ProfileController@storeRequestUser')->name('profile.request');
 Route::get('/user/request/changed/view/{user}', 'ProfileController@showRequestUser')->name('profile.request.show');
+Route::post('/user/request/changed/{request}/state/{state}', 'ProfileController@handlerRequestUsersState')->name('profile.request.state');
 
 //////// Cambiar contraaeña /////////
 Route::get('/change_password/profile/{id}','ProfileController@change_password')->name('profile.change_password');
@@ -248,7 +249,8 @@ Route::get('/process/request/change_estate/{id}','ProcessController@change_estat
 /////////Rutas cotizaciones //////////
 
 Route::get('/process/quotes/index','ProcessController@index_quotes')->name('process.quotes.index');
-Route::get('/process/quotes/create','ProcessController@create_quotes')->name('process.quotes.create');
+Route::get('/process/quotes/create/{id}','ProcessController@create_quotes')->name('process.quotes.create');
+Route::post('/process/quotes/store','ProcessController@store_quotes')->name('process.quotes.store');
 Route::get('/process/quotes/edit','ProcessController@edit_quotes')->name('process.quotes.edit');
 
 /////////Rutas trabajos //////////

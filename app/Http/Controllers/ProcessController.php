@@ -25,7 +25,7 @@ class ProcessController extends Controller
 
     public function index_request($id_rol)
     {
-        $data = $this->getInfoRequest($id_rol)->get();
+        $data = $this->getInfoRequest($id_rol)->select('requests.*')->distinct()->get();
 
         if ($id_rol == 4) {
             return view('process.request.index',compact('data'));
@@ -137,18 +137,16 @@ class ProcessController extends Controller
         return view('process.quotes.index');
     }
 
-    public function create_quotes(){
+    public function create_quotes($id){
 
-        $services = $this->getDataParametrics('param_list_services')->orderby('p_order')->get();
-        $languages = $this->getDataParametrics('param_list_languages')->orderby('p_order')->get();
-        $list_systems = $this->getDataParametrics('param_list_systems')->orderby('p_order')->get();
         $areas = $this->getInfoTable('areas')->where('a_state',1)->get();
         $subjects = $this->getInfoTable('subjects')->where('s_state',1)->get();
         $topics = $this->getInfoTable('topics')->where('t_state',1)->get();
+        $list_systems = $this->getDataParametrics('param_list_systems')->orderby('p_order')->get();
+        $languages = $this->getDataParametrics('param_list_languages')->orderby('p_order')->get();
         $question = $this->getRequest_questions('request_questions')->where('status',1)->select('request_questions.id','question','question_type','type_service_id')->get();
-
-        return view('process.quotes.create',compact('languages','list_systems','areas','subjects','topics','services','question'));
-
+        $request = $this->getInfoRequest(Auth::user()->roles()->first()->id)->where('requests.id',$id)->select('requests.*')->first();
+        return view('process.quotes.create',compact('request','question','languages','list_systems','areas','subjects','topics'));
     }
 
     public function edit_quotes(){
@@ -162,6 +160,13 @@ class ProcessController extends Controller
         $question = $this->getRequest_questions('request_questions')->where('status',1)->select('request_questions.id','question','question_type','type_service_id')->get();
 
         return view('process.quotes.edit',compact('languages','list_systems','areas','subjects','topics','services','question'));
+    }
+
+    public function store_quotes(Request $request)
+    {
+        $this->saveQuotes($request);
+
+        return redirect()->route('process.request.index',Auth::user()->roles()->first()->id)->with('success','Registro creado con éxito');
     }
 
      ////////// trabajos  ////////

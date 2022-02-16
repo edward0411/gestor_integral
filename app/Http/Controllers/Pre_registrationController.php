@@ -79,7 +79,7 @@ class Pre_registrationController extends Controller
     // listar los tutores
     public function index_turors_list()
     {
-        $users = User::rolUser('tutor')->stateUser(User::REGISTRADO)->get();
+        $users = User::rolUser('tutor')->stateUser([User::REGISTRADO,User::APROBADO])->get();
         return view('pre_registration.index_turors_list', compact('users'));
     }
 
