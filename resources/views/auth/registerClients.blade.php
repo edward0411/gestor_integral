@@ -187,9 +187,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="captcha" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Captcha</label>
-                                       
-                                        <div class="g-recaptcha" data-sitekey="6LeKyW8eAAAAABWWPQ0D5UPOqdhMaA_3VnvXSHPY"></div>
+                                        <label for="captcha" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"> </i>Captcha</label>   
+                                        <div class="g-recaptcha" data-sitekey="6LeKyW8eAAAAAP15Ci1FWwrcHa0DkHdCH4Itxc_J"></div>   
                                     </div>
                                 </div>
                                 <div class="row">
@@ -243,8 +242,6 @@ $(document).ready(function() {
 
     function bringIndicative() {
 
-        
-
         var selectedCountry = $("#id_contry").val();
         nuevo = $.grep(countries, function(n, i) {
             return n.id_indicative == selectedCountry
@@ -253,7 +250,6 @@ $(document).ready(function() {
         $.each(nuevo, function(key, value) {
            $('#u_indicativo').val(value.indicative);
         });
-
     }
 
   

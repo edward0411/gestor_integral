@@ -49,7 +49,11 @@
                         @if(\Auth::user()->roles()->first()->id != 6) 
                           <a href="{{route('process.request.delete',$value->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                         @else
-                          <a href="{{route('process.quotes.create',$value->id)}}" class="btn btn-danger btn-xs" > {!! trans('Crear Cotización') !!}</a>
+                          @if($value->id_cot == null)
+                            <a href="{{route('process.quotes_tutor.create',$value->id)}}" class="btn btn-danger btn-xs" > {!! trans('Crear Cotización') !!}</a>
+                          @else
+                            <a href="{{route('process.quotes_tutor.edit',$value->id)}}" class="btn btn-warning btn-xs" > {!! trans('Editar Cotización') !!}</a>
+                          @endif
                         @endif
                       </td>
                     </tr>

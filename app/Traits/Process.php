@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use File;
 use Illuminate\Support\Str;
-
 use App\User;
 use App\Models\Request as solicitud;
 use App\Models\RequestHistory as history;
@@ -24,15 +23,16 @@ use GuzzleHttp\Psr7\Message;
 
 trait Process
 {
-    public function getInfoRequest($id_rol)
+    public function getInfoRequest($id_rol = null)
     {
         $query = solicitud::orderBy('date_delivery');
 
         if($id_rol == 4){
-            $query = $query->where('user_id',Auth::user()->id);
+            $query = $query->where('requests.user_id',Auth::user()->id);
         }elseif($id_rol == 6){
 
             $query =$query->where('request_state_id',2);
+           
 
             $arrayServices = [];
             $arrayTopics = [];
@@ -350,18 +350,41 @@ trait Process
         return true;
     }
 
-    public function saveQuotes($data)
+    public function saveQuotesTutors($data)
     {
-        $register = new requestTutor();
+        if (isset($data->id_quote_tutor)) {
+            $register = requestTutor::find($data->id_quote_tutor);
+            $register->updated_by = Auth::user()->id;
+        }else{
+            $register = new requestTutor();
+            $register->created_by = Auth::user()->id;
+        }
         $register->value = $data->value;
         $register->observation = $data->comentarios_tutor;
         $register->request_id  = $data->id_request;
         $register->user_id  = Auth::user()->id;
         $register->application_date = $data->fecha_postulada;
-        $register->created_by = Auth::user()->id;
         $register->save();
 
         return true;
+    }
+
+    public function DataQuotesTutor()
+    {
+        $query = requestTutor::orderBy('created_at');
+
+        return $query;
+    }
+
+    public function validateTopicsRequest($id)
+    {
+        $solicitud = solicitud::find($id);
+
+        if(count($solicitud->requestTopics) > 0){
+            return false;
+        }else{
+            return true;
+        }
     }
     
 }

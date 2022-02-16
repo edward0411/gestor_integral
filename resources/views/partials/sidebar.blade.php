@@ -192,28 +192,29 @@
                 </ul>
               </li>
               @if(\Auth::user()->roles()->first()->id !=4)
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="icofont-data"></i>
-                  <p><font size="3">Cotizaciones</font></p>
-                </a>
-                <ul class="nav nav-treeview">
-                  @if(\Auth::user()->roles()->first()->id == 6)
-                  <li class="nav-item">
-                    <a href="{{route('process.quotes.index')}}" class="nav-link">
-                      <i class="icofont-checked"></i>
-                      <p>Mis Cotizaciones</p>
-                    </a>
-                  </li>
-                  @endif
-                  <li class="nav-item">
-                    <a href="{{route('customers.inactives')}}" class="nav-link">
-                      <i class="icofont-close-squared-alt"></i>
-                      <p>List. cotizaciones</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <i class="icofont-data"></i>
+                    <p><font size="3">Cotizaciones</font></p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    @if(\Auth::user()->roles()->first()->id == 6)
+                      <li class="nav-item">
+                        <a href="{{route('process.quotes.index')}}" class="nav-link">
+                          <i class="icofont-checked"></i>
+                          <p>Mis Cotizaciones</p>
+                        </a>
+                      </li>
+                    @else
+                    <li class="nav-item">
+                      <a href="{{route('process.request.list')}}" class="nav-link">
+                        <i class="icofont-close-squared-alt"></i>
+                        <p>List. cotizaciones</p>
+                      </a>
+                    </li>
+                    @endif
+                  </ul>
+                </li>
               @endif
               <li class="nav-item">
                 <a href="" class="nav-link">

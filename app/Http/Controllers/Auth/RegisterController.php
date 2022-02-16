@@ -64,6 +64,7 @@ class RegisterController extends Controller
 
     protected function validator_client(array $data)
     {
+        $this->validateCaptcha($data);
         return Validator::make($data, [
             'u_nickname' => ['required', 'string', 'max:50','unique:users'],
             'u_key_number' => ['required', 'string','min:8', 'max:15'],
@@ -71,12 +72,13 @@ class RegisterController extends Controller
             'id_means' => ['required', 'numeric'],
             'id_money' => ['required', 'numeric'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'captcha' => 'required|captcha', 
         ]);
     }
 
     protected function validator_tutor(array $data)
     {
+        $this->validateCaptcha($data);
+        
         return Validator::make($data, [
             'u_name' => ['max:50'],
             'u_nickname' => ['required', 'string', 'max:50'],
@@ -87,8 +89,27 @@ class RegisterController extends Controller
             'id_means' => ['required', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'captcha' => 'required|captcha', 
         ]);
+    }
+
+    public function validateCaptcha($request)
+    {
+        if(isset($request['g-recaptcha-response']) && !empty($request['g-recaptcha-response']))
+        {
+            $secret = "6LeKyW8eAAAAABWWPQ0D5UPOqdhMaA_3VnvXSHPY";
+            
+            $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$request['g-recaptcha-response']);
+            
+            $data = json_decode($response);
+            
+            if($data->success == false){
+                return back();
+            }
+        }else{
+            return back();
+        }
+
+        return true;
     }
 
     protected function create(array $data)
