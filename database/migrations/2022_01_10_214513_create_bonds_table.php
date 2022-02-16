@@ -15,7 +15,7 @@ class CreateBondsTable extends Migration
     {
         Schema::create('bonds', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('id_user')->unsigned(); 
+            $table->bigInteger('id_user')->unsigned();
             $table->integer('id_type_bond')->unsigned();
             $table->integer('id_type_value')->unsigned();
             $table->integer('b_value')->unsigned();

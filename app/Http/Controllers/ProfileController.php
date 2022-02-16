@@ -36,24 +36,18 @@ class ProfileController extends Controller
 
     }
 
-    public function index_bonds(){
-
-        $bonds = DB::table('bonds')
-        ->leftJoin('users','users.id','=','bonds.id_user')
-        ->leftJoin('parametrics','parametrics.id','=','bonds.id_type_bond')
-        ->leftJoin('parametrics as param','param.id','=','bonds.id_type_value')
-        ->where('bonds.b_state', 1)
-        ->whereNull('bonds.deleted_at')
-        ->select('bonds.*','users.u_nickname','parametrics.p_text','param.p_text as text')
-        ->get();
-
+    public function index_bonds($state){
+        
+        $bonds = $this->infoBonds($state)->get();
+        
+        
         return view('profile.index_bonds',compact('bonds'));
     }
 
     public function create_bonds(){
 
         $state = 1;
-        $data = $this->getInfoUsers(4,$state)->select('users.id','users.u_nickname')->get();
+        $data = $this->getInfoUsers(4,$state)->select('users.id as id_user','users.u_nickname','coins.*')->get();
         $type_bonds = $this->getDataParametrics('param_type_bonds')->orderby('p_order')->get();
         $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
 
@@ -62,16 +56,10 @@ class ProfileController extends Controller
 
     public function edit_bonds($id){
 
-        $bonds = bonds::findOrFail($id)
-        ->leftJoin('users','users.id','=','bonds.id_user')
-        ->leftJoin('parametrics','parametrics.id','=','bonds.id_type_bond')
-        ->leftJoin('parametrics as param','param.id','=','bonds.id_type_value')
-        ->select('bonds.*','users.u_nickname','parametrics.p_text','param.p_text as text')
-        ->where('bonds.id',$id)
-        ->get();
-
         $state = 1;
-        $data = $this->getInfoUsers(4,$state)->select('users.id','users.u_nickname')->get();
+        $bonds = $this->infoBonds($state)->find($id);
+
+        $data = $this->getInfoUsers(4,$state)->select('users.id as id_user','users.u_nickname','coins.*')->get();
         $type_bonds = $this->getDataParametrics('param_type_bonds')->orderby('p_order')->get();
         $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
 
@@ -80,8 +68,12 @@ class ProfileController extends Controller
     }
 
     public function store(Request $request){
+
+
+       $validate = $this->getDataParametrics('param_type_value')->find($request->type_value);
+       
         try {
-            if($request->type_value == 21)
+            if($validate->p_text == "Porcentaje" )
             {
 
                 if($request->b_value > 100)
@@ -101,14 +93,19 @@ class ProfileController extends Controller
             $bonds->id_type_value = $request->type_value;
             $bonds->b_value = $request->b_value;
             $bonds->b_state = 1;
-            $bonds->created_by = Auth::user()->id;
+            $bonds->id_coin = $request->id_coins;
+            if (!isset($request->id)) {
+                $bonds->created_by = Auth::user()->id;
+            } else {
+                $bonds->updated_by = Auth::user()->id;
+            }
             $bonds->save();
 
             if(!isset($request->id))
             {
-                return redirect()->route('profile.index_bonds')->with('success','Registro creado con éxito');
+                return redirect()->route('profile.index_bonds',1)->with('success','Registro creado con éxito');
             }else{
-                return redirect()->route('profile.index_bonds')->with('success','Registro actualizado con éxito');
+                return redirect()->route('profile.index_bonds',1)->with('success','Registro actualizado con éxito');
             }
         } catch (\Throwable $th) {
             dd($th);
@@ -122,7 +119,7 @@ class ProfileController extends Controller
             $bonds->deleted_by = Auth::user()->id;
             $bonds->save();
             $bonds->delete();
-            return redirect()->route('profile.index_bonds')->with('success', trans('Registro eliminado con éxito'));
+            return redirect()->route('profile.index_bonds',1)->with('success', trans('Registro eliminado con éxito'));
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -141,8 +138,6 @@ class ProfileController extends Controller
        dd($request);
 
         return back()->with('success','se ha cambiado la clave');
-
-        //dd($request);
 
     }
 

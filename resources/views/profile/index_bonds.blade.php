@@ -19,7 +19,8 @@
                   <tr class="bg-warning text-center">
                     <th>{!! trans('Nick Name') !!}</th>
                     <th>{!! trans('Clasificación') !!}</th>
-                    <th>{!! trans('Tipo') !!}</th>
+                    <th>{!! trans('Tipo de bono') !!}</th>
+                    <th>{!! trans('Tipo de moneda') !!}</th>
                     <th>{!! trans('Valor') !!}</th>
                     <th>{!! trans('Estado') !!}</th>
                     <th>{!! trans('Acciones') !!}</th>
@@ -27,23 +28,25 @@
                 </thead>
                 <tbody>
                   @foreach($bonds as $bond)
+                  
                   <tr>
-                    <td>{{$bond->u_nickname}}</td>
-                    <td>{{$bond->p_text}}</td>
-                    <td>{{$bond->text}}</td>
-                    @if($bond->id_type_value == 21)
+                    <td>{{$bond->users->u_nickname}}</td>
+                    <td>{{$bond->type_bond->p_text}}</td>
+                    <td>{{$bond->value_bond->p_text}}</td>
+                    <td>{{$bond->coins->c_type_currency}} - {{$bond->coins->c_currency}}</td>
+                    @if($bond->type_bond->p_text == 'Porcentaje')
                     <td style="text-align: right"> {{number_format((float)$bond->b_value, 2, '.', '')}} %</td>
                     @else
-                    <td style="text-align: right">$ {{number_format((float)$bond->b_value, 2, '.', '')}}</td>
+                    <td style="text-align: right">{{number_format((float)$bond->b_value, 2, '.', '')}}</td>
                     @endif
                     <td> @if($bond->b_state == 1)
-                      {!! trans('Activo') !!}
+                      {!! trans('Pendiente') !!}
                       @else
-                      {!! trans('Inactivo') !!}
+                      {!! trans('Asignado') !!}
                       @endif</td>
                     <td>
-                        <a href="{{route('profile.edit_bonds',$bond->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                        <a href="{{route('profile.delete',$bond->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                        <a href="{{route('profile.edit_bonds',$bond->id,1)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                        <a href="{{route('profile.delete',$bond->id,1)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                     </td>
                 </tr>
                   @endforeach              

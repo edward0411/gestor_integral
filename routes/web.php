@@ -205,7 +205,7 @@ Route::get('/information_system/pre_registration','Pre_registrationController@cr
 
 Route::get('/basic_data/profile/{id}','ProfileController@index_basic_data')->name('profile.index_basic_data');
 Route::get('/request_users/profile','ProfileController@list_basic_data')->name('profile.list_basic_data');
-Route::get('/bonds/profile','ProfileController@index_bonds')->name('profile.index_bonds');
+Route::get('/bonds/profile/{id}','ProfileController@index_bonds')->name('profile.index_bonds');
 Route::get('/create_bonds/profile','ProfileController@create_bonds')->name('profile.create_bonds');
 Route::post('/store/profile','ProfileController@store')->name('profile.store');
 Route::get('/edit_bonds/profile/{id}','ProfileController@edit_bonds')->name('profile.edit_bonds');

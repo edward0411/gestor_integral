@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Coins;
+use App\Models\Parametrics;
+use App\User;
 
 class Bonds extends Model
 {
@@ -20,4 +23,22 @@ class Bonds extends Model
         'updated_by',
         'deleted_by',
     ];
+
+    public function coins() {
+        return $this->belongsTo(Coins::class, 'id_coin');
+    }
+
+    public function type_bond() {
+        return $this->belongsTo(Parametrics::class, 'id_type_bond');
+    }
+
+    public function value_bond() {
+        return $this->belongsTo(Parametrics::class, 'id_type_value');
+    }
+    
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

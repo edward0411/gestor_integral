@@ -29,12 +29,18 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="id_user">{!! trans('Nick Name') !!}</label>
-                                <select class="form-control form-control-sm select2" id="id_user" name="id_user" required>
+                               
+                                <select class="form-control form-control-sm select2" id="id_user" name="id_user" onChange="bringCoins();" required>
                                     <option value="">{!! trans('Selecione...') !!}</option> 
                                     @foreach($data as $datas)
-                                    <option value="{{$datas->id}}" >{{$datas->u_nickname}}</option> 
+                                    <option value="{{$datas->id_user}}" >{{$datas->u_nickname}}</option> 
                                     @endforeach 
                                 </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="id_coin">{!! trans('Tipo de moneda por defecto') !!}</label>
+                                <input type="text" class="form-control form-control-sm" id="id_coin" name="id_coin" value="" disabled>
+                                <input type="hidden" class="form-control form-control-sm" id="id_coins" name="id_coins" value="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="type_bond"> {!! trans('Clasificación') !!}</label>
@@ -60,7 +66,7 @@
                             </div>
                         </div>
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
-                        <a href="{{route('profile.index_bonds')}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
+                        <a href="{{route('profile.index_bonds',1)}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
                     </div>
                 </form>
                 <!-- /.card-body -->
@@ -70,4 +76,36 @@
         <!-- /.col -->
     </div>
 </div>
+
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    
+        var data = [
+            @foreach($data as $item) {
+                "id_coins": "{{$item->id}}",
+                "type_coin": "{{$item->c_type_currency}} - {{$item->c_currency}}",
+                "id_user": "{{$item->id_user}}",
+
+             },
+            @endforeach
+        ];
+    
+        function bringCoins() {
+    
+            var selectedUsers = $("#id_user").val();
+            nuevo = $.grep(data, function(n, i) {
+                return n.id_user == selectedUsers
+            });
+            
+            $.each(nuevo, function(key, value) {
+               $('#id_coin').val(value.type_coin);
+               $('#id_coins').val(value.id_coins);
+
+              
+            });
+    
+        }
+    </script>
 @endsection
