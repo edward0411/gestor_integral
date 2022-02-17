@@ -24,7 +24,16 @@ class Work extends Model
         return $this->belongsTo(RequestQuote::class, 'request_quote_id');
     }
 
-    public function deliverables() {
-        return $this->hasMany(Deliverable::class, 'work_id');
+    public function deliverable() {
+        return $this->hasOne(Deliverable::class, 'work_id');
+    }
+
+    public function workDetails() {
+        return $this->hasMany(WorkDetail::class, 'work_id');
+    }
+
+    // scope
+    function scopeHandlerQuote($query, $id){
+        return $query->where('request_quote_id', $id);
     }
 }
