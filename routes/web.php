@@ -238,6 +238,10 @@ Route::get('/payment/showPayment/{payment}','PaymentController@showPayment')->na
 Route::post('/payment/edit/{quote}','PaymentController@edit')->name('payment.edit');
 
 
+////////////////////Rutas de billetra virtual //////////////////
+Route::get('/wallet/index','WalletVirtualController@index')->name('wallet.index');
+Route::get('/wallet/show/{quote}','WalletVirtualController@show')->name('wallet.show');
+
 
 /////////////////////////Procesos///////////////
 
