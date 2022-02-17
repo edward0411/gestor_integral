@@ -14,7 +14,6 @@ class PaymentController extends Controller
     use ApiResponser;
 
     public function index(){
-
         $quotes = RequestQuote::orderBy('created_at')->get();
         return view('payments.index',compact('quotes'));
     }
