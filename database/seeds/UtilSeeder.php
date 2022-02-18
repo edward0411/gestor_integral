@@ -2,6 +2,7 @@
 
 use App\Models\BondQuote;
 use App\Models\Bonds;
+use App\Models\Coins;
 use App\Models\Parametrics;
 use App\Models\Payment as ModelsPayment;
 use App\Models\Request;
@@ -23,10 +24,19 @@ class UtilSeeder extends Seeder
     {
         // Bonos
         for ($i=0; $i <3; $i++) {
+            Coins::create([
+                'c_currency'                => collect(['COLOMBIA', 'USD','MXN'])->random(),
+                'c_type_currency'           => collect(['CO', 'USD','MXN'])->random(),
+                'c_trm_currency'            => rand(500, 10000),
+                'c_order'                   => 100,
+                'c_state'                   => 1,
+
+            ]);
             Bonds::create([
                 'b_value'                   => rand(500, 10000),
                 'b_state'                   => 1,
                 'id_user'                   => User::all()->random()->id,
+                'id_coin'                   => Coins::all()->random()->id,
                 'id_type_bond'              => Parametrics::handleCategory('param_type_bonds')->get()->random()->id,
                 'id_type_value'             => Parametrics::handleCategory('param_type_value')->get()->random()->id,
 

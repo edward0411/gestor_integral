@@ -201,7 +201,7 @@ Route::get('/information_service/pre_registration','Pre_registrationController@c
 Route::get('/information_system/pre_registration','Pre_registrationController@create_information_system')->name('pre_registration.my_register.form_information_system');
 
 
-////////// Mi perfil y bonos /////////////////
+////////////////////// Mi perfil y bonos /////////////////
 
 Route::get('/basic_data/profile/{id}','ProfileController@index_basic_data')->name('profile.index_basic_data');
 Route::get('/request_users/profile','ProfileController@list_basic_data')->name('profile.list_basic_data');
@@ -214,20 +214,22 @@ Route::post('/user/request/changed', 'ProfileController@storeRequestUser')->name
 Route::get('/user/request/changed/view/{user}', 'ProfileController@showRequestUser')->name('profile.request.show');
 Route::post('/user/request/changed/{request}/state/{state}', 'ProfileController@handlerRequestUsersState')->name('profile.request.state');
 
-//////// Cambiar contraaeña /////////
+///////////////////// Cambiar contraaeña /////////
+
 Route::get('/change_password/profile/{id}','ProfileController@change_password')->name('profile.change_password');
 Route::post('/change_password_store/profile','ProfileController@change_password_store')->name('profile.change_password_store');
 
 
 
 
-///////Rutas Comunicaciones/////////
+//////////////////////Rutas Comunicaciones/////////
 
 Route::get('/communications/index','CommunicationsController@index')->name('communications.index');
 Route::get('/communications/view_living/{id}','CommunicationsController@living')->name('communications.living');
 Route::post('/communications/{communication}/messages','CommunicationsController@storeMesage')->name('communications.messages.store');
 
-///////Rutas de pagos /////////
+////////////////////Rutas de pagos //////////////////
+
 Route::get('/payment/index','PaymentController@index')->name('payment.index');
 Route::get('/payment/show/{quote}','PaymentController@show')->name('payment.show');
 Route::post('/payment/store/{quote}','PaymentController@store')->name('payment.store');
@@ -236,9 +238,15 @@ Route::get('/payment/showPayment/{payment}','PaymentController@showPayment')->na
 Route::post('/payment/edit/{quote}','PaymentController@edit')->name('payment.edit');
 
 
+////////////////////Rutas de billetra virtual //////////////////
+Route::get('/wallet/index','WalletVirtualController@index')->name('wallet.index');
+Route::get('/wallet/show/{quote}','WalletVirtualController@show')->name('wallet.show');
 
-////////Procesos///////////////
+
+/////////////////////////Procesos///////////////
+
 Route::get('/process/request/index/{rol}','ProcessController@index_request')->name('process.request.index');
+Route::get('/process/request/list','ProcessController@list_request')->name('process.request.list');
 Route::get('/process/request/create','ProcessController@create_request')->name('process.request.create');
 Route::post('/process/request/store','ProcessController@store_request')->name('process.request.store');
 Route::get('/process/request/edit/{id}','ProcessController@edit_request')->name('process.request.edit');
@@ -246,12 +254,18 @@ Route::get('/process/request/delete/{id}','ProcessController@delete_request')->n
 Route::get('/process/request/delete_file','ProcessController@delete_file')->name('process.request.delete_file');
 Route::get('/process/request/change_estate/{id}','ProcessController@change_estate')->name('process.request.change_estate');
 
-/////////Rutas cotizaciones //////////
+//////////////////Rutas cotizaciones para tutores//////////
 
 Route::get('/process/quotes/index','ProcessController@index_quotes')->name('process.quotes.index');
+Route::get('/process/quotes_tutor/create/{id}','ProcessController@create_quotes_turtor')->name('process.quotes_tutor.create');
+Route::post('/process/quotes_tutor/store','ProcessController@store_quotes_tutors')->name('process.quotes_tutor.store');
+Route::get('/process/quotes_tutor/edit/{id}','ProcessController@edit_quotes_turtor')->name('process.quotes_tutor.edit');
+Route::get('/process/quotes_tutor/view_list_quotes_tutor/{id}','ProcessController@view_list_quotes_tutor')->name('process.quetes_tutor.view_list_quotes_tutor');
+
+
+//////////////rutas cotizaciones formales//////////////////////////////
+
 Route::get('/process/quotes/create/{id}','ProcessController@create_quotes')->name('process.quotes.create');
-Route::post('/process/quotes/store','ProcessController@store_quotes')->name('process.quotes.store');
-Route::get('/process/quotes/edit','ProcessController@edit_quotes')->name('process.quotes.edit');
 
 /////////Rutas trabajos //////////
 

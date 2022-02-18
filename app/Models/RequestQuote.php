@@ -42,6 +42,10 @@ class RequestQuote extends Model
         return $this->hasMany(Payment::class, 'request_quote_id');
     }
 
+    public function work() {
+        return $this->hasOne(Work::class, 'request_quote_id');
+    }
+
     // Accessor
     public function getBalanceAttribute()//calcular el saldo total de la cotización
     {

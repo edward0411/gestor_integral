@@ -253,13 +253,16 @@
                                 </div>
                             </div>
                         </div>
-                        <form method="POST" action="{{route('process.quotes.store')}}">
+                        <form method="POST" action="{{route('process.quotes_tutor.store')}}">
                             @csrf
                             <input type="hidden" name="id_request" value="{{$request->id}}">
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="observations">{!! trans('Observaciones Comercial') !!}</label>
                                     <textarea name="observations" id="" class="form-control form-control-sm" rows="2" readonly>{{$request->note_private_comercial}}</textarea>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <span>Recuerde realizar su cotización en: <b>{{$user->coins->c_type_currency}} - {{$user->coins->c_currency}}</b></span>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="valor">{!! trans('Valor de cotización') !!}</label>
