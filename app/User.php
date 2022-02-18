@@ -19,6 +19,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Notifications\ResetPassword;
+use App\Models\MessagesAdmin;
 
 class User extends Authenticatable
 {
@@ -116,6 +117,11 @@ class User extends Authenticatable
     public function messages()
     {
         return $this->hasMany(Messages::class, 'id_user');
+    }
+
+    public function messages_admin()
+    {
+        return $this->hasMany(MessagesAdmin::class, 'id_user');
     }
 
     public function changedRequests()

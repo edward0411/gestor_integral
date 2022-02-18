@@ -14,7 +14,7 @@ class AlterBondsTable extends Migration
     public function up()
     {
         Schema::table('bonds', function (Blueprint $table) {
-            $table->integer('id_coin')->unsigned();
+            $table->integer('id_coin')->default(1)->unsigned();
             $table->foreign('id_coin')->references('id')->on('coins');
         });
     }
