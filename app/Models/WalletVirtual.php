@@ -12,15 +12,15 @@ class WalletVirtual extends Model
 
     protected $fillable = [
         'status',
-        'deliverable_id',
+        'work_id',
         'created_by',
         'updated_by',
         'deleted_by',
     ];
 
     // relaciones
-    public function deliverable() {
-        return $this->belongsTo(Deliverable::class, 'deliverable_id');
+    public function work() {
+        return $this->belongsTo(Work::class, 'work_id');
     }
 
     public function walletDetails() {

@@ -28,6 +28,10 @@ class Work extends Model
         return $this->hasOne(Deliverable::class, 'work_id');
     }
 
+    public function walletVirtual() {
+        return $this->hasOne(WalletVirtual::class, 'work_id');
+    }
+
     public function workDetails() {
         return $this->hasMany(WorkDetail::class, 'work_id');
     }
