@@ -241,7 +241,12 @@ Route::post('/payment/edit/{quote}','PaymentController@edit')->name('payment.edi
 ////////////////////Rutas de billetra virtual //////////////////
 Route::get('/wallet/index','WalletVirtualController@index')->name('wallet.index');
 Route::get('/wallet/show/{quote}','WalletVirtualController@show')->name('wallet.show');
+Route::post('/wallet/store/{work}','WalletVirtualController@store')->name('wallet.store');
 Route::get('/wallet/delete/{walletDetail}','WalletVirtualController@delete')->name('walletDetail.delete');
+Route::get('/wallet/showWalletDetail/{walletDetail}','WalletVirtualController@showWalletDetail')->name('walletDetail.showWalletDetail');
+Route::post('/wallet/edit/{work}','WalletVirtualController@edit')->name('walletDetail.edit');
+
+
 
 
 /////////////////////////Procesos///////////////

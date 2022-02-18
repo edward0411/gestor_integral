@@ -18,6 +18,9 @@ class WalletVirtual extends Model
         'deleted_by',
     ];
 
+    const PDT_PAGO  = 1;
+    const PAGADA    = 2;
+
     // relaciones
     public function work() {
         return $this->belongsTo(Work::class, 'work_id');
@@ -25,6 +28,11 @@ class WalletVirtual extends Model
 
     public function walletDetails() {
         return $this->hasMany(WalletDetail::class, 'wallet_virtual_id');
+    }
+
+    // scope
+    function scopeHandleWork($query, $id){
+        return $query->where('work_id', $id);
     }
 
     // Accessor

@@ -8,7 +8,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" id="formEdit" action="{{route('payment.edit', $quote->id)}}"  enctype="multipart/form-data">
+        <form method="POST" id="formEdit" action="{{route('walletDetail.edit', $work->id)}}"  enctype="multipart/form-data">
             @csrf
             <div class="card-body table-responsive">
                 <div class="row">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="">Referencia de pago</label>
-                        <input type="text" class="form-control form-control-sm" name="payment_reference" id="referenceEdit"  style="text-align:center;" required>
+                        <input type="text" class="form-control form-control-sm" name="reference" id="referenceEdit"  style="text-align:center;" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="">Vaucher</label>
@@ -51,7 +51,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" id="form" action="{{route('payment.store', $quote->id)}}"  enctype="multipart/form-data">
+        <form method="POST" id="formCreate" action="{{route('wallet.store', $work->id)}}"  enctype="multipart/form-data">
             @csrf
             <div class="card-body table-responsive">
                 <div class="row">
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="">Referencia de pago</label>
-                        <input type="text" class="form-control form-control-sm" name="payment_reference" id="payment_reference"  style="text-align:center;" required>
+                        <input type="text" class="form-control form-control-sm" name="reference" id="payment_reference"  style="text-align:center;" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="">Vaucher</label>

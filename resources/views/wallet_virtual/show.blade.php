@@ -146,7 +146,7 @@
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Historial de pagos') !!}</h5>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-warning btn-sm {{$work->walletVirtual->balancee <= 0 ? 'disabled':''}} " data-toggle="modal" data-target="#modalCreate" ><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
+                    <a href="#" class="btn btn-warning btn-sm {{$work->walletVirtual->balance <= 0 ? 'disabled':'hiden'}} " data-toggle="modal" data-target="#modalCreate" ><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
                   </div>
                 <div class="card-body table-responsive">
                     <table id="tabledata1" class="table table-bordered table-striped">
@@ -175,7 +175,7 @@
                                 <td>{{$walletDetail->observation ? $walletDetail->observation:'Sin observación...'}}</td>
                                 <td>{{$walletDetail->created_at}}</td>
                                 <td>
-                                    <a href="" class="btn btn-warning btn-xs" onclick="showwalletDetail({{$walletDetail->id}})" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    <a href="" class="btn btn-warning btn-xs" onclick="showWalletDetail({{$walletDetail->id}})" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
                                     <a href="{{route('walletDetail.delete', $walletDetail->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                                 </td>
                             </tr>
@@ -191,7 +191,7 @@
             </div>
         </div>
     </div>
-    {{-- @include('payments.modals') --}}
+    @include('wallet_virtual.modals')
 
 </div>
 
@@ -210,7 +210,7 @@
         });
 
         const handleReady = () => {
-            $('#form').ajaxForm({
+            $('#formCreate').ajaxForm({
                 dataType: 'json',
                 clearForm: true,
                 beforeSubmit: function(data) {
@@ -244,8 +244,8 @@
             processResponse('message', 'danger', 'Error al guardar: '+data.message)
         }
 
-        const showPayment = (id) => {
-            var url = `{{url('/panel/administrativo/payment/showPayment/${id}')}}`;
+        const showWalletDetail = (id) => {
+            var url = `{{url('/panel/administrativo/wallet/showWalletDetail/${id}')}}`;
             var data = {
                 "_token": $('meta[name="csrf-token"]').attr('content'),
             };
@@ -263,7 +263,7 @@
         const paint = (data) => {
             $("#id").val(data.id);
             $("#valueEdit").val(data.value);
-            $("#referenceEdit").val(data.payment_reference);
+            $("#referenceEdit").val(data.reference);
             $("#observationEdit").val(data.observation);
         }
     </script>
