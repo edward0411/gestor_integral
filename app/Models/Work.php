@@ -40,4 +40,5 @@ class Work extends Model
     function scopeHandlerQuote($query, $id){
         return $query->where('request_quote_id', $id);
     }
+    
 }
