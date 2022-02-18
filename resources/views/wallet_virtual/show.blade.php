@@ -38,31 +38,67 @@
                 <div class="card-header color-header">
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de trabajos entregados') !!}</h5>
                 </div>
-                    <div class="card-body table-responsive">
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label for="">Fecha de entrega:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{($work->deliverable->date_delivery)}}" disabled>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="">Estado de entrega:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->deliverable->state_deliverable}}" disabled>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="">Estado:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->deliverable->state}}" disabled>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="">Archivo:</label>
-                                @if ($work->deliverable->file)
-                                    <a href="{{ asset('folders/wallet/'.$work->deliverable->file)}}" target="_blank">{{$work->deliverable->file}}</a></td>
-                                @else
-                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="Sin archivo..." disabled>
-                                @endif
-                            </div>
+                <div class="card-body table-responsive">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="">Fecha de entrega:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{($work->deliverable->date_delivery)}}" disabled>
                         </div>
-                        <hr size="2px" color="black"/>
+                        <div class="form-group col-md-4">
+                            <label for="">Estado de entrega:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->deliverable->state_deliverable}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Estado:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->deliverable->state}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Archivo:</label>
+                            @if ($work->deliverable->file)
+                                <a href="{{ asset('folders/wallet/'.$work->deliverable->file)}}" target="_blank">{{$work->deliverable->file}}</a></td>
+                            @else
+                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="Sin archivo..." disabled>
+                            @endif
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header color-header">
+                    <h5 class="text-white" style="font-weight: bold;">{!! trans('Detalles de trabajos') !!}</h5>
+                </div>
+                @if ($work->workDetails->count() > 0)
+                    @foreach($work->workDetails as $workDetail)
+                        <div class="card-body table-responsive">
+                            <div>
+                                <span>Detalle # {{$workDetail->id}}</span>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="">Observacion:</label>
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{($workDetail->observation ? $workDetail->observation:'sin observacion...')}}" disabled>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="">Fecha:</label>
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$workDetail->created_at}}" disabled>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="">Archivo:</label>
+                                    @if ($workDetail->file)
+                                        <a href="{{ asset('folders/wallet/'.$workDetail->file)}}" target="_blank">{{$workDetail->file}}</a></td>
+                                    @else
+                                        <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="Sin archivo..." disabled>
+                                    @endif
+                                </div>
+                            </div>
+                            <hr size="2px" color="black"/>
+                        </div>
+                    @endforeach
+                    @else
+                        <div class="form-group col-md-4">
+                            <label for="">Sin detalles</label>
+                        </div>
+                    @endif
             </div>
 
             {{-- <div class="card">
