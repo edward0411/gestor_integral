@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header color-header">
-                    @if(Auth::user()->roles()->first()->id == 6  || Auth::user()->roles()->first()->id == 4)
+                    @if(Auth::user()->roles()->first()->id == 4)
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de mis comunicaciones') !!}</h5>
                     @else
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de comunicaciones') !!}</h5>
@@ -20,7 +20,7 @@
                             <tr class="bg-warning text-center">
                                 <th>{!! trans('N° de proceso') !!}</th>
                                 
-                                @if(Auth::user()->roles()->first()->id != 6  && Auth::user()->roles()->first()->id != 4)
+                                @if( Auth::user()->roles()->first()->id != 4)
                                 <th>{!! trans('Rol') !!}</th>
                                 <th>{!! trans('Usuario') !!}</th>
                                 @endif
@@ -33,7 +33,7 @@
                             @foreach($communications as $communication)
                                 <tr>
                                     <td>#{{ $communication->request->id }}</td>
-                                    @if(Auth::user()->roles()->first()->id != 6  && Auth::user()->roles()->first()->id != 4)
+                                    @if(Auth::user()->roles()->first()->id != 4)
                                     <td>{{ $communication->user->roles()->first()->name }}</td>
                                     <td>{{ $communication->user->u_nickname }}</td>
                                     @endif

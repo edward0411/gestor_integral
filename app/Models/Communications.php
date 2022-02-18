@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use App\Models\Messages;
 use Illuminate\Database\Eloquent\Model;
 
 class Communications extends Model

@@ -51,7 +51,7 @@
               <div class="inner">
                 <h3>30</h3>
 
-                <p>Solicitudes nuevas</p>
+                <p>Solicitudes 3</p>
               </div>
               <div class="icon">
                 <i class="icofont-tasks"></i>
