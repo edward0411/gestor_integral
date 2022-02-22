@@ -18,11 +18,18 @@ use App\Models\RequestTopic as topics;
 use App\Models\RequestFile as filesRequest;
 use App\Models\RequestQuoteTutor as requestTutor;
 use App\Models\Communications;
+use App\Models\Bonds as bonds;
 use Facade\Ignition\QueryRecorder\Query;
 use GuzzleHttp\Psr7\Message;
 
 trait Process
 {
+    public function getInfoTrm($id)
+    {
+        $trm = User::find($id)->coins->c_trm_currency;
+        return $trm;
+    }
+
     public function getInfoRequest($id_rol = null)
     {
         $query = solicitud::orderBy('date_delivery');
@@ -352,6 +359,8 @@ trait Process
 
     public function saveQuotesTutors($data)
     {
+        $trm = $this->getInfoTrm(Auth::user()->id);
+       
         if (isset($data->id_quote_tutor)) {
             $register = requestTutor::find($data->id_quote_tutor);
             $register->updated_by = Auth::user()->id;
@@ -360,6 +369,7 @@ trait Process
             $register->created_by = Auth::user()->id;
         }
         $register->value = $data->value;
+        $register->trm_assigned = $trm;
         $register->observation = $data->comentarios_tutor;
         $register->request_id  = $data->id_request;
         $register->user_id  = Auth::user()->id;
@@ -385,6 +395,13 @@ trait Process
         }else{
             return true;
         }
+    }
+
+    public function getInfoBonds($id)
+    {
+        $bonds = bonds::where('id_user',$id)->where('b_state',1)->get();
+
+        return $bonds;
     }
     
 }

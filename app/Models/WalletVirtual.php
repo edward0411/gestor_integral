@@ -12,18 +12,58 @@ class WalletVirtual extends Model
 
     protected $fillable = [
         'status',
-        'deliverable_id',
+        'work_id',
         'created_by',
         'updated_by',
         'deleted_by',
     ];
 
+    const PDT_PAGO  = 1;
+    const PAGADA    = 2;
+
     // relaciones
-    public function deliverable() {
-        return $this->belongsTo(Deliverable::class, 'deliverable_id');
+    public function work() {
+        return $this->belongsTo(Work::class, 'work_id');
     }
 
     public function walletDetails() {
         return $this->hasMany(WalletDetail::class, 'wallet_virtual_id');
+    }
+
+    // scope
+    function scopeHandleWork($query, $id){
+        return $query->where('work_id', $id);
+    }
+
+    // Accessor
+    public function getValueAttribute()//calcular el valor del pago
+    {
+        $total = 0;
+        foreach ($this->walletDetails as $walletDetail) {
+            $total = $total + $walletDetail->value;
+        }
+        return $total;
+    }
+
+    public function getBalanceAttribute()//calcular el saldo total
+    {
+        return $this->work->requestQuote->requestQuoteTutor->value - $this->value;
+    }
+
+    public function getStateAttribute()
+    {
+        $name = null;
+        switch ($this->status) {
+            case 1:
+               $name = 'PENDIENTE DE PAGO';
+                break;
+            case 2:
+               $name = 'PAGADA';
+                break;
+            default:
+               $name = $this->status;
+               break;
+        }
+        return $name;
     }
 }

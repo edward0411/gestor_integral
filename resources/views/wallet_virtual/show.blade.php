@@ -38,78 +38,115 @@
                 <div class="card-header color-header">
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de trabajos entregados') !!}</h5>
                 </div>
-                    <div class="card-body table-responsive">
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label for="">Fecha de entrega:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{($work->deliverable->date_delivery)}}" disabled>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="">Estado de entrega:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->deliverable->state_deliverable}}" disabled>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="">Estado:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->deliverable->state}}" disabled>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="">Archivo:</label>
-                                @if ($work->deliverable->file)
-                                    <a href="{{ asset('folders/wallet/'.$work->deliverable->file)}}" target="_blank">{{$work->deliverable->file}}</a></td>
-                                @else
-                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="Sin archivo..." disabled>
-                                @endif
-                            </div>
-                        </div>
-                        <hr size="2px" color="black"/>
-                    </div>
-            </div>
-
-            {{-- <div class="card">
-                <div class="card-header color-header">
-                    <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de pago') !!}</h5>
-                </div>
                 <div class="card-body table-responsive">
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="">Valor:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->value)}}" disabled>
+                            <label for="">Fecha de entrega:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{($work->deliverable->date_delivery)}}" disabled>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="">Valor de utilidad:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->value_utility)}}" disabled>
+                            <label for="">Estado de entrega:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->deliverable->state_deliverable}}" disabled>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="">Saldo:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->balance)}}" disabled>
+                            <label for="">Estado:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->deliverable->state}}" disabled>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="">observación:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->observation ? $quote->observation:'sin observación...'}}" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Nota privada:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->private_note}}" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Tipo de utilidad:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->utilityType->p_text}}" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Fecha de cotización:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->created_at}}" disabled>
+                            <label for="">Archivo:</label>
+                            @if ($work->deliverable->file)
+                                <a href="{{ asset('folders/wallet/'.$work->deliverable->file)}}" target="_blank">{{$work->deliverable->file}}</a></td>
+                            @else
+                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="Sin archivo..." disabled>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header color-header">
+                    <h5 class="text-white" style="font-weight: bold;">{!! trans('Detalles de trabajos') !!}</h5>
+                </div>
+                @if ($work->workDetails->count() > 0)
+                    @foreach($work->workDetails as $workDetail)
+                        <div class="card-body table-responsive">
+                            <div>
+                                <span>Detalle # {{$workDetail->id}}</span>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="">Observacion:</label>
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{($workDetail->observation ? $workDetail->observation:'sin observacion...')}}" disabled>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="">Fecha:</label>
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$workDetail->created_at}}" disabled>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="">Archivo:</label>
+                                    @if ($workDetail->file)
+                                        <a href="{{ asset('folders/wallet/'.$workDetail->file)}}" target="_blank">{{$workDetail->file}}</a></td>
+                                    @else
+                                        <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="Sin archivo..." disabled>
+                                    @endif
+                                </div>
+                            </div>
+                            <hr size="2px" color="black"/>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="form-group col-md-4">
+                        <label for="">Sin detalles</label>
+                    </div>
+                @endif
+            </div>
 
+            <div class="card">
+                <div class="card-header color-header">
+                    <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de pago') !!}</h5>
+                </div>
+                @if ($work->walletVirtual->count() > 0)
+                    <div class="card-body table-responsive">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="">Total cuenta:</label>
+                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($work->requestQuote->requestQuoteTutor->value)}}" disabled>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">Valor pagado:</label>
+                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($work->walletVirtual->value)}}" disabled>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">Saldo:</label>
+                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($work->walletVirtual->balance)}}" disabled>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">Estado:</label>
+                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->walletVirtual->state}}" disabled>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">Observación:</label>
+                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{($work->walletVirtual->observation ? $work->walletVirtual->observation:'sin observacion...')}}" disabled>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">Fecha:</label>
+                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->walletVirtual->created_at}}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="form-group col-md-4">
+                        <label for="">Sin detalles</label>
+                    </div>
+                @endif
+            </div>
 
             <div class="card">
                 <div class="card-header color-header">
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Historial de pagos') !!}</h5>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-warning btn-sm {{$quote->balance <= 0 ? 'disabled':''}} " data-toggle="modal" data-target="#modalCreate" ><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
+                    <a href="#" class="btn btn-warning btn-sm {{$work->walletVirtual->balance <= 0 ? 'disabled':'hiden'}} " data-toggle="modal" data-target="#modalCreate" ><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
                   </div>
                 <div class="card-body table-responsive">
                     <table id="tabledata1" class="table table-bordered table-striped">
@@ -117,7 +154,6 @@
                           <tr class="bg-warning text-center">
                             <th>{!! trans('Numeral de pago') !!} </th>
                             <th>{!! trans('Valor') !!}</th>
-                            <th>{!! trans('Tipo de pago') !!}</th>
                             <th>{!! trans('Referencia de pago') !!}</th>
                             <th>{!! trans('Vaucher') !!}</th>
                             <th>{!! trans('Observacion') !!}</th>
@@ -126,37 +162,36 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($quote->payments as $payment)
+                          @foreach($work->walletVirtual->walletDetails as $walletDetail)
                             <tr>
-                                <td>{{$payment->id}}</td>
-                                <td>${{number_format($payment->value)}}</td>
-                                <td>{{$payment->payment_type}}</td>
-                                <td>{{$payment->payment_reference}}</td>
-                                <td>@if ($payment->vaucher)
-                                        <a href="{{ asset('folders/payments/'.$payment->vaucher)}}" target="_blank">{{$payment->vaucher}}</a></td>
+                                <td>{{$walletDetail->id}}</td>
+                                <td>${{number_format($walletDetail->value)}}</td>
+                                <td>{{$walletDetail->reference}}</td>
+                                <td>@if ($walletDetail->vaucher)
+                                        <a href="{{ asset('folders/wallet/'.$walletDetail->vaucher)}}" target="_blank">{{$walletDetail->vaucher}}</a></td>
                                     @else
                                         Sin vaucher...
                                     @endif
-                                <td>{{$payment->observation ? $payment->observation:'Sin observación...'}}</td>
-                                <td>{{$payment->created_at}}</td>
+                                <td>{{$walletDetail->observation ? $walletDetail->observation:'Sin observación...'}}</td>
+                                <td>{{$walletDetail->created_at}}</td>
                                 <td>
-                                    <a href="" class="btn btn-warning btn-xs" onclick="showPayment({{$payment->id}})" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="{{route('payment.delete', $payment->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                    <a href="" class="btn btn-warning btn-xs" onclick="showWalletDetail({{$walletDetail->id}})" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    <a href="{{route('walletDetail.delete', $walletDetail->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                                 </td>
                             </tr>
                           @endforeach
                           <td class="color-header">TOTAL</td>
-                          <td class="color-header">${{number_format($quote->payments->sum('value'))}}</td>
+                          <td class="color-header">${{number_format($work->walletVirtual->value)}}</td>
                           <td class="color-header">SALDO</td>
-                          <td class="color-header">${{number_format($quote->balance)}}</td>
+                          <td class="color-header">${{number_format($work->walletVirtual->balance)}}</td>
 
                         </tbody>
                       </table>
                 </div>
             </div>
-        </div> --}}
+        </div>
     </div>
-    {{-- @include('payments.modals') --}}
+    @include('wallet_virtual.modals')
 
 </div>
 
@@ -175,7 +210,7 @@
         });
 
         const handleReady = () => {
-            $('#form').ajaxForm({
+            $('#formCreate').ajaxForm({
                 dataType: 'json',
                 clearForm: true,
                 beforeSubmit: function(data) {
@@ -209,8 +244,8 @@
             processResponse('message', 'danger', 'Error al guardar: '+data.message)
         }
 
-        const showPayment = (id) => {
-            var url = `{{url('/panel/administrativo/payment/showPayment/${id}')}}`;
+        const showWalletDetail = (id) => {
+            var url = `{{url('/panel/administrativo/wallet/showWalletDetail/${id}')}}`;
             var data = {
                 "_token": $('meta[name="csrf-token"]').attr('content'),
             };
@@ -228,7 +263,7 @@
         const paint = (data) => {
             $("#id").val(data.id);
             $("#valueEdit").val(data.value);
-            $("#referenceEdit").val(data.payment_reference);
+            $("#referenceEdit").val(data.reference);
             $("#observationEdit").val(data.observation);
         }
     </script>

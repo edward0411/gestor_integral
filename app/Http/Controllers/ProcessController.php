@@ -8,6 +8,7 @@ use App\Traits\Process;
 use App\Traits\ApiResponser;
 use App\User;
 use Session;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ProcessController extends Controller
@@ -155,7 +156,7 @@ class ProcessController extends Controller
         return redirect()->route('process.request.index',Auth::user()->roles()->first()->id)->with('success','Registro eliminado con éxito');
     }
 
-    /////////// Cotizaciones  //////////
+    /////////// Cotizaciones  tutor//////////
 
     public function index_quotes()
     {
@@ -241,9 +242,13 @@ class ProcessController extends Controller
     public function create_quotes($id)
     {
         $request = $this->DataQuotesTutor()->find($id);
+        $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
+        $bonds = $this->getInfoBonds($request->request->users->id);
+        $trm = $this->getInfoTrm($request->request->users->id);
+        $fecha = $this->get_date_now();
+        $fechaMax = Carbon::now()->addDays(7)->format('Y-m-d');
 
-        //dd($request);
-
-        return view('process.quotes.create_formal',compact('request'));
+        
+        return view('process.quotes.create_formal',compact('request','type_value','bonds','trm','fecha','fechaMax'));
     }
 }
