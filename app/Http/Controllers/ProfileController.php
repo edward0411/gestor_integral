@@ -69,7 +69,6 @@ class ProfileController extends Controller
 
     public function store(Request $request){
 
-
        $validate = $this->getDataParametrics('param_type_value')->find($request->type_value);
        
         try {

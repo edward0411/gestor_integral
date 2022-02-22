@@ -24,8 +24,8 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="id_coin">{!! trans('Tipo de moneda por defecto') !!}</label>
-                                <input type="text" class="form-control form-control-sm" id="id_coin" name="id_coin" value="{{$bonds->coins->c_type_currency}} - {{$bonds->coins->c_currency}}" disabled>
-                                <input type="hidden" class="form-control form-control-sm" id="id_coins" name="id_coins" value="">
+                                <input type="text" class="form-control form-control-sm" id="id_coin" name="id_coin" value="{{$bonds->coins->c_type_currency}} - {{$bonds->coins->c_currency}}" readonly>
+                                <input type="hidden" class="form-control form-control-sm" id="id_coins" name="id_coins" value="{{$bonds->coins->id}}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="type_bond"> {!! trans('Clasificación') !!}</label>
