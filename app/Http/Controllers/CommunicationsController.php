@@ -23,7 +23,7 @@ class CommunicationsController extends Controller
                 ['id_user', '<>', $user->id],
             ]);
         }, 'user']);
-        if (!$user->hasRole('Administrador')) {
+        if (\Auth::user()->roles()->first()->id == 4) {
             $communications = $communications->where('id_user', $user->id);
         }
         $communications = $communications->get();

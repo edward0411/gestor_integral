@@ -228,6 +228,12 @@ Route::get('/communications/index','CommunicationsController@index')->name('comm
 Route::get('/communications/view_living/{id}','CommunicationsController@living')->name('communications.living');
 Route::post('/communications/{communication}/messages','CommunicationsController@storeMesage')->name('communications.messages.store');
 
+//////////////////////Rutas administrador procesos/////////
+
+Route::get('/admin_process/index','Admin_precessController@index')->name('admin_process.index');
+Route::get('/admin_process/view_messages/{id}','Admin_precessController@messages')->name('admin_process.messages');
+Route::post('/admin_process/{admin_process}/messages_admin','Admin_precessController@store_messages')->name('admin_process.messages_admin.store');
+
 ////////////////////Rutas de pagos //////////////////
 
 Route::get('/payment/index','PaymentController@index')->name('payment.index');

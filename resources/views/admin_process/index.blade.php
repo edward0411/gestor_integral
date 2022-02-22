@@ -1,5 +1,5 @@
 @extends('layouts.master_panel')
-@section('title','Bandeja de Comunicaciones')
+@section('title','Procesos administrativos')
 
 @section('content')
 <div class="container">
@@ -7,10 +7,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header color-header">
-                    @if(Auth::user()->roles()->first()->id == 4)
-                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de mis comunicaciones') !!}</h5>
+                    @if(Auth::user()->roles()->first()->id == 6)
+                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de mis Procesos administrativos') !!}</h5>
                     @else
-                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de comunicaciones') !!}</h5>
+                    <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de Procesos administrativos') !!}</h5>
                     @endif
                 </div>
                 <!-- /.card-header -->
@@ -20,7 +20,7 @@
                             <tr class="bg-warning text-center">
                                 <th>{!! trans('N° de proceso') !!}</th>
                                 
-                                @if( Auth::user()->roles()->first()->id != 4)
+                                @if(Auth::user()->roles()->first()->id != 6)
                                 <th>{!! trans('Rol') !!}</th>
                                 <th>{!! trans('Usuario') !!}</th>
                                 @endif
@@ -30,25 +30,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($communications as $communication)
-                                <tr>
-                                    <td>#{{ $communication->request->id }}</td>
-                                    @if(Auth::user()->roles()->first()->id != 4)
-                                    <td>{{ $communication->user->roles()->first()->name }}</td>
-                                    <td>{{ $communication->user->u_nickname }}</td>
+                            @foreach($admin_process as $admin_process)
+                            <tr>
+                                <td>#{{ $admin_process->id }}</td>
+                                @if(Auth::user()->roles()->first()->id != 6)
+                                <td>{{ $admin_process->user->roles()->first()->name }}</td>
+                                <td>{{ $admin_process->user->u_nickname }}</td>
+                                @endif
+                                <td>{{ $admin_process->created_at }}</td>
+                                <td>{{ $admin_process->ap_status }}</td>
+                                <td>                                         
+                                    <a href="{{route('admin_process.messages',$admin_process->id)}}" class="btn btn-warning btn-xs">
+                                        <i class="fas fa-eye"></i> {!! trans('Ver') !!}                                            
+                                        @if (count($admin_process->messages_admin))
+                                        <span class="badge bg-danger"> {{ count($admin_process->messages_admin) }}</span>
                                     @endif
-                                    <td>{{ $communication->request->created_at }}</td>
-                                    <td>{{ $communication->request->requestState->name }}</td>
-                                    <td>                                         
-                                        <a href="{{ route('communications.living', $communication->id) }}" class="btn btn-warning btn-xs">
-                                            <i class="fas fa-eye"></i> {!! trans('Ver') !!}                                            
-                                            @if (count($communication->messages))
-                                                <span class="badge bg-danger"> {{ count($communication->messages) }}</span>
-                                            @endif
-                                        </a>                                        
-                                    </td>
-                                </tr>
-                            @endforeach
+                                        
+                                    </a>                                        
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
