@@ -56,7 +56,7 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Crear valore de cotización') !!}</h5>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="{{route('process.quotes.store')}}" method="POST" class="form-group">
                     @csrf
                         <input type="hidden" name="id_request_tutor" id="id_request_tutor" value="{{$request->id}}">
                         <input type="hidden" name="value_trm_client" id="value_trm_client" value="{{$trm}}">

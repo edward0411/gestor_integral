@@ -251,4 +251,24 @@ class ProcessController extends Controller
         
         return view('process.quotes.create_formal',compact('request','type_value','bonds','trm','fecha','fechaMax'));
     }
+
+    public function store_quotes(Request $request)
+    {
+        $this->validateQuotes($request);
+
+    }
+
+    public function validateQuotes($request)
+    {
+        $rules = [];
+        $messages = [];
+
+        dd($request);
+                        
+            
+        $this->validate($request, $rules, $messages);
+        
+
+        return true;
+    }
 }

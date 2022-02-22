@@ -272,6 +272,7 @@ Route::get('/process/quotes_tutor/view_list_quotes_tutor/{id}','ProcessControlle
 //////////////rutas cotizaciones formales//////////////////////////////
 
 Route::get('/process/quotes/create/{id}','ProcessController@create_quotes')->name('process.quotes.create');
+Route::post('/process/quotes/store','ProcessController@store_quotes')->name('process.quotes.store');
 
 /////////Rutas trabajos //////////
 
