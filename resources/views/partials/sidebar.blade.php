@@ -303,7 +303,7 @@
             </a>
             <ul class="nav nav-treeview">
               @can('Pagos_HistorialPagosClientes_ver')
-                @if((\Auth::user()->roles()->first()->id == 4)))
+                @if((\Auth::user()->roles()->first()->id == 4))
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                         <i class="icofont-data"></i>
@@ -399,6 +399,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @if((\Auth::user()->roles()->first()->id != 6))
               @can('Comunicaciones_bandeja')
               <li class="nav-item">
                 <a href="{{route('communications.index')}}" class="nav-link">
@@ -407,9 +408,18 @@
                 </a>
               </li>
               @endcan
+              @endif
+              @if((\Auth::user()->roles()->first()->id != 4))
+              <li class="nav-item">
+                <a href="{{route('admin_process.index')}}" class="nav-link">
+                  <i class="icofont-ui-browser"></i>
+                  <p><font size="2">Procesos administrativos</font></p>
+                </a>
+              </li>
             </ul>
           </li>
           @endcan
+          @endif
           <!-- /.Modulo Comunicaciones -->
         </ul>
       </nav>
