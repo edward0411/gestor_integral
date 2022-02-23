@@ -281,12 +281,14 @@
               </li>
               @endcan
               @can('Billetera_virtual_HistoriarPagos_ver')
-              <li class="nav-item">
-                <a href="{{route('wallet.index')}}" class="nav-link">
-                  <i class="icofont-data"></i>
-                  <p><font size="3">Hist. Pagos a tutores</font></p>
-                </a>
-              </li>
+                @if((\Auth::user()->roles()->first()->id == 1))
+                    <li class="nav-item">
+                        <a href="{{route('wallet.index')}}" class="nav-link">
+                        <i class="icofont-data"></i>
+                        <p><font size="3">Hist. Pagos a tutores</font></p>
+                        </a>
+                    </li>
+                @endif
               @endcan
             </ul>
           </li>

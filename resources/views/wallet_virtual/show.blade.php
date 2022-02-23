@@ -26,10 +26,13 @@
                             <label for="">Tipo de trabajo:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->requestQuote->requestQuoteTutor->request->parametric->p_text}}"  disabled>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Cliente:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->requestQuote->requestQuoteTutor->request->users->u_name}}" disabled>
-                        </div>
+                        @if((\Auth::user()->roles()->first()->id == 1))
+                            <div class="form-group col-md-4">
+                                <label for="">Cliente:</label>
+                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->requestQuote->requestQuoteTutor->request->users->u_name}}" disabled>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -145,9 +148,11 @@
                 <div class="card-header color-header">
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Historial de pagos') !!}</h5>
                 </div>
-                <div class="card-body">
-                    <a href="#" class="btn btn-warning btn-sm {{$work->walletVirtual->balance <= 0 ? 'disabled':'hiden'}} " data-toggle="modal" data-target="#modalCreate" ><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
-                  </div>
+                @if((\Auth::user()->roles()->first()->id == 1))
+                    <div class="card-body">
+                        <a href="#" class="btn btn-warning btn-sm {{$work->walletVirtual->balance <= 0 ? 'disabled':'hiden'}} " data-toggle="modal" data-target="#modalCreate" ><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
+                    </div>
+                @endif
                 <div class="card-body table-responsive">
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
@@ -158,7 +163,9 @@
                             <th>{!! trans('Vaucher') !!}</th>
                             <th>{!! trans('Observacion') !!}</th>
                             <th>{!! trans('Fecha de pago') !!}</th>
-                            <th>{!! trans('Acciones') !!}</th>
+                            @if((\Auth::user()->roles()->first()->id == 1))
+                                <th>{!! trans('Acciones') !!}</th>
+                            @endif
                           </tr>
                         </thead>
                         <tbody>
@@ -174,10 +181,12 @@
                                     @endif
                                 <td>{{$walletDetail->observation ? $walletDetail->observation:'Sin observación...'}}</td>
                                 <td>{{$walletDetail->created_at}}</td>
-                                <td>
-                                    <a href="" class="btn btn-warning btn-xs" onclick="showWalletDetail({{$walletDetail->id}})" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                    <a href="{{route('walletDetail.delete', $walletDetail->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
-                                </td>
+                                @if((\Auth::user()->roles()->first()->id == 1))
+                                    <td>
+                                        <a href="" class="btn btn-warning btn-xs" onclick="showWalletDetail({{$walletDetail->id}})" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                        <a href="{{route('walletDetail.delete', $walletDetail->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                    </td>
+                                @endif
                             </tr>
                           @endforeach
                           <td class="color-header">TOTAL</td>
