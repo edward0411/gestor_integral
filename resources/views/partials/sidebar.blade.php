@@ -274,7 +274,7 @@
             <ul class="nav nav-treeview">
               @can('Billetera_virtual_miBilletera_ver')
               <li class="nav-item">
-                <a href="{{route('wallet.index',Auth::user()->id)}}" class="nav-link">
+                <a href="{{route('wallet.index','mi_billetera')}}" class="nav-link">
                   <i class="icofont-data"></i>
                   <p><font size="3">Mi Billetera</font></p>
                 </a>

@@ -245,7 +245,7 @@ Route::post('/payment/edit/{quote}','PaymentController@edit')->name('payment.edi
 
 
 ////////////////////Rutas de billetra virtual //////////////////
-Route::get('/wallet/index/{id?}','WalletVirtualController@index')->name('wallet.index');
+Route::get('/wallet/index/{handle?}','WalletVirtualController@index')->name('wallet.index');
 Route::get('/wallet/show/{quote}','WalletVirtualController@show')->name('wallet.show');
 Route::post('/wallet/store/{work}','WalletVirtualController@store')->name('wallet.store');
 Route::get('/wallet/delete/{walletDetail}','WalletVirtualController@delete')->name('walletDetail.delete');

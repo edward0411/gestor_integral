@@ -16,9 +16,9 @@ class WalletVirtualController extends Controller
 {
     use ApiResponser;
 
-    public function index($id = null){
-        if($id) {
-            $tutorPayments = RequestQuote::handleUser($id);
+    public function index($handle = null){
+        if($handle) {
+            $tutorPayments = RequestQuote::handleUser(Auth::user()->id);
         }else{
             $tutorPayments = RequestQuote::orderBy('created_at');
         }
