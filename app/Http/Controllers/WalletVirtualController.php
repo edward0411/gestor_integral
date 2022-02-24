@@ -16,9 +16,13 @@ class WalletVirtualController extends Controller
 {
     use ApiResponser;
 
-    public function index(){
-        $tutorPayments = RequestQuote::orderBy('created_at')->get();
-        return view('wallet_virtual.index',compact('tutorPayments'));
+    public function index($handle = null){
+        if($handle) {
+            $tutorPayments = RequestQuote::handleUser(Auth::user()->id);
+        }else{
+            $tutorPayments = RequestQuote::orderBy('created_at');
+        }
+        return view('wallet_virtual.index', ['tutorPayments' => $tutorPayments->get()]);
     }
 
     public function show($quote){

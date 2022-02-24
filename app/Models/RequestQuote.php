@@ -46,6 +46,13 @@ class RequestQuote extends Model
         return $this->hasOne(Work::class, 'request_quote_id');
     }
 
+    // scope
+    function scopeHandleUser($query, $id){
+        return $query->whereHas('requestQuoteTutor', function ($query) use($id) {
+            $query->where('user_id', $id);
+        });
+    }
+
     // Accessor
     public function getBalanceAttribute()//calcular el saldo total de la cotización
     {
