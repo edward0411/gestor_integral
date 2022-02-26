@@ -34,11 +34,14 @@
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    <form action="{{route('communications.messages.store', $communication->id) }}" method="POST">
+                    <form action="{{route('communications.messages.store', $communication->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="form-group col-md-9 ">
-                                <textarea class="form-control" name="message" id="message" cols="30" rows="3"></textarea>
+                            <div class="form-group col-md-12">
+                                <input type="file" class="form-control form-control-sm" name="m_file" id="m_file">
+                              </div>
+                            <div class="form-group col-md-9">
+                                <textarea class="form-control form-control-sm" name="message" id="message" cols="30" rows="3"></textarea>
                             </div>
                             <div class="form-group col-md-3">
                                 <button type="submit" id="" class="btn btn-warning btn-sm"><i class="fas fa-comments"> Enviar</i></button>
@@ -74,6 +77,11 @@
                                 </div>                                    
                                 <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
                                     <p>{{ $message->m_text_message }}</p>
+                                    <br>
+                                    @if($message->m_file != null)
+                                    <a href="{{asset('folders/living_messages/files_messages'. $communication->id.'/'.$message->m_file)}}"  target="_blank"> {{ $message->m_file }}</a>
+                                    @endif 
+                                    <br>
                                     <small style="text-align:rigth;">Enviado el {{ $message->m_date_message }}.</small>
                                 </div>
                             </div>  

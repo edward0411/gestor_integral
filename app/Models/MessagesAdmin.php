@@ -16,6 +16,7 @@ class MessagesAdmin extends Model
         'ma_date_message',
         'ma_text_message',
         'ma_state',
+        'ma_file',
         'created_by',
     ];
 

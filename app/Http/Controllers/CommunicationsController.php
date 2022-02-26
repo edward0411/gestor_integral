@@ -7,6 +7,7 @@ use App\Models\Messages;
 use Illuminate\Http\Request;
 use App\Traits\Managment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class CommunicationsController extends Controller
 {
@@ -51,12 +52,24 @@ class CommunicationsController extends Controller
 
     public function storeMesage(Request $request, Communications $communication)
     {
-        $communication->messages()->create([
-            'id_user' => Auth::user()->id,
-            'm_date_message' => date('Y-m-d H:i:s'),
-            'm_text_message' => $request->message,
-            'm_state' => 0,
-        ]);
+        $name = null;
+        if($request->hasFile('m_file')){
+            $path = public_path() .'/folders/living_messages/files_messages'.$request->id.'/file_';
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+            $file = $request->file('m_file');
+            $name = $file->getClientOriginalName();
+            $path = public_path() .'\folders\living_messages\files_messages'.$communication->id;
+            $file->move($path,$name);
+        }
+           $communication->messages()->create([
+               'id_user' => Auth::user()->id,
+               'm_date_message' => date('Y-m-d H:i:s'),
+               'm_text_message' => $request->message,
+               'm_state' => 0,
+               'm_file' => $name,
+            ]);
         return back();
     }
     

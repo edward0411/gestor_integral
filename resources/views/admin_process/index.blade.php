@@ -18,9 +18,7 @@
                     <table id="tabledata1" class="table table-bordered table-striped">
                         <thead>
                             <tr class="bg-warning text-center">
-                                <th>{!! trans('N° de proceso') !!}</th>
-                                
-                                @if(Auth::user()->roles()->first()->id != 6)
+                                @if((Auth::user()->roles()->first()->id != 6)  && (Auth::user()->roles()->first()->id != 4))
                                 <th>{!! trans('Rol') !!}</th>
                                 <th>{!! trans('Usuario') !!}</th>
                                 @endif
@@ -30,10 +28,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                         
                             @foreach($admin_process as $admin_process)
                             <tr>
-                                <td>#{{ $admin_process->id }}</td>
-                                @if(Auth::user()->roles()->first()->id != 6)
+                                @if((Auth::user()->roles()->first()->id != 6)  && (Auth::user()->roles()->first()->id != 4))
                                 <td>{{ $admin_process->user->roles()->first()->name }}</td>
                                 <td>{{ $admin_process->user->u_nickname }}</td>
                                 @endif
@@ -50,6 +48,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                      
                         </tbody>
                     </table>
                 </div>

@@ -12,23 +12,32 @@
                 <div class="card-body table-responsive">
                     <div class="row">
                         <div class="form-group col-md-6">
+                           
+                            @if((\Auth::user()->roles()->first()->id != 6))
+                            <label for="">Cliente:</label>
+                            @else
                             <label for="">Tutor:</label>
+                            @endif
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{ $admin_process->user->u_nickname }}" disabled>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="">Fecha de recibido el mensaje:</label>
+                            <label for="">Fecha de creación de la sala:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{ $admin_process->created_at }}" disabled>
                         </div>
                         </div>
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    <form action="{{route('admin_process.messages_admin.store',$admin_process->id)}}" method="POST">
+                    <form action="{{route('admin_process.messages_admin.store',$admin_process->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="form-group col-md-9 ">
-                                <textarea class="form-control" name="message" id="message" cols="30" rows="3"></textarea>
+                            <div class="form-group col-md-12">
+                                <input type="file" class="form-control form-control-sm" name="ma_file" id="ma_file">
+                              </div>
+                            <div class="form-group col-md-9">
+                                <textarea class="form-control form-control-sm" name="message" id="message" cols="30" rows="2"></textarea>
                             </div>
+                           
                             <div class="form-group col-md-3">
                                 <button type="submit" id="" class="btn btn-warning btn-sm"><i class="fas fa-comments"> Enviar</i></button>
                             </div>
@@ -57,10 +66,18 @@
                             @if (in_array(3, $roleIDs))
                                 <div class="card-header color-comercial">
                             @endif
+                            @if (in_array(4, $roleIDs))
+                                    <div class="card-header color-client">
+                                @endif
                                 <h5 class="text-white" style="font-weight: bold;">{{ $message->user->u_nickname }} </h5>                       
                             </div>                                    
                             <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
                                 <p>{{ $message->ma_text_message }}</p>
+                                <br>
+                                @if($message->ma_file != null)
+                                <a href="{{asset('folders/living_admin/files_admin'. $admin_process->id.'/'.$message->ma_file)}}"  target="_blank"> {{ $message->ma_file }}</a>
+                                @endif 
+                                <br>
                                 <small style="text-align:rigth;">Enviado el {{ $message->ma_date_message }}.</small>
                             </div>
                         </div>  
