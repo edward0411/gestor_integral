@@ -246,7 +246,7 @@ class ProcessController extends Controller
         $bonds = $this->getInfoBonds($request->request->users->id);
         $trm = $this->getInfoTrm($request->request->users->id);
         $fecha = $this->get_date_now();
-        $fechaMax = Carbon::now()->addDays(7)->format('Y-m-d');
+        $fechaMax = Carbon::now()->addDays(1)->format('Y-m-d');
 
         
         return view('process.quotes.create_formal',compact('request','type_value','bonds','trm','fecha','fechaMax'));
