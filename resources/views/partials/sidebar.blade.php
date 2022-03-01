@@ -216,27 +216,30 @@
                   </ul>
                 </li>
               @endif
+              @if(\Auth::user()->roles()->first()->id !=4)
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="icofont-data"></i>
                   <p><font size="3">Trabajos</font></p>
                 </a>
                 <ul class="nav nav-treeview">
+                  @if(\Auth::user()->roles()->first()->id ==4)
                   <li class="nav-item">
                     <a href="{{route('process.works.index')}}" class="nav-link">
                       <i class="icofont-checked"></i>
                       <p>Mis trabajos</p>
                     </a>
                   </li>
+                  @endif
                   <li class="nav-item">
-                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                    <a href="{{route('process.works.list')}}" class="nav-link">
                       <i class="icofont-close-squared-alt"></i>
                       <p>List. trabajos</p>
                     </a>
                   </li>
                 </ul>
               </li>
-
+              @endif
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="icofont-data"></i>

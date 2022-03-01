@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="deliver_date">{!! trans('Tipo de utilidad') !!}</label>
-                                <select class="form-control" name="type_utility" id="type_utility">
+                                <select class="form-control" name="type_utility" id="type_utility" required>
                                     <option value="">Seleccione...</option>
                                     @foreach($type_value as $value)
                                         <option value="{{$value->id}}" >{{$value->p_text}}</option> 

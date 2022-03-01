@@ -17,8 +17,10 @@ use App\Models\RequestSystem as systems;
 use App\Models\RequestTopic as topics;
 use App\Models\RequestFile as filesRequest;
 use App\Models\RequestQuoteTutor as requestTutor;
+use App\Models\RequestQuote as Quote;
 use App\Models\Communications;
 use App\Models\Bonds as bonds;
+use App\Models\BondQuote as rel_bond;
 use Facade\Ignition\QueryRecorder\Query;
 use GuzzleHttp\Psr7\Message;
 
@@ -334,6 +336,8 @@ trait Process
         $state_old = null;
         if ($state == 2) {
             $state_old = 1;
+        }else if ($state == 3) {
+            $state_old = 2;
         }
  
         $this->changeHistoryState($id,$state,$state_old);
@@ -382,14 +386,12 @@ trait Process
     public function DataQuotesTutor()
     {
         $query = requestTutor::orderBy('created_at');
-
         return $query;
     }
 
     public function validateTopicsRequest($id)
     {
         $solicitud = solicitud::find($id);
-
         if(count($solicitud->requestTopics) > 0){
             return false;
         }else{
@@ -400,8 +402,66 @@ trait Process
     public function getInfoBonds($id)
     {
         $bonds = bonds::where('id_user',$id)->where('b_state',1)->get();
-
         return $bonds;
+    }
+
+    public function saveQuotesFormal($request)
+    {
+        try {
+           
+            $register = new Quote();
+            $register->value = $request->value_cot_formal;
+            $register->value_utility = $request->value_utility;
+            $register->observation = $request->observation;
+            $register->private_note = $request->private_note;
+            $register->request_quote_tutor_id = $request->id_request_tutor;
+            $register->utility_type_id = $request->type_utility;
+            $register->date_quote = $request->date_quote;
+            $register->date_validate = $request->date_validate;
+            $register->trm_assigned = $request->value_trm_client;
+            $register->created_by = Auth::user()->id;
+            $register->save();
+
+            if ($request->id_bond != 0) {
+
+                $bond = bonds::find($request->id_bond);
+                $value_bond = 0;
+                $divisor = 0;
+
+                if($bond->value_bond->p_text == "Porcentaje"){
+                    $divisor = 100 - $bond->b_value;
+                    $value_bond = (((float)$request->value_cot_formal / $divisor) * 100)-(float)$request->value_cot_formal;
+                }else{
+                    $value_bond = $bond->b_value;
+                }
+
+                $relation = new rel_bond();
+                $relation->bond_id = $request->id_bond;
+                $relation->request_quote_id  = $register->id;
+                $relation->value_bond = $value_bond;
+                $relation->trm_assigned = $request->value_trm_client;
+                $relation->created_by = Auth::user()->id;
+                $relation->save();
+               
+            }
+            $this-> changeState($register->requestQuoteTutor->request_id,3);
+            $this-> changeStateBond($request->id_bond);
+
+            return $register;
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
+    public function changeStateBond($id)
+    {
+        $bond = bonds::find($id);
+        $bond->b_state = 2;
+        $bond->updated_by = Auth::user()->id;
+        $bond->save();
+
+        return true;
     }
     
 }

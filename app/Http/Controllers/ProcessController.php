@@ -10,6 +10,9 @@ use App\User;
 use Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+use Illuminate\Support\Facades\Storage;
+use App\Models\RequestQuote as Quote;
 
 class ProcessController extends Controller
 {
@@ -213,6 +216,17 @@ class ProcessController extends Controller
         return view('process.works.index');
     }
 
+    public function list_works()
+    {
+        $quotes = Quote::join('request_quote_tutors as rt','rt.id','=','request_quotes.request_quote_tutor_id')
+        ->join('requests','rt.request_id','=','requests.id')
+        ->whereNull('requests.deleted_at')
+        ->select('request_quotes.*')
+        ->get();
+
+        return view('process.works.list',compact('quotes'));
+    }
+
     public function create_works()
     {
         $services = $this->getDataParametrics('param_list_services')->orderby('p_order')->get();
@@ -239,6 +253,9 @@ class ProcessController extends Controller
         return view('process.works.edit',compact('languages','list_systems','areas','subjects','topics','services','question'));
     }
 
+
+    //////////////Cotizaciones formales///////////
+
     public function create_quotes($id)
     {
         $request = $this->DataQuotesTutor()->find($id);
@@ -256,19 +273,38 @@ class ProcessController extends Controller
     {
         $this->validateQuotes($request);
 
+        $data = $this->saveQuotesFormal($request);
+
+        $pdf = PDF::loadView('process.quotes.pdf_quote_formal',compact('data'));
+        Storage::put('Folders/Quotes/quote_'.$data->id.'.pdf', $pdf->output());
+
+
+        //return $pdf->download('invoice.pdf');
+
     }
 
     public function validateQuotes($request)
     {
         $rules = [];
         $messages = [];
+        $fecha_quote = $request->date_quote;
+        $fecha_max = $request->date_validate;
 
-        dd($request);
-                        
-            
+        if ($fecha_max < $fecha_quote) {
+            $rules['validate1'] = 'required';
+            $messages['validate1.required'] =trans('La fecha maxima de validez no puede ser inferior a la fecha de creación');  
+        }
+
+        if ($request->value_utility == 0) {
+            $rules['validate2'] = 'required';
+            $messages['validate2.required'] =trans('Por favor asigne un valor de utilidad a la cotización formal');  
+        }
         $this->validate($request, $rules, $messages);
-        
-
         return true;
+    }
+
+    public function download_quote($id)
+    {
+        return Storage::download("Folders/Quotes/quote_".$id.'.pdf');
     }
 }

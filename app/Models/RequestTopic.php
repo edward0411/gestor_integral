@@ -25,7 +25,7 @@ class RequestTopic extends Model
         return $this->belongsTo(Request::class, 'request_id');
     }
 
-    public function tutorTopic() {
-        return $this->belongsTo(Parametrics::class, 'topic_id');
+    public function topics() {
+        return $this->belongsTo(Topics::class, 'topic_id');
     }
 }
