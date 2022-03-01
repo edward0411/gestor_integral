@@ -97,8 +97,8 @@ Route::get('/view/customers','CustomersController@active')->name('customers.inde
 Route::get('/view/customers_inactives','CustomersController@inactive')->name('customers.inactives')->middleware('permission:Administrador_clientes_inactivar');
 Route::get('/create/customers','CustomersController@create')->name('customers.create')->middleware('permission:Administrador_clientes_crear');
 Route::get('/edit/customers/{id}','CustomersController@edit')->name('customers.edit')->middleware('permission:Administrador_clientes_editar');
-Route::get('/processState/customers/{id}','CustomersController@processState')->name('customers.processState');//->middleware('permission:Administrador_parametricas_ver');
-Route::post('/store/customers','CustomersController@store_customer')->name('customers.store_customer');//->middleware('permission:Administrador_parametricas_ver');
+Route::get('/processState/customers/{id}','CustomersController@processState')->name('customers.processState')->middleware('permission:Administrador_clientes_estados');
+Route::post('/store/customers','CustomersController@store_customer')->name('customers.store_customer')->middleware('permission:Administrador_clientes_crear');
 
 ///////// Rutas tutores  ////////////
 
@@ -106,7 +106,7 @@ Route::get('/view/tutors','TutorsController@active')->name('tutors.index')->midd
 Route::get('/view/tutors_inactives','TutorsController@inactive')->name('tutors.inactives')->middleware('permission:Administrador_tutores_inactivar');
 Route::get('/create/tutors','TutorsController@create')->name('tutors.create')->middleware('permission:Administrador_tutores_crear');
 Route::get('/edit/tutors/{id}','TutorsController@edit')->name('tutors.edit')->middleware('permission:Administrador_tutores_editar');
-Route::post('/store/tutors','TutorsController@store_tutor')->name('tutors.store_tutor');//->middleware('permission:Administrador_tutores_editar');
+Route::post('/store/tutors','TutorsController@store_tutor')->name('tutors.store_tutor')->middleware('permission:Administrador_tutores_crear');
 
 ////////// Rutas monedas //////////
 
@@ -131,24 +131,24 @@ Route::get('/active/areas/{id}', 'AreasController@active')->name('areas.active')
 
 ////////// Rutas materias //////////
 
-Route::get('/view/areas/subjects/{id}','SubjectsController@index')->name('areas.subjects.index');//->middleware('permission:Administrador_materias_ver');
-Route::get('/create/areas/subjects/{id}','SubjectsController@create')->name('areas.subjects.create');//->middleware('permission:Administrador_materias_crear');
-Route::get('/edit/areas/subjects/{id}','SubjectsController@edit')->name('areas.subjects.edit');//->middleware('permission:Administrador_materias_editar');
-Route::post('/store/areas/subjects','SubjectsController@store')->name('areas.subjects.store');//->middleware('permission:Administrador_materias_crear');
-Route::post('/update/areas/subjects','SubjectsController@update')->name('areas.subjects.update');//->middleware('permission:Administrador_materias_editar');
-Route::get('/inactive/areas/subjects/{id}/{id_area}', 'SubjectsController@inactive')->name('areas.subjects.inactive');//->middleware('permission:Administrador_materias_inactivar');
-Route::get('/active/areas/subjects/{id}/{id_area}', 'SubjectsController@active')->name('areas.subjects.active');//->middleware('permission:Administrador_materias_activar');
+Route::get('/view/areas/subjects/{id}','SubjectsController@index')->name('areas.subjects.index')->middleware('permission:Administrador_materias_ver');
+Route::get('/create/areas/subjects/{id}','SubjectsController@create')->name('areas.subjects.create')->middleware('permission:Administrador_materias_crear');
+Route::get('/edit/areas/subjects/{id}','SubjectsController@edit')->name('areas.subjects.edit')->middleware('permission:Administrador_materias_editar');
+Route::post('/store/areas/subjects','SubjectsController@store')->name('areas.subjects.store')->middleware('permission:Administrador_materias_crear');
+Route::post('/update/areas/subjects','SubjectsController@update')->name('areas.subjects.update')->middleware('permission:Administrador_materias_editar');
+Route::get('/inactive/areas/subjects/{id}/{id_area}', 'SubjectsController@inactive')->name('areas.subjects.inactive')->middleware('permission:Administrador_materias_inactivar');
+Route::get('/active/areas/subjects/{id}/{id_area}', 'SubjectsController@active')->name('areas.subjects.active')->middleware('permission:Administrador_materias_activar');
 
 
 ////////// Rutas temas //////////
 
-Route::get('/view/areas/subjects/topics/{id}','TopicsController@index')->name('areas.subjects.topics.index');//->middleware('permission:Administrador_parametricas_ver');
-Route::get('/create/subjects/topics/{id}','TopicsController@create')->name('areas.subjects.topics.create');//->middleware('permission:Administrador_parametricas_ver');
-Route::get('/edit/subjects/topics/{id}','TopicsController@edit')->name('areas.subjects.topics.edit');//->middleware('permission:Administrador_parametricas_ver');
-Route::post('/store/areas/subjects/topics','TopicsController@store')->name('areas.subjects.topics.store');//->middleware('permission:Administrador_parametricas_ver');
-Route::post('/update/areas/subjects/topics','TopicsController@update')->name('areas.subjects.topics.update');//->middleware('permission:Administrador_parametricas_ver');
-Route::get('/inactive/areas/subjects/topics/{id}/{id_subject}', 'TopicsController@inactive')->name('areas.subjects.topics.inactive');//->middleware('permission:Administrador_parametricas_ver');
-Route::get('/active/areas/subjects/topics/{id}/{id_subject}', 'TopicsController@active')->name('areas.subjects.topics.active');//->middleware('permission:Administrador_parametricas_ver');
+Route::get('/view/areas/subjects/topics/{id}','TopicsController@index')->name('areas.subjects.topics.index')->middleware('permission:Administrador_temas_ver');
+Route::get('/create/subjects/topics/{id}','TopicsController@create')->name('areas.subjects.topics.create')->middleware('permission:Administrador_temas_crear');
+Route::get('/edit/subjects/topics/{id}','TopicsController@edit')->name('areas.subjects.topics.edit')->middleware('permission:Administrador_temas_editar');
+Route::post('/store/areas/subjects/topics','TopicsController@store')->name('areas.subjects.topics.store')->middleware('permission:Administrador_temas_crear');
+Route::post('/update/areas/subjects/topics','TopicsController@update')->name('areas.subjects.topics.update')->middleware('permission:Administrador_temas_editar');
+Route::get('/inactive/areas/subjects/topics/{id}/{id_subject}', 'TopicsController@inactive')->name('areas.subjects.topics.inactive')->middleware('permission:Administrador_temas_inactivar');
+Route::get('/active/areas/subjects/topics/{id}/{id_subject}', 'TopicsController@active')->name('areas.subjects.topics.active')->middleware('permission:Administrador_temas_activar');
 
 //////////// Rutas empleados //////////
 
@@ -296,6 +296,27 @@ Route::get('/clearcache', function () {
 });
 
 Route::get('/createpermission',function(){
+
+    ///////// permisos areas
+
+    Permission::create(['name' => 'Administrador_areas_inactivar']);
+    Permission::create(['name' => 'Administrador_areas_activar']);
+
+    ///////permisos materias/////////
+
+     Permission::create(['name' => 'Administrador_materias_ver']);
+     Permission::create(['name' => 'Administrador_materias_crear']);
+     Permission::create(['name' => 'Administrador_materias_editar']);
+     Permission::create(['name' => 'Administrador_materias_inactivar']);
+     Permission::create(['name' => 'Administrador_materias_activar']);
+
+     ///////permisos temas /////////
+
+     Permission::create(['name' => 'Administrador_temas_ver']);
+     Permission::create(['name' => 'Administrador_temas_crear']);
+     Permission::create(['name' => 'Administrador_temas_editar']);
+     Permission::create(['name' => 'Administrador_temas_inactivar']);
+     Permission::create(['name' => 'Administrador_temas_activar']);
 
 
 

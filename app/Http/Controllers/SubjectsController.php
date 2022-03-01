@@ -101,53 +101,11 @@ class SubjectsController extends Controller
     public function update(Request $request){
 
         //dd($request);
-
-        $order_requested = $request->s_order;
-
-        $order = DB::table('subjects')
-        ->where('id',$request->id_area)
-        ->select('s_order')
-        ->first();
-
-        $value = $order->s_order * 100;
-
-        /*if($order_requested < $value){
-
-        if($order_requested < $value){
-          //dd($order_requested);
-            $number = ($value - 1);
-
-            for ($i= $number; $i >= $order_requested ; $i--) {
-
-                $order = $i * 100;
-
-                $subjects = subject::where('s_order', $order)->where('id_area',$request->id_area)->firstOrFail();
-                $subjects->s_order = $order + 100;
-                $subjects->update();
-
-            }
-
-        }else{ 
-
-
-            for ($i= $order_requested; $i > $value ; $i--) {
-
-                $order = $i * 100;
-
-                $subjects = subject::where('s_order', $order)->where('id_area',$request->id_area)->firstOrFail();
-                $subjects->s_order = $order - 100;
-                $subjects->update();
-
-            }
-        }*/
-
-        $id_area = $request->id_area;
-
-        $subject = subject::where('id', $id_area)->firstOrFail();
+        $subject = subject::find($request->id);
         $subject->s_name = $request->s_name;
         $subject->s_order = $request->s_order;
         $subject->updated_by  = Auth::user()->id;
-        $subject->update();
+        $subject->save();
 
         return redirect()->route('areas.subjects.index',$request->id_area)->with('success','Registro actualizado con éxito');
     }
