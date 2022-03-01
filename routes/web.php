@@ -253,8 +253,6 @@ Route::get('/wallet/showWalletDetail/{walletDetail}','WalletVirtualController@sh
 Route::post('/wallet/edit/{work}','WalletVirtualController@edit')->name('walletDetail.edit');
 
 
-
-
 /////////////////////////Procesos///////////////
 
 Route::get('/process/request/index/{rol}','ProcessController@index_request')->name('process.request.index');
@@ -283,6 +281,8 @@ Route::post('/process/quotes/store','ProcessController@store_quotes')->name('pro
 /////////Rutas trabajos //////////
 
 Route::get('/process/works/index','ProcessController@index_works')->name('process.works.index');
+Route::get('/process/works/list','ProcessController@list_works')->name('process.works.list');
+Route::get('/process/works/quote/{id}','ProcessController@download_quote')->name('process.works.quote');
 Route::get('/process/works/create','ProcessController@create_works')->name('process.works.create');
 Route::get('/process/works/edit','ProcessController@edit_works')->name('process.works.edit');
 

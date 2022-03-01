@@ -164,8 +164,6 @@
                 @endif
 
                 <!-- /.Modulo Pre Registro -->
-
-
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="icofont-money"></i>
@@ -248,7 +246,7 @@
                                 </li>
                                 @else
                                 <li class="nav-item">
-                                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                                    <a href="{{route('process.works.list')}}" class="nav-link">
                                         <i class="icofont-close-squared-alt"></i>
                                         <p>List. trabajos</p>
                                     </a>
@@ -257,7 +255,6 @@
                             </ul>
                         </li>
                         @endif
-
 
                         @if(\Auth::user()->roles()->first()->id !=4)
                         <li class="nav-item">

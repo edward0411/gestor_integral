@@ -34,8 +34,8 @@ class RequestQuote extends Model
         return $this->belongsTo(Parametrics::class, 'utility_type_id');
     }
 
-    public function bondQuotes() {
-        return $this->hasMany(BondQuote::class, 'bond_id');
+    public function requestBond() {
+        return $this->hasOne(BondQuote::class, 'request_quote_id');
     }
 
     public function payments() {
