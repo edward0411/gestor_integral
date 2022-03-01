@@ -414,7 +414,7 @@
               </li>
               @endcan
               @endif
-              @if((\Auth::user()->roles()->first()->id != 4))
+             
               <li class="nav-item">
                 <a href="{{route('admin_process.index')}}" class="nav-link">
                   <i class="icofont-ui-browser"></i>
@@ -423,7 +423,7 @@
               </li>
             </ul>
           </li>
-          @endcan
+          
           @endif
           <!-- /.Modulo Comunicaciones -->
         </ul>

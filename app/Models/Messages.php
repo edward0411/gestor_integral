@@ -14,6 +14,7 @@ class Messages extends Model
         'm_date_message',
         'm_text_message',
         'm_state',
+        'm_file',
     ];
     
     public function communication()
