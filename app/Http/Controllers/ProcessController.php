@@ -278,9 +278,21 @@ class ProcessController extends Controller
         $pdf = PDF::loadView('process.quotes.pdf_quote_formal',compact('data'));
         Storage::put('Folders/Quotes/quote_'.$data->id.'.pdf', $pdf->output());
 
+        return redirect()->route('process.works.list')->with('success','Cotización creada con éxito');
 
-        //return $pdf->download('invoice.pdf');
+    }
 
+    public function edit_quotes($id)
+    {
+        dd($id);
+    }
+
+
+    public function delete_quotes($id)
+    {
+       $this->deleteQuote($id);
+
+       return redirect()->back()->with(['success' => 'Cotización eliminada con éxito']);
     }
 
     public function validateQuotes($request)

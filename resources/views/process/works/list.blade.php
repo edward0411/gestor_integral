@@ -57,9 +57,9 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{route('process.works.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar Cotización') !!}</a>
-                                <a href="{{route('process.works.edit')}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Iniciar Trabajo') !!}</a>      
-                                <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                <a href="{{route('process.quote.edit',$value->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar Cotización') !!}</a>
+                                <a href="{{route('process.quote.edit',$value->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Iniciar Trabajo') !!}</a>      
+                                <a href="{{route('process.quote.delete',$value->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
                             </td>
                         </tr>
                     @endforeach

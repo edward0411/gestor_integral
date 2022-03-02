@@ -14,7 +14,13 @@ class PaymentController extends Controller
     use ApiResponser;
 
     public function index(){
-        $quotes = RequestQuote::orderBy('created_at')->get();
+
+        $quotes = RequestQuote::join('request_quote_tutors as rt','rt.id','=','request_quotes.request_quote_tutor_id')
+        ->join('requests','rt.request_id','=','requests.id')
+        ->whereNull('requests.deleted_at')
+        ->select('request_quotes.*')
+        ->orderBy('request_quotes.created_at')->get();
+        
         return view('payments.index',compact('quotes'));
     }
 
