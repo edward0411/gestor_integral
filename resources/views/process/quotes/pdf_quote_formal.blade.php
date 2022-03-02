@@ -74,7 +74,7 @@
                     {{$i}}
                 </td>
                 <td style="text-align: left; font-size:10px;border:1px solid">
-                    @if(isset($data->requestQuoteTutor->request->requestResponses))
+                    @if(isset($data->requestQuoteTutor->request->requestResponses) )
                         <p>Preguntas:</p>
                         <ul> 
                             @foreach($data->requestQuoteTutor->request->requestResponses as $key => $value)
@@ -84,7 +84,7 @@
                             @endforeach
                         </ul>
                     @endif
-                    @if(isset($data->requestQuoteTutor->request->requestLanguages))
+                    @if(isset($data->requestQuoteTutor->request->requestLanguages) && count($data->requestQuoteTutor->request->requestLanguages) > 0)
                     <p>Idiomas:</p>
                         <ul>
                             @foreach($data->requestQuoteTutor->request->requestLanguages as $lang)
@@ -94,7 +94,7 @@
                             @endforeach
                         </ul>
                     @endif
-                    @if(isset($data->requestQuoteTutor->request->requestSystems))
+                    @if(isset($data->requestQuoteTutor->request->requestSystems) && count($data->requestQuoteTutor->request->requestSystems) > 0)
                     <p>Sistemas:</p>
                         <ul>
                             @foreach($data->requestQuoteTutor->request->requestSystems as $system)
@@ -114,8 +114,8 @@
                             @endforeach
                         </ul>
                     @endif
-                    @if(isset($data->requestQuoteTutor->request->requestFiles))
-                    <p>Temas:</p>
+                    @if(isset($data->requestQuoteTutor->request->requestFiles) && count($data->requestQuoteTutor->request->requestFiles) > 0)
+                    <p>Archivos:</p>
                         <ul>
                             @foreach($data->requestQuoteTutor->request->requestFiles as $file)
                                 <li>

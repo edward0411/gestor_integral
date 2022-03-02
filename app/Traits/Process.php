@@ -445,7 +445,7 @@ trait Process
                
             }
             $this-> changeState($register->requestQuoteTutor->request_id,3);
-            $this-> changeStateBond($request->id_bond);
+            $this-> changeStateBond($request->id_bond,2);
 
             return $register;
 
@@ -454,12 +454,28 @@ trait Process
         }
     }
 
-    public function changeStateBond($id)
+    public function changeStateBond($id,$state)
     {
         $bond = bonds::find($id);
-        $bond->b_state = 2;
+        $bond->b_state = $state;
         $bond->updated_by = Auth::user()->id;
         $bond->save();
+
+        return true;
+    }
+
+    public function deleteQuote($id)
+    {
+        $register = Quote::find($id);
+        $request = solicitud::find($register->requestQuoteTutor->request->id);
+        $this->changeHistoryState($request->id,2,3);
+        $request->request_state_id = 2;
+        $request->updated_by = Auth::user()->id;
+        $request->save();
+        $this-> changeStateBond($register->requestBond->bond_id,1);
+        $register->deleted_by = Auth::user()->id;
+        $register->save();
+        $register->delete();
 
         return true;
     }

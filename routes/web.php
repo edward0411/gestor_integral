@@ -220,8 +220,6 @@ Route::get('/change_password/profile/{id}','ProfileController@change_password')-
 Route::post('/change_password_store/profile','ProfileController@change_password_store')->name('profile.change_password_store');
 
 
-
-
 //////////////////////Rutas Comunicaciones/////////
 
 Route::get('/communications/index','CommunicationsController@index')->name('communications.index');
@@ -284,7 +282,9 @@ Route::get('/process/works/index','ProcessController@index_works')->name('proces
 Route::get('/process/works/list','ProcessController@list_works')->name('process.works.list');
 Route::get('/process/works/quote/{id}','ProcessController@download_quote')->name('process.works.quote');
 Route::get('/process/works/create','ProcessController@create_works')->name('process.works.create');
-Route::get('/process/works/edit','ProcessController@edit_works')->name('process.works.edit');
+
+Route::get('/process/works/edit_quote/{id}','ProcessController@edit_quotes')->name('process.quote.edit');
+Route::get('/process/works/delete_quote/{id}','ProcessController@delete_quotes')->name('process.quote.delete');
 
 
 Route::get('/clearcache', function () {
