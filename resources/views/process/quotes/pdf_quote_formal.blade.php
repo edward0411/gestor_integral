@@ -16,12 +16,11 @@
             <tr>
                 <td> <img src="{{ asset('dist/img/LogoTusTareasHorizontal_Op.png') }}" height="100" style="opacity: .8"></td>
                 <td style="text-align: right">
-                    <h1>TusTareas sas</h1>
-                    <p>TusTareas.com <br>
-                        NIT 00000000-00 <br>
-                        Cra 1 # 02-34 Bogota - Colombia <br>
-                        Celular +57 3123456789 <br>
-                        Colombia <br>
+                    <h1>TUS TAREAS</h1>
+                    <p> Nit: 98762114-7<br>
+                        www.tustareas.com.co<br>
+                        tustareasinternacional@gmail.com<br>
+                        Marca registrada <br>
                     </p> 
                 </td>
             </tr>
@@ -29,24 +28,25 @@
         <br>
         <table id="table1" width="100%" style=" border: 1px solid black; border-collapse: collapse;">
             <tr style="background-color: #dcd9d9;">
-                <th style="text-align: center; font-size:14px">Presupuesto #</th>
+                <th style="text-align: center; font-size:14px">Cotización #</th>
                 <th style="text-align: center; font-size:14px">Servicio</th>
                 <th style="text-align: center; font-size:14px">Fecha cotización</th>
                 <th style="text-align: center; font-size:14px">Valido hasta</th>
+                <th style="text-align: center; font-size:12px; width:20%;border:1px solid">Moneda</th>
             </tr>
            <tr>
                <td style="text-align: center; font-size:12px">{{$data->id}}</td>
                <td style="text-align: center; font-size:12px">{{$data->requestQuoteTutor->request->parametric->p_text}}</td>
                <td style="text-align: center; font-size:12px">{{$data->date_quote}}</td>
                <td style="text-align: center; font-size:12px">{{$data->date_validate}}</td>
+               <td style="text-align: center; font-size:12px">{{$data->requestQuoteTutor->request->users->coins->c_type_currency}} - {{$data->requestQuoteTutor->request->users->coins->c_currency}}
+            </td>
            </tr>
         </table>
         <br>
         <br>
         <br>
         <p>
-            <b>Destinatario</b>
-            <br>
             Sr@, {{$data->requestQuoteTutor->request->users->u_nickname}}
             <br>
             <br>
@@ -63,7 +63,6 @@
                 <th style="text-align: center; font-size:12px; width:10%;border:1px solid">N°</th>
                 <th style="text-align: center; font-size:12px; width:30%;border:1px solid">Descripción</th>
                 <th style="text-align: center; font-size:12px; width:20%;border:1px solid">Valor</th>
-                <th style="text-align: center; font-size:12px; width:20%;border:1px solid">Moneda</th>
                 <th style="text-align: center; font-size:12px; width:20%;border:1px solid">Total</th>
             </tr>
             @php
@@ -152,9 +151,6 @@
                     </td>
                     <td style="text-align: center; font-size:10px;border:1px solid">
                         {{number_format((float)$data->requestBond->value_bond)}}
-                    </td>
-                    <td style="text-align: center; font-size:10px;border:1px solid">
-                        <p>{{$data->requestQuoteTutor->request->users->coins->c_type_currency}} - {{$data->requestQuoteTutor->request->users->coins->c_currency}}</p>
                     </td>
                     <td style="text-align: center; font-size:10px;border:1px solid">
                        <p><b>{{number_format((float)$data->requestBond->value_bond *(-1))}}</b></p> 
