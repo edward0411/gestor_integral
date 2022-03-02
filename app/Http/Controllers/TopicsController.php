@@ -46,8 +46,10 @@ class TopicsController extends Controller
         $topics = DB::table('topics')
         ->leftJoin('subjects','subjects.id','=','topics.id_subject')
         ->where('topics.id',$id)
-        ->select('topics.t_name','topics.t_order','subjects.id','topics.id_subject')
+        ->select('topics.t_name','topics.t_order','topics.id_subject')
         ->first();
+
+        //dd($topics);
 
         $value = DB::table('topics')->max('t_order');
         $max  = $value + 100;
@@ -100,7 +102,17 @@ class TopicsController extends Controller
 
     public function update(Request $request){
 
-        return redirect()->route('areas.subjects.topics.index')->with('success','Registro actualizado con éxito');
+       // dd($request);
+
+        $topics = topics::find($request->id);
+        $topics->t_name = $request->t_name;
+        $topics->t_order = $request->t_order;
+        $topics->updated_by = Auth::user()->id;
+        $topics->save();
+
+
+
+        return redirect()->route('areas.subjects.topics.index',$request->id_subject)->with('success','Registro actualizado con éxito');
     }
 
     public function active($id,$id_subject)

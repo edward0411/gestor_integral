@@ -9,10 +9,10 @@
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Editar tema') !!}</h5>
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" action="">
+                <form method="POST" action="{{route('areas.subjects.topics.update')}}">
                     @csrf
-                    <input type="hidden" name="id_subject" value="{{$id}}">
-                    <input type="hidden" name="id" value="{{$topics->id}}">
+                    <input type="hidden" name="id_subject" value="{{$topics->id_subject}}">
+                    <input type="hidden" name="id" value="{{$id}}">
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
-                        <a href="{{route('areas.subjects.topics.index',$topics->id)}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
+                        <a href="{{route('areas.subjects.topics.index',$topics->id_subject)}}" class="btn btn-warning btn-sm float-right">{!! trans('Regresar') !!}</a>
                     </div>
                 </form>
                 <!-- /.card-body -->

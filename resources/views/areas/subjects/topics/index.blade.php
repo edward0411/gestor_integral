@@ -11,7 +11,9 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    @can('Administrador_temas_crear') 
                     <a href="{{route('areas.subjects.topics.create',$id)}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear tema') !!}</a>
+                    @endcan
                   </div>
                 <div class="card-body">
                     <table id="tabledata1" class="table table-bordered table-striped">
@@ -37,11 +39,17 @@
                                     @endif
                                 </td>
                                 <td>
+                                    @can('Administrador_temas_editar') 
                                     <a href="{{route('areas.subjects.topics.edit',$topic->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    @endcan
                                     @if($topic->t_state == 1)
+                                    @can('Administrador_temas_inactivar') 
                                     <a href="{{route('areas.subjects.topics.inactive',array($topic->id,$id))}}" onclick="return confirm('{!! trans('Desea inactivar el tema') !!}?');" class="btn btn-danger btn-xs"><i class="fas fa-ban"></i> {!! trans('Inactivar') !!}</a>
+                                    @endcan
                                     @else
+                                    @can('Administrador_temas_activar') 
                                    <a href="{{route('areas.subjects.topics.active',array($topic->id,$id))}}" class="btn btn-warning btn-xs" onclick="return confirm('{!! trans('Desea activar el tema') !!}?');"><i class="fas fa-check"></i> {!! trans('Activar') !!}</a>
+                                   @endcan
                                    @endif
                                 </td>
                             </tr>

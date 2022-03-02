@@ -11,7 +11,9 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    @can('Administrador_areas_crear') 
                     <a href="{{route('areas.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear área') !!}</a>
+                    @endcan
                   </div>
                 <div class="card-body">
                     <table id="tabledata1" class="table table-bordered table-striped">
@@ -36,12 +38,20 @@
                                 @endif
                                 </td>
                                 <td>
+                                    @can('Administrador_areas_editar') 
                                     <a href="{{route('areas.edit',$area->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                    @endcan
+                                    @can('Administrador_materias_ver') 
                                     <a href="{{route('areas.subjects.index',$area->id)}}" class="btn btn-primary btn-xs"><i class=" 	fas fa-clipboard-list"></i> {!! trans('Materias') !!}</a>
+                                    @endcan
                                     @if($area->a_state == 1)
+                                    @can('Administrador_areas_inactivar') 
                                     <a href="{{route('areas.inactive',$area->id)}}" onclick="return confirm('{!! trans('Desea inactivar el área') !!}?');" class="btn btn-danger btn-xs"><i class="fas fa-ban"></i> {!! trans('Inactivar') !!}</a>
+                                    @endcan
                                 @else
+                                @can('Administrador_areas_activar') 
                                    <a href="{{route('areas.active',$area->id)}}" class="btn btn-warning btn-xs" onclick="return confirm('{!! trans('Desea activar área') !!}?');"><i class="fas fa-check"></i> {!! trans('Activar') !!}</a>
+                                   @endcan
                                 @endif
                                 </td>
                             </tr>
