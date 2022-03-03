@@ -169,9 +169,13 @@ trait Process
 
             if ($state_old != null) {           
                 $consult = history::where('request_id',$id)->where('request_state_id',$state_old)->first();
-                $consult->end_date = $this->get_date_now();
-                $consult->updated_by = Auth::user()->id;
-                $consult->save();
+                //dd($consult);
+                if ($consult != null) {
+                    $consult->end_date = $this->get_date_now();
+                    $consult->updated_by = Auth::user()->id;
+                    $consult->save();
+                }
+               
             }
             
             $history = new history();

@@ -163,7 +163,9 @@ class ProcessController extends Controller
 
     public function index_quotes()
     {
-        return view('process.quotes.index');
+        $data = $this->getInfoRequest()->where('request_state_id',2)->get();
+
+        return view('process.quotes.index',compact('data'));
     }
 
     public function create_quotes_turtor($id)
@@ -284,7 +286,9 @@ class ProcessController extends Controller
 
     public function edit_quotes($id)
     {
-        dd($id);
+        $data = Quote::find($id);
+
+        return view('process.quotes.edit_formal',compact('data'));
     }
 
 
