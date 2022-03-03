@@ -449,8 +449,10 @@ trait Process
                
             }
             $this-> changeState($register->requestQuoteTutor->request_id,3);
-            $this-> changeStateBond($request->id_bond,2);
-
+            //dd($request->id_bond);
+            if ($request->id_bond != 0) {
+                $this-> changeStateBond($request->id_bond,2);
+            }
             return $register;
 
         } catch (\Throwable $th) {
