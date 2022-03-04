@@ -32,7 +32,7 @@
                 <th style="text-align: center; font-size:14px">Servicio</th>
                 <th style="text-align: center; font-size:14px">Fecha cotización</th>
                 <th style="text-align: center; font-size:14px">Valido hasta</th>
-                <th style="text-align: center; font-size:12px; width:20%;border:1px solid">Moneda</th>
+                <th style="text-align: center; font-size:12px;">Moneda</th>
             </tr>
            <tr>
                <td style="text-align: center; font-size:12px">{{$data->id}}</td>
@@ -60,10 +60,10 @@
       
         <table id="table1" width="100%" style=" border: 1px solid black; border-collapse: collapse;">
             <tr style="background-color: #dcd9d9;border:1px solid">
-                <th style="text-align: center; font-size:12px; width:10%;border:1px solid">N°</th>
-                <th style="text-align: center; font-size:12px; width:30%;border:1px solid">Descripción</th>
-                <th style="text-align: center; font-size:12px; width:20%;border:1px solid">Valor</th>
-                <th style="text-align: center; font-size:12px; width:20%;border:1px solid">Total</th>
+                <th style="text-align: center; font-size:12px; width:5%;border:1px solid">N°</th>
+                <th style="text-align: center; font-size:12px; width:75%;border:1px solid">Descripción</th>
+                <th style="text-align: center; font-size:12px; width:10%;border:1px solid">Valor</th>
+                <th style="text-align: center; font-size:12px; width:10%;border:1px solid">Total</th>
             </tr>
             @php
                 $i = 1;
@@ -74,7 +74,7 @@
                     {{$i}}
                 </td>
                 <td style="text-align: left; font-size:10px;border:1px solid">
-                    @if(isset($data->requestQuoteTutor->request->requestResponses) )
+                    @if(isset($data->requestQuoteTutor->request->requestResponses) && count($data->requestQuoteTutor->request->requestResponses) > 0)
                         <p>Preguntas:</p>
                         <ul> 
                             @foreach($data->requestQuoteTutor->request->requestResponses as $key => $value)
@@ -126,21 +126,28 @@
                     @endif
                 </td>
                 <td style="text-align: center; font-size:10px;border:1px solid">
-                    <p>
-                        {{number_format($data->value)}}
-                    </p>
+                    @if(isset($data->requestBond))
+                        <p>
+                            {{number_format($data->value + (float)$data->requestBond->value_bond)}}
+                        </p>
+                    @else
+                        <p>
+                            {{number_format($data->value)}}
+                        </p>
+                    @endif
                 </td>
                 <td style="text-align: center; font-size:10px;border:1px solid">
-                    <p>{{$data->requestQuoteTutor->request->users->coins->c_type_currency}} - {{$data->requestQuoteTutor->request->users->coins->c_currency}}</p>
-                </td>
-                <td style="text-align: center; font-size:10px;border:1px solid">
-                    <p><b>{{number_format($data->value)}}</b></p>
+                    @if(isset($data->requestBond))
+                        <p>
+                            <b>
+                                {{number_format($data->value + (float)$data->requestBond->value_bond)}}
+                            </b>
+                        </p>
+                    @else
+                        <p><b>{{number_format($data->value)}}</b></p>
+                    @endif
                 </td>
             </tr>
-            @php
-                $i++;
-                $valor_t = $valor_t + $data->value;
-            @endphp
             @if(isset($data->requestBond))
                 <tr>
                     <td style="text-align: center; font-size:10px;border:1px solid">
@@ -150,30 +157,17 @@
                       <p>{{$data->requestBond->bond->type_bond->p_text}}  -  {{$data->requestBond->bond->value_bond->p_text}}</p>  
                     </td>
                     <td style="text-align: center; font-size:10px;border:1px solid">
-                        {{number_format((float)$data->requestBond->value_bond)}}
+                                {{number_format((float)$data->requestBond->value_bond)}}
                     </td>
                     <td style="text-align: center; font-size:10px;border:1px solid">
                        <p><b>{{number_format((float)$data->requestBond->value_bond *(-1))}}</b></p> 
                     </td>
                 </tr>
-                @php
-                    $valor_t = $valor_t - (float)$data->requestBond->value_bond;
-                @endphp
             @endif
             <tr style="background-color: #dcd9d9;border:1px solid">
-                <td colspan="3"></td>
-                <td style="text-align: right; font-size:10px;border:1px solid">Sub Total</td>
-                <td style="text-align: center; font-size:10px;border:1px solid"><b>{{number_format($valor_t)}}</b></td>
-            </tr>
-            <tr style="background-color: #dcd9d9;border:1px solid">
-                <td colspan="3"></td>
-                <td style="text-align: right; font-size:10px;border:1px solid">IVA @ 19.00%</td>
-                <td style="text-align: center; font-size:10px;border:1px solid"><b>{{number_format(0)}}</b></td>
-            </tr>
-            <tr style="background-color: #dcd9d9;border:1px solid">
-                <td colspan="3"></td>
+                <td colspan="2"></td>
                 <td style="text-align: right; font-size:10px;border:1px solid">Total</td>
-                <td style="text-align: center; font-size:10px;border:1px solid"><b>{{number_format($valor_t)}}</b></td>
+                <td style="text-align: center; font-size:10px;border:1px solid"><b>{{number_format($data->value)}}</b></td>
             </tr>
         </table>
         <br>
@@ -183,9 +177,7 @@
         </p>
         <p>
             Un Cordial saludo, <br><br>
-            Departamento Comercial - TusTareas<br>
-            Celular: +57 3123456789<br>
-            ventas@TusTareas.com
+            Departamento Comercial - TusTareas
         </p>
     </body>
 </html>

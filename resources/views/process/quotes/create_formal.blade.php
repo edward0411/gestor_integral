@@ -77,7 +77,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="deliver_date">{!! trans('Valor utilidad') !!}</label>
-                                <input type="number" class="form-control form-control-sm" id="value_utility" name="value_utility" value="0" onchange="CalcularCotizacion()" required>
+                                <input type="number" step="0.01" class="form-control form-control-sm" id="value_utility" name="value_utility" value="0" onchange="CalcularCotizacion()" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="deliver_date">{!! trans('Asignar bono') !!}</label>

@@ -478,7 +478,9 @@ trait Process
         $request->request_state_id = 2;
         $request->updated_by = Auth::user()->id;
         $request->save();
-        $this-> changeStateBond($register->requestBond->bond_id,1);
+        if ($register->requestBond != null) {
+            $this-> changeStateBond($register->requestBond->bond_id,1);
+        }
         $register->deleted_by = Auth::user()->id;
         $register->save();
         $register->delete();
