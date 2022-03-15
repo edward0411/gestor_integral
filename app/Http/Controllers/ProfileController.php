@@ -124,20 +124,16 @@ class ProfileController extends Controller
         }
     }
 
-    public function change_password(){
-
-
-
+    public function change_password()
+    {
         return view('profile.change_password');
-
     }
 
     public function change_password_store(request $request)
     {
-       dd($request);
+       dd($request,2);
 
         return back()->with('success','se ha cambiado la clave');
-
     }
 
     public function list_basic_data(){

@@ -40,6 +40,8 @@
                     <th>{!! trans('Valor cotización tutor') !!}</th>
                     <th>{!! trans('Valor cotización en pesos') !!}</th>
                     <th>{!! trans('Fecha propuesta tutor') !!}</th>
+                    <th>{!! trans('Primera linea') !!}</th>
+                    <th>{!! trans('Calificación') !!}</th>
                     <th>{!! trans('Observaciones') !!}</th>
                     <th>{!! trans('Acciones') !!}</th>
                   </tr>
@@ -59,6 +61,16 @@
                         <td width="10%" style="text-align: right">{{number_format($value->value)}}</td>
                         <td width="10%" style="text-align: right">$ {{number_format($valor)}}</td>
                         <td  width="10%">{{$value->application_date}}</td>
+                        <td  width="10%">
+                            @if($value->user->u_line_first == null)
+                                <p>Sin registro</p>
+                            @elseif($value->user->u_line_first == 1)
+                                <p>Primera Linea</p>
+                            @else
+                                <p>No Primera Linea</p>
+                            @endif
+                        </td>
+                        <td  width="10%">Sin Calificación</td>
                         <td width="30%">{{$value->observation}}</td>
                         <td width="5%">
                             <a href="{{route('process.quotes.create',$value->id)}}" class="btn btn-warning btn-xs"> {!! trans('Aplicar Cotización') !!}</a>

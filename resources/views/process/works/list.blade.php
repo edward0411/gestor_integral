@@ -50,16 +50,21 @@
                                 <a href="{{route('process.works.quote',$value->id)}}"> {!! trans('Cotización_'.$value->id.'.pdf') !!}</a>
                             </td>
                             <td>
-                                @if($value->work =! null)
+                                @if($value->work)
                                     En proceso
                                 @else
                                     Pendiente
                                 @endif
                             </td>
                             <td>
-                                <a href="{{route('process.quote.edit',$value->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar Cotización') !!}</a>
-                                <a href="{{route('process.quote.edit',$value->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Iniciar Trabajo') !!}</a>      
-                                <a href="{{route('process.quote.delete',$value->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                @if($value->work)
+                                    <a href="{{route('process.works.view',$value->work->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-eye"></i> {!! trans('Ver Trabajo') !!}</a>
+                                @else
+                                    <a href="{{route('process.quote.edit',$value->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar Cotización') !!}</a>
+                                    <a href="{{route('process.works.create',$value->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Iniciar Trabajo') !!}</a>      
+                                    <a href="{{route('process.quote.delete',$value->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                @endif
+                                
                             </td>
                         </tr>
                     @endforeach

@@ -67,7 +67,7 @@ class RegisterController extends Controller
         $this->validateCaptcha($data);
         return Validator::make($data, [
             'u_nickname' => ['required', 'string', 'max:50','unique:users'],
-            'u_key_number' => ['required', 'string','min:8', 'max:15'],
+            'u_key_number' => ['required', 'string','min:8', 'max:15','unique:users'],
             'id_contry' => ['required', 'numeric'],
             'id_means' => ['required', 'numeric'],
             'id_money' => ['required', 'numeric'],
@@ -84,7 +84,7 @@ class RegisterController extends Controller
             'u_nickname' => ['required', 'string', 'max:50'],
             'u_type_doc' => ['required', 'string'],
             'u_num_doc' => ['required', 'string'],
-            'u_key_number' => ['required', 'string', 'min:8', 'max:15'],
+            'u_key_number' => ['required', 'string', 'min:8', 'max:15','unique:users'],
             'id_contry' => ['required', 'numeric'],
             'id_means' => ['required', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],

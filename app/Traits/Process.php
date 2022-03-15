@@ -23,6 +23,8 @@ use App\Models\Bonds as bonds;
 use App\Models\BondQuote as rel_bond;
 use Facade\Ignition\QueryRecorder\Query;
 use GuzzleHttp\Psr7\Message;
+use App\Models\Work;
+use App\Models\WorkDetail;
 
 trait Process
 {
@@ -342,6 +344,8 @@ trait Process
             $state_old = 1;
         }else if ($state == 3) {
             $state_old = 2;
+        }else if($state == 4){
+            $state_old = 3;
         }
  
         $this->changeHistoryState($id,$state,$state_old);
@@ -412,8 +416,17 @@ trait Process
     public function saveQuotesFormal($request)
     {
         try {
+
+            if (isset($request->id_quote)) {
+                $register = Quote::find($request->id_quote);
+
+
+                $register->updated_by = Auth::user()->id;
+            }else{
+                $register = new Quote();
+                $register->created_by = Auth::user()->id;
+            }
            
-            $register = new Quote();
             $register->value = $request->value_cot_formal;
             $register->value_utility = $request->value_utility;
             $register->observation = $request->observation;
@@ -423,41 +436,71 @@ trait Process
             $register->date_quote = $request->date_quote;
             $register->date_validate = $request->date_validate;
             $register->trm_assigned = $request->value_trm_client;
-            $register->created_by = Auth::user()->id;
+           
             $register->save();
 
-            if ($request->id_bond != 0) {
-
-                $bond = bonds::find($request->id_bond);
-                $value_bond = 0;
-                $divisor = 0;
-
-                if($bond->value_bond->p_text == "Porcentaje"){
-                    $divisor = 100 - $bond->b_value;
-                    $value_bond = (((float)$request->value_cot_formal / $divisor) * 100)-(float)$request->value_cot_formal;
-                }else{
-                    $value_bond = $bond->b_value;
+           if ($register->requestBond == null) {
+                if ($request->id_bond > 0) {
+                    $this->saveQuoteBond($request,$register->id);
                 }
+           }else{
+                if ($request->id_bond == 0) {
+                    $this->changeRelationBond($register);            
+                }elseif($request->id_bond > 0){
+                    $this->changeRelationBond($register); 
+                    $this->saveQuoteBond($request,$register->id);
+                    $this-> changeStateBond($request->id_bond,2);
+                }
+           }
 
-                $relation = new rel_bond();
-                $relation->bond_id = $request->id_bond;
-                $relation->request_quote_id  = $register->id;
-                $relation->value_bond = $value_bond;
-                $relation->trm_assigned = $request->value_trm_client;
-                $relation->created_by = Auth::user()->id;
-                $relation->save();
-               
-            }
-            $this-> changeState($register->requestQuoteTutor->request_id,3);
-            //dd($request->id_bond);
-            if ($request->id_bond != 0) {
-                $this-> changeStateBond($request->id_bond,2);
-            }
+           if (!isset($request->id_quote)) {
+               $this-> changeState($register->requestQuoteTutor->request_id,3);
+                if ($request->id_bond != 0) {
+                    $this-> changeStateBond($request->id_bond,2);
+                }
+           }
+            
             return $register;
 
         } catch (\Throwable $th) {
             dd($th);
         }
+    }
+
+    public function changeRelationBond($register)
+    {
+        $this->changeStateBond($register->requestBond->bond_id,1);
+
+        $relation = rel_bond::find($register->requestBond->id);
+        $relation->deleted_by = Auth::user()->id;
+        $relation->save();
+        $relation->delete();
+
+        return true;
+    }
+
+    public function saveQuoteBond($request,$id)
+    {
+        $bond = bonds::find($request->id_bond);
+        $value_bond = 0;
+        $divisor = 0;
+
+        if($bond->value_bond->p_text == "Porcentaje"){
+            $divisor = 100 - $bond->b_value;
+            $value_bond = (((float)$request->value_cot_formal / $divisor) * 100)-(float)$request->value_cot_formal;
+        }else{
+            $value_bond = $bond->b_value;
+        }
+
+        $relation = new rel_bond();
+        $relation->bond_id = $request->id_bond;
+        $relation->request_quote_id  = $id;
+        $relation->value_bond = $value_bond;
+        $relation->trm_assigned = $request->value_trm_client;
+        $relation->created_by = Auth::user()->id;
+        $relation->save();
+
+        return true;
     }
 
     public function changeStateBond($id,$state)
@@ -484,6 +527,53 @@ trait Process
         $register->deleted_by = Auth::user()->id;
         $register->save();
         $register->delete();
+
+        return true;
+    }
+
+    public function createWorkQuote($id)
+    {
+        try {
+            $register = new Work();
+            $register->start_date = $this->get_date_now();
+            $register->request_quote_id  = $id;
+            $register->created_by = Auth::user()->id;
+            $register->save();
+
+            $this->changeState($register->requestQuote->requestQuoteTutor->request->id,4);
+
+            return true;     
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
+    public function infoQuote($id)
+    {
+        $query = Work::find($id);
+        return $query; 
+    }
+
+    public function dataInfoWorksTutor($id_tutor)
+    {
+        $query = Work::join('request_quotes','request_quotes.id','=','works.request_quote_id')
+        ->join('request_quote_tutors','request_quote_tutors.request_id','=','request_quotes.request_quote_tutor_id')
+        ->where('request_quote_tutors.user_id',$id_tutor)
+        ->select('works.*')
+        ->get();
+
+        return $query;
+    }
+
+    public function saveDetailWork($request,$id,$name)
+    {
+        $detail = new WorkDetail();
+        $detail->observation = $request->message;
+        $detail->file = $name;
+        $detail->work_id = $id;
+        $detail->created_by = Auth::user()->id;
+        $detail->save();
 
         return true;
     }

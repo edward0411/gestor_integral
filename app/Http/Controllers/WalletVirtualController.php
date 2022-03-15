@@ -18,9 +18,9 @@ class WalletVirtualController extends Controller
 
     public function index($handle = null){
         if($handle) {
-            $tutorPayments = RequestQuote::handleUser(Auth::user()->id);
+            $tutorPayments = RequestQuote::handleUser(Auth::user()->id)->whereNull('deleted_at');
         }else{
-            $tutorPayments = RequestQuote::orderBy('created_at');
+            $tutorPayments = RequestQuote::whereNull('deleted_at');
         }
         return view('wallet_virtual.index', ['tutorPayments' => $tutorPayments->get()]);
     }

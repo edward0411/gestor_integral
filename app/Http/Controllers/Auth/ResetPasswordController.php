@@ -32,9 +32,12 @@ class ResetPasswordController extends Controller
 
     public function reset()
     {
-        $id_rol = Auth::user()->roles()->first()->id;
-
-        switch ($id_rol) {
+        
+        if( Auth::user() != null){
+            
+            $id_rol = Auth::user()->roles()->first()->id;
+            
+             switch ($id_rol) {
             case '3':
                 return redirect()->route('process.request.index',$id_rol);
                 break;
@@ -60,7 +63,11 @@ class ResetPasswordController extends Controller
             default:
                 return view('home');
                 break;
-       }
+            }
+        }else{
+            
+             return redirect()->route('home');
+        }
         
     }
 }

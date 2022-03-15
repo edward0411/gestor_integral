@@ -281,7 +281,9 @@ Route::post('/process/quotes/store','ProcessController@store_quotes')->name('pro
 Route::get('/process/works/index','ProcessController@index_works')->name('process.works.index');
 Route::get('/process/works/list','ProcessController@list_works')->name('process.works.list');
 Route::get('/process/works/quote/{id}','ProcessController@download_quote')->name('process.works.quote');
-Route::get('/process/works/create','ProcessController@create_works')->name('process.works.create');
+Route::get('/process/works/create/{id}','ProcessController@create_works')->name('process.works.create');
+Route::get('/process/works/view/{id}','ProcessController@view_works')->name('process.works.view');
+Route::post('/process/works/store_detail{id}','ProcessController@store_detail')->name('process.work.store_detail');
 
 Route::get('/process/works/edit_quote/{id}','ProcessController@edit_quotes')->name('process.quote.edit');
 Route::get('/process/works/delete_quote/{id}','ProcessController@delete_quotes')->name('process.quote.delete');

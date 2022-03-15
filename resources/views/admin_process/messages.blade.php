@@ -47,14 +47,13 @@
                 <hr>
                 <div class="row">
 
-                    @foreach($admin_process->messages_admin as $message)
-                    @php
-                        $roleIDs = array_map(function ($i) {return $i['id'];}, $message->user->roles->toArray())
-                    @endphp
-                    
-                    @if($message->id_user == auth()->user()->id)                        
-                        <div class="form-group col-md-3 float-left"></div>
-                    @endif                  
+                @foreach($admin_process->messages_admin as $message)
+                        @php
+                            $roleIDs = array_map(function ($i) {return $i['id'];}, $message->user->roles->toArray())
+                        @endphp
+                        @if($message->id_user == auth()->user()->id)                        
+                            <div class="form-group col-md-3 float-left"></div>
+                        @endif                  
                     <div class="form-group col-md-9 {{ $message->id_user == auth()->user()->id ? 'float-right' : 'float-left' }}">
                         <div class="card-body">
                             @if (in_array(1, $roleIDs))
@@ -67,19 +66,19 @@
                                 <div class="card-header color-comercial">
                             @endif
                             @if (in_array(4, $roleIDs))
-                                    <div class="card-header color-client">
-                                @endif
-                                <h5 class="text-white" style="font-weight: bold;">{{ $message->user->u_nickname }} </h5>                       
-                            </div>                                    
-                            <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
-                                <p>{{ $message->ma_text_message }}</p>
-                                <br>
-                                @if($message->ma_file != null)
-                                <a href="{{asset('folders/living_admin/files_admin'. $admin_process->id.'/'.$message->ma_file)}}"  target="_blank"> {{ $message->ma_file }}</a>
-                                @endif 
-                                <br>
-                                <small style="text-align:rigth;">Enviado el {{ $message->ma_date_message }}.</small>
-                            </div>
+                                <div class="card-header color-client">
+                            @endif
+                                    <h5 class="text-white" style="font-weight: bold;">{{ $message->user->u_nickname }} </h5>                       
+                                </div>                                    
+                                <div class="card-body table-responsive" style="border: 1px solid #cccccc;">
+                                    <p>{{ $message->ma_text_message }}</p>
+                                    <br>
+                                    @if($message->ma_file != null)
+                                    <a href="{{asset('folders/living_admin/files_admin'. $admin_process->id.'/'.$message->ma_file)}}"  target="_blank"> {{ $message->ma_file }}</a>
+                                    @endif 
+                                    <br>
+                                    <small style="text-align:rigth;">Enviado el {{ $message->ma_date_message }}.</small>
+                                </div>
                         </div>  
                     </div>
                     @if($message->id_user != auth()->user()->id)

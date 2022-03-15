@@ -23,6 +23,7 @@
                 </thead>
                 <tbody>
                   @foreach($tutorPayments as $tutorPayment)
+                  {{dd($tutorPayment->requestQuoteTutor)}}
                     <tr>
                         <td>{{$tutorPayment->id}}</td>
                         <td>{{$tutorPayment->requestQuoteTutor->request->parametric->p_text}}</td>

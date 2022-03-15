@@ -67,16 +67,17 @@ class Admin_precessController extends Controller
                 
             }
 
-        $admin_process->messages_admin()->create([
-            'id_user' => Auth::user()->id,
-            'ma_date_message' => date('Y-m-d H:i:s'),
-            'ma_text_message' => $request->message,
-            'ma_state' => 0,
-            'ma_state' => 0,
-            'created_by' => 0,
-            'ma_file' => $name,
+            $admin_process->messages_admin()->create([
+                'id_user' => Auth::user()->id,
+                'ma_date_message' => date('Y-m-d H:i:s'),
+                'ma_text_message' => $request->message,
+                'ma_state' => 0,
+                'ma_state' => 0,
+                'created_by' => 0,
+                'ma_file' => $name,
+                
+            ]);
             
-        ]);
         return back();
     }
     

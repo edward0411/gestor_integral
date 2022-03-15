@@ -126,7 +126,6 @@ class ProcessController extends Controller
             }
             $this->validate($request, $rules, $messages);
         }
-
         return true;
     }
 
@@ -140,16 +139,13 @@ class ProcessController extends Controller
     public function change_estate($id, $state = null)
     {
         if ($state == null) {
-
            $request = $this->validateTopicsRequest($id);
-
            if($request){
               return redirect()->back()->withErrors(['error' => 'No se puede solicitar cotizaciones a esta solicitud, pendiente asignarles temas']);
            }
            $state = 2;
         }
         $this->changeState($id,$state);
-
         return redirect()->route('process.request.index',Auth::user()->roles()->first()->id)->with('success','Registro actualizado con éxito');
     }
 
@@ -164,13 +160,11 @@ class ProcessController extends Controller
     public function index_quotes()
     {
         $data = $this->getInfoRequest()->where('request_state_id',2)->get();
-
         return view('process.quotes.index',compact('data'));
     }
 
     public function create_quotes_turtor($id)
     {
-
         $areas = $this->getInfoTable('areas')->where('a_state',1)->get();
         $subjects = $this->getInfoTable('subjects')->where('s_state',1)->get();
         $topics = $this->getInfoTable('topics')->where('t_state',1)->get();
@@ -215,7 +209,11 @@ class ProcessController extends Controller
      ////////// trabajos  ////////
     public function index_works()
     {
-        return view('process.works.index');
+        $id_tutor = Auth::user()->id;
+
+        $work = $this->dataInfoWorksTutor($id_tutor);
+
+        return view('process.works.index',compact('work'));
     }
 
     public function list_works()
@@ -229,17 +227,10 @@ class ProcessController extends Controller
         return view('process.works.list',compact('quotes'));
     }
 
-    public function create_works()
+    public function create_works($id)
     {
-        $services = $this->getDataParametrics('param_list_services')->orderby('p_order')->get();
-        $languages = $this->getDataParametrics('param_list_languages')->orderby('p_order')->get();
-        $list_systems = $this->getDataParametrics('param_list_systems')->orderby('p_order')->get();
-        $areas = $this->getInfoTable('areas')->where('a_state',1)->get();
-        $subjects = $this->getInfoTable('subjects')->where('s_state',1)->get();
-        $topics = $this->getInfoTable('topics')->where('t_state',1)->get();
-        $question = $this->getRequest_questions('request_questions')->where('status',1)->select('request_questions.id','question','question_type','type_service_id')->get();
-
-        return view('process.works.create',compact('languages','list_systems','areas','subjects','topics','services','question'));
+        $this->createWorkQuote($id);
+        return redirect()->route('process.works.list')->with('success','Trabajo creada con éxito');
     }
 
     public function edit_works()
@@ -255,6 +246,27 @@ class ProcessController extends Controller
         return view('process.works.edit',compact('languages','list_systems','areas','subjects','topics','services','question'));
     }
 
+    public function view_works($id)
+    {
+        $work = $this->infoQuote($id);
+        return view('process.works.view',compact('work'));
+    }
+
+    public function store_detail(Request $request,$id)
+    {
+        $name = null;
+        if($request->hasFile('file_detail')){
+           
+            $file = $request->file('file_detail');
+            $name = $file->getClientOriginalName();
+            $path = public_path() .'/folders/works/files_work'.$id;
+            $file->move($path,$name);   
+        }
+
+        $detail = $this->saveDetailWork($request,$id,$name);
+        
+        return redirect()->route('process.works.view',$id)->with('success','Detalle creado con éxito');
+    }
 
     //////////////Cotizaciones formales///////////
 
@@ -266,7 +278,6 @@ class ProcessController extends Controller
         $trm = $this->getInfoTrm($request->request->users->id);
         $fecha = $this->get_date_now();
         $fechaMax = Carbon::now()->addDays(1)->format('Y-m-d');
-
         
         return view('process.quotes.create_formal',compact('request','type_value','bonds','trm','fecha','fechaMax'));
     }
@@ -274,28 +285,27 @@ class ProcessController extends Controller
     public function store_quotes(Request $request)
     {
         $this->validateQuotes($request);
-
         $data = $this->saveQuotesFormal($request);
-
         $pdf = PDF::loadView('process.quotes.pdf_quote_formal',compact('data'));
         Storage::put('Folders/Quotes/quote_'.$data->id.'.pdf', $pdf->output());
 
         return redirect()->route('process.works.list')->with('success','Cotización creada con éxito');
-
     }
 
     public function edit_quotes($id)
     {
         $data = Quote::find($id);
-
-        return view('process.quotes.edit_formal',compact('data'));
+        $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
+        $bonds = $this->getInfoBonds($data->requestQuoteTutor->request->users->id);
+        $trm = $this->getInfoTrm($data->requestQuoteTutor->request->users->id);
+        $fecha = $this->get_date_now();
+        $fechaMax = Carbon::now()->addDays(1)->format('Y-m-d');
+        return view('process.quotes.edit_formal',compact('data','type_value','bonds','trm','fecha','fechaMax'));
     }
-
 
     public function delete_quotes($id)
     {
        $this->deleteQuote($id);
-
        return redirect()->back()->with(['success' => 'Cotización eliminada con éxito']);
     }
 
