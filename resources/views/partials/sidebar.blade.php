@@ -239,7 +239,8 @@
                             <ul class="nav nav-treeview">
                                 @if(\Auth::user()->roles()->first()->id == 6)
                                 <li class="nav-item">
-                                    <a href="{{route('process.works.index')}}" class="nav-link">
+                                    <a href="{{route('
+                                    ')}}" class="nav-link">
                                         <i class="icofont-checked"></i>
                                         <p>Mis trabajos</p>
                                     </a>
