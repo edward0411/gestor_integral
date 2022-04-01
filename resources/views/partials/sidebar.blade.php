@@ -14,6 +14,7 @@
         </div>
 
         <nav class="mt-2">
+            @if((\Auth::user()->u_state != 5) )
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @can('Administrador')
                 @if((\Auth::user()->roles()->first()->id == 1) || (\Auth::user()->roles()->first()->id == 2))
@@ -173,7 +174,6 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-
                         <li class="nav-item">
                             <a href="" class="nav-link">
                                 <i class="icofont-data"></i>
@@ -239,8 +239,7 @@
                             <ul class="nav nav-treeview">
                                 @if(\Auth::user()->roles()->first()->id == 6)
                                 <li class="nav-item">
-                                    <a href="{{route('
-                                    ')}}" class="nav-link">
+                                    <a href="{{route('process.works.index')}}" class="nav-link">
                                         <i class="icofont-checked"></i>
                                         <p>Mis trabajos</p>
                                     </a>
@@ -256,8 +255,6 @@
                             </ul>
                         </li>
                         @endif
-
-                        @if(\Auth::user()->roles()->first()->id !=4)
                         <li class="nav-item">
                             <a href="" class="nav-link">
                                 <i class="icofont-data"></i>
@@ -266,16 +263,16 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                @if(\Auth::user()->roles()->first()->id == 6)
+                                @if(\Auth::user()->roles()->first()->id == 6 || \Auth::user()->roles()->first()->id == 4)
                                 <li class="nav-item">
-                                    <a href="{{route('customers.index')}}" class="nav-link">
+                                    <a href="{{route('process.deliverables.index')}}" class="nav-link">
                                         <i class="icofont-checked"></i>
-                                        <p>Mis entregable</p>
+                                        <p>Mis entregables</p>
                                     </a>
                                 </li>
                                 @else
                                 <li class="nav-item">
-                                    <a href="{{route('customers.inactives')}}" class="nav-link">
+                                    <a href="{{route('process.deliverables.list')}}" class="nav-link">
                                         <i class="icofont-close-squared-alt"></i>
                                         <p>List. entregables</p>
                                     </a>
@@ -283,8 +280,6 @@
                                 @endif
                             </ul>
                         </li>
-                        @endif
-
                     </ul>
                 </li>
 
@@ -402,7 +397,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        @if((\Auth::user()->roles()->first()->id == 4) || (\Auth::user()->roles()->first()->id == 6))
+                        @if((\Auth::user()->roles()->first()->id == 4 || \Auth::user()->roles()->first()->id == 6) && (\Auth::user()->u_state == 2))
                         @can('Perfil_datosBasicos_ver')
                         <li class="nav-item">
                             <a href="{{route('profile.index_basic_data',\Auth::user()->id)}}" class="nav-link">
@@ -493,6 +488,7 @@
                 @endif
                 <!-- /.Modulo Comunicaciones -->
             </ul>
+            @endif
         </nav>
         <!-- /.sidebar-menu -->
     </div>

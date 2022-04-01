@@ -35,7 +35,7 @@
                                 <input type="file" class="form-control form-control-sm" name="ma_file" id="ma_file">
                               </div>
                             <div class="form-group col-md-9">
-                                <textarea class="form-control form-control-sm" name="message" id="message" cols="30" rows="2"></textarea>
+                                <textarea class="form-control form-control-sm" name="message" id="message" cols="30" rows="2" required></textarea>
                             </div>
                            
                             <div class="form-group col-md-3">

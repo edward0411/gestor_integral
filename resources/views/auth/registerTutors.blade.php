@@ -36,7 +36,7 @@
                                         <label for="u_nickname"  class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Nick Name: <small>(No usar espacios.)</small></label>
                                         <div class="input-group mb-3">
                                             
-                                            <input id="u_nickname" onchange="spc();" type="text" class="form-control form-control-sm @error('u_nickname') is-invalid @enderror" name="u_nickname" value="{{ old('u_nickname') }}" required autocomplete="u_nickname">
+                                            <input id="u_nickname" onchange="spc();" onkeypress="return check(event)" type="text" class="form-control form-control-sm @error('u_nickname') is-invalid @enderror" name="u_nickname" value="{{ old('u_nickname') }}" required autocomplete="u_nickname">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-user"></span>
@@ -159,6 +159,27 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
+                                        <label for="id_money" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Tipo de moneda por defecto:</label>
+                                        <div class="input-group mb-3">
+                                            <select name="id_money" id="id_money" class="form-control form-control-sm" required>
+                                                <option value="">seleccione...</option>
+                                                @foreach ($coins as $coin)
+                                                <option value="{{$coin->id}}" {{(old('id_money')==$coin->id)? 'selected':''}}>{{$coin->c_type_currency}} - {{$coin->c_currency}}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-dollar-sign"></span>
+                                                </div>
+                                            </div>
+                                            @error('id_money')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
                                         <label for="email" class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Correo electronico:</label>
                                         <div class="input-group mb-3">
                                             <input id="email" type="email" class="form-control form-control-sm @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -258,6 +279,20 @@
         $.each(nuevo, function(key, value) {
            $('#u_indicativo').val(value.indicative);
         });
+    }
+
+    function check(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+
+        //Tecla de retroceso para borrar, siempre la permite
+        if (tecla == 8) {
+            return true;
+        }
+
+        // Patron de entrada, en este caso solo acepta numeros y letras
+        patron = /[A-Za-z0-9]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
     }
 
 </script>

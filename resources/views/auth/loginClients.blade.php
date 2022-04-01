@@ -66,7 +66,7 @@
                     </form>
                     <div class="row">
                       <p class="col-6">
-                        <a href="{{ route('password.request') }}">Olvidé mi contraseña</a>
+                        <a href="{{ route('password.request_special',1) }}">Olvidé mi contraseña</a>
                     </p>
                       <p class="mb-6">
                           <a href="{{ route('registerClients') }}" class="text-center">Registrarme</a>

@@ -108,7 +108,7 @@
                 <div class="card-header color-header">
                     <h5 class="text-white" style="font-weight: bold;">{!! trans('Información de pago') !!}</h5>
                 </div>
-                @if ($work->walletVirtual->count() > 0)
+               
                     <div class="card-body table-responsive">
                         <div class="row">
                             <div class="form-group col-md-4">
@@ -116,32 +116,50 @@
                                 <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($work->requestQuote->requestQuoteTutor->value)}}" disabled>
                             </div>
                             <div class="form-group col-md-4">
+                                <label for="">Moneda Tutor:</label>
+                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->requestQuote->requestQuoteTutor->user->coins->c_type_currency}} - {{$work->requestQuote->requestQuoteTutor->user->coins->c_currency}}" disabled>
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label for="">Valor pagado:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($work->walletVirtual->value)}}" disabled>
+                                @if ($work->walletVirtual  != null)
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($work->walletVirtual->value)}}" disabled>
+                                @else
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="$ 0" disabled>
+                                @endif
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="">Saldo:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($work->walletVirtual->balance)}}" disabled>
+                                @if ($work->walletVirtual  != null)
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($work->walletVirtual->balance)}}" disabled>
+                                @else
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($work->requestQuote->requestQuoteTutor->value)}}" disabled>
+                                @endif
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="">Estado:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->walletVirtual->state}}" disabled>
+                                @if ($work->walletVirtual  != null)
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->walletVirtual->state}}" disabled>
+                                @else
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="Pendiente" disabled>
+                                @endif
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="">Observación:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{($work->walletVirtual->observation ? $work->walletVirtual->observation:'sin observacion...')}}" disabled>
+                                @if ($work->walletVirtual  != null)
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{($work->walletVirtual->observation ? $work->walletVirtual->observation:'sin observación...')}}" disabled>
+                                @else
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="sin observaciones..." disabled>
+                                @endif
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="">Fecha:</label>
-                                <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->walletVirtual->created_at}}" disabled>
+                                @if ($work->walletVirtual  != null)
+                                    <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$work->walletVirtual->created_at}}" disabled>
+                                @endif
                             </div>
                         </div>
                     </div>
-                @else
-                    <div class="form-group col-md-4">
-                        <label for="">Sin detalles</label>
-                    </div>
-                @endif
+                
             </div>
 
             <div class="card">
@@ -150,7 +168,11 @@
                 </div>
                 @if((\Auth::user()->roles()->first()->id == 1))
                     <div class="card-body">
+                        @if ($work->walletVirtual  != null)
                         <a href="#" class="btn btn-warning btn-sm {{$work->walletVirtual->balance <= 0 ? 'disabled':'hiden'}} " data-toggle="modal" data-target="#modalCreate" ><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
+                        @else
+                        <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalCreate" ><i class="fas fa-plus-circle"></i> {!! trans('Crear pago') !!}</a>
+                        @endif
                     </div>
                 @endif
                 <div class="card-body table-responsive">
@@ -169,31 +191,44 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($work->walletVirtual->walletDetails as $walletDetail)
-                            <tr>
-                                <td>{{$walletDetail->id}}</td>
-                                <td>${{number_format($walletDetail->value)}}</td>
-                                <td>{{$walletDetail->reference}}</td>
-                                <td>@if ($walletDetail->vaucher)
-                                        <a href="{{ asset('folders/wallet/'.$walletDetail->vaucher)}}" target="_blank">{{$walletDetail->vaucher}}</a></td>
-                                    @else
-                                        Sin vaucher...
-                                    @endif
-                                <td>{{$walletDetail->observation ? $walletDetail->observation:'Sin observación...'}}</td>
-                                <td>{{$walletDetail->created_at}}</td>
-                                @if((\Auth::user()->roles()->first()->id == 1))
-                                    <td>
-                                        <a href="" class="btn btn-warning btn-xs" onclick="showWalletDetail({{$walletDetail->id}})" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
-                                        <a href="{{route('walletDetail.delete', $walletDetail->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
-                                    </td>
+                            @if ($work->walletVirtual  != null)
+                                @foreach($work->walletVirtual->walletDetails as $walletDetail)
+                                    <tr>
+                                        <td>{{$walletDetail->id}}</td>
+                                        <td>${{number_format($walletDetail->value)}}</td>
+                                        <td>{{$walletDetail->reference}}</td>
+                                        <td>@if ($walletDetail->vaucher)
+                                                <a href="{{ asset('folders/wallet/'.$walletDetail->vaucher)}}" target="_blank">{{$walletDetail->vaucher}}</a></td>
+                                            @else
+                                                Sin vaucher...
+                                            @endif
+                                        <td>{{$walletDetail->observation ? $walletDetail->observation:'Sin observación...'}}</td>
+                                        <td>{{$walletDetail->created_at}}</td>
+                                        @if((\Auth::user()->roles()->first()->id == 1))
+                                            <td>
+                                                <a href="" class="btn btn-warning btn-xs" onclick="showWalletDetail({{$walletDetail->id}})" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
+                                                <a href="{{route('walletDetail.delete', $walletDetail->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            @endif
+                            <td class="color-header">TOTAL</td>
+                            <td class="color-header">
+                                @if ($work->walletVirtual  != null)
+                                {{number_format($work->walletVirtual->value)}}
+                                @else
+                                 0
                                 @endif
-                            </tr>
-                          @endforeach
-                          <td class="color-header">TOTAL</td>
-                          <td class="color-header">${{number_format($work->walletVirtual->value)}}</td>
-                          <td class="color-header">SALDO</td>
-                          <td class="color-header">${{number_format($work->walletVirtual->balance)}}</td>
-
+                            </td>
+                            <td class="color-header">SALDO</td>
+                            <td class="color-header">
+                                @if ($work->walletVirtual  != null)
+                                {{number_format($work->walletVirtual->balance)}}
+                                @else
+                                0
+                                @endif
+                            </td>
                         </tbody>
                       </table>
                 </div>

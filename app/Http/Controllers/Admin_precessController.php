@@ -62,7 +62,7 @@ class Admin_precessController extends Controller
                 }
                 $file = $request->file('ma_file');
                 $name = $file->getClientOriginalName();
-                $path = public_path() .'\folders\living_admin\files_admin'.$admin_process->id;
+                $path = public_path() .'/folders/living_admin/files_admin'.$admin_process->id;
                 $file->move($path,$name);
                 
             }

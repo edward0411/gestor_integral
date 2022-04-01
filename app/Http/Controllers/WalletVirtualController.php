@@ -18,10 +18,19 @@ class WalletVirtualController extends Controller
 
     public function index($handle = null){
         if($handle) {
-            $tutorPayments = RequestQuote::handleUser(Auth::user()->id)->whereNull('deleted_at');
+            $tutorPayments = RequestQuote::handleUser(Auth::user()->id)->whereNull('request_quotes.deleted_at');
         }else{
-            $tutorPayments = RequestQuote::whereNull('deleted_at');
+            $tutorPayments = RequestQuote::whereNull('request_quotes.deleted_at');
         }
+
+        $tutorPayments = $tutorPayments->join('works','works.request_quote_id','=','request_quotes.id')
+        ->join('deliverables','deliverables.work_id','=','works.id')
+        ->whereNull('works.deleted_at')
+        ->whereNull('deliverables.deleted_at')
+        ->whereNotNull('deliverables.cuenta_cobro')
+        ->where('deliverables.status_cb',1)
+        ->select('request_quotes.*');
+
         return view('wallet_virtual.index', ['tutorPayments' => $tutorPayments->get()]);
     }
 
@@ -37,24 +46,60 @@ class WalletVirtualController extends Controller
     public function store(WalletStoreRequest $request, Work $work){
         $data = $request->all();
         try {
-            if ($request->value <= $work->walletVirtual->balance) {
+            if ($work->walletVirtual != null) {
+                if ($request->value <= $work->walletVirtual->balance) {
+                    if ($request->value > 0) {
+                        $data['wallet_virtual_id']  = $this->storeWalletVirtual($work->id);
+                        $data['created_by']         = Auth::user()->id;
+                        $walletDetail = new WalletDetail();
+                        $walletDetail->value = $data['value']; 
+                        $walletDetail->reference = $data['reference']; 
+                        $walletDetail->observation = $data['observation']; 
+                        $walletDetail->wallet_virtual_id  = $data['wallet_virtual_id']; 
+                        $walletDetail->created_by = $data['created_by']; 
+                        if ($data['trm'][0] == 'SI') {
+                            $walletDetail->trm_assigned = $work->requestQuote->requestQuoteTutor->user->coins->c_trm_currency;
+                        } else {
+                            $walletDetail->trm_assigned = $work->requestQuote->requestQuoteTutor->trm_assigned;
+                        }                        
+                        if($request->hasFile('vaucher')){
+                            $file = $request->file('vaucher');
+                            $walletDetail->vaucher = UtilHelper::saveFile('/folders/wallet', $file);                       
+                        }
+                        $walletDetail->save();
+                        if($walletDetail->walletVirtual->balance == 0) $this->handlerStateWalletVirtual($work->id, WalletVirtual::PAGADA);
+    
+                        return $this->showMessage('Pago realizado con exito');
+                    }
+                    return $this->showMessage('No se puede realizar un pago negativo o de 0', 400, false);
+                }
+            } else{
                 if ($request->value > 0) {
                     $data['wallet_virtual_id']  = $this->storeWalletVirtual($work->id);
                     $data['created_by']         = Auth::user()->id;
-                    $walletDetail               = WalletDetail::create($data);
+                    $walletDetail = new WalletDetail();
+                    $walletDetail->value = $data['value']; 
+                    $walletDetail->reference = $data['reference']; 
+                    $walletDetail->observation = $data['observation']; 
+                    $walletDetail->wallet_virtual_id  = $data['wallet_virtual_id']; 
+                    $walletDetail->created_by = $data['created_by']; 
+                    if ($data['trm'][0] == 'SI') {
+                        $walletDetail->trm_assigned = $work->requestQuote->requestQuoteTutor->user->coins->c_trm_currency;
+                    } else {
+                        $walletDetail->trm_assigned = $work->requestQuote->requestQuoteTutor->trm_assigned;
+                    }  
                     if($request->hasFile('vaucher')){
                         $file = $request->file('vaucher');
-                        $walletDetail->vaucher = UtilHelper::saveFile('\folders\wallet', $file);
-                        $walletDetail->save();
+                        $walletDetail->vaucher = UtilHelper::saveFile('/folders/wallet', $file);
                     }
-
-                    // cambiar el estado de la billetera virtual
+                    $walletDetail->save();
                     if($walletDetail->walletVirtual->balance == 0) $this->handlerStateWalletVirtual($work->id, WalletVirtual::PAGADA);
 
                     return $this->showMessage('Pago realizado con exito');
                 }
                 return $this->showMessage('No se puede realizar un pago negativo o de 0', 400, false);
-            }
+            }  
+            
             return $this->showMessage('El pago no puede exceder el saldo', 400, false);
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage(), 409);
@@ -86,7 +131,7 @@ class WalletVirtualController extends Controller
             $walletDetail->update($data);
             if($request->hasFile('vaucher')){
                 $file = $request->file('vaucher');
-                $walletDetail->vaucher = UtilHelper::saveFile('\folders\wallet', $file);
+                $walletDetail->vaucher = UtilHelper::saveFile('/folders/wallet', $file);
                 $walletDetail->save();
             }
             // cambiar el estado de la billetera virtual

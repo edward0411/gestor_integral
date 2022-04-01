@@ -70,7 +70,14 @@
                                 <p>No Primera Linea</p>
                             @endif
                         </td>
-                        <td  width="10%">Sin Calificación</td>
+                        <td  width="10%">
+                            @if($value->qualificate == null)
+                              <p>Sin Calificación</p>
+                            @else
+                            <img src="{{ asset('folders/qualificates/qualificate_'.$value->qualificate.'.png') }}" alt=""  width="100" height="20">
+                            @endif
+                            
+                        </td>
                         <td width="30%">{{$value->observation}}</td>
                         <td width="5%">
                             <a href="{{route('process.quotes.create',$value->id)}}" class="btn btn-warning btn-xs"> {!! trans('Aplicar Cotización') !!}</a>

@@ -37,8 +37,15 @@
                             <!-- /.col -->
                         </div>
                     </form>
+                   
                     <p class="mt-3 mb-1">
-                        <a href="{{ route('login') }}" style="color:#ffc107">Login</a>
+                        @if ($i == 1)
+                            <a href="{{ route('login_clients') }}" style="color:#1a7c94">Login</a>
+                        @elseif($i == 2)
+                            <a href="{{ route('login_tutors') }}" style="color:#1a7c94">Login</a>
+                        @else
+                        <a href="{{ route('login_employee') }}" style="color:#1a7c94">Login</a>
+                        @endif
                     </p>
                 </div>
                 <!-- /.login-card-body -->

@@ -338,18 +338,10 @@
                         </div>
                     </div>
                     <div class="card-body table-responsive">
-                        <a href="{{route('pre_registration.save_state_tutor', [$user->id, 2])}}"
-                            class="btn btn-warning btn-xs">
-                            {!! trans('Aprobar') !!}</a>
-                        <a href="{{route('pre_registration.save_state_tutor', [$user->id, 3])}}"
-                            class="btn btn-warning btn-xs">
-                            {!! trans('Rechazar') !!}</a>
-                        <a href="{{route('pre_registration.save_state_tutor', [$user->id, 4])}}"
-                            class="btn btn-warning btn-xs">
-                            {!! trans('No aceptado') !!}</a>
-                        <a href="{{route('pre_registration.index_turors_list')}}"
-                            class="btn btn-warning btn-sm float-right">{!!
-                            trans('Regresar') !!}</a>
+                        <a href="{{route('pre_registration.save_state_tutor', [$user->id, 2])}}" class="btn btn-warning btn-xs"> {!! trans('Aprobar') !!}</a>
+                        <a href="{{route('pre_registration.save_state_tutor', [$user->id, 3])}}" class="btn btn-warning btn-xs">  {!! trans('Rechazar') !!}</a>
+                        <a href="{{route('pre_registration.save_state_tutor', [$user->id, 4])}}"  class="btn btn-warning btn-xs"> {!! trans('No aceptado') !!}</a>
+                        <a href="{{route('pre_registration.index_turors_list')}}" class="btn btn-warning btn-sm float-right">{!!trans('Regresar') !!}</a>
                     </div>
             </div>
             <!-- /.card-body -->

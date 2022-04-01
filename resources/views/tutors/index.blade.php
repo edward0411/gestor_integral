@@ -11,7 +11,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header color-header">
-                    @if($state == 1)
+                    @if($state == 2)
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de tutores activos') !!}</h5>
                     @elseif($state == 4)
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Listado de tutores inactivos') !!}</h5>
@@ -19,7 +19,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    @if($state == 1)
+                    @if($state == 2)
                     <a href="{{route('tutors.create')}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear tutor') !!}</a>      
                     @endif
                   </div>
@@ -41,7 +41,7 @@
                             <td>{{$user->email}}</td>
                             <td>{{$user->c_name}}</td>
                             <td>
-                                @if($state == 1)
+                                @if($state == 2)
                                 <a href="{{route('tutors.edit',$user->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-pencil-alt"></i> {!! trans('Editar') !!}</a>
                                 <a href="{{route('customers.processState',$user->id)}}" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea inactivar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Inactivar') !!}</a>
                                 @elseif($state == 4)

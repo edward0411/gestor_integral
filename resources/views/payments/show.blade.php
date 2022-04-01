@@ -76,28 +76,36 @@
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->value)}}" disabled>
                         </div>
                         <div class="form-group col-md-4">
+                            <label for="">Tipo de utilidad:</label>
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->utilityType->p_text}}" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label for="">Valor de utilidad:</label>
+                            @if($quote->utilityType->p_text == 'Porcentaje')
+                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{number_format($quote->value_utility)}} %" disabled>
+                           
+                            @else
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->value_utility)}}" disabled>
+                            @endif
                         </div>
                         <div class="form-group col-md-4">
                             <label for="">Saldo:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="${{number_format($quote->balance)}}" disabled>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="">observación:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->observation ? $quote->observation:'sin observación...'}}" disabled>
-                        </div>
+                        
                         <div class="form-group col-md-4">
                             <label for="">Nota privada:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->private_note}}" disabled>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Tipo de utilidad:</label>
-                            <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->utilityType->p_text}}" disabled>
-                        </div>
+                        
                         <div class="form-group col-md-4">
                             <label for="">Fecha de cotización:</label>
                             <input type="text" class="form-control form-control-sm" name="" style="text-align:center;" value="{{$quote->created_at}}" disabled>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="">observación:</label>
+                            <textarea name="" id="" class="form-control form-control-sm" cols="30" rows="10" disabled>{{$quote->observation ? $quote->observation:'sin observación...'}}</textarea>
+                           
                         </div>
                     </div>
                 </div>

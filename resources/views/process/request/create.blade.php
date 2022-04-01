@@ -471,7 +471,8 @@ function addLanguage()
                                 <input type="hidden" name="question[]" value="`+value.id_question+`">
                             </td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" id="question" name="answer[]" value="" required>
+                                <textarea class="form-control form-control-sm" id="question" name="answer[]" required></textarea>
+                                
                             </td>
                         </tr>
                         `;

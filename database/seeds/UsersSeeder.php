@@ -79,7 +79,7 @@ class UsersSeeder extends Seeder
             'u_id_means' => '1',
             'u_id_money' => '17',
             'u_state' => '1',
-            'email' => 'Tutor2.test@gestorintegarl.com',
+            'email' => 'Tutor1.test@gestorintegarl.com',
             'created_by' => 1,
             'password' => Hash::make('12345678')
         ]);

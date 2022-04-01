@@ -31,6 +31,7 @@
                         </thead>
                         <tbody>
                             @foreach($communications as $communication)
+                                @if($communication->request != null)
                                 <tr>
                                     <td>#{{ $communication->request->id }}</td>
                                     @if(Auth::user()->roles()->first()->id != 6  && Auth::user()->roles()->first()->id != 4)
@@ -48,6 +49,7 @@
                                         </a>                                        
                                     </td>
                                 </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

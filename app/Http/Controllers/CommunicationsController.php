@@ -60,7 +60,7 @@ class CommunicationsController extends Controller
             }
             $file = $request->file('m_file');
             $name = $file->getClientOriginalName();
-            $path = public_path() .'\folders\living_messages\files_messages'.$communication->id;
+            $path = public_path() .'/folders/living_messages/files_messages'.$communication->id;
             $file->move($path,$name);
         }
            $communication->messages()->create([

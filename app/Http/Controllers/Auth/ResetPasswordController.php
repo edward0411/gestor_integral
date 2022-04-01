@@ -36,34 +36,34 @@ class ResetPasswordController extends Controller
         if( Auth::user() != null){
             
             $id_rol = Auth::user()->roles()->first()->id;
+
+        switch ($id_rol) {
             
-             switch ($id_rol) {
-            case '3':
-                return redirect()->route('process.request.index',$id_rol);
-                break;
             case '4':
-                if (Auth::user()->u_state == 1 ) {
+                if (Auth::user()->u_state == 2 ) {
                     return redirect()->route('process.request.index',$id_rol);
                 }elseif(Auth::user()->u_state == 4){
                     return redirect()->route('logouth');
+                }elseif(Auth::user()->u_state == 5){
+                    return redirect()->route('validate_token');
                 }
                 break;
-            case '5':
-                return redirect()->route('process.quotes.index');
-                break;
+            
             case '6':
                 if (Auth::user()->u_state == 0 || Auth::user()->u_state == 1 || Auth::user()->u_state == 3) {
                     return redirect()->route('pre_registration.index_registration');
                 }elseif(Auth::user()->u_state == 2){
-                    return route('quotes.myQuotes');
+                    return redirect()->route('process.request.index',$id_rol);
                 }elseif(Auth::user()->u_state == 4){
                     return redirect()->route('logouth');
+                }elseif(Auth::user()->u_state == 5){
+                    return redirect()->route('validate_token');
                 }               
                 break;
             default:
                 return view('home');
                 break;
-            }
+       }
         }else{
             
              return redirect()->route('home');

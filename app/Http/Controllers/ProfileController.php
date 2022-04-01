@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Models\Countries as countries;
 use App\Models\Parametrics as parametrics;
 use App\User as profile;
@@ -21,11 +23,11 @@ class ProfileController extends Controller
 {
     use Managment;
 
-    public function index_basic_data($id){
-
+    public function index_basic_data($id)
+    {
         $id_rol = Auth::user()->roles()->first()->id;
 
-        $state = 1;
+        $state = 2;
         $data = $this->getInfoUsers($id_rol,$state)->where('users.id',$id)->select('users.*','countries.c_name','coun.c_indicative','coins.c_currency','coins.c_type_currency')->first();
         $countries = $this->getInfoCountries()->orderBy('c_name')->get();
         $type_docs = $this->getDataParametrics('type_documents')->orderby('p_order')->get();
@@ -33,18 +35,17 @@ class ProfileController extends Controller
         $coins = coins::all();
 
         return view('profile.index_basic_data',compact('data','state','countries','type_docs','means','coins'));
-
     }
 
-    public function index_bonds($state){
+    public function index_bonds($state)
+    {
         
-        $bonds = $this->infoBonds($state)->get();
-        
-        
+        $bonds = $this->infoBonds($state)->get();     
         return view('profile.index_bonds',compact('bonds'));
     }
 
-    public function create_bonds(){
+    public function create_bonds()
+    {
 
         $state = 1;
         $data = $this->getInfoUsers(4,$state)->select('users.id as id_user','users.u_nickname','coins.*')->get();
@@ -62,7 +63,6 @@ class ProfileController extends Controller
         $data = $this->getInfoUsers(4,$state)->select('users.id as id_user','users.u_nickname','coins.*')->get();
         $type_bonds = $this->getDataParametrics('param_type_bonds')->orderby('p_order')->get();
         $type_value = $this->getDataParametrics('param_type_value')->orderby('p_order')->get();
-
 
         return view('profile.edit_bonds',compact('type_bonds','type_value','data','bonds'));
     }
@@ -131,7 +131,19 @@ class ProfileController extends Controller
 
     public function change_password_store(request $request)
     {
-       dd($request,2);
+        $user = auth()->user();
+
+        if( !Hash::check($request->password, auth()->user()->password)) {
+            return back()->with('error','la contraseña actual no es válida');   
+        }
+
+        $request->validate([
+            'password' => ['required', 'string', 'min:8'],
+            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user->password = Hash::make($request->new_password);    
+        $user->save();
 
         return back()->with('success','se ha cambiado la clave');
     }

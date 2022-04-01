@@ -65,7 +65,7 @@
                         </div>
                     </form>
                     <p class="mb-1">
-                        <a href="{{ route('password.request') }}" style="color:#1A7C94">Olvidé mi contraseña</a>
+                        <a href="{{ route('password.request_special',3) }}" style="color:#1A7C94">Olvidé mi contraseña</a>
                     </p>
                 </div>
                 <!-- /.card-body -->

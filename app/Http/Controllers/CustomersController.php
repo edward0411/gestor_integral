@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Helpers\EmailHelper;
 
 class CustomersController extends Controller
 {
@@ -74,22 +75,22 @@ class CustomersController extends Controller
             if (($customer->u_nickname != $request->u_nickname) && ($customer->u_key_number == $request->u_key_number)) {
                 $validate_nick =  DB::table('users')->where([
                     ["u_nickname", "=", $request->u_nickname],
-                    ["u_state", 1],
+                    ["u_state", 2],
                 ])->get();
                 if (!isset($validate_nick[0])) {
                     if ($request->u_nickname > 0) {
-                        return back()->with('error', 'El nickname debe ser unico');
+                        return back()->with('error', 'El nickname debe ser único');
                     }
                 }
             } elseif (($customer->u_nickname == $request->u_nickname) && ($customer->u_key_number != $request->u_key_number)) {
                 $validate_number =  DB::table('users')->where([
                         ["u_key_number", "=", $request->u_key_number
                         ],
-                        ["u_state", 1],
+                        ["u_state", 2],
                     ])->get();
                 if (!isset($validate_number[0])) {
                     if ($request->u_key_number > 0) {
-                        return back()->with('error', 'El numero de celular debe ser unico');
+                        return back()->with('error', 'El número de celular debe ser único');
                     }
                 }
             }
@@ -97,8 +98,8 @@ class CustomersController extends Controller
 
         try {
 
-            $pass = $request->u_nick_name . '_' . $request->u_num_doc;
-
+            $pass = $request->u_key_number;
+            $token = mt_rand(1000,9999);
             $password = Hash::make($pass);
 
             if (!isset($request->id)) {
@@ -116,17 +117,21 @@ class CustomersController extends Controller
             $customer->u_id_money = $request->u_id_money;
             $customer->email = $request->email;
             $customer->password = $password;
-            $customer->u_state = 1;
+            
             if (!isset($request->id)) {
+                $customer->u_state = 5;
+                $customer->u_token = $token;
                 $customer->created_by = Auth::user()->id;
+                $rol = $this->getRoles()->where('id', 4)->first();
+                $customer->assignRole($rol->name);
             } else {
                 $customer->updated_by = Auth::user()->id;
             }
             $customer->save();
 
-            $rol = $this->getRoles()->where('id', 4)->first();
-            $customer->assignRole($rol->name);
-
+            if (!isset($request->id)) {
+                EmailHelper::SendEmailWelcome($customer,$token);
+            }
             if (!isset($request->id)) {
                 return redirect()->route('customers.index')->with('success', 'Registro creado con éxito');
             } else {
@@ -142,25 +147,32 @@ class CustomersController extends Controller
     {
         $user = User::find($id);
 
-        if ($user->u_state == 4) {
-            $user->update([
-                'u_state' => 0
-            ]);
-        }elseif ($user->u_state == 6){   
-            $user->update([
-                'u_state' => 0
-            ]);
-        } else {
-            $user->update([
-                'u_state' => 4
-            ]);
+        if ($user->roles()->first()->id == 6) {
+            if ($user->u_state == 4) {
+                $user->update([
+                    'u_state' => 0
+                ]);
 
-            if ($user->roles()->first()->id == 6) {
                 $this->changeStateRegister('tutors_bank_details', $user->id);
                 $this->changeStateRegister('language_tutors', $user->id);
                 $this->changeStateRegister('tutors_systems', $user->id);
                 $this->changeStateRegister('tutors_topics', $user->id);
                 $this->changeStateRegister('tutors_services', $user->id);
+
+            }elseif ($user->u_state == 2){   
+                $user->update([
+                    'u_state' => 4
+                ]);
+            }
+        }elseif($user->roles()->first()->id == 4){
+            if ($user->u_state == 4) {
+                $user->update([
+                    'u_state' => 2
+                ]);
+            }elseif ($user->u_state == 2){   
+                $user->update([
+                    'u_state' => 4
+                ]);
             }
         }
 
@@ -175,10 +187,8 @@ class CustomersController extends Controller
             if ($user->u_state == 4) {
                 return redirect()->route('tutors.index')->with('success', 'Registro actualizado con éxito');
             } else {
-                return redirect()->route('tutors.index')->with('success', 'Registro actualizado con éxito');
+                return redirect()->route('tutors.inactives')->with('success', 'Registro actualizado con éxito');
             }
-        } else {
-            return redirect()->route('employees.index')->with('success', 'Registro actualizado con éxito');
-        }
+        } 
     }
 }

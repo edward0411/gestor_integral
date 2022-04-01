@@ -34,7 +34,7 @@
                                     <div class="form-group col-md-4">
                                         <label for="u_nickname"  class="col-md-12 control-label"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> Nick Name: <small>(No usar espacios.)</small></label>
                                         <div class="input-group mb-3">
-                                            <input id="u_nickname" onchange="spc();" type="text" class="form-control form-control-sm @error('u_nickname') is-invalid @enderror" name="u_nickname" value="{{ old('u_nickname') }}" required autocomplete="u_nickname">
+                                            <input id="u_nickname" onchange="spc();" onkeypress="return check(event)" type="text" class="form-control form-control-sm @error('u_nickname') is-invalid @enderror" name="u_nickname" value="{{ old('u_nickname') }}" required autocomplete="u_nickname">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-user"></span>
@@ -252,10 +252,20 @@ $(document).ready(function() {
         });
     }
 
-  
+    function check(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+
+        //Tecla de retroceso para borrar, siempre la permite
+        if (tecla == 8) {
+            return true;
+        }
+
+        // Patron de entrada, en este caso solo acepta numeros y letras
+        patron = /[A-Za-z0-9]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    }
 
 </script>
-
-
 @endsection
 

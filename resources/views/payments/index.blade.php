@@ -14,7 +14,8 @@
               <table id="tabledata1" class="table table-bordered table-striped">
                 <thead>
                   <tr class="bg-warning text-center">
-                    <th>{!! trans('Numeral de solicitud') !!} </th>
+                    <th>{!! trans('# Cotización') !!} </th>
+                    <th>{!! trans('# Solicitud') !!} </th>
                     <th>{!! trans('Tipo de servicio') !!}</th>
                     <th>{!! trans('Cliente') !!}</th>
                     <th>{!! trans('Fecha de inicio de solicitud') !!}</th>
@@ -27,6 +28,7 @@
                   @foreach($quotes as $quote)
                     <tr>
                         <td>{{$quote->id}}</td>
+                        <td>{{$quote->requestQuoteTutor->request->id}}</td>
                         <td>{{$quote->requestQuoteTutor->request->parametric->p_text}}</td>
                         <td>{{$quote->requestQuoteTutor->request->users->u_name}}</td>
                         <td>{{$quote->requestQuoteTutor->request->created_at}}</td>

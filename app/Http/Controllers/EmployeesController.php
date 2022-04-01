@@ -20,11 +20,8 @@ class EmployeesController extends Controller
         $employee = DB::table('users')
         ->leftJoin('model_has_roles','model_has_roles.model_id','=','users.id')
         ->leftJoin('roles','roles.id','=','model_has_roles.role_id')
-        ->orWhereNotIn('roles.id',[1,4,6])
-        ->where(function ($query) {
-            $query->where('users.u_state',1)
-                  ->orWhere('users.u_state',0);
-        })
+        ->orWhereNotIn('roles.id',[4,6])
+        ->where('users.u_state',2)
         ->whereNull('users.deleted_at')
         ->select('users.*','roles.name')
         ->get();
@@ -35,7 +32,7 @@ class EmployeesController extends Controller
 
         $countries = $this->getInfoCountries()->orderBy('c_name')->get();
         $type_docs = $this->getDataParametrics('type_documents')->orderby('p_order')->get();
-        $roles = $this->getRoles()->orWhereNotIn('id',[1,4,6])->orderby('name')->get();
+        $roles = $this->getRoles()->orWhereNotIn('id',[4,6])->orderby('name')->get();
         return view('employees.create',compact('countries','type_docs','roles')); 
     }
 
@@ -52,7 +49,7 @@ class EmployeesController extends Controller
 
         $countries = $this->getInfoCountries()->get();
         $type_docs = $this->getDataParametrics('type_documents')->orderby('p_order')->get();
-        $roles = $this->getRoles()->orWhereNotIn('id',[1,4,6])->orderby('name')->get();
+        $roles = $this->getRoles()->orWhereNotIn('id',[4,6])->orderby('name')->get();
         return view('employees.edit',compact('employee','countries','type_docs','roles')); 
     }
 
@@ -70,7 +67,7 @@ class EmployeesController extends Controller
 
         try {
 
-           $pass = $request->u_nick_name.'_'.$request->u_num_doc;   
+           $pass = $request->u_num_doc;   
            $password = Hash::make($pass);
     
            $employee = new employees();
@@ -83,7 +80,7 @@ class EmployeesController extends Controller
            $employee->u_indicativo = $request->u_indicativo;
            $employee->email = $request->email;
            $employee->password = $password;
-           $employee->u_state = 1;
+           $employee->u_state = 2;
            $employee->created_by = Auth::user()->id;
            $employee->save();
 
@@ -101,8 +98,8 @@ class EmployeesController extends Controller
        
     }
 
-    public function update(Request $request){
-       
+    public function update(Request $request)
+    {     
         $this->validate($request,[
             'u_name' => ['max:50'],
             'u_nickname' => ['required', 'string', 'max:50'],
@@ -116,24 +113,25 @@ class EmployeesController extends Controller
             $employee=employees::where('id','=',$request->id)->firstOrFail();
             $employee->u_name = $request->u_name;
             $employee->u_nickname = $request->u_nickname;
-            $employee->u_indicativo = '+57';
+            $employee->u_indicativo = $request->u_indicativo;
             $employee->u_type_doc = $request->u_type_doc;
             $employee->u_num_doc = $request->u_num_doc;
             $employee->u_key_number = $request->u_key_number;
             $employee->u_id_country = $request->u_id_country;
             $employee->email = $request->email;
-            $employee->u_state = 1;
+            $employee->u_state = 2;
             $employee->updated_at = Auth::user()->id;
             $employee->update();
 
+            $employee->roles()->detach();
+
+            $rol = $this->getRoles()->where('id',$request->role)->first();
+            $employee->assignRole($rol->name);
            
             return redirect()->route('employees.index')->with('success','Registro actualizado con éxito');
            } catch (\Throwable $th) {
             dd($th);
            }
-
-        
-
     }
 
     public function delete($id){

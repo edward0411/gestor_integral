@@ -25,6 +25,10 @@ use Facade\Ignition\QueryRecorder\Query;
 use GuzzleHttp\Psr7\Message;
 use App\Models\Work;
 use App\Models\WorkDetail;
+use App\Models\Deliverable;
+use App\Models\Observations_services as obs_services;
+use App\Models\Deliverable_qualificates as Qualificate;
+use App\Models\PointsQualificates as Points;
 
 trait Process
 {
@@ -107,7 +111,7 @@ trait Process
                 $register->user_id = Auth::user()->id;
                 $register->observation = $data->observations;
             }
-            $register->save();            
+            $register->save();          
             if (!is_null($communication)) {            
                 $register->communications()->save($communication);
                 $communication->messages()->create([
@@ -168,20 +172,16 @@ trait Process
     public function changeHistoryState($id,$state,$state_old = null)
     {
         try {
-
             if ($state_old != null) {           
                 $consult = history::where('request_id',$id)->where('request_state_id',$state_old)->first();
-                //dd($consult);
                 if ($consult != null) {
-                    $consult->end_date = $this->get_date_now();
+                    $consult->end_date = Carbon::now()->parse()->format('Y-m-d H:m:s');
                     $consult->updated_by = Auth::user()->id;
                     $consult->save();
-                }
-               
-            }
-            
+                }             
+            }          
             $history = new history();
-            $history->start_date = $this->get_date_now();
+            $history->start_date =  Carbon::now()->parse()->format('Y-m-d H:m:s');
             $history->request_id  = $id;
             $history->request_state_id = $state;
             $history->created_by = Auth::user()->id;
@@ -346,8 +346,9 @@ trait Process
             $state_old = 2;
         }else if($state == 4){
             $state_old = 3;
+        }else if($state == 5){
+            $state_old = 4;
         }
- 
         $this->changeHistoryState($id,$state,$state_old);
 
         $register = solicitud::find($id);
@@ -355,8 +356,7 @@ trait Process
         $register->updated_by = Auth::user()->id;
         $register->save();
 
-        return true;
-       
+        return true;      
     }
 
     public function deleteRequest($id)
@@ -393,7 +393,10 @@ trait Process
 
     public function DataQuotesTutor()
     {
-        $query = requestTutor::orderBy('created_at');
+        $query = requestTutor::join('requests as r','r.id','=','request_quote_tutors.request_id')
+        ->select('request_quote_tutors.*')
+        ->whereNull('r.deleted_at')
+        ->orderBy('created_at');
         return $query;
     }
 
@@ -558,7 +561,7 @@ trait Process
     public function dataInfoWorksTutor($id_tutor)
     {
         $query = Work::join('request_quotes','request_quotes.id','=','works.request_quote_id')
-        ->join('request_quote_tutors','request_quote_tutors.request_id','=','request_quotes.request_quote_tutor_id')
+        ->join('request_quote_tutors','request_quote_tutors.id','=','request_quotes.request_quote_tutor_id')
         ->where('request_quote_tutors.user_id',$id_tutor)
         ->select('works.*')
         ->get();
@@ -577,5 +580,262 @@ trait Process
 
         return true;
     }
+
+    public function getDataDeliverables()
+    {
+        $id_rol = Auth::user()->roles()->first()->id;
+
+        $query = Deliverable::join('works as w','w.id','=','deliverables.work_id')
+        ->join('request_quotes as rq','rq.id','=','w.request_quote_id')
+        ->join('request_quote_tutors as rqt','rqt.id','=','rq.request_quote_tutor_id')
+        ->select('deliverables.*');
+
+        if($id_rol == 6){
+            $query = $query->where('rqt.user_id', Auth::user()->id);
+        }else if($id_rol == 4){
+            $query = $query
+            ->join('requests as r','r.id','=','rqt.request_id')
+            ->where('r.user_id', Auth::user()->id)
+            ->where('deliverables.status',2);
+        }
+        $query = $query->get();
+
+        return $query;
+    }
+
+    public function saveDataDeliverable($request)
+    {
+        try {
+            $work = Work::find($request->id_work);
+            $work->end_date = $this->get_date_now();
+            $work->save();
+
+            if(!isset($request->id_deliverable))
+            {
+                $register = new Deliverable();
+                $this->changeState($work->requestQuote->requestQuoteTutor->request->id,5);
+            }else{
+                $register = Deliverable::where('id',$request->id_deliverable)->first();
+            }
+            $register->date_delivery = Carbon::now()->parse()->format('Y-m-d');
+            $register->observaciones = $request->obs_deliverable;
+            $register->work_id  = $request->id_work;
+            if(!isset($request->id_deliverable)){
+            $register->created_by = Auth::user()->id;
+            }else{
+            $register->updated_by = Auth::user()->id;
+            }
+            $register->save();
+
+            $id_register = $register->id;
+
+            if($request->hasFile('file_deliverable')){
+                $file_path = public_path() .'/folders/deliverables/deliverable_'.$id_register.'/'.$register->file;
+                if (File::exists($file_path)) {
+                    File::delete($file_path);
+                }
+                $file = $request->file('file_deliverable');
+                $name = $file->getClientOriginalName();
+                $path = public_path() .'/folders/deliverables/deliverable_'.$id_register;
+                $file->move($path,$name);
+
+                $register->file = $name;
+                $register->save();
+            }
+
+            if($request->hasFile('cuenta_cobro')){
+                $file_path = public_path() .'/folders/deliverables/charge_acount_'.$id_register.'/'.$register->cuenta_cobro;
+                if (File::exists($file_path)) {
+                    File::delete($file_path);
+                }
+                $file = $request->file('cuenta_cobro');
+                $name = $file->getClientOriginalName();
+                $path = public_path() .'/folders/deliverables/charge_acount_'.$id_register;
+                $file->move($path,$name);
+
+                $register->cuenta_cobro = $name;
+                $register->save();
+            }
+
+            return true;
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
+    public function getInfoDeliverable($id)
+    {
+        $query = Deliverable::find($id);
+        return $query;
+    }
+
+    public function getDeleteDeliverable($id)
+    {
+        $register = Deliverable::find($id);
+        $request = solicitud::find($register->work->requestQuote->requestQuoteTutor->request->id);
+        $this->changeHistoryState($request->id,4,5);
+        $request->request_state_id = 4;
+        $request->updated_by = Auth::user()->id;
+        $request->save();
+        $register->deleted_by = Auth::user()->id;
+        $register->save();
+        $register->delete();
+
+        return true;
+    }
+
+    public function dataObsService($service_id)
+    {
+        $observatios = obs_services::where('id_service',$service_id)->get();
+        return $observatios;
+    }
+
+    public function changeStateCamp($id,$camp,$status)
+    {
+        $register = Deliverable::find($id);
+        $register->$camp = $status;
+        $register->save();
+
+        return true;
+    }
+
+    public function infoDeliverable($id)
+    {
+        $query = Deliverable::find($id);
+        return $query;
+    }
+
+    public function getInfoPoints()
+    {
+        $query = Points::all();
+        return $query;
+    }
+
+    public function saveQualification($request)
+    {
+        try {
+            if (isset($request->id_qualificate)) {
+                $quality = Qualificate::find($request->id_qualificate);
+                $quality->updated_by = Auth::user()->id;
+            }else{
+                $quality = new Qualificate();
+                $quality->id_deliverable = $request->id_deliverable;
+                $quality->created_by = Auth::user()->id;
+            }
+            
+            $quality->date_qualificate = $this->get_date_now();
+            $quality->state_deliverable = $request->type_bond;
+            $quality->value_qualificate = $request->num_qualificate;
+            
+            $quality->save();
+
+            if ( $quality->state_deliverable == 113) {
+                $this->changeStateCamp($request->id_deliverable,'status_deliverable',3);
+                if (!isset($request->id_qualificate)) {
+                    $solicitud = solicitud::find($quality->deliverable->work->requestQuote->requestQuoteTutor->request->id);
+                    $this->changeHistoryState($solicitud->id,7,5);
+                    $solicitud->request_state_id = 7;
+                    $solicitud->updated_by = Auth::user()->id;
+                    $solicitud->save();
+                }
+            }else{
+                $this->changeStateCamp($request->id_deliverable,'status_deliverable',2);
+                if (!isset($request->id_qualificate)) {
+                $solicitud = solicitud::find($quality->deliverable->work->requestQuote->requestQuoteTutor->request->id);
+                $this->changeHistoryState($solicitud->id,6,5);
+                $solicitud->request_state_id = 6;
+                $solicitud->updated_by = Auth::user()->id;
+                $solicitud->save();
+                }
+            }
+
+
+            return true;
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
+    public function datDataQualificate($id)
+    {
+        $query = Qualificate::find($id);
+        return $query;
+    }
+
+    public function getDeleteQualificate($id)
+    {
+        $register = Qualificate::find($id);
+        $request = solicitud::find($register->deliverable->work->requestQuote->requestQuoteTutor->request->id);
+        $this->changeHistoryState($request->id,5,$request->request_state_id);      
+        $request->request_state_id = 5;
+        $request->updated_by = Auth::user()->id;
+        $request->save();
+
+        $deliverable = Deliverable::find($register->id_deliverable);
+        $deliverable->status_deliverable = 1;
+        $deliverable->save();
+
+        $register->deleted_by = Auth::user()->id;
+        $register->save();
+        $register->delete();
+
+        return true;
+    }   
     
+    public function getDataQualificate($id)
+    {
+        $qualificate = Qualificate::join('points_qualificates as pq','pq.id','=','deliverable_qualificates.value_qualificate')
+        ->join('deliverables as d','d.id','=','deliverable_qualificates.id_deliverable')
+        ->join('works as w','w.id','=','d.work_id')
+        ->join('request_quotes as rq','rq.id','=','w.request_quote_id')
+        ->join('request_quote_tutors as rqt','rqt.id','=','rq.request_quote_tutor_id')
+        ->whereNull('deliverable_qualificates.deleted_at')
+        ->whereNull('d.deleted_at')
+        ->whereNull('w.deleted_at')
+        ->whereNull('rq.deleted_at')
+        ->whereNull('rqt.deleted_at')
+        ->where('rqt.user_id',$id)
+        ->select('pq.point_value')
+        ->get();
+
+        $count = count($qualificate);
+        $points = null;
+        $sum = 0;
+        $number = null;
+
+        if ($count > 0) {
+           foreach ($qualificate as $key => $quality) {
+              $sum = $sum + (float)$quality->point_value;
+           }
+
+           $points = $sum/$count;
+
+           if ($points >= 0 && $points <= 0.4) {
+                $number = 1;
+            }else if($points >= 0.5 && $points <= 0.9) {
+                $number = 2;
+            }else if($points >= 1.0 && $points <= 1.4) {
+                $number = 3;
+            }elseif ($points >= 1.5 && $points <= 1.9) {
+                $number = 4;
+            }elseif ($points >= 2.0 && $points <= 2.4) {
+                $number = 5;
+            }elseif ($points >= 2.5 && $points <= 2.9) {
+                $number = 6;
+            }elseif ($points >= 3.0 && $points <= 3.4) {
+                $number = 7;
+            }elseif ($points >= 3.5 && $points <= 3.9) {
+                $number = 8;
+            }elseif ($points >= 4.0 && $points <= 4.4) {
+                $number = 9;
+            }elseif ($points >= 4.5 && $points <= 4.9) {
+                $number = 10;
+            }elseif ($points == 5.0 ) {
+                $number = 11;
+            }
+        }
+
+        return $number;
+    }
 }

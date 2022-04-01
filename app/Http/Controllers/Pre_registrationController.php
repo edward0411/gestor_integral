@@ -131,8 +131,11 @@ class Pre_registrationController extends Controller
 
     public function acount_bank_store(Request $request)
     {
+        $rules['t_b_namefile'] = 'mimes:pdf';   
+        $messages['t_b_namefile.mimes'] ='Favor cargue archivos en formato .pdf'; 
+        
+        $this->validate($request, $rules, $messages);
         $this->saveDataAcount($request);
-
         return true;
     }
 
@@ -162,6 +165,10 @@ class Pre_registrationController extends Controller
 
     public function lenguageStore(Request $request)
     {
+        $rules['l_t_namefile'] = 'mimes:pdf';   
+        $messages['l_t_namefile.mimes'] ='Favor cargue archivos en formato .pdf'; 
+        
+        $this->validate($request, $rules, $messages);
         if(!$request->id && TutorLanguage::infoUser(Auth::user()->id)->infoLanguage($request->id_language)->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])->first()){
             return $this->showMessage('No se puede guardar porque ya existe un registro con esta información');
         }
@@ -196,6 +203,10 @@ class Pre_registrationController extends Controller
 
     public function topicStore(Request $request)
     {
+        $rules['t_t_namefile'] = 'mimes:pdf';   
+        $messages['t_t_namefile.mimes'] ='Favor cargue archivos en formato .pdf'; 
+        
+        $this->validate($request, $rules, $messages);
         if(!$request->id && TutorTopic::infoUser(Auth::user()->id)->infoTopic($request->id_topic)->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])->first()){
             return $this->showMessage('No se puede guardar porque ya existe un registro con esta información');
         }
@@ -261,6 +272,10 @@ class Pre_registrationController extends Controller
 
     public function systemStore(Request $request)
     {
+        $rules['t_s_namefile'] = 'mimes:pdf';   
+        $messages['t_s_namefile.mimes'] ='Favor cargue archivos en formato .pdf'; 
+        
+        $this->validate($request, $rules, $messages);
         if(!$request->id && TutorSystem::infoUser(Auth::user()->id)->infoSystem($request->id_system)->infoState([Pre_registrationController::PENDIENTE, Pre_registrationController::APROBADO])->first()){
             return $this->showMessage('No se puede guardar porque ya existe un registro con esta información');
         }

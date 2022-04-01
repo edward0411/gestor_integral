@@ -61,6 +61,17 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
+                                <label for="id_money" class="col-md-12 control-label"> Tipo de moneda por defecto:</label>
+                                <div class="input-group mb-3">
+                                    <select name="id_money" id="id_money" class="form-control form-control-sm" required>
+                                        <option value="">seleccione...</option>
+                                        @foreach ($coins as $coin)
+                                        <option value="{{$coin->id}}" {{(old('id_money')==$coin->id)? 'selected':''}}>{{$coin->c_type_currency}} - {{$coin->c_currency}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label for="email">{!! trans('Correo') !!}</label>
                                 <input type="email" class="form-control form-control-sm" id="email" name="email" value="{{ old('email') }}" required>
                             </div>

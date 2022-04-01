@@ -52,6 +52,7 @@ class User extends Authenticatable
         'u_state',
         'email',
         'password',
+        'u_token',
     ];
 
     /**

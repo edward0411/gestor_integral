@@ -20,14 +20,16 @@ trait RegistersUsersTutors
         $countries = DB::table('countries')->whereNull('deleted_at')->select('id','c_indicative','c_name')->get();
         $means = Parametrics::where('p_category','=','means_type')->orderby('p_order')->get();
         $type_docs = Parametrics::where('p_category','=','type_documents')->orderby('p_order')->get();
-        return view('auth.registerTutors',compact('countries','means','type_docs'));
+        $coins = coins::all();
+        return view('auth.registerTutors',compact('countries','means','type_docs','coins'));
     }
 
     public function register_tutors(Request $request)
     {
+        $token = mt_rand(1000,9999);
         $this->validator_tutor($request->all())->validate();
 
-        event(new Registered($user = $this->create_tutor($request->all())));
+        event(new Registered($user = $this->create_tutor($request->all(),$token)));
 
         $this->guard()->login($user);
 
@@ -38,7 +40,7 @@ trait RegistersUsersTutors
         $rol = $this->getRoles()->where('id',6)->first();
         $user->assignRole($rol->name);
 
-        if ($user->email) EmailHelper::SendEmailWelcome($user);
+        if ($user->email) EmailHelper::SendEmailWelcome($user,$token);
         
         $sala = new AdminProcess();
         $sala->id_user = $user->id;

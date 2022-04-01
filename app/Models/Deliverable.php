@@ -26,16 +26,37 @@ class Deliverable extends Model
         return $this->belongsTo(Work::class, 'work_id');
     }
 
+    public function qualificate() {
+        return $this->hasOne(Deliverable_qualificates::class, 'id_deliverable');
+    }
+
     // Accessor
     public function getStateAttribute()
     {
         $name = null;
         switch ($this->status) {
             case 1:
-               $name = 'SUBIDO';
+               $name = 'ENTREGABLE CARGADO';
                 break;
             case 2:
-               $name = 'DESCARGABLE';
+               $name = 'ENTREGABLE DESCARGABLE';
+                break;
+            default:
+               $name = $this->status;
+               break;
+        }
+        return $name;
+    }
+
+    public function getStateAcountAttribute()
+    {
+        $name = null;
+        switch ($this->status_cb) {
+            case 0:
+               $name = 'PTE VALIDACIÓN';
+                break;
+            case 1:
+               $name = 'CUENTA VALIDADA';
                 break;
             default:
                $name = $this->status;

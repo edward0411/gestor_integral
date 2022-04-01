@@ -47,7 +47,7 @@
                                 {{$value->date_validate}}
                             </td>
                             <td>
-                                <a href="{{route('process.works.quote',$value->id)}}"> {!! trans('Cotización_'.$value->id.'.pdf') !!}</a>
+                                <a href="{{route('process.works.quote',$value->id)}}" target="_blank"> {!! trans('Cotización_'.$value->id.'.pdf') !!}</a>
                             </td>
                             <td>
                                 @if($value->work)

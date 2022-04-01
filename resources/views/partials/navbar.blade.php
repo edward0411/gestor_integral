@@ -37,21 +37,18 @@
           <b>{{ Auth::user()->u_nickname }}</b>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">
-            <a href="" class="nav-link" >
-              {!! trans('Opciones') !!} <i class="fa fa-gears"></i>
-            </a>
-          </span>
+          
   
-          <a class="btn btn-warning nav-link" href="{{ route('logout') }}"
+         <!-- <a class="" href="{{ route('logout') }}"
              onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();"><i class="fas fa-arrow-right"></i>
               {!! trans('Salir') !!}
           </a>
-                     <!--Comprobamos si el status esta a true y existe más de un lenguaje-->
+                     Comprobamos si el status esta a true y existe más de un lenguaje-->
   
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" >
               @csrf
+              <input type="submit" value="Salir" name="Salir" class="btn btn-warning btn-block nav-link">
           </form>
   
           <div class="dropdown-divider"></div>

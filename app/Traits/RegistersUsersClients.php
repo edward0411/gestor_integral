@@ -23,9 +23,10 @@ trait RegistersUsersClients
 
     public function register_clients(Request $request)
     {
+        $token = mt_rand(1000,9999);
         $this->validator_client($request->all())->validate();
 
-        event(new Registered($user = $this->create_client($request->all())));
+        event(new Registered($user = $this->create_client($request->all(),$token)));
 
         $this->guard()->login($user);
 
@@ -36,7 +37,7 @@ trait RegistersUsersClients
         $rol = $this->getRoles()->where('id',4)->first();
         $user->assignRole($rol->name);
 
-        if ($user->email) EmailHelper::SendEmailWelcome($user);
+        if ($user->email) EmailHelper::SendEmailWelcome($user,$token);
 
         $sala = new AdminProcess();
         $sala->id_user = $user->id;

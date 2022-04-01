@@ -8,6 +8,13 @@
                 <div class="card-header color-header">
                     <h5 class="card-title" style="font-weight: bold;">{!! trans('Ver historial trabajo') !!}</h5>
                 </div>
+                    @if(\Auth::user()->roles()->first()->id == 6)
+                        @if($work->deliverable == null)
+                            <div class="card-body">
+                                <a href="{{route('process.deliverables.create',$work->id)}}" class="btn btn-warning btn-sm"><i class="fas fa-plus-circle"></i> {!! trans('Crear Entregable') !!}</a>
+                            </div>
+                        @endif
+                    @endif
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-md-4">
@@ -107,6 +114,9 @@
                             </table>
                         </div>
                     </div>
+                </div>
+                <div class="card-body table-responsive">
+                    <p><b>Detalles de trabajo</b></p>
                 </div>
                 @if((\Auth::user()->roles()->first()->id == 6))
                 <div class="card-body table-responsive">

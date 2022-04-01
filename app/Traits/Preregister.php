@@ -107,13 +107,13 @@ trait Preregister
             $id_register = $register->id;
 
             if($request->hasFile('t_b_namefile')){
-                $image_path = public_path() .'\folders\banks'.$register->t_b_namefile;
+                $image_path = public_path() .'/folders/banks'.$register->t_b_namefile;
                 if (File::exists($image_path)) {
                     File::delete($image_path);
                 }
                 $file = $request->file('t_b_namefile');
                 $name = $file->getClientOriginalName();
-                $path = public_path() .'\folders\banks';
+                $path = public_path() .'/folders/banks';
                 $file->move($path,$name);
 
                 $register->t_b_namefile = $name;
@@ -136,9 +136,9 @@ trait Preregister
         $data['l_t_state']      = User::PENDIENTE;
         $language               = TutorLanguage::updateOrCreate(['id' => $data['id']], $data);
 
-        if($request->hasFile('file')){
-            $file = $request->file('file');
-            $language->l_t_namefile = $this->saveFile('\folders\languages', $file);
+        if($request->hasFile('l_t_namefile')){
+            $file = $request->file('l_t_namefile');
+            $language->l_t_namefile = $this->saveFile('/folders/languages', $file);
             $language->save();
         }
     }
@@ -160,9 +160,9 @@ trait Preregister
         $data['t_s_state']      = User::PENDIENTE;
         $system                 = TutorSystem::updateOrCreate(['id' => $data['id']], $data);
 
-        if($request->hasFile('file')){
-            $file = $request->file('file');
-            $system->t_s_namefile = $this->saveFile('\folders\system', $file);
+        if($request->hasFile('t_s_namefile')){
+            $file = $request->file('t_s_namefile');
+            $system->t_s_namefile = $this->saveFile('/folders/system', $file);
             $system->save();
         }
     }
@@ -174,9 +174,9 @@ trait Preregister
         $data['t_t_state']      = User::PENDIENTE;
         $system                 = TutorTopic::updateOrCreate(['id' => $data['id']], $data);
 
-        if($request->hasFile('file')){
-            $file = $request->file('file');
-            $system->t_t_namefile = $this->saveFile('\folders\topic', $file);
+        if($request->hasFile('t_t_namefile')){
+            $file = $request->file('t_t_namefile');
+            $system->t_t_namefile = $this->saveFile('/folders/topic', $file);
             $system->save();
         }
 

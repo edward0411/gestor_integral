@@ -112,11 +112,18 @@
                                 <label for="deliver_date">{!! trans('Nota interna comercial') !!}</label>
                                 <textarea name="private_note" id="" class="form-control form-control-sm" rows="2" ></textarea>
                             </div>
+                            @php
+                                $text = '';
+                            @endphp
+                            @foreach($observatios as $key => $obs)
+                                @php
+                                    $text = $text. "\n -> ". $obs->text_observation;
+                                @endphp
+                            @endforeach
                             <div class="form-group col-md-12">
                                 <label for="deliver_date">{!! trans('Observaciones') !!}</label>
-                                <textarea name="observation" id="" class="form-control form-control-sm" rows="2" ></textarea>
+                                <textarea name="observation" id="" class="form-control form-control-sm" rows="10">{{$text}}</textarea>
                             </div>
-                           
                         </div>  
                         <button type="submit" id="" class="btn btn-warning btn-sm"> {!! trans('Guardar') !!}</button>
                         

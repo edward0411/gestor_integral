@@ -364,8 +364,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <label for="observations">{!! trans('Nota interna comercial') !!}</label>
-                                <textarea name="observations" id="" class="form-control form-control-sm" rows="2">{{$request->note_private_comercial}}</textarea>
+                                <label for="note_private">{!! trans('Nota interna comercial') !!}</label>
+                                <textarea name="note_private" id="" class="form-control form-control-sm" rows="2">{{$request->note_private_comercial}}</textarea>
                             </div>
                         </div>
                     </div>

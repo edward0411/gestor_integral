@@ -141,7 +141,6 @@
                 $('#save').prop('disabled',true);
             },
             success: function(data) {
-                console.log("res", data);
                 processResponse('message-topic','success', data.message)
                 getInfo();
                 clear('id');

@@ -51,7 +51,7 @@
                                             <input type="hidden" id="ed_name_{{$rol['id']}}" value="{{$rol['name']}}">
                                         </div>
                                         <div class="col">
-                                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>
+                                            <!--<a href="" class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('Desea eliminar este registro') !!}?');"><i class="fas fa-trash"></i> {!! trans('Eliminar') !!}</a>-->
                                         </div>
                                         <div class="col">
                                             <a href="{{ route('roles.permission',$rol)}}" type="button" class="btn btn-info btn-xs" name="permisos" vuale="permisos"><i class="fas fa-key"></i> Permisos</a>

@@ -47,7 +47,7 @@ class PaymentController extends Controller
         $payment->update($data);
         if($request->hasFile('vaucher')){
             $file = $request->file('vaucher');
-            $payment->vaucher = UtilHelper::saveFile('\folders\payments', $file);
+            $payment->vaucher = UtilHelper::saveFile('/folders/payments', $file);
             $payment->save();
         }
         return redirect()->route('payment.show', $quote->id )->with('success','Pago actualizado con exito');
@@ -64,7 +64,7 @@ class PaymentController extends Controller
                         $payment                    =  Payment::create($data);
                         if($request->hasFile('vaucher')){
                             $file = $request->file('vaucher');
-                            $payment->vaucher = UtilHelper::saveFile('\folders\payments', $file);
+                            $payment->vaucher = UtilHelper::saveFile('/folders/payments', $file);
                             $payment->save();
                         }
                         return $this->showMessage('Pago realizado con exito');

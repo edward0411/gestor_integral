@@ -22,7 +22,7 @@ if ($options['reset'] ?? true) {
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
  }
 
-
+    Route::get('password/reset_special/{id}', 'Auth\ForgotPasswordController@showForm')->name('password.request_special');
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +31,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@home')->name('home');
+
+Route::get('/validate.token', 'HomeController@validate_token')->name('validate_token');
+Route::post('/validate.update_email', 'HomeController@update_email_users')->name('update_email_users');
+Route::post('/validate.token.store', 'HomeController@validate_token_store')->name('validate_token_store');
 
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::get('register.tutors', 'Auth\RegisterController@showRegistrationTutorsForm')->name('registerTutors');
@@ -288,6 +292,24 @@ Route::post('/process/works/store_detail{id}','ProcessController@store_detail')-
 Route::get('/process/works/edit_quote/{id}','ProcessController@edit_quotes')->name('process.quote.edit');
 Route::get('/process/works/delete_quote/{id}','ProcessController@delete_quotes')->name('process.quote.delete');
 
+
+////////////////Rutas entregables /////////////////////////
+Route::get('/process/deliverables/index','ProcessController@deliverables_index')->name('process.deliverables.index');
+Route::post('/process/deliverables/store','ProcessController@deliverables_store')->name('process.deliverables.store');
+Route::get('/process/deliverables/create/{id}','ProcessController@deliverables_create')->name('process.deliverables.create');
+Route::get('/process/deliverables/edit/{id}','ProcessController@deliverables_edit')->name('process.deliverables.edit');
+Route::get('/process/deliverables/validate_deliverable/{id}','ProcessController@validate_deliverable')->name('process.deliverables.validate_deliverable');
+Route::get('/process/deliverables/validate_count/{id}','ProcessController@validate_count')->name('process.deliverables.validate_count');
+Route::get('/process/deliverables/delete/{id}','ProcessController@deliverables_delete')->name('process.deliverables.delete');
+Route::get('/process/deliverables/list','ProcessController@deliverables_list')->name('process.deliverables.list');
+
+
+///////////////////Calificaciones de entregables////////////////////////////
+
+Route::get('/process/deliverables/qualificate/{id}','ProcessController@deliverables_view_form_qualificate')->name('process.deliverables.qualificate');
+Route::get('/process/deliverables/qualificate/edit/{id}','ProcessController@form_edit_qualificate')->name('process.deliverables.qualificate_edit');
+Route::get('/process/deliverables/qualificate/delete/{id}','ProcessController@delete_qualificate')->name('process.deliverables.qualificate_delete');
+Route::post('/process/deliverables/qualificate/store','ProcessController@qualificate_store')->name('qualificate_store');
 
 Route::get('/clearcache', function () {
     Artisan::call('cache:clear');

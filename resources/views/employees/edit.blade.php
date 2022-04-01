@@ -41,9 +41,8 @@
                             <div class="form-group col-md-4">
                                 <label for="u_id_country"><i class="fa fa-asterisk" style="font-size:10px;color: red"></i> {!! trans('Pais de origen') !!} </label>
                                 <select class="form-control form-control-sm" id="u_id_country" name="u_id_country" onChange="bringIndicative();" required>
-                                    <option value="{{$employee->u_id_country}}">{{$employee->c_name}}</option>
                                     @foreach ($countries as $country)
-                                    <option value="{{$country->id}}">{{$country->c_name}}</option>
+                                    <option value="{{$country->id}}" {{ $country->id == $employee->u_id_country ? 'selected' : '' }}>{{$country->c_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -58,9 +57,8 @@
                             <div class="form-group col-md-4">
                                 <label for="role"> <i class="fa fa-asterisk" style="font-size:10px;color: red"></i> {!! trans('Rol') !!} </label>
                                 <select class="form-control form-control-sm" id="role" name="role" required>
-                                    <option value="{{$employee->id}}">{{$employee->name}}</option>
                                     @foreach ($roles as $rol)
-                                    <option value="{{$rol->id}}">{{$rol->name}}</option>
+                                    <option value="{{$rol->id}}" {{ $rol->id == $employee->roles()->first()->id ? 'selected' : '' }}>{{$rol->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

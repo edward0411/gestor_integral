@@ -150,7 +150,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="deliver_date">{!! trans('Observaciones') !!}</label>
-                                <textarea name="observation" id="" class="form-control form-control-sm" rows="2" >{{$data->observation}}</textarea>
+                                <textarea name="observation" id="" class="form-control form-control-sm" rows="10" >{{$data->observation}}</textarea>
                             </div>
                            
                         </div>  

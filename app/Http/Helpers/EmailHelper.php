@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailHelper
 {
-    static function SendEmailWelcome($user){
-        Mail::to($user->email)->send(new EmailWelcome($user));
+    static function SendEmailWelcome($user,$token){
+        Mail::to($user->email)->send(new EmailWelcome($user,$token));
     }
 }

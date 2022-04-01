@@ -75,9 +75,9 @@
                         <label for="">Pagar con TRM actual</label>
                         <div class="d-flex ">
                             <label for="">Sí</label>
-                            <input type="radio" class="form-control form-control-sm" name="trm" id="yes"  style="text-align:center;" required>
+                            <input type="radio" class="form-control form-control-sm" name="trm[]" value="SI"  style="text-align:center;" required>
                             <label for="">No</label>
-                            <input type="radio" class="form-control form-control-sm" name="trm" id="no"  style="text-align:center;" required>
+                            <input type="radio" class="form-control form-control-sm" name="trm[]" value="NO" style="text-align:center;" required>
                         </div>
                     </div>
                 </div>

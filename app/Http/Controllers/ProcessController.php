@@ -20,7 +20,7 @@ class ProcessController extends Controller
     const ENVIADA_TUTOR        = 2;
     const EN_COTIZACIÓN        = 3;
     const EN_DEARROLLO         = 4;
-    const ENTREGABLE           = 5;
+    const ENTREGABLE_CARGADO   = 5;
     const ENTREGABLE_APROBADO  = 6;
     const ENTREGABLE_RECHAZADO = 7;
 
@@ -159,8 +159,8 @@ class ProcessController extends Controller
 
     public function index_quotes()
     {
-        $data = $this->getInfoRequest()->where('request_state_id',2)->get();
-        return view('process.quotes.index',compact('data'));
+        $data = $this->DataQuotesTutor()->where('request_quote_tutors.user_id',Auth::user()->id)->get();
+        return view('process.quotes.myQuotes',compact('data'));
     }
 
     public function create_quotes_turtor($id)
@@ -201,6 +201,11 @@ class ProcessController extends Controller
     {
         $quotes_tutors = $this->DataQuotesTutor()->where('request_id',$id)->get();
         $request = $quotes_tutors[0]->request;
+
+        foreach ($quotes_tutors as $key => $tutor) {
+           $qualificate = $this->getDataQualificate($tutor->user_id);
+           $tutor->qualificate = $qualificate;
+        }
 
         return view('process.quotes.list_quotes_tutor',compact('quotes_tutors','request'));
 
@@ -278,8 +283,9 @@ class ProcessController extends Controller
         $trm = $this->getInfoTrm($request->request->users->id);
         $fecha = $this->get_date_now();
         $fechaMax = Carbon::now()->addDays(1)->format('Y-m-d');
+        $observatios = $this->dataObsService($request->request->type_service_id);
         
-        return view('process.quotes.create_formal',compact('request','type_value','bonds','trm','fecha','fechaMax'));
+        return view('process.quotes.create_formal',compact('request','type_value','bonds','trm','fecha','fechaMax','observatios'));
     }
 
     public function store_quotes(Request $request)
@@ -332,5 +338,109 @@ class ProcessController extends Controller
     public function download_quote($id)
     {
         return Storage::download("Folders/Quotes/quote_".$id.'.pdf');
+    }
+
+    //////////////Entregables ////////////////////
+
+    public function deliverables_index()
+    {
+       $data = $this->getDataDeliverables();
+       return view('process.deliverables.index',compact('data'));
+    }
+
+    public function deliverables_list()
+    {
+        $data = $this->getDataDeliverables();
+        return view('process.deliverables.list',compact('data'));
+    }
+
+    public function deliverables_create($id)
+    {
+        $work = $this->infoQuote($id);
+        $fecha = Carbon::now()->parse()->format('Y-m-d');
+        return view('process.deliverables.create',compact('work','fecha'));
+    }
+
+    public function deliverables_store(Request $request)
+    {
+        if($request->hasFile('cuenta_cobro')){
+            $this->validateFileCuentaCobro($request,$request->cuenta_cobro);
+        }
+        $this->saveDataDeliverable($request);
+        return redirect()->route('process.deliverables.index')->with('success','Cotización creada con éxito');
+    }
+
+    public function validateFileCuentaCobro($request,$file)
+    {
+        $rules = [];
+        $messages = [];
+        
+        $rules['cuenta_cobro'] = 'mimes:pdf';
+        $messages['cuenta_cobro.mimes'] =trans('El formato de la cuenta de cobro no es valido.');               
+                
+        $this->validate($request, $rules, $messages);
+        
+        return true;
+    }
+
+    public function deliverables_edit($id)
+    {
+        $data = $this->getInfoDeliverable($id);
+        $fecha = Carbon::now()->parse()->format('Y-m-d');
+        return view('process.deliverables.edit',compact('data','fecha'));
+    }
+
+    public function deliverables_delete($id)
+    {
+        $this->getDeleteDeliverable($id);
+        return redirect()->route('process.deliverables.index')->with('success','Cotización eliminada con éxito');
+    }
+
+    public function validate_deliverable($id)
+    {
+        $camp = 'status';
+        $this->changeStateCamp($id,$camp,2);
+
+        return redirect()->route('process.deliverables.list')->with('success','Cotización actualizada con éxito');
+    }
+
+    public function validate_count($id)
+    {
+        $camp = 'status_cb';
+        $this->changeStateCamp($id,$camp,1);
+
+        return redirect()->route('process.deliverables.list')->with('success','Cotización actualizada con éxito');
+    }
+
+    /////////////calificaciones////////////////////
+    public function deliverables_view_form_qualificate($id)
+    {
+        $deliverable = $this->infoDeliverable($id);
+        $fecha = Carbon::now()->parse()->format('Y-m-d');
+        $types = $this->getDataParametrics('type_qualificate')->get();
+        $qualificates = $this->getInfoPoints();
+
+        return view('process.qualifications.form_create',compact('deliverable','fecha','types','qualificates'));
+    }
+
+    public function qualificate_store(Request $request)
+    {
+        $this->saveQualification($request);
+        return redirect()->route('process.deliverables.index')->with('success','Cotización calificada con éxito');
+    }
+
+    public function form_edit_qualificate($id)
+    {
+        $quality = $this->datDataQualificate($id);
+        $fecha = Carbon::now()->parse()->format('Y-m-d');
+        $types = $this->getDataParametrics('type_qualificate')->get();
+        $qualificates = $this->getInfoPoints();
+        return view('process.qualifications.form_edit',compact('quality','fecha','types','qualificates'));
+    }
+
+    public function delete_qualificate($id)
+    {
+        $this->getDeleteQualificate($id);
+        return redirect()->route('process.deliverables.index')->with('success','Calificación eliminada con éxito');
     }
 }
