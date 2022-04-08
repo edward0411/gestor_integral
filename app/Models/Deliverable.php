@@ -70,7 +70,7 @@ class Deliverable extends Model
         $name = null;
         switch ($this->status_deliverable) {
             case 1:
-               $name = 'ENTEGABLE PENDIENTE APROBACIÓN';
+               $name = 'ENTREGABLE PENDIENTE APROBACIÓN';
                 break;
             case 2:
                $name = 'ENTREGABLE APROBADO';

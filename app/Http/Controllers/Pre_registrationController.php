@@ -130,11 +130,14 @@ class Pre_registrationController extends Controller
     }
 
     public function acount_bank_store(Request $request)
-    {
-        $rules['t_b_namefile'] = 'mimes:pdf';   
-        $messages['t_b_namefile.mimes'] ='Favor cargue archivos en formato .pdf'; 
+    { 
+        if($request->id_bank != 40 && $request->id_bank != 41){
+            $rules['t_b_namefile'] = 'required|mimes:pdf';   
+            $messages['t_b_namefile.mimes'] ='Favor cargue archivos en formato .pdf'; 
+            $messages['t_b_namefile.required'] ='Favor cargue un archivo como soporte'; 
+            $this->validate($request, $rules, $messages);
+        }
         
-        $this->validate($request, $rules, $messages);
         $this->saveDataAcount($request);
         return true;
     }

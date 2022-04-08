@@ -25,6 +25,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="file">{!! trans('Archivo') !!}</label>
+                                <small><b>*</b> Favor subir en formato PDF</small>
                                 <input type="file" class="form-control form-control-sm" id="file" name="t_s_namefile">
                             </div>
                         </div>

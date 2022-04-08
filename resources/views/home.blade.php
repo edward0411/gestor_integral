@@ -19,14 +19,14 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>10</h3>
+                <h3>{{$count_hoy}}</h3>
 
-                <p>Solicitudes 1</p>
+                <p>Solicitudes para entrega hoy</p>
               </div>
               <div class="icon">
                 <i class="icofont-coins"></i>
               </div>
-              <a href="" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{route('process.request.index',$id_rol)}}" class="small-box-footer">ver solicitudes <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -34,14 +34,14 @@
             <!-- small box -->
             <div class="small-box bg-yellow">
               <div class="inner">
-                <h3>20</h3>
+                <h3>{{$count_semana}}</h3>
 
-                <p>Solicitudes 2</p>
+                <p>Solicitudes para entrega esta semana</p>
               </div>
               <div class="icon">
                 <i class="icofont-tags"></i>
               </div>
-              <a href="" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{route('process.request.index',$id_rol)}}" class="small-box-footer">ver solicitudes <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -49,14 +49,14 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>30</h3>
+                <h3>{{$count_mes}}</h3>
 
-                <p>Solicitudes 3</p>
+                <p>Solicitudes para entrega este mes</p>
               </div>
               <div class="icon">
                 <i class="icofont-tasks"></i>
               </div>
-              <a href="" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{route('process.request.index',$id_rol)}}" class="small-box-footer">ver solicitudes <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 

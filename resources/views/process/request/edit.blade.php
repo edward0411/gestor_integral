@@ -224,13 +224,13 @@
                                 </div>
                                 <div id="collapseFour41" class="collapse" role="tabpanel" aria-labelledby="headingFour41" data-parent="#accordionEx1">
                                     <!-- Temas -->
-                                    <div class="card-body">
+                                    
                                         <div class="card-header color-header">
                                             <h5 class="text-white" style="font-weight: bold;">{!! trans('Temas') !!}</h5>
                                         </div>
                                         <div class="card-body" style="border: 1px solid #cccccc;">
                                             <label for="descripcion">{!! trans('Agregar Tema') !!}</label> <i id="addElementSubject" data-count="{{count($request->requestTopics)}}" class="fas fa-plus-square add-item"></i><br>
-                                            <table class="table table-bordered" id="tblSubject">
+                                            <table class="table table-hover mx-auto w-auto table-bordered table-striped table-responsive" id="tblSubject">
                                                 <thead class="bg-warning text-center">
                                                     <tr>
                                                         <th class="text-white" style="width: 30%;">{!! trans('Áreas') !!}</th>
@@ -289,7 +289,6 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                             @endif

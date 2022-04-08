@@ -29,6 +29,8 @@ class HomeController extends Controller
     {
         $id_rol = Auth::user()->roles()->first()->id;
 
+       
+
         switch ($id_rol) {
             
             case '4':
@@ -53,7 +55,8 @@ class HomeController extends Controller
                 }               
                 break;
             default:
-                return view('home');
+                return redirect()->route('report_home');
+               
                 break;
        }
         

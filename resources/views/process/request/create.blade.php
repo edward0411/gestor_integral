@@ -180,7 +180,7 @@
                                         </div>
                                         <div class="card-body" style="border: 1px solid #cccccc;">
                                             <label for="descripcion">{!! trans('Agregar Tema') !!}</label> <i id="addElementSubject" data-count="0" class="fas fa-plus-square add-item"></i><br>
-                                            <table class="table table-bordered" id="tblSubject">
+                                            <table class="table table-bordered table-responsive" id="tblSubject">
                                                 <thead class="bg-warning text-center">
                                                     <tr>
                                                         <th class="text-white" style="width: 30%;">{!! trans('Áreas') !!}</th>

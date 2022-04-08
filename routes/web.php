@@ -311,6 +311,10 @@ Route::get('/process/deliverables/qualificate/edit/{id}','ProcessController@form
 Route::get('/process/deliverables/qualificate/delete/{id}','ProcessController@delete_qualificate')->name('process.deliverables.qualificate_delete');
 Route::post('/process/deliverables/qualificate/store','ProcessController@qualificate_store')->name('qualificate_store');
 
+
+////////////////Rutas de reportes////////////////////////
+Route::get('/report/home','ReportController@report_home')->name('report_home');
+
 Route::get('/clearcache', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
